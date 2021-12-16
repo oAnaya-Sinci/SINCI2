@@ -21,25 +21,17 @@
     
     @include('layouts.assetsCSS')
 
-    @yield('cssSection')
-
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">
-  
-    @include('layouts.sidebar')
 
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
-
-        @include('layouts.navbar')
 
         @yield('pageContent')
 
     </main>
 
     @include('layouts.assetsJS')
-
-    @yield('jsSection')
 
 </body>
 

@@ -3,6 +3,7 @@
 
 @section('cssSection')
 
+  <link href='../css/calendar/mainCalendar.css' rel='stylesheet' />
   <link href='../css/calendar/fullcalendar.css' rel='stylesheet' />
   <link href='../css/calendar/fullcalendar.print.css' rel='stylesheet' media='print' />
 

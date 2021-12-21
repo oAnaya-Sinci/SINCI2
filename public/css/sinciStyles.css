@@ -1,0 +1,35 @@
+.sinciLogo {
+  background: url(https://sinci.com/wp-content/uploads/2019/10/logo-sinci.-servicios-de-automatizacion-y-control-de-procesos-industriales-en-mexico.png) no-repeat !important;
+ }
+
+.site-title a {
+  background: url(https://sinci.com/wp-content/uploads/2019/10/logo-sinci.-servicios-de-automatizacion-y-control-de-procesos-industriales-en-mexico.png) no-repeat !important;
+ }
+
+ .site-title {
+  font-family:'Poppins',sans-serif;
+  font-size:20px;
+  font-size:2rem;
+  font-weight:700;
+  line-height:1;
+  margin-bottom:0;
+  text-transform:uppercase
+ }
+ .site-title a,
+ .site-title a:hover,
+ .site-title a:focus {
+  border-bottom-width:0;
+  color:#232525
+ }
+
+ .header-image .site-title>a {
+  background-position:center center !important;
+  background-size:contain !important;
+  float:left;
+  min-height:70px;
+  width:300px
+ }
+ .header-image .title-area {
+  margin:0
+ }
+ 

@@ -5,9 +5,7 @@ $(document).ready(function() {
     var y = date.getFullYear();
 
     /*  className colors
-
-    className: default(transparent), important(red), chill(pink), success(green), info(blue)
-
+        className: default(transparent), important(red), chill(pink), success(green), info(blue)
     */
 
 
@@ -31,9 +29,7 @@ $(document).ready(function() {
             revert: true, // will cause the event to go back to its
             revertDuration: 0 //  original position after the drag
         });
-
     });
-
 
     /* initialize the calendar
     -----------------------------------------------------------------*/
@@ -45,7 +41,7 @@ $(document).ready(function() {
             right: 'prev,next today'
         },
         editable: true,
-        firstDay: 1, //  1(Monday) this can be changed to 0(Sunday) for the USA system
+        firstDay: 0, //  1(Monday) this can be changed to 0(Sunday) for the USA system
         selectable: true,
         defaultView: 'month',
 
@@ -64,7 +60,19 @@ $(document).ready(function() {
         allDaySlot: false,
         selectHelper: true,
         select: function(start, end, allDay) {
+
+            /**
+             * Carlos Omar Anaya Barajas
+             * the form of obtain the title of the event will changue ahead, this elment will be changed with a modal to obtain the information
+             */
+
             var title = prompt('Event Title:');
+
+            /* var title =  */
+            // $('#createEventCalendar').modal('show');
+
+            // END
+
             if (title) {
                 calendar.fullCalendar('renderEvent', {
                         title: title,
@@ -148,6 +156,4 @@ $(document).ready(function() {
             }
         ],
     });
-
-
 });

@@ -1,0 +1,69 @@
+/* .main-content .container-fluid #calendar .fc-content .fc-view-agendaWeek .fc-agenda-slots {
+        display: none !important;
+    } */
+
+
+/* .fc-agenda-slots .fc-slot6 {
+        display: none;
+    } */
+
+.fc-slot17 .fc-widget-content,
+.fc-slot18 .fc-widget-content,
+.fc-slot19 .fc-widget-content,
+.fc-slot20 .fc-widget-content,
+.fc-slot21 .fc-widget-content,
+.fc-slot22 .fc-widget-content,
+.fc-slot23 .fc-widget-content,
+.fc-slot24 .fc-widget-content,
+.fc-slot25 .fc-widget-content,
+.fc-slot26 .fc-widget-content,
+.fc-slot27 .fc-widget-content,
+.fc-slot28 .fc-widget-content,
+.fc-slot29 .fc-widget-content,
+.fc-slot30 .fc-widget-content,
+.fc-slot31 .fc-widget-content,
+.fc-slot32 .fc-widget-content,
+.fc-slot33 .fc-widget-content,
+.fc-slot34 .fc-widget-content,
+.fc-slot35 .fc-widget-content,
+.fc-slot36 .fc-widget-content,
+.fc-slot37 .fc-widget-content {
+    background-color: #F1F1F1;
+}
+
+.modal input,
+.modal textarea {
+    background-color: #F1F1F1;
+    resize: none;
+}
+
+#message-text {
+    height: 15rem;
+}
+
+#createEventCalendar.modal-lg {
+    max-width: none !important;
+}
+
+#createEventCalendar .modal-dialog {
+    max-width: 65rem;
+}
+
+#createEventCalendar .modal-content {
+    height: 45rem;
+}
+
+
+/* .modal-body .col-form-label,
+.modal-body .form-control {
+    line-height: 1rem;
+} */
+
+.body-bitacora {
+    display: flex;
+    margin: .5rem 0 .5rem 0;
+}
+
+.body-bitacora label {
+    margin-right: .5rem;
+}

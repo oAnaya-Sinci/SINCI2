@@ -68,14 +68,14 @@ $(document).ready(function() {
              * the form of obtain the title of the event will changue ahead, this elment will be changed with a modal to obtain the information
              */
 
-            // var title = prompt('Event Title:');
-
-            /* var title =  */
-            $('#createEventCalendar').modal('show');
+            // Function to obtaind the data from the modal
+            let dataEvent = registerEventModal();
 
             // END
 
-            if (title) {
+            // var title = prompt('Event Title:');
+
+            if (dataEvent) {
                 calendar.fullCalendar('renderEvent', {
                         title: title,
                         start: start,
@@ -112,50 +112,51 @@ $(document).ready(function() {
 
         },
 
-        events: [{
-                title: 'All Day Event',
-                start: new Date(y, m, 1)
-            },
-            {
-                id: 999,
-                title: 'Repeating Event',
-                start: new Date(y, m, d - 3, 16, 0),
-                allDay: false,
-                className: 'info'
-            },
-            {
-                id: 999,
-                title: 'Repeating Event',
-                start: new Date(y, m, d + 4, 16, 0),
-                allDay: false,
-                className: 'info'
-            },
-            {
-                title: 'Meeting',
-                start: new Date(y, m, d, 10, 30),
-                allDay: false,
-                className: 'important'
-            },
-            {
-                title: 'Lunch',
-                start: new Date(y, m, d, 12, 0),
-                end: new Date(y, m, d, 14, 0),
-                allDay: false,
-                className: 'important'
-            },
-            {
-                title: 'Birthday Party',
-                start: new Date(y, m, d + 1, 19, 0),
-                end: new Date(y, m, d + 1, 22, 30),
-                allDay: false,
-            },
-            {
-                title: 'Click for Google',
-                start: new Date(y, m, 28),
-                end: new Date(y, m, 29),
-                url: 'http://google.com/',
-                className: 'success'
-            }
+        events: [
+            //     {
+            //         title: 'All Day Event',
+            //         start: new Date(y, m, 1)
+            //     },
+            //     {
+            //         id: 999,
+            //         title: 'Repeating Event',
+            //         start: new Date(y, m, d - 3, 16, 0),
+            //         allDay: false,
+            //         className: 'info'
+            //     },
+            //     {
+            //         id: 999,
+            //         title: 'Repeating Event',
+            //         start: new Date(y, m, d + 4, 16, 0),
+            //         allDay: false,
+            //         className: 'info'
+            //     },
+            //     {
+            //         title: 'Meeting',
+            //         start: new Date(y, m, d, 10, 30),
+            //         allDay: false,
+            //         className: 'important'
+            //     },
+            //     {
+            //         title: 'Lunch',
+            //         start: new Date(y, m, d, 12, 0),
+            //         end: new Date(y, m, d, 14, 0),
+            //         allDay: false,
+            //         className: 'important'
+            //     },
+            //     {
+            //         title: 'Birthday Party',
+            //         start: new Date(y, m, d + 1, 19, 0),
+            //         end: new Date(y, m, d + 1, 22, 30),
+            //         allDay: false,
+            //     },
+            //     {
+            //         title: 'Click for Google',
+            //         start: new Date(y, m, 28),
+            //         end: new Date(y, m, 29),
+            //         url: 'http://google.com/',
+            //         className: 'success'
+            //     }
         ],
     });
 
@@ -172,5 +173,14 @@ function obtainWeekNumber() {
     var numberOfDays = Math.floor((currentdate - oneJan) / (24 * 60 * 60 * 1000));
     var result = Math.ceil((currentdate.getDay() + 1 + numberOfDays) / 7);
 
-    return result;
+    return result - 1;
 }
+
+function registerEventModal() {
+
+    $('#createEventCalendar').modal('show');
+
+    return false;
+}
+
+function getEventsRegisteredInDB() {}

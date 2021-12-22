@@ -67,3 +67,7 @@
 .body-bitacora label {
     margin-right: .5rem;
 }
+
+.fc-header .fc-header-center span h5 {
+    color: #344767 !important;
+}

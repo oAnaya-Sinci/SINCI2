@@ -1,4 +1,4 @@
-.sinciLogo {
+/* .sinciLogo {
   background: url(https://sinci.com/wp-content/uploads/2019/10/logo-sinci.-servicios-de-automatizacion-y-control-de-procesos-industriales-en-mexico.png) no-repeat !important;
  }
 
@@ -32,4 +32,26 @@
  .header-image .title-area {
   margin:0
  }
- 
+  */
+
+#navbar .input-group label {
+    color: #fff;
+}
+
+#navbarBlur {
+    background-color: #3b6f90;
+    margin-top: 1rem !important;
+}
+
+#navbarBlur ol li,
+#navbarBlur ol li a {
+    color: #fff !important;
+}
+
+#navbarBlur #navbar ul li a {
+    color: #fff !important;
+}
+
+h5 {
+    color: #fff !important;
+}

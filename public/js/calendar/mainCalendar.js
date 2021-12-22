@@ -1,4 +1,5 @@
 $(document).ready(function() {
+
     var date = new Date();
     var d = date.getDate();
     var m = date.getMonth();
@@ -37,8 +38,9 @@ $(document).ready(function() {
     var calendar = $('#calendar').fullCalendar({
         header: {
             left: 'title',
-            center: 'agendaDay,agendaWeek,month',
-            right: 'prev,next today'
+            // center: 'agendaDay,agendaWeek,month today',
+            // center: '<h4>Omar Anaya</h4>',
+            right: 'today agendaDay,agendaWeek,month prev,next'
         },
         editable: true,
         firstDay: 0, //  1(Monday) this can be changed to 0(Sunday) for the USA system
@@ -66,10 +68,10 @@ $(document).ready(function() {
              * the form of obtain the title of the event will changue ahead, this elment will be changed with a modal to obtain the information
              */
 
-            var title = prompt('Event Title:');
+            // var title = prompt('Event Title:');
 
             /* var title =  */
-            // $('#createEventCalendar').modal('show');
+            $('#createEventCalendar').modal('show');
 
             // END
 
@@ -156,4 +158,19 @@ $(document).ready(function() {
             }
         ],
     });
+
+    let weekNumer = obtainWeekNumber();
+
+    $('.fc-header .fc-header-center').html("<span class=''><h5> Semana " + weekNumer + "</h5></span>");
 });
+
+function obtainWeekNumber() {
+
+    currentdate = new Date();
+
+    var oneJan = new Date(currentdate.getFullYear(), 0, 1);
+    var numberOfDays = Math.floor((currentdate - oneJan) / (24 * 60 * 60 * 1000));
+    var result = Math.ceil((currentdate.getDay() + 1 + numberOfDays) / 7);
+
+    return result;
+}

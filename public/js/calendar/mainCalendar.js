@@ -1,14 +1,19 @@
 $(document).ready(function() {
 
-    var date = new Date();
-    var d = date.getDate();
-    var m = date.getMonth();
-    var y = date.getFullYear();
+    // var date = new Date();
+    // var d = date.getDate();
+    // var m = date.getMonth();
+    // var y = date.getFullYear();
 
     /*  className colors
         className: default(transparent), important(red), chill(pink), success(green), info(blue)
     */
 
+    // let eventsObtained = testObtainDataNodeRed().then(data => data.json()).then(post => {
+    //     return post;
+    // });
+
+    console.log(fetch("//localhost:1880/obtainDataFromNodeRed?data='OmarAnaya'").then(data => data.json()).then(post => { return post }));
 
     /* initialize the external events
     -----------------------------------------------------------------*/
@@ -112,52 +117,56 @@ $(document).ready(function() {
 
         },
 
-        events: [
-            //     {
-            //         title: 'All Day Event',
-            //         start: new Date(y, m, 1)
-            //     },
-            //     {
-            //         id: 999,
-            //         title: 'Repeating Event',
-            //         start: new Date(y, m, d - 3, 16, 0),
-            //         allDay: false,
-            //         className: 'info'
-            //     },
-            //     {
-            //         id: 999,
-            //         title: 'Repeating Event',
-            //         start: new Date(y, m, d + 4, 16, 0),
-            //         allDay: false,
-            //         className: 'info'
-            //     },
-            //     {
-            //         title: 'Meeting',
-            //         start: new Date(y, m, d, 10, 30),
-            //         allDay: false,
-            //         className: 'important'
-            //     },
-            //     {
-            //         title: 'Lunch',
-            //         start: new Date(y, m, d, 12, 0),
-            //         end: new Date(y, m, d, 14, 0),
-            //         allDay: false,
-            //         className: 'important'
-            //     },
-            //     {
-            //         title: 'Birthday Party',
-            //         start: new Date(y, m, d + 1, 19, 0),
-            //         end: new Date(y, m, d + 1, 22, 30),
-            //         allDay: false,
-            //     },
-            //     {
-            //         title: 'Click for Google',
-            //         start: new Date(y, m, 28),
-            //         end: new Date(y, m, 29),
-            //         url: 'http://google.com/',
-            //         className: 'success'
-            //     }
-        ],
+        // events: getEventsRegisteredInDB(),
+        // events: eventsObtained,
+        events: fetch("//localhost:1880/obtainDataFromNodeRed?data='OmarAnaya'").then(data => data.json()).then(post => { return post }),
+
+        // events: [
+        //     {
+        //         title: 'All Day Event',
+        //         start: new Date(y, m, 1)
+        //     },
+        //     {
+        //         id: 999,
+        //         title: 'Repeating Event',
+        //         start: new Date(y, m, d - 3, 16, 0),
+        //         allDay: false,
+        //         className: 'info'
+        //     },
+        //     {
+        //         id: 999,
+        //         title: 'Repeating Event',
+        //         start: new Date(y, m, d + 4, 16, 0),
+        //         allDay: false,
+        //         className: 'info'
+        //     },
+        //     {
+        //         title: 'Meeting',
+        //         start: new Date(y, m, d, 10, 30),
+        //         allDay: false,
+        //         className: 'important'
+        //     },
+        //     {
+        //         title: 'Lunch',
+        //         start: new Date(y, m, d, 12, 0),
+        //         end: new Date(y, m, d, 14, 0),
+        //         allDay: false,
+        //         className: 'important'
+        //     },
+        //     {
+        //         title: 'Birthday Party',
+        //         start: new Date(y, m, d + 1, 19, 0),
+        //         end: new Date(y, m, d + 1, 22, 30),
+        //         allDay: false,
+        //     },
+        //     {
+        //         title: 'Click for Google',
+        //         start: new Date(y, m, 28),
+        //         end: new Date(y, m, 29),
+        //         url: 'http://google.com/',
+        //         className: 'success'
+        //     }
+        // ],
     });
 
     let weekNumer = obtainWeekNumber();
@@ -183,4 +192,77 @@ function registerEventModal() {
     return false;
 }
 
-function getEventsRegisteredInDB() {}
+function getEventsRegisteredInDB() {
+
+    var date = new Date();
+    var d = date.getDate();
+    var m = date.getMonth();
+    var y = date.getFullYear();
+
+    let data = [{
+        title: 'All Day Event',
+        start: new Date(y, m, 1)
+    }, {
+        id: 999,
+        title: 'Repeating Event',
+        start: new Date(y, m, d - 3, 16, 0),
+        allDay: false,
+        className: 'info'
+    }, {
+        id: 999,
+        title: 'Repeating Event',
+        start: new Date(y, m, d + 4, 16, 0),
+        allDay: false,
+        className: 'info'
+    }, {
+        title: 'Meeting',
+        start: new Date(y, m, d, 10, 30),
+        allDay: false,
+        className: 'important'
+    }, {
+        title: 'Lunch',
+        start: new Date(y, m, d, 12, 0),
+        end: new Date(y, m, d, 14, 0),
+        allDay: false,
+        className: 'important'
+    }, {
+        title: 'Birthday Party',
+        start: new Date(y, m, d + 1, 19, 0),
+        end: new Date(y, m, d + 1, 22, 30),
+        allDay: false,
+    }, {
+        title: 'Click for Google',
+        start: new Date(y, m, 28),
+        end: new Date(y, m, 29),
+        url: 'http://google.com/',
+        className: 'success'
+    }];
+
+    return [];
+}
+
+async function testObtainDataNodeRed() {
+
+    return fetch("//localhost:1880/obtainDataFromNodeRed?data='OmarAnaya'");
+
+    const dataResponse = await $.ajax({
+        type: "GET",
+        url: "//localhost:1880/obtainDataFromNodeRed?data='OmarAnaya'",
+        // success: function(response) {
+
+        //     dataResponse = response;
+        // },
+        // error: function() {}
+    });
+
+    console.log(dataResponse);
+
+    $.each(dataResponse, function(index, value) {
+
+        value.start = new Date(value.start);
+
+        // console.log(index, new Date(value.start));
+    });
+
+    return dataResponse;
+}

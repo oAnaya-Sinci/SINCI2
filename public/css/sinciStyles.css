@@ -55,3 +55,7 @@
 h5 {
     color: #fff !important;
 }
+
+#navbar .input-group.input-group-outline {
+    display: none;
+}

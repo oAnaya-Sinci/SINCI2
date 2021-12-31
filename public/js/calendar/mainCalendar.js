@@ -1,19 +1,28 @@
-$(document).ready(function() {
+$(document).ready(function() { calendarSinci(); });
 
-    // var date = new Date();
-    // var d = date.getDate();
-    // var m = date.getMonth();
-    // var y = date.getFullYear();
+async function calendarSinci() {
+
+    /**
+     * This Fetch petition obtain the calendar events registerd for the login user
+     */
+    let dataEvents = await fetch("//localhost:1880/obtainDataFromNodeRed?data='OmarAnaya'")
+        .then(data => data.json())
+        .then(data => {
+
+            return data;
+        });
+
+    $.each(dataEvents, function(index, value) {
+
+        value.start = new Date(value.start);
+    });
+    // END
 
     /*  className colors
         className: default(transparent), important(red), chill(pink), success(green), info(blue)
     */
 
-    // let eventsObtained = testObtainDataNodeRed().then(data => data.json()).then(post => {
-    //     return post;
-    // });
-
-    console.log(fetch("//localhost:1880/obtainDataFromNodeRed?data='OmarAnaya'").then(data => data.json()).then(post => { return post }));
+    // var testFunc = async() => { return await fetch("//localhost:1880/obtainDataFromNodeRed?data='OmarAnaya'").then(data => data.json()).then(data => { return data }); }
 
     /* initialize the external events
     -----------------------------------------------------------------*/
@@ -40,11 +49,10 @@ $(document).ready(function() {
     /* initialize the calendar
     -----------------------------------------------------------------*/
 
-    var calendar = $('#calendar').fullCalendar({
+    calendar = $('#calendar').fullCalendar({
         header: {
             left: 'title',
             // center: 'agendaDay,agendaWeek,month today',
-            // center: '<h4>Omar Anaya</h4>',
             right: 'today agendaDay,agendaWeek,month prev,next'
         },
         editable: true,
@@ -74,22 +82,34 @@ $(document).ready(function() {
              */
 
             // Function to obtaind the data from the modal
-            let dataEvent = registerEventModal();
+            let event = registerEventModal();
+
+            // console.log(start);
 
             // END
 
             // var title = prompt('Event Title:');
 
-            if (dataEvent) {
-                calendar.fullCalendar('renderEvent', {
-                        title: title,
-                        start: start,
-                        end: end,
-                        allDay: allDay
-                    },
-                    true // make the event "stick"
-                );
-            }
+            // var title;
+            // bootbox.prompt("This is the default prompt!", function(result) {
+            //     console.log(result);
+            //     title = result;
+            // });
+
+            // // console.log(title);
+
+            // var title = "Test Title for add Events"
+
+            // // if (title) {
+            // calendar.fullCalendar('renderEvent', {
+            //         title: title,
+            //         start: start,
+            //         end: end,
+            //         allDay: allDay
+            //     },
+            //     true // make the event "stick"
+            // );
+            // }
             calendar.fullCalendar('unselect');
         },
         droppable: true, // this allows things to be dropped onto the calendar !!!
@@ -117,62 +137,13 @@ $(document).ready(function() {
 
         },
 
-        // events: getEventsRegisteredInDB(),
-        // events: eventsObtained,
-        events: fetch("//localhost:1880/obtainDataFromNodeRed?data='OmarAnaya'").then(data => data.json()).then(post => { return post }),
-
-        // events: [
-        //     {
-        //         title: 'All Day Event',
-        //         start: new Date(y, m, 1)
-        //     },
-        //     {
-        //         id: 999,
-        //         title: 'Repeating Event',
-        //         start: new Date(y, m, d - 3, 16, 0),
-        //         allDay: false,
-        //         className: 'info'
-        //     },
-        //     {
-        //         id: 999,
-        //         title: 'Repeating Event',
-        //         start: new Date(y, m, d + 4, 16, 0),
-        //         allDay: false,
-        //         className: 'info'
-        //     },
-        //     {
-        //         title: 'Meeting',
-        //         start: new Date(y, m, d, 10, 30),
-        //         allDay: false,
-        //         className: 'important'
-        //     },
-        //     {
-        //         title: 'Lunch',
-        //         start: new Date(y, m, d, 12, 0),
-        //         end: new Date(y, m, d, 14, 0),
-        //         allDay: false,
-        //         className: 'important'
-        //     },
-        //     {
-        //         title: 'Birthday Party',
-        //         start: new Date(y, m, d + 1, 19, 0),
-        //         end: new Date(y, m, d + 1, 22, 30),
-        //         allDay: false,
-        //     },
-        //     {
-        //         title: 'Click for Google',
-        //         start: new Date(y, m, 28),
-        //         end: new Date(y, m, 29),
-        //         url: 'http://google.com/',
-        //         className: 'success'
-        //     }
-        // ],
+        events: dataEvents,
     });
 
     let weekNumer = obtainWeekNumber();
 
     $('.fc-header .fc-header-center').html("<span class=''><h5> Semana " + weekNumer + "</h5></span>");
-});
+}
 
 function obtainWeekNumber() {
 
@@ -183,67 +154,62 @@ function obtainWeekNumber() {
     var result = Math.ceil((currentdate.getDay() + 1 + numberOfDays) / 7);
 
     return result - 1;
+    // return result;
 }
 
-function registerEventModal() {
+async function registerEventModal() {
+
+
+    /**
+     * Queda pendiente el poder agregar la informcion sin tener que recargar la pagina para ello utilizando la funcion de select en el fullcalendar.
+     */
 
     $('#createEventCalendar').modal('show');
 
-    return false;
+    $('#btnSaveEvent').click(function() {
+
+        var dataForm = $('#dataEvent').serializeArray();
+
+        console.log(JSON.stringify(dataForm));
+        console.log(new Date());
+
+        $('#calendar').select(function() {
+
+            $('#calendar').select(function() {
+
+                $('#calendar').fullCalendar('renderEvent', {
+                        title: 'ANAYA',
+                        start: new Date(),
+                        end: new Date(),
+                        allDay: allDay
+                    },
+                    true // make the event "stick");
+                );
+
+                return dataForm;
+            });
+        });
+
+        return dataForm;
+    });
+
+    return await [];
 }
 
-function getEventsRegisteredInDB() {
+/**
+ * This function close the modals
+ */
 
-    var date = new Date();
-    var d = date.getDate();
-    var m = date.getMonth();
-    var y = date.getFullYear();
+$(".modal .modal-dialog .modal-header .close").click(function() {
 
-    let data = [{
-        title: 'All Day Event',
-        start: new Date(y, m, 1)
-    }, {
-        id: 999,
-        title: 'Repeating Event',
-        start: new Date(y, m, d - 3, 16, 0),
-        allDay: false,
-        className: 'info'
-    }, {
-        id: 999,
-        title: 'Repeating Event',
-        start: new Date(y, m, d + 4, 16, 0),
-        allDay: false,
-        className: 'info'
-    }, {
-        title: 'Meeting',
-        start: new Date(y, m, d, 10, 30),
-        allDay: false,
-        className: 'important'
-    }, {
-        title: 'Lunch',
-        start: new Date(y, m, d, 12, 0),
-        end: new Date(y, m, d, 14, 0),
-        allDay: false,
-        className: 'important'
-    }, {
-        title: 'Birthday Party',
-        start: new Date(y, m, d + 1, 19, 0),
-        end: new Date(y, m, d + 1, 22, 30),
-        allDay: false,
-    }, {
-        title: 'Click for Google',
-        start: new Date(y, m, 28),
-        end: new Date(y, m, 29),
-        url: 'http://google.com/',
-        className: 'success'
-    }];
+    $('.modal').modal('hide');
+});
 
-    return [];
-}
+/**
+ * This Functions are to test the promises results on the ajax or fetch petitions
+ */
 
 async function testObtainDataNodeRed() {
-
-    return fetch("//localhost:1880/obtainDataFromNodeRed?data='OmarAnaya'");
 
     const dataResponse = await $.ajax({
         type: "GET",
@@ -266,3 +232,38 @@ async function testObtainDataNodeRed() {
 
     return dataResponse;
 }
+
+async function testPromise() {
+
+    dataEvents = await fetch("//localhost:1880/obtainDataFromNodeRed?data='OmarAnaya'")
+        .then(data => data.json())
+        .then(data => {
+
+            return data;
+        });
+
+    $.each(dataEvents, function(index, value) {
+
+        value.start = new Date(value.start);
+    });
+
+    console.log(dataEvents);
+
+    return dataEvents;
+}
+
+setTimeout(() => {
+
+    // console.log("Set Time Out");
+
+
+    // calendar.fullCalendar('renderEvent', {
+    //         title: "Test Event Title",
+    //         start: 3,
+    //         end: 5,
+    //         allDay: true
+    //     },
+    //     true // make the event "stick"
+
+    // );
+}, 2000);

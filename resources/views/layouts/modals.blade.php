@@ -3,7 +3,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Registro de Evento</h5>
+        <h4 class="modal-title" id="exampleModalLabel">Registro de Evento</h4>
         <button type="button" class="close btn btn-secondary" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -18,26 +18,32 @@
 
           <div class="form-group body-bitacora">
             <label for="recipient-name" class="col-form-label">Proyecto:</label>
-            <input type="text" class="form-control" id="recipient-name" name="proyecto">
+            <!-- <input type="text" class="form-control" id="recipient-name" name="proyecto"> -->
+            <select class="form-select modalForm" name="slctProyecto" id="slctProyecto">
+              <option value="">NAN</option>
+            </select>
           </div>
 
           <div class="form-group body-bitacora">
             <label for="recipient-name" class="col-form-label">Usuario:</label>
-            <input type="text" class="form-control" id="recipient-name" name="usuario">
+            <!-- <input type="text" class="form-control" id="recipient-name" name="usuario"> -->
+            <select class="form-select modalForm" name="slctUsuario" id="slctUsuario">
+            <option value="">NAN</option>
+            </select>
           </div>
 
           <div class="row">
             <div class="col-md-6">
               <div class="form-group body-bitacora">
                 <label for="recipient-name" class="col-form-label">Inicio:</label>
-                <input type="text" class="form-control" id="recipient-name" name="incio">
+                <input type="text" class="form-control datetimepicker modalForm" id="startDate" name="inicio">
               </div>
             </div>
 
             <div class="col-md-6">
               <div class="form-group body-bitacora">
                 <label for="recipient-name" class="col-form-label">Fin:</label>
-                <input type="text" class="form-control" id="recipient-name" name="fin">
+                <input type="text" class="form-control datetimepicker modalForm" id="endDate" name="fin">
               </div>
             </div>
           </div>
@@ -46,14 +52,24 @@
             <div class="col-md-6">
               <div class="form-group body-bitacora">
                 <label for="recipient-name" class="col-form-label">Tipo:</label>
-                <input type="text" class="form-control" id="recipient-name" name="tipo">
+                <!-- <input type="text" class="form-control" id="recipient-name" name="tipo"> -->
+                <select class="form-select modalForm" name="slctTipo" id="slctTipo">
+                  <option value="">Seleccione opcion</option>
+                  <option value="">Horas desarrollo</option>
+                  <option value="">Horas de puesta en servicio</option>
+                  <option value="">Administrativo</option>
+                  <option value="">Servicio</option>
+                </select>
               </div>
             </div>
 
             <div class="col-md-6">
               <div class="form-group body-bitacora">
                 <label for="recipient-name" class="col-form-label">Asignar a:</label>
-                <input type="text" class="form-control" id="recipient-name" name="asignar">
+                <!-- <input type="text" class="form-control" id="recipient-name" name="asignar"> -->
+                <select class="form-select modalForm" name="slctAsignar" id="slctAsignar">
+                <option value="">NAN</option>
+                </select>
               </div>
             </div>
           </div>
@@ -61,8 +77,8 @@
         </form>
       </div>
       <div class="modal-footer">
-        <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
-        <button id="btnSaveEvent" type="button" class="btn btn-primary">Save Event</button>
+        <button type="button" class="btn btn-secondary btnCancelModal" data-dismiss="modal">Close</button>
+        <button id="btnSaveEvent" type="button" class="btn btn-primary">Guardar</button>
       </div>
     </div>
   </div>

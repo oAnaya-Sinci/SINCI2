@@ -101,7 +101,6 @@
         dropAccept: '*',
 
         handleWindowResize: true
-
     };
 
     // right-to-left defaults
@@ -412,6 +411,9 @@
             ignoreWindowResize--;
 
             getAndRenderEvents();
+
+            // Function to show the week numberin the weeks
+            buttonsNav(options.defaultView);
         }
 
 
@@ -1294,10 +1296,7 @@
         }
 
 
-    }
-
-    ;;
-
+    };
 
     fc.addDays = addDays;
     fc.cloneDate = cloneDate;

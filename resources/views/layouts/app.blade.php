@@ -75,6 +75,9 @@
     <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="/js/material-dashboard.min.js?v=3.0.0"></script>
 
+    <script src='../js/calendar/jquery-1.10.2.js' type="text/javascript"></script>
+    <script src='../js/calendar/jquery-ui.custom.min.js' type="text/javascript"></script>
+
     @yield('jsSection')
 
 </body>

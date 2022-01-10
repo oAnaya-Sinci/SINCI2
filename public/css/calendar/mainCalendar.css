@@ -31,9 +31,14 @@
     background-color: #F1F1F1;
 }
 
+.modal .modal-content label {
+    display: block ruby;
+}
+
 .modal input,
 .modal textarea {
-    background-color: #F1F1F1;
+    /* background-color: #F1F1F1; */
+    border: 1px solid #d2d6da;
     resize: none;
 }
 

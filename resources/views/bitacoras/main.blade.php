@@ -3,9 +3,15 @@
 
 @section('cssSection')
 
+  <link href='../css/datepicker.min.css' rel='stylesheet' media='print' />
+
   <link href='../css/calendar/mainCalendar.css' rel='stylesheet' />
   <link href='../css/calendar/fullcalendar.css' rel='stylesheet' />
   <link href='../css/calendar/fullcalendar.print.css' rel='stylesheet' media='print' />
+
+  <!-- <link href='../css/MCDatePicker/mc-calendar.min.css' rel='stylesheet' /> -->
+  
+  <link href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.css" rel="stylesheet"/>
 
 @endsection
 
@@ -13,7 +19,7 @@
 
   <div class="container-fluid py-4">
     <div class="row">
-      <div class="col-xl-12 col-sm-6 mb-xl-0 mb-2">
+      <div class="col-xl-12 col-sm-12 mb-xl-0 mb-2">
         <div class="card">
           <div class="card-header p-3 pt-2">
 
@@ -38,12 +44,14 @@
 
 @section('jsSection')
 
-  <script src='../js/calendar/jquery-1.10.2.js' type="text/javascript"></script>
-  <script src='../js/calendar/jquery-1.10.2.js' type="text/javascript"></script>
-  <script src='../js/calendar/jquery-ui.custom.min.js' type="text/javascript"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.2/moment.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+  <script src='../js/datepicker.min.js' type="text/javascript"></script>
+
   <script src='../js/calendar/fullcalendar.js' type="text/javascript"></script>
   <script src='../js/calendar/mainCalendar.js' type="text/javascript"></script>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.5.2/bootbox.min.js" integrity="sha512-RdSPYh1WA6BF0RhpisYJVYkOyTzK4HwofJ3Q7ivt/jkpW6Vc8AurL1R+4AUcvn9IwEKAPm/fk7qFZW3OuiUDeg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <!-- <script src='../js/MCDatePicker/mc-calendar.min.js' type="text/javascript"></script> -->
 
 @endsection

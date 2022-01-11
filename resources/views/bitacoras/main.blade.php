@@ -23,7 +23,7 @@
         <div class="card">
           <div class="card-header p-3 pt-2">
 
-            <div class=" pt-1">
+            <div class="pt-1">
 
               <div id='wrap'>
 

@@ -130,10 +130,10 @@ async function calendarSinci() {
             // console.log(todayDate);
 
             // Function to obtaind the data from the modal
-            if (start <= todayDate)
-                registerEventModal();
-
-            // let event = registerEventModal();
+            if (start <= todayDate) {
+                $('.modalForm').prop("disabled", false);
+                $('#createEventCalendar').modal('show');
+            }
 
             // END
 
@@ -191,15 +191,44 @@ async function calendarSinci() {
 
     $('.fc-content .fc-event-container .fc-event-inner').click(function() {
 
-        idEvent = { "idEvent": '148276' };
+        let idEvent = { "idEvent": '148276' };
 
         $.ajax({
             type: "GET",
             url: "//localhost:1880/obtainEventsCalendarById",
             data: idEvent,
             success: function(response) {
-                console.log(response);
+                // console.log(response);
 
+                response = response[0];
+
+                var startDate = new Date(response.FECHA_INICIO);
+                var sDay = startDate.getDate();
+                var sMonth = startDate.getMonth();
+                var sYear = startDate.getFullYear();
+
+                var startHour = new Date(response.Hora_inicio);
+                var sHoraInicio = startHour.getHours() + ":" + startHour.getMinutes();
+
+                var endDate = new Date(response.FECHA_FIN);
+                var eDay = endDate.getDate();
+                var eMonth = startDate.getMonth();
+                var eYear = endDate.getFullYear();
+
+                var endHour = new Date(response.Hora_fin);
+                var sHoraFin = endHour.getHours() + ":" + endHour.getMinutes();
+
+                $('#message-text').val(response.NOTAS);
+                $('#slctProyecto').val(response.ID_PROYECTO);
+                $('#slctUsuario').val(response.ID_PERSONAL);
+
+                $('#startDate').val(sYear + "-" + (sMonth < 10 ? "0" + (sMonth + 1) : sMonth + 1) + "-" + (sDay < 10 ? "0" + (sDay) : sDay) + " " + sHoraInicio);
+                $('#endDate').val(eYear + "-" + (eMonth < 10 ? "0" + (eMonth + 1) : eMonth + 1) + "-" + (eDay < 10 ? "0" + (eDay) : eDay) + " " + sHoraFin);
+
+                // $('#slctTipo').val(response.TIPO_RESUMEN);
+                $('#slctAsignar').val(response.TIPO_RESUMEN);
+
+                $('.modalForm').prop("disabled", true);
             },
             error: function(exception) {
 
@@ -208,9 +237,7 @@ async function calendarSinci() {
         });
 
         updateEvent = true;
-        $('.modalForm').prop("disabled", true);
-
-        registerEventModal();
+        $('#createEventCalendar').modal('show');
     });
 
     modalCalendarSinci();
@@ -299,65 +326,61 @@ function buttonsNav(defaultView) {
     showWeeksNumbers(weekNumber);
 }
 
-function registerEventModal() {
+/**
+ * Queda pendiente el poder agregar la informcion sin tener que recargar la pagina para ello utilizando la funcion de select en el fullcalendar.
+ */
 
-    /**
-     * Queda pendiente el poder agregar la informcion sin tener que recargar la pagina para ello utilizando la funcion de select en el fullcalendar.
-     */
+$('#btnSaveEvent').click(function() {
 
     let urlEvent = "";
 
-    $('#createEventCalendar').modal('show');
+    $('.modalForm').prop("disabled", false);
+    var event = $('#dataEvent').serializeArray();
 
-    $('#btnSaveEvent').click(function() {
+    // event = JSON.stringify(event);
 
-        var event = $('#dataEvent').serializeArray();
+    event.push({ name: "usuarioNombre", value: $("#slctUsuario option:selected").text() });
 
-        // event = JSON.stringify(event);
+    console.log(event);
+    console.log(updateEvent);
 
-        event.push({ name: "usuarioNombre", value: $("#slctUsuario option:selected").text() });
+    if (updateEvent) {
+        urlEvent = "//localhost:1880/updateDataFromCalendar";
+    } else {
+        urlEvent = "//localhost:1880/saveDataFromCalendar";
+    }
 
-        // console.log(event);
+    updateEvent = false;
 
-        if (updateEvent) {
-            urlEvent = "//localhost:1880/updateDataFromCalendar";
-        } else {
-            urlEvent = "//localhost:1880/saveDataFromCalendar";
+    $.ajax({
+        type: "POST",
+        url: urlEvent,
+        data: event,
+        success: function(response) {
+            console.log(response);
+
+            $('.modal').modal('hide');
+            $('#dataEvent').trigger("reset");
+
+            /**
+             * This block of code is temporal, the register of the event changues ahead to not refresh the page completly
+             */
+            var timeout = 1500;
+
+            setTimeout(() => {
+                window.location.reload();
+            }, timeout);
+        },
+        error: function(exception) {
+
+            console.log(exception);
         }
-
-        $.ajax({
-            type: "POST",
-            url: urlEvent,
-            data: event,
-            success: function() {
-
-                $('.modal').modal('hide');
-
-                updateEvent = false;
-                $('.modalForm').prop("disabled", false);
-
-                /**
-                 * This block of code is temporal, the register of the event changues ahead to not refresh the page completly
-                 */
-                var timeout = 1500;
-
-                setTimeout(() => {
-                    window.location.reload();
-                }, timeout);
-            },
-            error: function(exception) {
-
-                console.log(exception);
-            }
-        });
     });
-
-    // return await [];
-}
+});
 
 $('.fc-content .fc-event-container .fc-event-inner').click(function() {
 
-    console.log("OMAR");
+    console.log("Content CLICK");
 });
 
 /**

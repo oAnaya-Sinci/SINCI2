@@ -23,7 +23,6 @@ use App\Http\Controllers\HomeController AS home;
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-
 Auth::routes([
     'login'    => true,
     'logout'   => true,

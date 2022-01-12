@@ -1,4 +1,6 @@
 var updateEvent = false;
+var urlData = "//localhost:1880";
+// var urlData = "//10.10.103.206:1880";
 
 $(document).ready(function() {
 
@@ -195,7 +197,7 @@ async function calendarSinci() {
 
         $.ajax({
             type: "GET",
-            url: "//localhost:1880/obtainEventsCalendarById",
+            url: urlData + "/obtainEventsCalendarById",
             data: idEvent,
             success: function(response) {
                 // console.log(response);
@@ -248,16 +250,16 @@ async function modalCalendarSinci() {
     // let allData = await fetch("//localhost:1880/obtainDataForModalCalendar").then(data => data.json()).then(data => { return data; });
     // processDataToSelect(allData);
 
-    let dataProyecto = await fetch("//localhost:1880/obtainDataProyecto_test").then(data => data.json()).then(data => { return data; });
+    let dataProyecto = await fetch(urlData + "/obtainDataProyecto").then(data => data.json()).then(data => { return data; });
     processDataToSelect(dataProyecto, '#slctProyecto');
 
-    let dataUsuario = await fetch("//localhost:1880/obtainDataUsuario_test").then(data => data.json()).then(data => { return data; });
+    let dataUsuario = await fetch(urlData + "/obtainDataUsuario").then(data => data.json()).then(data => { return data; });
     processDataToSelect(dataUsuario, '#slctUsuario');
 
-    // let dataTipo = await fetch("//localhost:1880/obtainDataTipo_test").then(data => data.json()).then(data => { return data; });
+    // let dataTipo = await fetch("//localhost:1880/obtainDataTipo").then(data => data.json()).then(data => { return data; });
     // processDataToSelect(dataTipo, '#slctTipo');
 
-    let dataAsignar = await fetch("//localhost:1880/obtainDataAsignar_test").then(data => data.json()).then(data => { return data; });
+    let dataAsignar = await fetch(urlData + "/obtainDataAsignar").then(data => data.json()).then(data => { return data; });
     processDataToSelect(dataAsignar, '#slctAsignar');
 }
 
@@ -339,15 +341,24 @@ $('#btnSaveEvent').click(function() {
 
     // event = JSON.stringify(event);
 
-    event.push({ name: "usuarioNombre", value: $("#slctUsuario option:selected").text() });
+    // console.log(event);
+    // console.log(event[3].value);
+    // console.log(event[4].value);
 
-    console.log(event);
-    console.log(updateEvent);
+    // return false;
+
+    event.push({ name: "usuarioNombre", value: $("#slctUsuario option:selected").text() });
+    event.push({ name: "totalHoras", value: calculeTotalTime(event[3].value, event[4].value) });
+
+    // console.log(event);
+    // console.log(updateEvent);
+
+    return false;
 
     if (updateEvent) {
-        urlEvent = "//localhost:1880/updateDataFromCalendar";
+        urlEvent = urlData + "/updateDataFromCalendar";
     } else {
-        urlEvent = "//localhost:1880/saveDataFromCalendar";
+        urlEvent = urlData + "/saveDataFromCalendar";
     }
 
     updateEvent = false;
@@ -397,55 +408,93 @@ $('.btnCancelModal').click(function() {
     $('.modal').modal('hide');
 });
 
-/**
- * This Functions are to test the promises results on the ajax or fetch petitions
- */
+/** 
+ * Funtion to obtain the hours between 2 dates 
+ * @Author: Anaya Barajas Carlos Omar 
+ * @Date: 2022-01-12 10:46:05 
+ * @Desc: NA
+ */ //
 
-// async function testObtainDataNodeRed() {
+function calculeTotalTime(D1, D2) {
 
-//     const dataResponse = await $.ajax({
-//         type: "GET",
-//         url: "//localhost:1880/obtainEventsCalendar",
-//         // success: function(response) {
+    D1 = D1.split(" ");
+    D2 = D2.split(" ");
 
-//         //     dataResponse = response;
-//         // },
-//         // error: function() {}
-//     });
+    let Date1 = D1[0];
+    let Date2 = D2[0];
 
-//     console.log(dataResponse);
+    var st = D1[1];
+    var et = D2[1];
 
-//     $.each(dataResponse, function(index, value) {
+    var rd = 0;
+    var cd = 0;
+    var dd = 1;
 
-//         value.start = new Date(value.start);
+    Date1 = Date1.split("-");
+    rd = Date1[2];
+    Date1 = Date1[0] + "-" + Date1[1] + "-" + Date1[2];
+    Date1 = new Date(Date1);
+    Date1.setDate(Date1.getDate() + 1);
 
-//         // console.log(index, new Date(value.start));
-//     });
+    Date2 = Date2.split("-");
+    cd = Date2[2];
+    Date2 = Date2[0] + "-" + Date2[1] + "-" + Date2[2];
+    Date2 = new Date(Date2);
+    Date2.setDate(Date2.getDate() + 1);
 
-//     return dataResponse;
-// }
+    dd = ((parseInt(cd) - parseInt(rd)) * 24);
 
-// async function testPromise() {
+    Date1 = Date.parse(Date1) / 1000;
+    Date2 = Date.parse(Date2) / 1000;
 
-//     dataEvents = await fetch("//localhost:1880/obtainEventsCalendar")
-//         .then(data => data.json())
-//         .then(data => {
+    st = st.split(':');
+    et = et.split(':');
 
-//             return data;
-//         });
+    if (Date1 < Date2)
+        et[0] = parseInt(et[0]) + parseInt(dd);
 
-//     $.each(dataEvents, function(index, value) {
+    var tt_h = parseInt(et[0]) - parseInt(st[0]);
+    var tt_m = 0;
 
-//         value.start = new Date(value.start);
-//     });
+    // if (tt_h < 0) {
 
-//     console.log(dataEvents);
+    //     $('#startTime').val('');
+    //     $('#endTime').val('');
 
-//     return dataEvents;
-// }   return dataEvents;
-// }
-//     return dataEvents;
-// }   return dataEvents;
-// }   return dataEvents;
-// }   return dataEvents;
-// }
+    //     $('#ErrorModal .modal-body').empty();
+    //     $('#ErrorModal .modal-body').append('El campo "Start Time" no puede ser mayor al campo "EndTime"');
+
+    //     $('#ErrorModal').modal('show');
+
+    //     return false;
+    // }
+
+    if (parseInt(et[1]) < parseInt(st[1]) && tt_h > 0) {
+
+        tt_h -= 1;
+        tt_m = (parseInt(et[1]) + 60) - parseInt(st[1]);
+
+    }
+    /*else if (parseInt(et[1]) < parseInt(st[1]) && tt_h == 0) {
+
+        $('#startTime').val('');
+        $('#endTime').val('');
+
+        $('#ErrorModal .modal-body').empty();
+        $('#ErrorModal .modal-body').append('El campo "Start Time" no puede ser mayor al campo "EndTime"');
+        $('#ErrorModal').modal('show');
+
+        return false;
+
+    } */
+    else
+        tt_m = parseInt(et[1]) - parseInt(st[1])
+
+    // var tt = (tt_h < 10 ? "0" + tt_h : tt_h) + ":" + (tt_m < 10 ? "0" + tt_m : tt_m);
+
+    // $('#totalTime').val(tt);
+
+    // return tt;
+
+    return tt_h;
+}

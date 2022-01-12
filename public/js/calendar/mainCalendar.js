@@ -1,6 +1,8 @@
 var updateEvent = false;
-var urlData = "//localhost:1880";
-// var urlData = "//10.10.103.206:1880";
+
+// var urlData = "//localhost:1880";
+var urlData = "//10.10.103.206:1880";
+// var urlData = window.location.href.split("/")[2];
 
 $(document).ready(function() {
 
@@ -34,7 +36,7 @@ async function calendarSinci() {
     /**
      * This Fetch petition obtain the calendar events registerd for the login user
      */
-    let dataDB = await fetch("//localhost:1880/obtainEventsCalendar").then(data => data.json()).then(data => { return data; });
+    let dataDB = await fetch(urlData + "/obtainEventsCalendar").then(data => data.json()).then(data => { return data; });
 
     let event;
     $.each(dataDB, function(index, value) {
@@ -66,8 +68,6 @@ async function calendarSinci() {
     /*  className colors
         className: default(transparent), important(red), chill(pink), success(green), info(blue)
     */
-
-    // var testFunc = async() => { return await fetch("//localhost:1880/obtainDataFromNodeRed").then(data => data.json()).then(data => { return data }); }
 
     /* initialize the external events
     -----------------------------------------------------------------*/
@@ -247,7 +247,7 @@ async function calendarSinci() {
 
 async function modalCalendarSinci() {
 
-    // let allData = await fetch("//localhost:1880/obtainDataForModalCalendar").then(data => data.json()).then(data => { return data; });
+    // let allData = await fetch(urlData + "/obtainDataForModalCalendar").then(data => data.json()).then(data => { return data; });
     // processDataToSelect(allData);
 
     let dataProyecto = await fetch(urlData + "/obtainDataProyecto").then(data => data.json()).then(data => { return data; });
@@ -256,7 +256,7 @@ async function modalCalendarSinci() {
     let dataUsuario = await fetch(urlData + "/obtainDataUsuario").then(data => data.json()).then(data => { return data; });
     processDataToSelect(dataUsuario, '#slctUsuario');
 
-    // let dataTipo = await fetch("//localhost:1880/obtainDataTipo").then(data => data.json()).then(data => { return data; });
+    // let dataTipo = await fetch(urlData + "/obtainDataTipo").then(data => data.json()).then(data => { return data; });
     // processDataToSelect(dataTipo, '#slctTipo');
 
     let dataAsignar = await fetch(urlData + "/obtainDataAsignar").then(data => data.json()).then(data => { return data; });

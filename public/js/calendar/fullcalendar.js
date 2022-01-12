@@ -5352,6 +5352,7 @@
             html +=
                 "<span class='fc-event-title'>" +
                 htmlEscape(event.title || '') +
+                "<div class='idEvent'>" + event.id + "</div>" +
                 "</span>" +
                 "</div>";
             if (segment.isEnd && isEventResizable(event)) {

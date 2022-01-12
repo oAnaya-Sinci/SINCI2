@@ -53,7 +53,7 @@ async function calendarSinci() {
 
         event = {
             id: value.ID_PROYECTOS_AVANCE,
-            title: value.LOCATION + " \n ------------------------------------------------- \n " + value.NOTAS,
+            title: value.LOCATION + "\n-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- \n " + value.NOTAS,
             start: new Date(sYear, sMonth, sDay + 1, 12, 0),
             end: new Date(eYear, eMonth, eDay + 1, 15, 0),
             allDay: false,
@@ -133,7 +133,7 @@ async function calendarSinci() {
 
             // Function to obtaind the data from the modal
             if (start <= todayDate) {
-                $('.modalForm').prop("disabled", false);
+                // $('.modalForm').prop("disabled", false);
                 $('#createEventCalendar').modal('show');
             }
 
@@ -191,58 +191,7 @@ async function calendarSinci() {
         events: dataEvents,
     });
 
-    $('.fc-content .fc-event-container .fc-event-inner').click(function() {
-
-        let idEvent = { "idEvent": '148276' };
-
-        $.ajax({
-            type: "GET",
-            url: urlData + "/obtainEventsCalendarById",
-            data: idEvent,
-            success: function(response) {
-                // console.log(response);
-
-                response = response[0];
-
-                var startDate = new Date(response.FECHA_INICIO);
-                var sDay = startDate.getDate();
-                var sMonth = startDate.getMonth();
-                var sYear = startDate.getFullYear();
-
-                var startHour = new Date(response.Hora_inicio);
-                var sHoraInicio = startHour.getHours() + ":" + startHour.getMinutes();
-
-                var endDate = new Date(response.FECHA_FIN);
-                var eDay = endDate.getDate();
-                var eMonth = startDate.getMonth();
-                var eYear = endDate.getFullYear();
-
-                var endHour = new Date(response.Hora_fin);
-                var sHoraFin = endHour.getHours() + ":" + endHour.getMinutes();
-
-                $('#message-text').val(response.NOTAS);
-                $('#slctProyecto').val(response.ID_PROYECTO);
-                $('#slctUsuario').val(response.ID_PERSONAL);
-
-                $('#startDate').val(sYear + "-" + (sMonth < 10 ? "0" + (sMonth + 1) : sMonth + 1) + "-" + (sDay < 10 ? "0" + (sDay) : sDay) + " " + sHoraInicio);
-                $('#endDate').val(eYear + "-" + (eMonth < 10 ? "0" + (eMonth + 1) : eMonth + 1) + "-" + (eDay < 10 ? "0" + (eDay) : eDay) + " " + sHoraFin);
-
-                // $('#slctTipo').val(response.TIPO_RESUMEN);
-                $('#slctAsignar').val(response.TIPO_RESUMEN);
-
-                $('.modalForm').prop("disabled", true);
-            },
-            error: function(exception) {
-
-                console.log(exception);
-            }
-        });
-
-        updateEvent = true;
-        $('#createEventCalendar').modal('show');
-    });
-
-    modalCalendarSinci();
+    iniciateModalUpdate();
 }
 
 async function modalCalendarSinci() {
@@ -314,6 +263,8 @@ function buttonsNav(defaultView) {
 
     // console.log(defaultView);
 
+    iniciateModalUpdate();
+
     let date;
 
     if (defaultView == "month") {
@@ -328,6 +279,69 @@ function buttonsNav(defaultView) {
     showWeeksNumbers(weekNumber);
 }
 
+/** 
+ * javascript comment 
+ * @Author: flydreame 
+ * @Date: 2022-01-12 17:31:20 
+ * @Desc:  
+ */
+
+function iniciateModalUpdate() {
+
+    $('.fc-content .fc-event-container .fc-event .fc-event-inner').click(function() {
+
+        let id = this.lastChild.lastChild.textContent;
+
+        $.ajax({
+            type: "GET",
+            url: urlData + "/obtainEventsCalendarById",
+            data: { "idEvent": id },
+            success: function(response) {
+                // console.log(response);
+
+                response = response[0];
+
+                var startDate = new Date(response.FECHA_INICIO);
+                var sDay = startDate.getDate();
+                var sMonth = startDate.getMonth();
+                var sYear = startDate.getFullYear();
+
+                var startHour = new Date(response.Hora_inicio);
+                var sHoraInicio = startHour.getHours() + ":" + startHour.getMinutes();
+
+                var endDate = new Date(response.FECHA_FIN);
+                var eDay = endDate.getDate();
+                var eMonth = startDate.getMonth();
+                var eYear = endDate.getFullYear();
+
+                var endHour = new Date(response.Hora_fin);
+                var sHoraFin = endHour.getHours() + ":" + endHour.getMinutes();
+
+                $('#message-text').val(response.NOTAS);
+                $('#slctProyecto').val(response.ID_PROYECTO);
+                $('#slctUsuario').val(response.ID_PERSONAL);
+
+                $('#startDate').val(sYear + "-" + (sMonth < 10 ? "0" + (sMonth + 1) : sMonth + 1) + "-" + (sDay < 10 ? "0" + (sDay) : sDay) + " " + sHoraInicio);
+                $('#endDate').val(eYear + "-" + (eMonth < 10 ? "0" + (eMonth + 1) : eMonth + 1) + "-" + (eDay < 10 ? "0" + (eDay) : eDay) + " " + sHoraFin);
+
+                // $('#slctTipo').val(response.TIPO_RESUMEN);
+                $('#slctAsignar').val(response.TIPO_RESUMEN);
+
+                // $('.modalForm').prop("disabled", true);
+            },
+            error: function(exception) {
+
+                console.log(exception);
+            }
+        });
+
+        updateEvent = true;
+        $('#createEventCalendar').modal('show');
+    });
+
+    modalCalendarSinci();
+}
+
 /**
  * Queda pendiente el poder agregar la informcion sin tener que recargar la pagina para ello utilizando la funcion de select en el fullcalendar.
  */
@@ -336,7 +350,7 @@ $('#btnSaveEvent').click(function() {
 
     let urlEvent = "";
 
-    $('.modalForm').prop("disabled", false);
+    // $('.modalForm').prop("disabled", false);
     var event = $('#dataEvent').serializeArray();
 
     // event = JSON.stringify(event);

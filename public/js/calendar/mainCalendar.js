@@ -4,6 +4,8 @@ var updateEvent = false;
 var urlData = "//10.10.103.206:1880";
 // var urlData = window.location.href.split("/")[2];
 
+var idEventUpdate;
+
 $(document).ready(function() {
 
     calendarSinci();
@@ -290,12 +292,12 @@ function iniciateModalUpdate() {
 
     $('.fc-content .fc-event-container .fc-event .fc-event-inner').click(function() {
 
-        let id = this.lastChild.lastChild.textContent;
+        idEventUpdate = this.lastChild.lastChild.textContent;
 
         $.ajax({
             type: "GET",
             url: urlData + "/obtainEventsCalendarById",
-            data: { "idEvent": id },
+            data: { "idEvent": idEventUpdate },
             success: function(response) {
                 // console.log(response);
 
@@ -352,22 +354,11 @@ $('#btnSaveEvent').click(function() {
 
     // $('.modalForm').prop("disabled", false);
     var event = $('#dataEvent').serializeArray();
-
     // event = JSON.stringify(event);
-
-    // console.log(event);
-    // console.log(event[3].value);
-    // console.log(event[4].value);
-
-    // return false;
 
     event.push({ name: "usuarioNombre", value: $("#slctUsuario option:selected").text() });
     event.push({ name: "totalHoras", value: calculeTotalTime(event[3].value, event[4].value) });
-
-    // console.log(event);
-    // console.log(updateEvent);
-
-    return false;
+    event.push({ name: "idEvent", value: idEventUpdate });
 
     if (updateEvent) {
         urlEvent = urlData + "/updateDataFromCalendar";
@@ -375,6 +366,7 @@ $('#btnSaveEvent').click(function() {
         urlEvent = urlData + "/saveDataFromCalendar";
     }
 
+    idEventUpdate = null;
     updateEvent = false;
 
     $.ajax({

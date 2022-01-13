@@ -193,6 +193,7 @@ async function calendarSinci() {
         events: dataEvents,
     });
 
+    modalCalendarSinci();
     iniciateModalUpdate();
 }
 
@@ -340,8 +341,6 @@ function iniciateModalUpdate() {
         updateEvent = true;
         $('#createEventCalendar').modal('show');
     });
-
-    modalCalendarSinci();
 }
 
 /**

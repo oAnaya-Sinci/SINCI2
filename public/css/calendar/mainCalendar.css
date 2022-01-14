@@ -31,9 +31,16 @@
     background-color: #F1F1F1;
 }
 
-.modal .modal-content label {
+
+/* .modal .modal-content label {
     display: block ruby;
-}
+} */
+
+
+/* .modal .modal-content .modal-body #dataEvent .form-group.body-bitacora {
+    display: -webkit-inline-box;
+    width: 93%;
+} */
 
 .modal input,
 .modal textarea {
@@ -51,11 +58,11 @@
 }
 
 #createEventCalendar .modal-dialog {
-    max-width: 65rem;
+    max-width: 60rem;
 }
 
 #createEventCalendar .modal-content {
-    height: 45rem;
+    height: 44rem;
 }
 
 

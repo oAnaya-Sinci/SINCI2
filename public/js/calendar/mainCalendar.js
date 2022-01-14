@@ -43,24 +43,42 @@ async function calendarSinci() {
     let event;
     $.each(dataDB, function(index, value) {
 
+        value.FECHA_INICIO = value.FECHA_INICIO.replace('T', ' ');
+        value.FECHA_INICIO = value.FECHA_INICIO.replace('Z', ' ');
+        value.FECHA_FIN = value.FECHA_FIN.replace('T', ' ');
+        value.FECHA_FIN = value.FECHA_FIN.replace('Z', ' ');
+
+        value.Hora_inicio = value.Hora_inicio.replace('T', ' ');
+        value.Hora_inicio = value.Hora_inicio.replace('Z', ' ');
+        value.Hora_fin = value.Hora_fin.replace('T', ' ');
+        value.Hora_fin = value.Hora_fin.replace('Z', ' ');
+
         var startDate = new Date(value.FECHA_INICIO);
         var sDay = startDate.getDate();
         var sMonth = startDate.getMonth();
         var sYear = startDate.getFullYear();
+
+        var startHour = new Date(value.Hora_inicio);
+        var horaInicio = (startHour.getHours() < 10 ? "0" + startHour.getHours() : startHour.getHours());
+        var mMinutosInicio = (startHour.getMinutes() < 10 ? "0" + startHour.getMinutes() : startHour.getMinutes());
 
         var endDate = new Date(value.FECHA_FIN);
         var eDay = endDate.getDate();
         var eMonth = startDate.getMonth();
         var eYear = endDate.getFullYear();
 
+        var endHour = new Date(value.Hora_fin);
+        var HoraFin = (endHour.getHours() < 10 ? "0" + endHour.getHours() : endHour.getHours());
+        var minutosFin = (endHour.getMinutes() < 10 ? "0" * endHour.getMinutes() : endHour.getMinutes());
+
         event = {
             id: value.ID_PROYECTOS_AVANCE,
             title: value.LOCATION + "\n-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- \n " + value.NOTAS,
-            start: new Date(sYear, sMonth, sDay + 1, 12, 0),
-            end: new Date(eYear, eMonth, eDay + 1, 15, 0),
+            start: new Date(sYear, sMonth, sDay, horaInicio, mMinutosInicio),
+            end: new Date(eYear, eMonth, eDay, HoraFin, minutosFin),
             allDay: false,
             className: 'success',
-            editable: true,
+            editable: false,
         };
 
         dataEvents.push(event);
@@ -130,11 +148,10 @@ async function calendarSinci() {
 
             let todayDate = new Date();
 
-            // console.log(start);
-            // console.log(todayDate);
-
             // Function to obtaind the data from the modal
             if (start <= todayDate) {
+
+                $("#dataEvent")[0].reset();
                 // $('.modalForm').prop("disabled", false);
                 $('#createEventCalendar').modal('show');
             }
@@ -142,16 +159,6 @@ async function calendarSinci() {
             // END
 
             // var title = prompt('Event Title:');
-
-            // var title;
-            // bootbox.prompt("This is the default prompt!", function(result) {
-            //     console.log(result);
-            //     title = result;
-            // });
-
-            // // console.log(title);
-
-            // var title = "Test Title for add Events"
 
             // // if (title) {
             // calendar.fullCalendar('renderEvent', {
@@ -264,8 +271,6 @@ function showWeeksNumbers(weekNumber) {
 
 function buttonsNav(defaultView) {
 
-    // console.log(defaultView);
-
     iniciateModalUpdate();
 
     let date;
@@ -304,13 +309,24 @@ function iniciateModalUpdate() {
 
                 response = response[0];
 
+
+                response.FECHA_INICIO = response.FECHA_INICIO.replace('T', ' ');
+                response.FECHA_INICIO = response.FECHA_INICIO.replace('Z', ' ');
+                response.FECHA_FIN = response.FECHA_FIN.replace('T', ' ');
+                response.FECHA_FIN = response.FECHA_FIN.replace('Z', ' ');
+
+                response.Hora_inicio = response.Hora_inicio.replace('T', ' ');
+                response.Hora_inicio = response.Hora_inicio.replace('Z', ' ');
+                response.Hora_fin = response.Hora_fin.replace('T', ' ');
+                response.Hora_fin = response.Hora_fin.replace('Z', ' ');
+
                 var startDate = new Date(response.FECHA_INICIO);
                 var sDay = startDate.getDate();
                 var sMonth = startDate.getMonth();
                 var sYear = startDate.getFullYear();
 
                 var startHour = new Date(response.Hora_inicio);
-                var sHoraInicio = startHour.getHours() + ":" + startHour.getMinutes();
+                var sHoraInicio = (startHour.getHours() < 10 ? "0" + startHour.getHours() : startHour.getHours()) + ":" + (startHour.getMinutes() < 10 ? "0" + startHour.getMinutes() : startHour.getMinutes());
 
                 var endDate = new Date(response.FECHA_FIN);
                 var eDay = endDate.getDate();
@@ -318,14 +334,14 @@ function iniciateModalUpdate() {
                 var eYear = endDate.getFullYear();
 
                 var endHour = new Date(response.Hora_fin);
-                var sHoraFin = endHour.getHours() + ":" + endHour.getMinutes();
+                var sHoraFin = (endHour.getHours() < 10 ? "0" + endHour.getHours() : endHour.getHours()) + ":" + (endHour.getMinutes() < 10 ? "0" * endHour.getMinutes() : endHour.getMinutes());
 
                 $('#message-text').val(response.NOTAS);
                 $('#slctProyecto').val(response.ID_PROYECTO);
                 $('#slctUsuario').val(response.ID_PERSONAL);
 
-                $('#startDate').val(sYear + "-" + (sMonth < 10 ? "0" + (sMonth + 1) : sMonth + 1) + "-" + (sDay < 10 ? "0" + (sDay) : sDay) + " " + sHoraInicio);
-                $('#endDate').val(eYear + "-" + (eMonth < 10 ? "0" + (eMonth + 1) : eMonth + 1) + "-" + (eDay < 10 ? "0" + (eDay) : eDay) + " " + sHoraFin);
+                $('#startDate').val(sYear + "-" + (sMonth < 9 ? "0" + (sMonth + 1) : sMonth + 1) + "-" + (sDay < 10 ? "0" + (sDay + 1) : sDay + 1) + " " + sHoraInicio);
+                $('#endDate').val(eYear + "-" + (eMonth < 9 ? "0" + (eMonth + 1) : eMonth + 1) + "-" + (eDay < 10 ? "0" + (eDay + 1) : eDay + 1) + " " + sHoraFin);
 
                 // $('#slctTipo').val(response.TIPO_RESUMEN);
                 $('#slctAsignar').val(response.TIPO_RESUMEN);
@@ -359,24 +375,22 @@ $('#btnSaveEvent').click(function() {
     event.push({ name: "totalHoras", value: calculeTotalTime(event[3].value, event[4].value) });
     event.push({ name: "idEvent", value: idEventUpdate });
 
-    if (updateEvent) {
+    if (updateEvent)
         urlEvent = urlData + "/updateDataFromCalendar";
-    } else {
+    else
         urlEvent = urlData + "/saveDataFromCalendar";
-    }
-
-    idEventUpdate = null;
-    updateEvent = false;
 
     $.ajax({
         type: "POST",
         url: urlEvent,
         data: event,
         success: function(response) {
-            console.log(response);
+            // console.log(response);
+
+            idEventUpdate = null;
+            updateEvent = false;
 
             $('.modal').modal('hide');
-            $('#dataEvent').trigger("reset");
 
             /**
              * This block of code is temporal, the register of the event changues ahead to not refresh the page completly
@@ -389,14 +403,14 @@ $('#btnSaveEvent').click(function() {
         },
         error: function(exception) {
 
+            idEventUpdate = null;
+            updateEvent = false;
+
             console.log(exception);
         }
+    }).done(function() {
+        $("#dataEvent")[0].reset();
     });
-});
-
-$('.fc-content .fc-event-container .fc-event-inner').click(function() {
-
-    console.log("Content CLICK");
 });
 
 /**
@@ -406,11 +420,13 @@ $('.fc-content .fc-event-container .fc-event-inner').click(function() {
 $(".modal .modal-dialog .modal-header .close").click(function() {
 
     $('.modal').modal('hide');
+    $("#dataEvent")[0].reset();
 });
 
 $('.btnCancelModal').click(function() {
 
     $('.modal').modal('hide');
+    $("#dataEvent")[0].reset();
 });
 
 /** 

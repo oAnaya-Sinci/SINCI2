@@ -52,7 +52,6 @@
             <div class="col-md-6">
               <div class="form-group body-bitacora">
                 <label for="recipient-name" class="col-form-label">Tipo:</label>
-                <!-- <input type="text" class="form-control" id="recipient-name" name="tipo"> -->
                 <select class="form-select modalForm" name="slctTipo" id="slctTipo">
                   <!-- <option value="-1">Seleccione opcion</option> -->
                   <option value="1">Horas desarrollo</option>
@@ -65,7 +64,7 @@
 
             <div class="col-md-6">
               <div class="form-group body-bitacora">
-                <label for="recipient-name" class="col-form-label">Asignar a:</label>
+                <label for="recipient-name" class="col-form-label">Asignar_a:</label>
                 <!-- <input type="text" class="form-control" id="recipient-name" name="asignar"> -->
                 <select class="form-select modalForm" name="slctAsignar" id="slctAsignar">
                 <option value="">NAN</option>
@@ -77,8 +76,8 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary btnCancelModal" data-dismiss="modal">Close</button>
         <button id="btnSaveEvent" type="button" class="btn btn-primary">Guardar</button>
+        <button type="button" class="btn btn-secondary btnCancelModal" data-dismiss="modal">Cancelar</button>
       </div>
     </div>
   </div>

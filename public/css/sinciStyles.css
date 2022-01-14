@@ -1,3 +1,101 @@
+/** 
+ * @Author: Carlos Omar Anaya Barajas 
+ * @Date: 2022-01-14 10:16:31 
+ * @Desc: Calendar styles
+ */
+
+
+/* .main-content .container-fluid #calendar .fc-content .fc-view-agendaWeek .fc-agenda-slots {
+        display: none !important;
+    } */
+
+
+/* .fc-agenda-slots .fc-slot6 {
+        display: none;
+    } */
+
+.fc-slot17 .fc-widget-content,
+.fc-slot18 .fc-widget-content,
+.fc-slot19 .fc-widget-content,
+.fc-slot20 .fc-widget-content,
+.fc-slot21 .fc-widget-content,
+.fc-slot22 .fc-widget-content,
+.fc-slot23 .fc-widget-content,
+.fc-slot24 .fc-widget-content,
+.fc-slot25 .fc-widget-content,
+.fc-slot26 .fc-widget-content,
+.fc-slot27 .fc-widget-content,
+.fc-slot28 .fc-widget-content,
+.fc-slot29 .fc-widget-content,
+.fc-slot30 .fc-widget-content,
+.fc-slot31 .fc-widget-content,
+.fc-slot32 .fc-widget-content,
+.fc-slot33 .fc-widget-content,
+.fc-slot34 .fc-widget-content,
+.fc-slot35 .fc-widget-content,
+.fc-slot36 .fc-widget-content,
+.fc-slot37 .fc-widget-content {
+    background-color: #F1F1F1;
+}
+
+
+/* .modal .modal-content label {
+        display: block ruby;
+    } */
+
+
+/* .modal .modal-content .modal-body #dataEvent .form-group.body-bitacora {
+        display: -webkit-inline-box;
+        width: 93%;
+    } */
+
+.modal input,
+.modal textarea {
+    /* background-color: #F1F1F1; */
+    border: 1px solid #d2d6da;
+    resize: none;
+}
+
+#message-text {
+    height: 15rem;
+}
+
+#createEventCalendar.modal-lg {
+    max-width: none !important;
+}
+
+#createEventCalendar .modal-dialog {
+    max-width: 60rem;
+}
+
+#createEventCalendar .modal-content {
+    height: 44rem;
+}
+
+
+/* .modal-body .col-form-label,
+    .modal-body .form-control {
+        line-height: 1rem;
+    } */
+
+.body-bitacora {
+    display: flex;
+    margin: .5rem 0 .5rem 0;
+}
+
+.body-bitacora label {
+    margin-right: .5rem;
+}
+
+.fc-header .fc-header-center span h5 {
+    color: #344767 !important;
+}
+
+.idEvent {
+    display: none;
+}
+
+
 /* .sinciLogo {
   background: url(https://sinci.com/wp-content/uploads/2019/10/logo-sinci.-servicios-de-automatizacion-y-control-de-procesos-industriales-en-mexico.png) no-repeat !important;
  }
@@ -62,4 +160,8 @@ h5 {
 
 .mc-calendar {
     z-index: 9999 !important;
+}
+
+#loginEmail:focus label {
+    display: none;
 }

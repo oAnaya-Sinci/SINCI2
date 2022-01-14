@@ -5,7 +5,6 @@
 
   <link href='../css/datepicker.min.css' rel='stylesheet' media='print' />
 
-  <link href='../css/calendar/mainCalendar.css' rel='stylesheet' />
   <link href='../css/calendar/fullcalendar.css' rel='stylesheet' />
   <link href='../css/calendar/fullcalendar.print.css' rel='stylesheet' media='print' />
 

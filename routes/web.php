@@ -34,11 +34,13 @@ Auth::routes([
 
 Route::group(['middleware'=>['auth']],function(){
 
-    Route::get('/', [home::class, 'index'])->name('home');
+    // Route::get('/', [home::class, 'index'])->name('home');
+    Route::get('/', function(){ return view('bitacoras/main'); });
 
     // Route::get('/main/Bitacora', function(){ return view('welcome'); });
 });
 
+Route::get('/dashboard', function(){ return view('dashboard/main'); });
 
 Route::get('/bitacoras/main', function(){ return view('bitacoras/main'); });
 

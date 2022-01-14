@@ -77,7 +77,7 @@ async function calendarSinci() {
             start: new Date(sYear, sMonth, sDay, horaInicio, mMinutosInicio),
             end: new Date(eYear, eMonth, eDay, HoraFin, minutosFin),
             allDay: false,
-            className: 'success',
+            className: 'info',
             editable: false,
         };
 
@@ -321,7 +321,7 @@ function iniciateModalUpdate() {
                 response.Hora_fin = response.Hora_fin.replace('Z', ' ');
 
                 var startDate = new Date(response.FECHA_INICIO);
-                var sDay = startDate.getDate();
+                var sDay = startDate.getDate() - 1;
                 var sMonth = startDate.getMonth();
                 var sYear = startDate.getFullYear();
 
@@ -329,7 +329,7 @@ function iniciateModalUpdate() {
                 var sHoraInicio = (startHour.getHours() < 10 ? "0" + startHour.getHours() : startHour.getHours()) + ":" + (startHour.getMinutes() < 10 ? "0" + startHour.getMinutes() : startHour.getMinutes());
 
                 var endDate = new Date(response.FECHA_FIN);
-                var eDay = endDate.getDate();
+                var eDay = endDate.getDate() - 1;
                 var eMonth = startDate.getMonth();
                 var eYear = endDate.getFullYear();
 

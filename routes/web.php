@@ -35,13 +35,13 @@ Auth::routes([
 Route::group(['middleware'=>['auth']],function(){
 
     // Route::get('/', [home::class, 'index'])->name('home');
-    Route::get('/', function(){ return view('bitacoras/main'); });
 
-    // Route::get('/main/Bitacora', function(){ return view('welcome'); });
+    Route::get('/', function(){ return view('dashboard/main'); });
+    Route::get('/', function(){ return view('bitacoras/main'); });
 });
 
-Route::get('/dashboard', function(){ return view('dashboard/main'); });
+// Route::get('/dashboard', function(){ return view('dashboard/main'); });
 
-Route::get('/bitacoras/main', function(){ return view('bitacoras/main'); });
+// Route::get('/bitacoras/main', function(){ return view('bitacoras/main'); });
 
-Route::get('/layout/app', function(){ return view('layouts/app'); });
+// Route::get('/layout/app', function(){ return view('layouts/app'); });

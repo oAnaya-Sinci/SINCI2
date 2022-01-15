@@ -1,3 +1,21 @@
+body,
+body label,
+body p,
+body button,
+body span,
+body div,
+body h1,
+body h2,
+body h3,
+body h4,
+body h5,
+body h6,
+body th,
+body tr {
+    font-family: din !important;
+}
+
+
 /** 
  * @Author: Carlos Omar Anaya Barajas 
  * @Date: 2022-01-14 10:16:31 
@@ -164,4 +182,18 @@ h5 {
 
 #loginEmail:focus label {
     display: none;
+}
+
+.input-group.input-group-outline .form-label::before,
+.input-group.input-group-outline .form-label::after {
+    content: none;
+}
+
+.input-group.input-group-outline .form-label {
+    top: -0.7rem !important;
+    line-height: 0 !important;
+}
+
+#loginEmail {
+    margin-bottom: 0.7rem !important;
 }

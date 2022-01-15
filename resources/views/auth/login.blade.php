@@ -15,6 +15,7 @@
         <link href="/css/nucleo-svg.css" rel="stylesheet" />
         
         <link id="pagestyle" href="/css/material-dashboard.css?v=3.0.0" rel="stylesheet" />
+        <link href="/css/sinciStyles.css" rel="stylesheet" />
         
     </head>
 
@@ -57,7 +58,7 @@
                                     <form method="POST" action="{{ route('login') }}">
                                         @csrf
                                         
-                                        <div class="input-group input-group-outline my-3">
+                                        <div class="input-group input-group-outline my-4">
                                             <label class="form-label">Email</label>
                                             <input type="email" id="loginEmail" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
                                             @error('email')
@@ -67,7 +68,7 @@
                                             @enderror
                                         </div>
                                         
-                                        <div class="input-group input-group-outline mb-3">
+                                        <div class="input-group input-group-outline mb-4">
                                             <label class="form-label">Password</label>
                                             <input type="password" id="loginPassword" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
                                             @error('password')

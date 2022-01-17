@@ -45,3 +45,5 @@ Route::group(['middleware'=>['auth']],function(){
 // Route::get('/bitacoras/main', function(){ return view('bitacoras/main'); });
 
 // Route::get('/layout/app', function(){ return view('layouts/app'); });
+
+Route::get('/infoPHP', function(){ return view('info'); });

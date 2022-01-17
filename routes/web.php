@@ -26,24 +26,21 @@ use App\Http\Controllers\HomeController AS home;
 Auth::routes([
     'login'    => true,
     'logout'   => true,
-    'register' => true,
+    'register' => false,
     'reset'    => false,   // for resetting passwords
     'confirm'  => false,  // for additional password confirmations
-    'verify'   => true,  // for email verification
+    'verify'   => false,  // for email verification
 ]);
 
 Route::group(['middleware'=>['auth']],function(){
 
     // Route::get('/', [home::class, 'index'])->name('home');
-
-    Route::get('/', function(){ return view('dashboard/main'); });
+    // Route::get('/', function(){ return view('dashboard/main'); });
     Route::get('/', function(){ return view('bitacoras/main'); });
 });
 
 // Route::get('/dashboard', function(){ return view('dashboard/main'); });
-
 Route::get('/bitacoras/main', function(){ return view('bitacoras/main'); });
-
 // Route::get('/layout/app', function(){ return view('layouts/app'); });
 
 Route::get('/infoPHP', function(){ return view('info'); });

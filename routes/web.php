@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\HomeController AS home;
+use App\Http\Controllers\Auth\logoutController AS logout;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,12 @@ use App\Http\Controllers\HomeController AS home;
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+/** 
+ * @Author: Carlos Omar Anaya Barajas 
+ * @Date: 2022-01-19 18:11:15 
+ * @Desc: This block of routes was made for the new SINCI ADMIN SISTEM.
+ */
+
 Auth::routes([
     'login'    => true,
     'logout'   => true,
@@ -35,12 +42,16 @@ Auth::routes([
 Route::group(['middleware'=>['auth']],function(){
 
     // Route::get('/', [home::class, 'index'])->name('home');
-    // Route::get('/', function(){ return view('dashboard/main'); });
-    Route::get('/', function(){ return view('bitacoras/main'); });
+    Route::get('/', function(){ $titulo = "DASHBOARD"; return view('dashboard/main', compact('titulo')); });
+    
+    // Route::get('/', function(){ return view('bitacoras/main'); });
+    Route::get('/bitacoras/main', function(){ $titulo = "REGISTRO DE BITACORAS"; return view('bitacoras/main', compact('titulo')); });
+    
+    // Route::get('/layout/app', function(){ return view('layouts/app'); });
+
+    /** Logout */
+    Route::post('/logout', [logout::class, 'logout']);
+
+    // This route only shows the PHP info of the server
+    Route::get('/infoPHP', function(){ return view('info'); });
 });
-
-// Route::get('/dashboard', function(){ return view('dashboard/main'); });
-Route::get('/bitacoras/main', function(){ return view('bitacoras/main'); });
-// Route::get('/layout/app', function(){ return view('layouts/app'); });
-
-Route::get('/infoPHP', function(){ return view('info'); });

@@ -51,6 +51,10 @@
   <script src='../js/calendar/fullcalendar.js' type="text/javascript"></script>
   <script src='../js/calendar/mainCalendar.js' type="text/javascript"></script>
 
-  <!-- <script src='../js/MCDatePicker/mc-calendar.min.js' type="text/javascript"></script> -->
+  <script>
+
+    $('a[href = "/bitacoras/main"]').addClass('active').removeClass('bg-gradient-primary');
+
+  </script>
 
 @endsection

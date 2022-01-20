@@ -7,7 +7,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         
         <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon.png">
-        <link rel="icon" type="image/png" href="/img/favicon.png">
+        <!-- <link rel="icon" type="image/png" href="/img/favicon.png"> -->
+        <link rel="icon" type="image/png" href="https://sinci.com/wp-content/uploads/2019/10/logo-sinci.-servicios-de-automatizacion-y-control-de-procesos-industriales-en-mexico-150x134.png" sizes="32x32">
         <title>{{ config('app.name', 'SINCI SOFTWARE') }}</title>
         
         <!-- Nucleo Icons -->

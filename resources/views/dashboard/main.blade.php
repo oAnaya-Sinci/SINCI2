@@ -26,4 +26,10 @@
 
 @section('jsSection')
 
+  <script>
+
+      $('a[href = "/"]').addClass('active').removeClass('bg-gradient-primary');
+
+  </script>
+
 @endsection

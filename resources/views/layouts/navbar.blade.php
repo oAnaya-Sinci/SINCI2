@@ -7,7 +7,7 @@
             <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
             <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Dashboard</li>
           </ol> -->
-          <h5 class="font-weight-bolder mb-0">Registro de Bitacora</h5>
+          <h5 class="font-weight-bolder mb-0">{{ $titulo }}</h5>
         <!-- </nav> -->
         
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
@@ -17,14 +17,15 @@
               <input type="text" class="form-control">
             </div>
           </div>
-          <!-- <ul class="navbar-nav  justify-content-end">
+
+          <ul class="navbar-nav  justify-content-end">
             <li class="nav-item d-flex align-items-center">
-              <a href="javascript:;" class="nav-link text-body font-weight-bold px-0">
+              <a href="#" id="logout" class="nav-link text-body font-weight-bold px-0">
                 <i class="fa fa-user me-sm-1"></i>
-                <span class="d-sm-inline d-none">Sign In</span>
+                <span class="d-sm-inline d-none">Log Out</span>
               </a>
             </li>
-            <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
+            <!-- <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
               <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
                 <div class="sidenav-toggler-inner">
                   <i class="sidenav-toggler-line"></i>
@@ -110,8 +111,9 @@
                   </a>
                 </li>
               </ul>
-            </li>
-          </ul> -->
+            </li> -->
+          </ul>
+
         </div>
       </div>
     </nav>

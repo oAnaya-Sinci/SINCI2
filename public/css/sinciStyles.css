@@ -1,4 +1,4 @@
-body,
+/* body,
 body label,
 body p,
 body button,
@@ -13,7 +13,7 @@ body h6,
 body th,
 body tr {
     font-family: din !important;
-}
+} */
 
 
 /** 
@@ -196,4 +196,14 @@ h5 {
 
 #loginEmail {
     margin-bottom: 0.7rem !important;
+}
+
+.form-select,
+.form-control {
+    color: #000;
+}
+
+.form-select:focus,
+.form-control:focus {
+    border-color: #d2d6da;
 }

@@ -24,6 +24,11 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
     <!-- CSS Files -->
     <link id="pagestyle" href="/css/material-dashboard.css?v=3.0.0" rel="stylesheet" />
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.css" rel="stylesheet"/>
+
+    <link href='../css/datepicker.min.css' rel='stylesheet' media='print' />
+
     <link href="/css/sinciStyles.css" rel="stylesheet" />
 
     @yield('cssSection')
@@ -68,6 +73,11 @@
 
     <script src='../js/calendar/jquery-1.10.2.js' type="text/javascript"></script>
     <script src='../js/calendar/jquery-ui.custom.min.js' type="text/javascript"></script>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.2/moment.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+    <script src='../js/datepicker.min.js' type="text/javascript"></script>
 
     <script src='../js/main.js' type="text/javascript"></script>
 

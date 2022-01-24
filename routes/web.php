@@ -43,10 +43,10 @@ Auth::routes([
 Route::group(['middleware'=>['auth']],function(){
 
     // Route::get('/', [home::class, 'index'])->name('home');
-    Route::get('/', function(){ $titulo = "DASHBOARD"; $userData = json_encode([Auth()->user()->ADMINISTRADOR, Auth()->user()->ID_USUARIO]); return view('dashboard/main', compact('titulo', 'userData')); });
+    Route::get('/', function(){ $titulo = "DASHBOARD"; $userName = Auth()->user()->ID_USUARIO . " - " . Auth()->user()->NOMBRE; $userData = json_encode([Auth()->user()->ADMINISTRADOR, Auth()->user()->ID_USUARIO]); return view('dashboard/main', compact('titulo', 'userName', 'userData')); });
     
     // Route::get('/', function(){ return view('bitacoras/main'); });
-    Route::get('/bitacoras/main', function(){ $titulo = "REGISTRO DE BITACORAS"; $userData = json_encode([Auth()->user()->ADMINISTRADOR, Auth()->user()->ID_USUARIO]); return view('bitacoras/main', compact('titulo', 'userData')); });
+    Route::get('/bitacoras/main', function(){ $titulo = "REGISTRO DE BITACORAS"; $userName = Auth()->user()->ID_USUARIO . " - " . Auth()->user()->NOMBRE; $userData = json_encode([Auth()->user()->ADMINISTRADOR, Auth()->user()->ID_USUARIO]); return view('bitacoras/main', compact('titulo', 'userName', 'userData')); });
     
     // Route::get('/layout/app', function(){ return view('layouts/app'); });
 

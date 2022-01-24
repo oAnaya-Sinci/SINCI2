@@ -45,9 +45,9 @@
 
         @yield('pageContent')
 
+        <input type="hidden" class="form-control" id="userData" value="{{ $userData }}">
+        
     </main>
-
-    <input type="hide" class="form-control" id="userData" value="{{ $userData }}">
 
     @include('layouts.modals')
 

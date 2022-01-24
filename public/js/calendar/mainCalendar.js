@@ -25,7 +25,13 @@ async function calendarSinci() {
     /**
      * This Fetch petition obtain the calendar events registerd for the login user
      */
-    let dataDB = await fetch(urlData + "/obtainEventsCalendar").then(data => data.json()).then(data => { return data; });
+    let dataDB;
+    if (isAdmin == 0) {
+        dataDB = await fetch(urlData + "/obtainEventsCalendarById?userId=" + userId).then(data => data.json()).then(data => { return data; });
+    } else {
+        dataDB = await fetch(urlData + "/obtainEventsCalendar").then(data => data.json()).then(data => { return data; });
+    }
+    // let dataDB = await fetch(urlData + "/obtainEventsCalendar").then(data => data.json()).then(data => { return data; });
 
     let event;
     $.each(dataDB, function(index, value) {

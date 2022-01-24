@@ -6,7 +6,14 @@ var urlData = "//10.10.103.206:1880";
 
 var idEventUpdate;
 
+var isAdmin;
+var userId;
+
 $(document).ready(function() {
+
+    let userData = JSON.parse($('#userData').val());
+    isAdmin = userData[0];
+    userId = userData[1];
 
     calendarSinci();
 });
@@ -135,6 +142,13 @@ async function calendarSinci() {
 
                 $("#dataEvent")[0].reset();
                 // $('.modalForm').prop("disabled", false);
+
+                if (isAdmin == 0) {
+
+                    $('#slctUsuario').attr('disabled', true);
+                    $('#slctUsuario').val(userId);
+                }
+
                 $('#createEventCalendar').modal('show');
             }
 
@@ -194,8 +208,16 @@ async function modalCalendarSinci() {
     let dataProyecto = await fetch(urlData + "/obtainDataProyecto").then(data => data.json()).then(data => { return data; });
     processDataToSelect(dataProyecto, '#slctProyecto');
 
-    let dataUsuario = await fetch(urlData + "/obtainDataUsuario").then(data => data.json()).then(data => { return data; });
-    processDataToSelect(dataUsuario, '#slctUsuario');
+    let dataUsuario
+    if (isAdmin == 0) {
+
+        dataUsuario = await fetch(urlData + "/obtainDataUsuarioById?userId=" + userId).then(data => data.json()).then(data => { return data; });
+        processDataToSelect(dataUsuario, '#slctUsuario');
+    } else {
+
+        dataUsuario = await fetch(urlData + "/obtainDataUsuario").then(data => data.json()).then(data => { return data; });
+        processDataToSelect(dataUsuario, '#slctUsuario');
+    }
 
     // let dataTipo = await fetch(urlData + "/obtainDataTipo").then(data => data.json()).then(data => { return data; });
     // processDataToSelect(dataTipo, '#slctTipo');

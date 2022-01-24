@@ -36,16 +36,18 @@
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">
-  
+
     @include('layouts.sidebar')
 
-    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
 
         @include('layouts.navbar')
 
         @yield('pageContent')
 
     </main>
+
+    <input type="hide" class="form-control" id="userData" value="{{ $userData }}">
 
     @include('layouts.modals')
 

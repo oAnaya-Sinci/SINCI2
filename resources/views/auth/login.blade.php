@@ -35,7 +35,7 @@
                                         <!-- <h1 class="site-title" itemprop="headline"><a href="https://sinci.com/">SINCI</a></h1> -->
                                         <!-- <div class="sinciLogo" style="height: 9rem;"> </div> -->
                                         
-                                        <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">Ingresar</h4>
+                                        <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">SAS Login</h4>
                                         <div class="row mt-3">
                                             <div class="col-2 text-center ms-auto">
                                                 <a class="btn btn-link px-3" href="javascript:;">

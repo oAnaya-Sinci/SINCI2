@@ -3984,6 +3984,7 @@
                 "</div>" +
                 "<div class='fc-event-title'>" +
                 htmlEscape(event.title || '') +
+                "<div class='idEvent'>" + event.id + "</div>" +
                 "</div>" +
                 "</div>" +
                 "<div class='fc-event-bg'></div>";

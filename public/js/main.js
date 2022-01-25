@@ -17,7 +17,8 @@ $(document).ready(function() {
             today: 'fa fa-check',
             clear: 'fa fa-trash',
             close: 'fa fa-times'
-        }
+        },
+
     });
 });
 

@@ -207,3 +207,15 @@ h5 {
 .form-control:focus {
     border-color: #d2d6da;
 }
+
+.requiredNull {
+    border: 1px solid red !important;
+}
+
+.invalidRequired {
+    color: red !important;
+}
+
+.hidden {
+    display: none;
+}

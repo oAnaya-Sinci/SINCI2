@@ -52,10 +52,7 @@ Route::group(['middleware'=>['auth']],function(){
 
     /** Logout */
     Route::post('/logout', [logout::class, 'logout']);
-
-    // This route only shows the PHP info of the server
-    Route::get('/infoPHP', function(){ return view('info'); });
 });
 
-// Temporal URL for test
-// Route::get('/bitacoras/main', function(){ $titulo = "REGISTRO DE BITACORAS"; return view('bitacoras/main', compact('titulo')); });
+// This route only shows the PHP info of the server
+Route::get('/infoPHP', function(){ return view('info'); });

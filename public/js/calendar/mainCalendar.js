@@ -27,7 +27,7 @@ async function calendarSinci() {
      */
     let dataDB;
     if (isAdmin == 0) {
-        dataDB = await fetch(urlData + "/obtainEventsCalendarById?userId=" + userId).then(data => data.json()).then(data => { return data; });
+        dataDB = await fetch(urlData + "/obtainUserEventsCalendarById?userId=" + userId).then(data => data.json()).then(data => { return data; });
     } else {
         dataDB = await fetch(urlData + "/obtainEventsCalendar").then(data => data.json()).then(data => { return data; });
     }
@@ -149,6 +149,14 @@ async function calendarSinci() {
                 $("#dataEvent")[0].reset();
                 // $('.modalForm').prop("disabled", false);
 
+                let date = new Date();
+
+                let today = start.getFullYear() + "-" + (start.getMonth() < 9 ? "0" + (start.getMonth() + 1) : start.getMonth() + 1) + "-" + (start.getDate() < 10 ? "0" + (start.getDate()) : start.getDate());
+                // today += " " + (start.getHours() < 10 ? "0" + start.getHours() : start.getHours()) + ":" + (start.getMinutes() < 10 ? "0" + start.getMinutes() : start.getMinutes());
+                today += " " + start.getHours() + 8 + ":" + "30";
+
+                $('.datetimepicker').val(today);
+
                 if (isAdmin == 0) {
 
                     $('#slctUsuario').attr('disabled', true);
@@ -217,11 +225,11 @@ async function modalCalendarSinci() {
     let dataUsuario
     if (isAdmin == 0) {
 
-        dataUsuario = await fetch(urlData + "/obtainDataUsuarioById?userId=" + userId).then(data => data.json()).then(data => { return data; });
-        processDataToSelect(dataUsuario, '#slctUsuario');
+        dataUsuario = await fetch(urlData + "/obtainDataUserById?userId=" + userId).then(data => data.json()).then(data => { return data; });
+        processDataToSelect(dataUsuario, '#slctUsuario', false);
     } else {
 
-        dataUsuario = await fetch(urlData + "/obtainDataUsuario").then(data => data.json()).then(data => { return data; });
+        dataUsuario = await fetch(urlData + "/obtainDataUser").then(data => data.json()).then(data => { return data; });
         processDataToSelect(dataUsuario, '#slctUsuario');
     }
 
@@ -232,12 +240,12 @@ async function modalCalendarSinci() {
     processDataToSelect(dataAsignar, '#slctAsignar');
 }
 
-function processDataToSelect(data, select) {
+function processDataToSelect(data, select, firstOption = true) {
 
     let options = "";
 
     $(select).empty();
-    options = "<option value0''>Seleccione opcion</option>";
+    firstOption ? options = "<option value=''>Seleccione opcion</option>" : null;
     $.each(data, function(index, value) {
 
         options += '<option value="' + value.VALUE_SELECT + '">' + value.OPTION_SELECT + '</option>';
@@ -353,7 +361,7 @@ function iniciateModalUpdate() {
                 $('#startDate').val(sYear + "-" + (sMonth < 9 ? "0" + (sMonth + 1) : sMonth + 1) + "-" + (sDay < 10 ? "0" + (sDay + 1) : sDay + 1) + " " + sHoraInicio);
                 $('#endDate').val(eYear + "-" + (eMonth < 9 ? "0" + (eMonth + 1) : eMonth + 1) + "-" + (eDay < 10 ? "0" + (eDay + 1) : eDay + 1) + " " + sHoraFin);
 
-                // $('#slctTipo').val(response.TIPO_RESUMEN);
+                $('#slctTipo').val(response.TIPO);
                 $('#slctAsignar').val(response.TIPO_RESUMEN);
 
                 // $('.modalForm').prop("disabled", true);
@@ -363,6 +371,12 @@ function iniciateModalUpdate() {
                 console.log(exception);
             }
         });
+
+        if (isAdmin == 0) {
+
+            $('#slctUsuario').attr('disabled', true);
+            $('#slctUsuario').val(userId);
+        }
 
         updateEvent = true;
         $('#createEventCalendar').modal('show');
@@ -375,11 +389,16 @@ function iniciateModalUpdate() {
 
 $('#btnSaveEvent').click(function() {
 
+    $('#slctUsuario').attr('disabled', false);
+
     let urlEvent = "";
 
-    // $('.modalForm').prop("disabled", false);
     var event = $('#dataEvent').serializeArray();
-    // event = JSON.stringify(event);
+
+    if (validateModal(event)) {
+
+        return false;
+    }
 
     event.push({ name: "usuarioNombre", value: $("#slctUsuario option:selected").text() });
     event.push({ name: "totalHoras", value: calculeTotalTime(event[3].value, event[4].value) });
@@ -405,7 +424,7 @@ $('#btnSaveEvent').click(function() {
             /**
              * This block of code is temporal, the register of the event changues ahead to not refresh the page completly
              */
-            var timeout = 1500;
+            var timeout = 1000;
 
             setTimeout(() => {
                 window.location.reload();
@@ -487,45 +506,36 @@ function calculeTotalTime(D1, D2) {
     var tt_h = parseInt(et[0]) - parseInt(st[0]);
     var tt_m = 0;
 
-    // if (tt_h < 0) {
-
-    //     $('#startTime').val('');
-    //     $('#endTime').val('');
-
-    //     $('#ErrorModal .modal-body').empty();
-    //     $('#ErrorModal .modal-body').append('El campo "Start Time" no puede ser mayor al campo "EndTime"');
-
-    //     $('#ErrorModal').modal('show');
-
-    //     return false;
-    // }
-
     if (parseInt(et[1]) < parseInt(st[1]) && tt_h > 0) {
 
         tt_h -= 1;
         tt_m = (parseInt(et[1]) + 60) - parseInt(st[1]);
 
-    }
-    /*else if (parseInt(et[1]) < parseInt(st[1]) && tt_h == 0) {
-
-        $('#startTime').val('');
-        $('#endTime').val('');
-
-        $('#ErrorModal .modal-body').empty();
-        $('#ErrorModal .modal-body').append('El campo "Start Time" no puede ser mayor al campo "EndTime"');
-        $('#ErrorModal').modal('show');
-
-        return false;
-
-    } */
-    else
+    } else
         tt_m = parseInt(et[1]) - parseInt(st[1])
 
-    // var tt = (tt_h < 10 ? "0" + tt_h : tt_h) + ":" + (tt_m < 10 ? "0" + tt_m : tt_m);
-
-    // $('#totalTime').val(tt);
-
-    // return tt;
-
     return tt_h;
+}
+
+function validateModal(event) {
+
+    let validate = false;
+
+    $.each(event, function(index, value) {
+
+        if (value.value == '') {
+
+            $("[name='" + value.name + "']").addClass('requiredNull');
+            $(".invalidRequired").removeClass('hidden');
+            validate = true;
+        }
+    });
+
+    setTimeout(() => {
+        $(".form-control").removeClass('requiredNull');
+        $(".form-select").removeClass('requiredNull');
+        $(".invalidRequired").addClass('hidden');
+    }, 8000);
+
+    return validate;
 }

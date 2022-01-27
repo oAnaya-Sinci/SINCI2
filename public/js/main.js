@@ -26,7 +26,7 @@ $(document).ready(function() {
 $('#logout').click(function() {
 
     logoutFunction();
-})
+});
 
 function logoutFunction() {
 

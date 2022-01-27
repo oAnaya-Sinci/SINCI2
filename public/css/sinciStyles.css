@@ -219,3 +219,8 @@ h5 {
 .hidden {
     display: none;
 }
+
+.sidenav-header span {
+    font-size: 19px;
+    padding: 1rem 0 0 2rem;
+}

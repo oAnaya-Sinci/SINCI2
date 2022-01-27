@@ -45,7 +45,7 @@
 
         @yield('pageContent')
 
-        <input type="hidden" class="form-control" id="userData" value="{{ $userData }}">
+        <input type="hidden" class="form-control" id="userData" value="">
         
     </main>
 
@@ -81,6 +81,7 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
     <script src='../js/datepicker.min.js' type="text/javascript"></script>
 
+    <!-- <script src='../js/login.js' type="text/javascript"></script> -->
     <script src='../js/main.js' type="text/javascript"></script>
 
     @yield('jsSection')

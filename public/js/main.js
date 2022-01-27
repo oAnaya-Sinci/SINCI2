@@ -1,7 +1,8 @@
 $(document).ready(function() {
 
+    window.localStorage.getItem('isLogedIn') == 'false' ? window.location.href = "/" : null;
+
     $('.datetimepicker').datetimepicker({
-        // Formats
         // follow MomentJS docs: https://momentjs.com/docs/#/displaying/format/
         format: 'YYYY-MM-DD HH:mm',
 
@@ -29,20 +30,9 @@ $('#logout').click(function() {
 
 function logoutFunction() {
 
-    var data = {
-        _token: $('meta[name="csrf-token"]').attr('content')
-    }
+    window.localStorage.setItem('isLogedIn', false);
+    window.localStorage.setItem('isAdmin', null);
+    window.localStorage.setItem('idUser', null);
 
-    $.ajax({
-        type: 'POST',
-        url: '/logout',
-        data: data,
-        success: function(data) {
-
-            location.href = "/";
-        },
-        error: function(Message) {
-            showError(Message);
-        }
-    });
+    window.location.reload();
 }

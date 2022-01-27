@@ -1,4 +1,4 @@
-var urlData = "//10.10.103.206:1880"; // Servidor de Pruebas
+var urlData = "//10.10.100.34:1880"; // Servidor de Pruebas
 
 $(document).ready(function() {
 
@@ -34,7 +34,6 @@ $('#btnLogin').click(function() {
                     $(".invalid-feedback").css("display", "none");
                 }, 5000);
             }
-
         },
         error: function(exception) {
 

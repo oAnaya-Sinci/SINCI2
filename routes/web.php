@@ -55,4 +55,6 @@ Route::group(['middleware'=>['auth']],function(){
 });
 
 // This route only shows the PHP info of the server
-Route::get('/infoPHP', function(){ return view('info'); });
+// Route::get('/infoPHP', function(){ return view('info'); });
+
+Route::get('/bitacoras/main', function(){ $titulo = "REGISTRO DE BITACORAS"; $userName = "0 - SAS Admin"; $userData = json_encode([1, 751]); return view('bitacoras/main', compact('titulo', 'userName', 'userData')); });

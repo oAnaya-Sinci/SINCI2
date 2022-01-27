@@ -1,7 +1,7 @@
 var updateEvent = false;
 
 // var urlData = "//localhost:1880";
-var urlData = "//10.10.103.206:1880"; // Servidor de Pruebas
+var urlData = "//10.10.100.34:1880"; // Servidor de Pruebas
 // var urlData = "//10.10.102.112:1880"; // Servidor de Produccion
 // var urlData = window.location.href.split("/")[2];
 

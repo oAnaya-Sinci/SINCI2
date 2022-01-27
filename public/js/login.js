@@ -1,4 +1,5 @@
-var urlData = "//10.10.100.34:1880"; // Servidor de Pruebas
+// var urlData = "http://10.10.100.34:1880"; // Servidor de Pruebas
+var urlData = "http://10.10.100.34:1880"; // Servidor de Produccion
 
 $(document).ready(function() {
 

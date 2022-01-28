@@ -1,8 +1,8 @@
 var updateEvent = false;
 
 // var urlData = "//localhost:1880";
-var urlData = "http://192.168.0.103:1880"; // DEVELOPMENT SERVER VMWARE HTTPS 80
-// var urlData = "https://192.168.0.103:1880"; // DEVELOPMENT SERVER VMWARE HTTPS 443
+// var urlData = "http://192.168.0.103:1880"; // DEVELOPMENT SERVER VMWARE HTTPS 80
+var urlData = "https://192.168.0.103:1880"; // DEVELOPMENT SERVER VMWARE HTTPS 443
 
 
 // var urlData = "http://10.10.103.206:1880"; // Servidor de Pruebas

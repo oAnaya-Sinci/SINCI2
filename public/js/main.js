@@ -1,5 +1,9 @@
 $(document).ready(function() {
 
+    setTimeout(() => {
+        logoutFunction();
+    }, 300000);
+
     window.localStorage.getItem('isLogedIn') == 'false' ? window.location.href = "/" : null;
 
     $('.datetimepicker').datetimepicker({
@@ -23,10 +27,7 @@ $(document).ready(function() {
     });
 });
 
-$('#logout').click(function() {
-
-    logoutFunction();
-});
+$('#logout').click(function() { logoutFunction(); });
 
 function logoutFunction() {
 
@@ -34,5 +35,5 @@ function logoutFunction() {
     window.localStorage.setItem('isAdmin', null);
     window.localStorage.setItem('idUser', null);
 
-    window.location.reload();
+    window.location.href = "/";
 }

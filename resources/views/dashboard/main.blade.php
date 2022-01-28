@@ -28,7 +28,7 @@
 
   <script>
 
-      $('a[href = "/"]').addClass('active').removeClass('bg-gradient-primary');
+      $('a[href = "/dashboard"]').addClass('active').removeClass('bg-gradient-primary');
 
   </script>
 

@@ -56,7 +56,7 @@
                                         @csrf
                                         
                                         <div class="input-group input-group-outline my-4">
-                                            <label class="form-label">Email</label>
+                                            <label class="form-label">Usuario</label>
                                             <input type="text" id="loginEmail" class="form-control @error('email') is-invalid @enderror" name="usuario" required autocomplete="email" autofocus>
                                         </div>
                                         

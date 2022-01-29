@@ -1,9 +1,16 @@
 var updateEvent = false;
 
 // var urlData = "//localhost:1880";
-// var urlData = "http://10.10.100.34:1880"; // Servidor de Pruebas
-var urlData = "https://10.10.100.34:1880"; // Servidor de Produccion
-// var urlData = window.location.href.split("/")[2];
+// var urlData = "http://192.168.0.103:1880"; // DEVELOPMENT SERVER VMWARE HTTPS 80
+var urlData = "https://192.168.0.103:1880"; // DEVELOPMENT SERVER VMWARE HTTPS 443
+
+
+// var urlData = "http://10.10.103.206:1880"; // Servidor de Pruebas
+
+// HTTPS
+// var urlData = "https://10.10.100.34:1880"; // PRODUCTION SERVER WITH SECURE PROTOCOL 443
+// HTTP
+// var urlData = "http://10.10.100.34:1880"; // PRODUCTION SERVER WITHOUT SECURE PROTOCOL 80
 
 var idEventUpdate;
 
@@ -26,7 +33,7 @@ async function calendarSinci() {
      * This Fetch petition obtain the calendar events registerd for the login user
      */
     let dataDB;
-    if (isAdmin == 0) {
+    if (isAdmin == '0') {
         dataDB = await fetch(urlData + "/obtainUserEventsCalendarById?userId=" + userId).then(data => data.json()).then(data => { return data; });
     } else {
         dataDB = await fetch(urlData + "/obtainEventsCalendar").then(data => data.json()).then(data => { return data; });
@@ -157,7 +164,7 @@ async function calendarSinci() {
 
                 $('.datetimepicker').val(today);
 
-                if (isAdmin == 0) {
+                if (isAdmin == '0') {
 
                     $('#slctUsuario').attr('disabled', true);
                     $('#slctUsuario').val(userId);
@@ -223,7 +230,7 @@ async function modalCalendarSinci() {
     processDataToSelect(dataProyecto, '#slctProyecto');
 
     let dataUsuario
-    if (isAdmin == 0) {
+    if (isAdmin == '0') {
 
         dataUsuario = await fetch(urlData + "/obtainDataUserById?userId=" + userId).then(data => data.json()).then(data => { return data; });
         processDataToSelect(dataUsuario, '#slctUsuario', false);
@@ -372,7 +379,7 @@ function iniciateModalUpdate() {
             }
         });
 
-        if (isAdmin == 0) {
+        if (isAdmin == '0') {
 
             $('#slctUsuario').attr('disabled', true);
             $('#slctUsuario').val(userId);

@@ -1,9 +1,24 @@
-// var urlData = "http://10.10.100.34:1880"; // Servidor de Pruebas
-var urlData = "https://10.10.100.34:1880"; // Servidor de Produccion
+// var urlData = "//localhost:1880";
+// var urlData = "http://192.168.0.103:1880"; // DEVELOPMENT SERVER VMWARE HTTPS 80
+var urlData = "https://192.168.0.103:1880"; // DEVELOPMENT SERVER VMWARE HTTPS 443
+
+
+// var urlData = "http://10.10.103.206:1880"; // Servidor de Pruebas
+
+// HTTPS
+// var urlData = "https://10.10.100.34:1880"; // PRODUCTION SERVER WITH SECURE PROTOCOL 443
+// HTTP
+// var urlData = "http://10.10.100.34:1880"; // PRODUCTION SERVER WITHOUT SECURE PROTOCOL 80
 
 $(document).ready(function() {
 
     window.localStorage.getItem('isLogedIn') == 'true' ? window.location.href = "/dashboard" : null;
+});
+
+$('#loginPassword').keyup(function(key) {
+
+    if (key.keyCode == 13)
+        $('#btnLogin').click();
 });
 
 $('#btnLogin').click(function() {
@@ -26,7 +41,6 @@ $('#btnLogin').click(function() {
                 window.localStorage.setItem('idUser', response.ID_USUARIO);
                 window.location.href = "/dashboard";
             } else {
-                // alert();
                 window.localStorage.setItem('isLogedIn', false);
 
                 $(".invalid-feedback").css("display", "block");

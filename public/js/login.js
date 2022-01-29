@@ -15,6 +15,12 @@ $(document).ready(function() {
     window.localStorage.getItem('isLogedIn') == 'true' ? window.location.href = "/dashboard" : null;
 });
 
+$('#loginPassword').keyup(function(key) {
+
+    if (key.keyCode == 13)
+        $('#btnLogin').click();
+});
+
 $('#btnLogin').click(function() {
 
     var formData = $('#loginForm').serializeArray();

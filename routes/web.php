@@ -52,7 +52,7 @@ use Illuminate\Support\Facades\Route;
 // });
 
 // This route only shows the PHP info of the server
-// Route::get('/infoPHP', function(){ return view('info'); });
+Route::get('/infoPHP', function(){ return view('info'); });
 
 Route::get('/', function(){ return view('authenticate/loginUser'); });
 

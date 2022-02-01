@@ -4,7 +4,7 @@ $(document).ready(function() {
         logoutFunction();
     }, 300000);
 
-    window.localStorage.getItem('sasIsLogedIn') == 'false' ? window.location.href = "/" : null;
+    window.localStorage.getItem('sasIsLogedIn') != 'false' ? window.location.href = "/" : null;
 
     $('.datetimepicker').datetimepicker({
         // follow MomentJS docs: https://momentjs.com/docs/#/displaying/format/

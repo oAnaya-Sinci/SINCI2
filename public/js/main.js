@@ -4,7 +4,7 @@ $(document).ready(function() {
         logoutFunction();
     }, 300000);
 
-    window.localStorage.getItem('isLogedIn') == 'false' ? window.location.href = "/" : null;
+    window.localStorage.getItem('sasIsLogedIn') == 'false' ? window.location.href = "/" : null;
 
     $('.datetimepicker').datetimepicker({
         // follow MomentJS docs: https://momentjs.com/docs/#/displaying/format/
@@ -31,9 +31,9 @@ $('#logout').click(function() { logoutFunction(); });
 
 function logoutFunction() {
 
-    window.localStorage.setItem('isLogedIn', false);
-    window.localStorage.setItem('isAdmin', null);
-    window.localStorage.setItem('idUser', null);
+    // window.localStorage.setItem('IsLogedIn', false);
+
+    window.localStorage.removeItem('IsLogedIn');
 
     window.location.href = "/";
 }

@@ -11,7 +11,7 @@ var urlData = "https://10.10.100.34:1880"; // PRODUCTION SERVER WITH SECURE PROT
 
 $(document).ready(function() {
 
-    window.localStorage.getItem('isLogedIn') == 'true' ? window.location.href = "/dashboard" : null;
+    window.localStorage.getItem('IsLogedIn') != 'false' ? window.location.href = "/dashboard" : null;
 });
 
 $('#loginPassword').keyup(function(key) {
@@ -40,18 +40,16 @@ $('#btnLogin').click(function() {
             response = JSON.parse(response)[0];
 
             if (response != null) {
-                window.localStorage.setItem('isLogedIn', true);
-                window.localStorage.setItem('isAdmin', response.ADMINISTRADOR);
-                window.localStorage.setItem('idUser', response.ID_USUARIO);
+                window.localStorage.setItem('sasIsLogedIn', response.sessionAuth);
                 window.location.href = "/dashboard";
             } else {
-                window.localStorage.setItem('isLogedIn', false);
+                window.localStorage.setItem('sasIsLogedIn', false);
 
                 $(".invalid-feedback").css("display", "block");
 
                 setTimeout(() => {
                     $(".invalid-feedback").css("display", "none");
-                }, 5000);
+                }, 7000);
             }
         },
         error: function(exception) {

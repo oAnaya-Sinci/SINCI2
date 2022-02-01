@@ -14,13 +14,13 @@ var urlData = "https://10.10.100.34:1880"; // PRODUCTION SERVER WITH SECURE PROT
 
 var idEventUpdate;
 
-var isAdmin;
+// var isAdmin;
 var userId;
 
 $(document).ready(function() {
 
-    isAdmin = window.localStorage.getItem('isAdmin');
-    userId = window.localStorage.getItem('idUser');
+    // isAdmin = window.localStorage.getItem('isAdmin');
+    // userId = window.localStorage.getItem('idUser');
 
     calendarSinci();
 });
@@ -32,13 +32,13 @@ async function calendarSinci() {
     /**
      * This Fetch petition obtain the calendar events registerd for the login user
      */
-    let dataDB;
-    if (isAdmin == '0') {
-        dataDB = await fetch(urlData + "/obtainUserEventsCalendarById?userId=" + userId).then(data => data.json()).then(data => { return data; });
-    } else {
-        dataDB = await fetch(urlData + "/obtainEventsCalendar").then(data => data.json()).then(data => { return data; });
-    }
-    // let dataDB = await fetch(urlData + "/obtainEventsCalendar").then(data => data.json()).then(data => { return data; });
+    // let dataDB;
+    // if (isAdmin == '0') {
+    //     dataDB = await fetch(urlData + "/obtainUserEventsCalendarById?userId=" + userId).then(data => data.json()).then(data => { return data; });
+    // } else {
+    //     dataDB = await fetch(urlData + "/obtainEventsCalendar").then(data => data.json()).then(data => { return data; });
+    // }
+    let dataDB = await fetch(urlData + "/obtainEventsCalendar").then(data => data.json()).then(data => { return data; });
 
     let event;
     $.each(dataDB, function(index, value) {
@@ -164,11 +164,11 @@ async function calendarSinci() {
 
                 $('.datetimepicker').val(today);
 
-                if (isAdmin == '0') {
+                // if (isAdmin == '0') {
 
-                    $('#slctUsuario').attr('disabled', true);
-                    $('#slctUsuario').val(userId);
-                }
+                //     $('#slctUsuario').attr('disabled', true);
+                //     $('#slctUsuario').val(userId);
+                // }
 
                 $('#createEventCalendar').modal('show');
             }
@@ -229,16 +229,19 @@ async function modalCalendarSinci() {
     let dataProyecto = await fetch(urlData + "/obtainDataProyecto").then(data => data.json()).then(data => { return data; });
     processDataToSelect(dataProyecto, '#slctProyecto');
 
-    let dataUsuario
-    if (isAdmin == '0') {
+    // let dataUsuario
+    // if (isAdmin == '0') {
 
-        dataUsuario = await fetch(urlData + "/obtainDataUserById?userId=" + userId).then(data => data.json()).then(data => { return data; });
-        processDataToSelect(dataUsuario, '#slctUsuario', false);
-    } else {
+    //     dataUsuario = await fetch(urlData + "/obtainDataUserById?userId=" + userId).then(data => data.json()).then(data => { return data; });
+    //     processDataToSelect(dataUsuario, '#slctUsuario', false);
+    // } else {
 
-        dataUsuario = await fetch(urlData + "/obtainDataUser").then(data => data.json()).then(data => { return data; });
-        processDataToSelect(dataUsuario, '#slctUsuario');
-    }
+    //     dataUsuario = await fetch(urlData + "/obtainDataUser").then(data => data.json()).then(data => { return data; });
+    //     processDataToSelect(dataUsuario, '#slctUsuario');
+    // }
+
+    let dataUsuario = await fetch(urlData + "/obtainDataUser").then(data => data.json()).then(data => { return data; });
+    processDataToSelect(dataUsuario, '#slctUsuario');
 
     // let dataTipo = await fetch(urlData + "/obtainDataTipo").then(data => data.json()).then(data => { return data; });
     // processDataToSelect(dataTipo, '#slctTipo');
@@ -247,7 +250,7 @@ async function modalCalendarSinci() {
     processDataToSelect(dataAsignar, '#slctAsignar');
 }
 
-function processDataToSelect(data, select, firstOption = true) {
+function processDataToSelect(data, select, firstOption = false) {
 
     let options = "";
 
@@ -330,7 +333,6 @@ function iniciateModalUpdate() {
             url: urlData + "/obtainEventsCalendarById",
             data: { "idEvent": idEventUpdate },
             success: function(response) {
-                // console.log(response);
 
                 response = response[0];
 
@@ -379,11 +381,11 @@ function iniciateModalUpdate() {
             }
         });
 
-        if (isAdmin == '0') {
+        // if (isAdmin == '0') {
 
-            $('#slctUsuario').attr('disabled', true);
-            $('#slctUsuario').val(userId);
-        }
+        //     $('#slctUsuario').attr('disabled', true);
+        //     $('#slctUsuario').val(userId);
+        // }
 
         updateEvent = true;
         $('#createEventCalendar').modal('show');

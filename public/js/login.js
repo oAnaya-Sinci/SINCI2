@@ -5,13 +5,22 @@
 // var urlData = "http://10.10.103.206:1880"; // Servidor de Pruebas
 
 // HTTPS
-var urlData = "https://10.10.100.34:1880"; // PRODUCTION SERVER WITH SECURE PROTOCOL 443
+// var urlData = "https://10.10.100.34:1880"; // PRODUCTION SERVER WITH SECURE PROTOCOL 443
 // HTTP
 // var urlData = "http://10.10.100.34:1880"; // PRODUCTION SERVER WITHOUT SECURE PROTOCOL 80
 
+console.log(window.location.href);
+
+var currenUrl = window.location.href.split("/")[2];
+currenUrl = currenUrl.split(":");
+
+var urlData = "https://" + currenUrl[0] + ":1880";
+
+console.log(urlData);
+
 $(document).ready(function() {
 
-    // window.localStorage.getItem('IsLogedIn') != 'false' ? window.location.href = "/dashboard" : null;
+    IsLogedIn();
 });
 
 $('#loginPassword').keyup(function(key) {
@@ -60,3 +69,27 @@ $('#btnLogin').click(function() {
         }
     });
 });
+
+function IsLogedIn() {
+
+    $.ajax({
+        type: "POST",
+        url: urlData + "/authenticate/isLogedIn",
+        data: { "isLogedIn": window.localStorage.getItem('sasIsLogedIn') },
+        success: function(response) {
+
+            response = JSON.parse(response)[0];
+
+            if (response.sessionAuth != 'false') {
+                window.localStorage.setItem('sasIsLogedIn', response.sessionAuth);
+                window.location.href = "/dashboard";
+            } else {
+                window.localStorage.setItem('sasIsLogedIn', 'false');
+            }
+        },
+        error: function(exception) {
+
+            console.log(exception);
+        }
+    });
+}

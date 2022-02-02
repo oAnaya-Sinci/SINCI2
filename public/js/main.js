@@ -1,10 +1,25 @@
+// var urlData = "//localhost:1880";
+// var urlData = "http://192.168.0.103:1880"; // DEVELOPMENT SERVER VMWARE HTTPS 80
+// var urlData = "https://192.168.0.103:1880"; // DEVELOPMENT SERVER VMWARE HTTPS 443
+
+
+// var urlData = "http://10.10.103.206:1880"; // Servidor de Pruebas
+
+// HTTPS
+var urlData = "https://10.10.100.34:1880"; // PRODUCTION SERVER WITH SECURE PROTOCOL 443
+// HTTP
+// var urlData = "http://10.10.100.34:1880"; // PRODUCTION SERVER WITHOUT SECURE PROTOCOL 80
+
 $(document).ready(function() {
 
     setTimeout(() => {
-        logoutFunction();
-    }, 300000);
+        IsLogedIn();
+    }, 360000);
 
-    window.localStorage.getItem('sasIsLogedIn') != 'false' ? window.location.href = "/" : null;
+    // window.localStorage.getItem('sasIsLogedIn') == 'false' ? window.location.href = "/" : null;
+    IsLogedIn();
+
+    calendarSinci();
 
     $('.datetimepicker').datetimepicker({
         // follow MomentJS docs: https://momentjs.com/docs/#/displaying/format/
@@ -27,13 +42,36 @@ $(document).ready(function() {
     });
 });
 
-$('#logout').click(function() { logoutFunction(); });
+$('#logout').click(function() {
 
-function logoutFunction() {
-
-    // window.localStorage.setItem('IsLogedIn', false);
-
-    window.localStorage.removeItem('IsLogedIn');
+    // window.localStorage.removeItem('sasIsLogedIn');
+    window.localStorage.setItem('sasIsLogedIn', 'false');
 
     window.location.href = "/";
+});
+
+function IsLogedIn() {
+
+    $.ajax({
+        type: "POST",
+        url: urlData + "/authenticate/isLogedIn",
+        data: { "isLogedIn": window.localStorage.getItem('sasIsLogedIn') },
+        success: function(response) {
+            // console.log(response);
+
+            response = JSON.parse(response)[0];
+
+            if (response.sessionAuth != 'false') {
+                window.localStorage.setItem('sasIsLogedIn', response.sessionAuth);
+            } else {
+                window.localStorage.setItem('sasIsLogedIn', false);
+                window.location.href = "/";
+            }
+        },
+        error: function(exception) {
+
+            console.log(exception);
+        }
+    });
+
 }

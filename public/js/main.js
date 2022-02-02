@@ -16,7 +16,6 @@ $(document).ready(function() {
         IsLogedIn();
     }, 360000);
 
-    // window.localStorage.getItem('sasIsLogedIn') == 'false' ? window.location.href = "/" : null;
     IsLogedIn();
 
     calendarSinci();
@@ -64,7 +63,7 @@ function IsLogedIn() {
             if (response.sessionAuth != 'false') {
                 window.localStorage.setItem('sasIsLogedIn', response.sessionAuth);
             } else {
-                window.localStorage.setItem('sasIsLogedIn', false);
+                window.localStorage.setItem('sasIsLogedIn', 'false');
                 window.location.href = "/";
             }
         },
@@ -73,5 +72,4 @@ function IsLogedIn() {
             console.log(exception);
         }
     });
-
 }

@@ -11,7 +11,7 @@ var urlData = "https://10.10.100.34:1880"; // PRODUCTION SERVER WITH SECURE PROT
 
 $(document).ready(function() {
 
-    window.localStorage.getItem('IsLogedIn') != 'false' ? window.location.href = "/dashboard" : null;
+    // window.localStorage.getItem('IsLogedIn') != 'false' ? window.location.href = "/dashboard" : null;
 });
 
 $('#loginPassword').keyup(function(key) {
@@ -38,12 +38,14 @@ $('#btnLogin').click(function() {
         success: function(response) {
 
             response = JSON.parse(response)[0];
+            // response = response[0];
 
-            if (response != null) {
+            if (response.sessionAuth != 'false') {
                 window.localStorage.setItem('sasIsLogedIn', response.sessionAuth);
                 window.location.href = "/dashboard";
             } else {
-                window.localStorage.setItem('sasIsLogedIn', false);
+                // window.localStorage.setItem('sasIsLogedIn', false);
+                window.localStorage.removeItem('sasIsLogedIn');
 
                 $(".invalid-feedback").css("display", "block");
 

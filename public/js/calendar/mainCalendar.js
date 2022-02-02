@@ -1,44 +1,52 @@
 var updateEvent = false;
-
-// var urlData = "//localhost:1880";
-// var urlData = "http://192.168.0.103:1880"; // DEVELOPMENT SERVER VMWARE HTTPS 80
-// var urlData = "https://192.168.0.103:1880"; // DEVELOPMENT SERVER VMWARE HTTPS 443
-
-
-// var urlData = "http://10.10.103.206:1880"; // Servidor de Pruebas
-
-// HTTPS
-var urlData = "https://10.10.100.34:1880"; // PRODUCTION SERVER WITH SECURE PROTOCOL 443
-// HTTP
-// var urlData = "http://10.10.100.34:1880"; // PRODUCTION SERVER WITHOUT SECURE PROTOCOL 80
-
 var idEventUpdate;
 
-// var isAdmin;
-var userId;
+var dataLogin;
 
-$(document).ready(function() {
+// $(document).ready(function() {
 
-    // isAdmin = window.localStorage.getItem('isAdmin');
-    // userId = window.localStorage.getItem('idUser');
-
-    calendarSinci();
-});
+//     calendarSinci();
+// });
 
 async function calendarSinci() {
+
+    dataLogin = window.localStorage.getItem('sasIsLogedIn');
+    dataLogin = dataLogin.split("/");
+
+    let newStr = "";
+    let x = 0;
+    $.each(dataLogin, function(index, value) {
+
+        if (x < dataLogin.length - 1)
+            newStr += value + "-";
+        else
+            newStr += value;
+
+        x++;
+    });
+    dataLogin = newStr;
+
+    dataLogin = dataLogin.split("+");
+
+    newStr = "";
+    x = 0;
+    $.each(dataLogin, function(index, value) {
+
+        if (x < dataLogin.length - 1)
+            newStr += value + "_";
+        else
+            newStr += value;
+
+        x++;
+    });
+    dataLogin = newStr;
 
     let dataEvents = [];
 
     /**
      * This Fetch petition obtain the calendar events registerd for the login user
      */
-    // let dataDB;
-    // if (isAdmin == '0') {
-    //     dataDB = await fetch(urlData + "/obtainUserEventsCalendarById?userId=" + userId).then(data => data.json()).then(data => { return data; });
-    // } else {
-    //     dataDB = await fetch(urlData + "/obtainEventsCalendar").then(data => data.json()).then(data => { return data; });
-    // }
-    let dataDB = await fetch(urlData + "/obtainEventsCalendar").then(data => data.json()).then(data => { return data; });
+    let dataDB = await fetch(urlData + "/obtainEventsCalendar?dataLogin=" + dataLogin).then(data => data.json()).then(data => { return data; });
 
     let event;
     $.each(dataDB, function(index, value) {
@@ -164,12 +172,6 @@ async function calendarSinci() {
 
                 $('.datetimepicker').val(today);
 
-                // if (isAdmin == '0') {
-
-                //     $('#slctUsuario').attr('disabled', true);
-                //     $('#slctUsuario').val(userId);
-                // }
-
                 $('#createEventCalendar').modal('show');
             }
 
@@ -229,18 +231,7 @@ async function modalCalendarSinci() {
     let dataProyecto = await fetch(urlData + "/obtainDataProyecto").then(data => data.json()).then(data => { return data; });
     processDataToSelect(dataProyecto, '#slctProyecto');
 
-    // let dataUsuario
-    // if (isAdmin == '0') {
-
-    //     dataUsuario = await fetch(urlData + "/obtainDataUserById?userId=" + userId).then(data => data.json()).then(data => { return data; });
-    //     processDataToSelect(dataUsuario, '#slctUsuario', false);
-    // } else {
-
-    //     dataUsuario = await fetch(urlData + "/obtainDataUser").then(data => data.json()).then(data => { return data; });
-    //     processDataToSelect(dataUsuario, '#slctUsuario');
-    // }
-
-    let dataUsuario = await fetch(urlData + "/obtainDataUser").then(data => data.json()).then(data => { return data; });
+    let dataUsuario = await fetch(urlData + "/obtainDataUser?dataLogin=" + dataLogin).then(data => data.json()).then(data => { return data; });
     processDataToSelect(dataUsuario, '#slctUsuario');
 
     // let dataTipo = await fetch(urlData + "/obtainDataTipo").then(data => data.json()).then(data => { return data; });
@@ -380,12 +371,6 @@ function iniciateModalUpdate() {
                 console.log(exception);
             }
         });
-
-        // if (isAdmin == '0') {
-
-        //     $('#slctUsuario').attr('disabled', true);
-        //     $('#slctUsuario').val(userId);
-        // }
 
         updateEvent = true;
         $('#createEventCalendar').modal('show');

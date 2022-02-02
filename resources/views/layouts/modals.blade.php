@@ -58,10 +58,10 @@
                 <label for="recipient-name" class="col-form-label">Tipo:</label>
                 <select class="form-select modalForm" name="slctTipo" id="slctTipo" required>
                   <!-- <option value="-1">Seleccione opcion</option> -->
-                  <option value="1">Horas desarrollo</option>
-                  <option value="2">Horas de puesta en servicio</option>
-                  <option value="3">Administrativo</option>
-                  <option value="4">Servicio</option>
+                  <option value="0">Horas desarrollo</option>
+                  <option value="1">Horas de puesta en servicio</option>
+                  <option value="2">Administrativo</option>
+                  <option value="3">Servicio</option>
                 </select>
               </div>
             </div>

@@ -9,9 +9,14 @@ var urlData = "https://192.168.0.103:1880"; // DEVELOPMENT SERVER VMWARE HTTPS 4
 // HTTP
 // var urlData = "http://10.10.100.34:1880"; // PRODUCTION SERVER WITHOUT SECURE PROTOCOL 80
 
-var currentUrl = window.location.href;
+console.log(window.location.href);
 
-console.log(currentUrl.split("/"));
+var currenUrl = window.location.href.split("/")[2];
+currenUrl = currenUrl.split(":");
+
+var urlData = "https://" + currenUrl[0] + ":1880";
+
+console.log(urlData);
 
 $(document).ready(function() {
 

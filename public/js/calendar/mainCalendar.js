@@ -10,8 +10,8 @@ var dataLogin;
 
 async function calendarSinci() {
 
-    dataLogin = window.localStorage.getItem('sasIsLogedIn');
-    dataLogin = dataLogin.split("/");
+    dataLogin = window.localStorage.getItem('sasIsLogedIn').split("/");
+    // dataLogin = dataLogin == 'false' ? window.location.href = "/dashboard" : dataLogin.split("/");
 
     let newStr = "";
     let x = 0;
@@ -443,12 +443,14 @@ $('#btnSaveEvent').click(function() {
 $(".modal .modal-dialog .modal-header .close").click(function() {
 
     $('.modal').modal('hide');
+    idEventUpdate = null;
     $("#dataEvent")[0].reset();
 });
 
 $('.btnCancelModal').click(function() {
 
     $('.modal').modal('hide');
+    idEventUpdate = null;
     $("#dataEvent")[0].reset();
 });
 

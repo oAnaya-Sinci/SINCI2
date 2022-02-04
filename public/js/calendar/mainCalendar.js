@@ -170,7 +170,7 @@ async function calendarSinci() {
                 // today += " " + (start.getHours() < 10 ? "0" + start.getHours() : start.getHours()) + ":" + (start.getMinutes() < 10 ? "0" + start.getMinutes() : start.getMinutes());
                 // today += " " + start.getHours() + 8 + ":" + "30";
 
-                today += "0" + 8 + ":" + "30";
+                let today = "0" + 8 + ":" + "30";
 
                 $('.datetimepicker').val(today);
 

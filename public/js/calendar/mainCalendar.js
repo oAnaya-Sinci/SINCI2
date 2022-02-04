@@ -166,11 +166,9 @@ async function calendarSinci() {
                 $("#dataEvent")[0].reset();
                 // $('.modalForm').prop("disabled", false);
 
-                // let today = start.getFullYear() + "-" + (start.getMonth() < 9 ? "0" + (start.getMonth() + 1) : start.getMonth() + 1) + "-" + (start.getDate() < 10 ? "0" + (start.getDate()) : start.getDate());
+                let today = start.getFullYear() + "-" + (start.getMonth() < 9 ? "0" + (start.getMonth() + 1) : start.getMonth() + 1) + "-" + (start.getDate() < 10 ? "0" + (start.getDate()) : start.getDate());
                 // today += " " + (start.getHours() < 10 ? "0" + start.getHours() : start.getHours()) + ":" + (start.getMinutes() < 10 ? "0" + start.getMinutes() : start.getMinutes());
-                // today += " " + start.getHours() + 8 + ":" + "30";
-
-                let today = "0" + 8 + ":" + "30";
+                today += " 0" + 8 + ":" + "30";
 
                 $('.datetimepicker').val(today);
 

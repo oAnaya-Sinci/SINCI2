@@ -327,7 +327,6 @@ function iniciateModalUpdate() {
 
                 response = response[0];
 
-
                 response.FECHA_INICIO = response.FECHA_INICIO.replace('T', ' ');
                 response.FECHA_INICIO = response.FECHA_INICIO.replace('Z', ' ');
                 response.FECHA_FIN = response.FECHA_FIN.replace('T', ' ');
@@ -358,8 +357,8 @@ function iniciateModalUpdate() {
                 $('#slctProyecto').val(response.ID_PROYECTO);
                 $('#slctUsuario').val(response.ID_PERSONAL);
 
-                $('#startDate').val(sYear + "-" + (sMonth < 9 ? "0" + (sMonth + 1) : sMonth + 1) + "-" + (sDay < 10 ? "0" + (sDay + 1) : sDay + 1) + " " + sHoraInicio);
-                $('#endDate').val(eYear + "-" + (eMonth < 9 ? "0" + (eMonth + 1) : eMonth + 1) + "-" + (eDay < 10 ? "0" + (eDay + 1) : eDay + 1) + " " + sHoraFin);
+                $('#startDate').val(sYear + "-" + (sMonth < 9 ? "0" + (sMonth + 1) : sMonth + 1) + "-" + ((sDay + 1) < 10 ? "0" + (sDay + 1) : sDay + 1) + " " + sHoraInicio);
+                $('#endDate').val(eYear + "-" + (eMonth < 9 ? "0" + (eMonth + 1) : eMonth + 1) + "-" + ((eDay + 1) < 10 ? "0" + (eDay + 1) : eDay + 1) + " " + sHoraFin);
 
                 $('#slctTipo').val(response.TIPO);
                 $('#slctAsignar').val(response.TIPO_RESUMEN);

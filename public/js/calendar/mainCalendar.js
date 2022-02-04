@@ -161,14 +161,16 @@ async function calendarSinci() {
             // Function to obtaind the data from the modal
             if (start <= todayDate) {
 
+                idEventUpdate = null;
+
                 $("#dataEvent")[0].reset();
                 // $('.modalForm').prop("disabled", false);
 
-                let date = new Date();
-
-                let today = start.getFullYear() + "-" + (start.getMonth() < 9 ? "0" + (start.getMonth() + 1) : start.getMonth() + 1) + "-" + (start.getDate() < 10 ? "0" + (start.getDate()) : start.getDate());
+                // let today = start.getFullYear() + "-" + (start.getMonth() < 9 ? "0" + (start.getMonth() + 1) : start.getMonth() + 1) + "-" + (start.getDate() < 10 ? "0" + (start.getDate()) : start.getDate());
                 // today += " " + (start.getHours() < 10 ? "0" + start.getHours() : start.getHours()) + ":" + (start.getMinutes() < 10 ? "0" + start.getMinutes() : start.getMinutes());
-                today += " " + start.getHours() + 8 + ":" + "30";
+                // today += " " + start.getHours() + 8 + ":" + "30";
+
+                today += "0" + 8 + ":" + "30";
 
                 $('.datetimepicker').val(today);
 
@@ -443,14 +445,12 @@ $('#btnSaveEvent').click(function() {
 $(".modal .modal-dialog .modal-header .close").click(function() {
 
     $('.modal').modal('hide');
-    idEventUpdate = null;
     $("#dataEvent")[0].reset();
 });
 
 $('.btnCancelModal').click(function() {
 
     $('.modal').modal('hide');
-    idEventUpdate = null;
     $("#dataEvent")[0].reset();
 });
 

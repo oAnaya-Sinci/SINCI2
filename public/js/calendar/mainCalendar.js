@@ -156,12 +156,13 @@ async function calendarSinci() {
              * the form of obtain the title of the event will changue ahead, this elment will be changed with a modal to obtain the information
              */
 
+            idEventUpdate = null;
+            updateEvent = false;
+
             let todayDate = new Date();
 
             // Function to obtaind the data from the modal
             if (start <= todayDate) {
-
-                idEventUpdate = null;
 
                 $("#dataEvent")[0].reset();
                 // $('.modalForm').prop("disabled", false);
@@ -174,6 +175,8 @@ async function calendarSinci() {
 
                 $('#createEventCalendar').modal('show');
             }
+
+            console.log(idEventUpdate);
 
             // END
 
@@ -381,6 +384,8 @@ function iniciateModalUpdate() {
  */
 
 $('#btnSaveEvent').click(function() {
+
+    console.log(idEventUpdate);
 
     $('#slctUsuario').attr('disabled', false);
 

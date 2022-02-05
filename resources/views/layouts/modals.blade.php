@@ -1,5 +1,5 @@
 <!-- This modal is to save de event on the calendar -->
-<div id="createEventCalendar" class="modal fade modal-lg" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div id="createEventCalendar" class="modal fade modal-lg" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -78,6 +78,27 @@
           </div>
 
         </form>
+      </div>
+      <div class="modal-footer">
+        <button id="btnSaveEvent" type="button" class="btn btn-primary">Guardar</button>
+        <button type="button" class="btn btn-secondary btnCancelModal" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- This modal is to save de event on the calendar -->
+<div id="modalMessageSystem" class="modal fade modal-lg" tabindex="-1" role="dialog" aria-labelledby="messageModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="exampleModalLabel">Mensaje del sistema</h4>
+        <button type="button" class="close btn btn-secondary" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div id="messageToDisplay"></div>
       </div>
       <div class="modal-footer">
         <button id="btnSaveEvent" type="button" class="btn btn-primary">Guardar</button>

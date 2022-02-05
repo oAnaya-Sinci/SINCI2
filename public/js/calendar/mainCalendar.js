@@ -176,8 +176,6 @@ async function calendarSinci() {
                 $('#createEventCalendar').modal('show');
             }
 
-            console.log(idEventUpdate);
-
             // END
 
             // var title = prompt('Event Title:');
@@ -328,6 +326,8 @@ function iniciateModalUpdate() {
             data: { "idEvent": idEventUpdate },
             success: function(response) {
 
+                $("#dataEvent")[0].reset();
+
                 response = response[0];
 
                 response.FECHA_INICIO = response.FECHA_INICIO.replace('T', ' ');
@@ -385,8 +385,6 @@ function iniciateModalUpdate() {
 
 $('#btnSaveEvent').click(function() {
 
-    console.log(idEventUpdate);
-
     $('#slctUsuario').attr('disabled', false);
 
     let urlEvent = "";
@@ -394,8 +392,13 @@ $('#btnSaveEvent').click(function() {
     var event = $('#dataEvent').serializeArray();
 
     if (validateModal(event)) {
-
         return false;
+    } else if (checkDateToSave(event[3].value, event[4].value)) {
+
+        $('#messageToDisplay').html("<p>Error en las fechas, no se puede seleccionar una fecha mayor a la del dia de hoy</p>");
+        $('#MessageSystem').modal('show');
+
+        return false
     }
 
     event.push({ name: "usuarioNombre", value: $("#slctUsuario option:selected").text() });
@@ -414,10 +417,16 @@ $('#btnSaveEvent').click(function() {
         success: function(response) {
             // console.log(response);
 
+            response = JSON.parse(response)[0];
+
+            if (response.cantSaveData == "true") {
+
+            }
+
             idEventUpdate = null;
             updateEvent = false;
 
-            $('.modal').modal('hide');
+            $('#createEventCalendar').modal('hide');
 
             /**
              * This block of code is temporal, the register of the event changues ahead to not refresh the page completly
@@ -447,14 +456,35 @@ $('#btnSaveEvent').click(function() {
 $(".modal .modal-dialog .modal-header .close").click(function() {
 
     $('.modal').modal('hide');
-    $("#dataEvent")[0].reset();
 });
 
 $('.btnCancelModal').click(function() {
 
     $('.modal').modal('hide');
-    $("#dataEvent")[0].reset();
 });
+
+/** 
+ * javascript comment 
+ * @Author: flydreame 
+ * @Date: 2022-02-04 18:07:05 
+ * @Desc:  
+ */
+
+function checkDateToSave(start, end) {
+
+    let isValidate = false;
+
+    let todayDate = new Date();
+
+    // Function to obtaind the data from the modal
+    if (start > todayDate) {
+        isValidate = true;
+    } else if (end > todayDate) {
+        isValidate = true;
+    }
+
+    return isValidate;
+}
 
 /** 
  * Funtion to obtain the hours between 2 dates 

@@ -314,8 +314,8 @@ function buttonsNav(defaultView) {
     //     date = null;
     // }
 
-    // let weekNumber = getWeekNumber(new Date(date));
-    // showWeeksNumbers(weekNumber);
+    let weekNumber = getWeekNumber(new Date(date));
+    showWeeksNumbers(weekNumber);
 }
 
 /** 
@@ -340,12 +340,12 @@ function iniciateModalUpdate() {
             data: { "idEvent": idEventUpdate },
             success: function(response) {
 
-console.log( response);
+                console.log(response);
 
                 $("#dataEvent")[0].reset();
 
                 response = JSON.parse(response)[0];
-console.log( response);
+                console.log(response);
                 response.FECHA_INICIO = response.FECHA_INICIO.replace('T', ' ');
                 response.FECHA_INICIO = response.FECHA_INICIO.replace('Z', ' ');
                 response.FECHA_FIN = response.FECHA_FIN.replace('T', ' ');
@@ -400,7 +400,7 @@ console.log( response);
  * Queda pendiente el poder agregar la informcion sin tener que recargar la pagina para ello utilizando la funcion de select en el fullcalendar.
  */
 
-$('#btnSaveEvent').click(function() {
+$('#btnSaveEvent').click(async function() {
 
     $('#slctUsuario').attr('disabled', false);
 
@@ -434,7 +434,7 @@ $('#btnSaveEvent').click(function() {
         message = "Información guardada exitosamente ";
     }
 
-    $.ajax({
+    await $.ajax({
         type: "POST",
         url: urlEvent,
         data: event,
@@ -442,7 +442,7 @@ $('#btnSaveEvent').click(function() {
 
             response = JSON.parse(response)[0];
 
-console.log(response);
+            console.log(response);
             console.log(response.cantSaveData);
 
             idEventUpdate = null;
@@ -453,7 +453,7 @@ console.log(response);
 
             if (response.cantSaveData == "true") {
 
-                showMessage('danger', 'Error', "Error ya existe registros en el rango de horas selccionadas \n favor de revisar la información a registrar");
+                showMessage('danger', 'Error', "Error ya existe registros en el rango de horas seleccionadas, favor de revisar la información a registrar");
 
                 return false;
             }
@@ -488,9 +488,9 @@ console.log(response);
  * @Desc:  Delete Information from the database
  */
 
-$('#btnDeleteEvent').click(function() {
+$('#btnDeleteEvent').click(async function() {
 
-    $.ajax({
+    await $.ajax({
         type: "POST",
         url: urlData + "/deleteInformation",
         data: { idEvent: idEventUpdate },

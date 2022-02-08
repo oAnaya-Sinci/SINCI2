@@ -63,7 +63,7 @@ $('#btnLogin').click(async function() {
                 // window.localStorage.setItem('sasIsLogedIn', false);
                 window.localStorage.removeItem('sasIsLogedIn');
 
-                $(".invalid-feedback").css("display", "block");
+                $(".invalid-feedback.login").css("display", "block");
 
                 setTimeout(() => {
                     $(".invalid-feedback").css("display", "none");

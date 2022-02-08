@@ -73,7 +73,7 @@
                                         </span>
                                         </div>
 
-                                        <span class="invalid-feedback" role="alert">
+                                        <span class="invalid-feedback login" role="alert">
                                             <strong>Login pass fail</strong>
                                         </span>
                                         

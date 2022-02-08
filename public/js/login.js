@@ -8,7 +8,13 @@ currenUrl = currenUrl.split(":");
 
 var urlData = "https://" + currenUrl[0] + ":1880";
 
+var keyAccess;
+
 $(document).ready(function() {
+
+    let keyAccess = await fetch(urlData + "/authenticate/keyAccess").then(data => data.json()).then(data => { return data; });
+
+    console.log(keyAccess);
 
     IsLogedIn();
 });
@@ -72,7 +78,8 @@ async function IsLogedIn() {
 
             if (response.sessionAuth != 'false') {
                 window.localStorage.setItem('sasIsLogedIn', response.sessionAuth);
-                window.location.href = "/dashboard";
+                // window.location.href = "/dashboard";
+                window.location.href = "/bitacoras/main";
             } else {
                 window.localStorage.setItem('sasIsLogedIn', 'false');
             }

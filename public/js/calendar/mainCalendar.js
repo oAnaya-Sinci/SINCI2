@@ -164,16 +164,15 @@ async function calendarSinci() {
             // Function to obtaind the data from the modal
             if (start <= todayDate) {
 
-                $("#dataEvent")[0].reset();
-                // $('.modalForm').prop("disabled", false);
+                // $("#dataEvent")[0].reset();
 
                 let today = start.getFullYear() + "-" + (start.getMonth() < 9 ? "0" + (start.getMonth() + 1) : start.getMonth() + 1) + "-" + (start.getDate() < 10 ? "0" + (start.getDate()) : start.getDate());
                 let Hours = (start.getHours() < 10 ? "0" + start.getHours() : start.getHours()) + ":" + (start.getMinutes() < 10 ? "0" + start.getMinutes() : start.getMinutes());
-                today += Hours == "00:00" ? " 0" + 8 + ":" + "30" : " " + Hours;
+                today += Hours == "00:00" ? " 08" + ":" + "30" : " " + Hours;
 
                 let todayEnd = end.getFullYear() + "-" + (end.getMonth() < 9 ? "0" + (end.getMonth() + 1) : end.getMonth() + 1) + "-" + (end.getDate() < 10 ? "0" + (end.getDate()) : start.getDate());
                 Hours = (end.getHours() < 10 ? "0" + end.getHours() : end.getHours()) + ":" + (end.getMinutes() < 10 ? "0" + end.getMinutes() : end.getMinutes());
-                todayEnd += Hours == "00:00" ? " 0" + 8 + ":" + "30" : " " + Hours;
+                todayEnd += Hours == "00:00" ? " 09" + ":" + "00" : " " + Hours;
 
                 // $('.datetimepicker').val(today);
 
@@ -251,12 +250,12 @@ async function modalCalendarSinci() {
     processDataToSelect(dataAsignar, '#slctAsignar');
 }
 
-function processDataToSelect(data, select, firstOption = false) {
+function processDataToSelect(data, select, firstOption = true) {
 
     let options = "";
 
     $(select).empty();
-    firstOption ? options = "<option value=''>Seleccione opcion</option>" : null;
+    firstOption ? options = "<option value=''>Seleccione una opción</option>" : null;
     $.each(data, function(index, value) {
 
         options += '<option value="' + value.VALUE_SELECT + '">' + value.OPTION_SELECT + '</option>';
@@ -300,8 +299,6 @@ function showWeeksNumbers(weekNumber) {
 
 function buttonsNav(defaultView) {
 
-    console.log(defaultView);
-
     iniciateModalUpdate();
 
     // let date;
@@ -331,10 +328,9 @@ function iniciateModalUpdate() {
 
     $('.fc-content .fc-event-container .fc-event .fc-event-inner').click(function() {
 
-        idEventUpdate = this.lastChild.lastChild.textContent;
+        $("#dataEvent")[0].reset();
 
-        // console.log($('#btnDeleteEvent'));
-        // console.log($('.modal-footer button'));
+        idEventUpdate = this.lastChild.lastChild.textContent;
 
         $.ajax({
             type: "GET",
@@ -342,12 +338,8 @@ function iniciateModalUpdate() {
             data: { "idEvent": idEventUpdate },
             success: function(response) {
 
-                console.log(response);
-
-                $("#dataEvent")[0].reset();
-
                 response = JSON.parse(response)[0];
-                console.log(response);
+
                 response.FECHA_INICIO = response.FECHA_INICIO.replace('T', ' ');
                 response.FECHA_INICIO = response.FECHA_INICIO.replace('Z', ' ');
                 response.FECHA_FIN = response.FECHA_FIN.replace('T', ' ');
@@ -444,9 +436,6 @@ $('#btnSaveEvent').click(async function() {
 
             response = JSON.parse(response)[0];
 
-            console.log(response);
-            console.log(response.cantSaveData);
-
             idEventUpdate = null;
             updateEvent = false;
 
@@ -478,8 +467,6 @@ $('#btnSaveEvent').click(async function() {
 
             showMessage('danger', 'Error', exception.text);
         }
-    }).done(function() {
-        $("#dataEvent")[0].reset();
     });
 });
 
@@ -523,8 +510,6 @@ $('#btnDeleteEvent').click(async function() {
 
             showMessage('danger', 'Error', exception.text);
         }
-    }).done(function() {
-        $("#dataEvent")[0].reset();
     });
 });
 
@@ -545,8 +530,6 @@ function checkDateToSave(start, end) {
     let message = "";
 
     let todayDate = new Date();
-
-    // console.log(todayDate, start, end);
 
     if (start > end) {
         isValidate = true;

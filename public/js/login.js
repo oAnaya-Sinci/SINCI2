@@ -10,9 +10,7 @@
 var currenUrl = window.location.href.split("/")[2];
 currenUrl = currenUrl.split(":");
 
-var urlData = "https://" + currenUrl[0] + ":1880";
-
-// urlData = "https://10.10.103.206:1880"; // Servidor de Pruebas
+// urlData = "https://10.10.100.34:1880"; // Servidor de Pruebas
 
 $(document).ready(function() {
 
@@ -30,13 +28,13 @@ $('#loginPassword').keyup(function(key) {
         $('#btnLogin').click();
 });
 
-$('#btnLogin').click(function() {
+$('#btnLogin').click(async function() {
 
     var formData = $('#loginForm').serializeArray();
 
     let userData = { "usuario": formData[1], "clave": formData[2], "token": formData[0] }
 
-    $.ajax({
+    await $.ajax({
         type: "POST",
         url: urlData + "/authenticate/login",
         data: userData,
@@ -66,9 +64,9 @@ $('#btnLogin').click(function() {
     });
 });
 
-function IsLogedIn() {
+async function IsLogedIn() {
 
-    $.ajax({
+    await $.ajax({
         type: "POST",
         url: urlData + "/authenticate/isLogedIn",
         data: { "isLogedIn": window.localStorage.getItem('sasIsLogedIn') },

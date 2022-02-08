@@ -56,9 +56,9 @@ $('#logout').click(function() {
     window.location.href = "/";
 });
 
-function IsLogedIn() {
+async function IsLogedIn() {
 
-    $.ajax({
+    await $.ajax({
         type: "POST",
         url: urlData + "/authenticate/isLogedIn",
         data: { "isLogedIn": window.localStorage.getItem('sasIsLogedIn') },

@@ -314,6 +314,8 @@ function buttonsNav(defaultView) {
     //     date = null;
     // }
 
+    date = $('#calendar .fc-content .fc-view-month table .fc-week.fc-first .fc-first')[0].dataset['date'];
+
     let weekNumber = getWeekNumber(new Date(date));
     showWeeksNumbers(weekNumber);
 }

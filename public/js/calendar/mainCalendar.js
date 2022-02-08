@@ -235,8 +235,8 @@ async function calendarSinci() {
 async function modalCalendarSinci() {
 
     let dataProyecto = await fetch(urlData + "/obtainDataProyecto").then(data => data.json()).then(data => { return data; });
-    // processDataToSelect(dataProyecto, '#slctProyecto');
-    processDataToSelect(dataProyecto, '#listaProyectos');
+    processDataToSelect(dataProyecto, '#slctProyecto', false);
+    // processDataToSelect(dataProyecto, '#listaProyectos', true);
 
     let dataUsuario = await fetch(urlData + "/obtainDataUser?dataLogin=" + dataLogin).then(data => data.json()).then(data => { return data; });
     processDataToSelect(dataUsuario, '#slctUsuario');
@@ -245,7 +245,7 @@ async function modalCalendarSinci() {
     processDataToSelect(dataAsignar, '#slctAsignar');
 }
 
-function processDataToSelect(data, select) {
+function processDataToSelect(data, select, proyectoSearch = false) {
 
     let options = "";
 
@@ -253,7 +253,7 @@ function processDataToSelect(data, select) {
     data.length > 1 ? options = "<option value=''>Seleccione una opción</option>" : null;
     $.each(data, function(index, value) {
 
-        options += '<option value="' + value.VALUE_SELECT + '">' + value.OPTION_SELECT + '</option>';
+        options += !proyectoSearch ? '<option value="' + value.VALUE_SELECT + '">' + value.OPTION_SELECT + '</option>' : '<option value="' + value.OPTION_SELECT + '">' + value.VALUE_SELECT + '</option>';
     });
 
     $(select).append(options);

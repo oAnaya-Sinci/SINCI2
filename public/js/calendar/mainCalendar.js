@@ -5,6 +5,7 @@ var dataLogin;
 
 $(document).ready(function() {
 
+    // $('#slctProyecto').select2();
     calendarSinci();
 });
 

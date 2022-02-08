@@ -22,10 +22,11 @@
 
           <div class="form-group body-bitacora">
             <label for="recipient-name" class="col-form-label">Proyecto:</label>
-            <!-- <input type="text" class="form-control" id="recipient-name" name="proyecto"> -->
-            <select class="form-select modalForm" name="slctProyecto" id="slctProyecto" required>
+            <input type="search" class="form-control" id="recipient-name" name="slctProyecto" list="listaProyectos">
+            <!-- <select class="form-select modalForm" name="slctProyecto" id="slctProyecto" required>
               <option value="">NAN</option>
-            </select>
+            </select> -->
+            <datalist id="listaProyectos"></datalist>
           </div>
 
           <div class="form-group body-bitacora">

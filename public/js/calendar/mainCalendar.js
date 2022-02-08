@@ -234,17 +234,12 @@ async function calendarSinci() {
 
 async function modalCalendarSinci() {
 
-    // let allData = await fetch(urlData + "/obtainDataForModalCalendar").then(data => data.json()).then(data => { return data; });
-    // processDataToSelect(allData);
-
     let dataProyecto = await fetch(urlData + "/obtainDataProyecto").then(data => data.json()).then(data => { return data; });
-    processDataToSelect(dataProyecto, '#slctProyecto');
+    // processDataToSelect(dataProyecto, '#slctProyecto');
+    processDataToSelect(dataProyecto, '#listaProyectos');
 
     let dataUsuario = await fetch(urlData + "/obtainDataUser?dataLogin=" + dataLogin).then(data => data.json()).then(data => { return data; });
     processDataToSelect(dataUsuario, '#slctUsuario');
-
-    // let dataTipo = await fetch(urlData + "/obtainDataTipo").then(data => data.json()).then(data => { return data; });
-    // processDataToSelect(dataTipo, '#slctTipo');
 
     let dataAsignar = await fetch(urlData + "/obtainDataAsignar").then(data => data.json()).then(data => { return data; });
     processDataToSelect(dataAsignar, '#slctAsignar');
@@ -608,7 +603,7 @@ function validateModal(event) {
 
     $.each(event, function(index, value) {
 
-        if (value.value == '') {
+        if (value.value == '' || value.value == '-1') {
 
             $("[name='" + value.name + "']").addClass('requiredNull');
             $(".invalidRequired").removeClass('hidden');

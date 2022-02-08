@@ -128,7 +128,7 @@
     </div>
 </div>
 
-<div class="position-fixed top-1 end-1 z-index-1" style="z-index: 999 !important;">
+<div class="position-fixed top-1 end-1 z-index-1" style="z-index: 1050 !important;">
   <div class="toast fade hide p-2 bg-white" role="alert" aria-live="assertive" id="successToast" aria-atomic="true">
       <div class="toast-header border-0">
           <i class="material-icons text-success me-2">

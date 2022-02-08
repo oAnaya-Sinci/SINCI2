@@ -437,8 +437,6 @@ $('#btnSaveEvent').click(async function() {
             idEventUpdate = null;
             updateEvent = false;
 
-            $('#btnDeleteEvent').addClass('btnDeleteNone');
-
             if (response.cantSaveData == "true") {
 
                 showMessage('danger', 'Error', "Error ya existe registros en el rango de horas seleccionadas, favor de revisar la información a registrar");
@@ -447,6 +445,7 @@ $('#btnSaveEvent').click(async function() {
             }
 
             $('#createEventCalendar').modal('hide');
+            $('#btnDeleteEvent').addClass('btnDeleteNone');
 
             showMessage('success', 'Mensaje', message);
 

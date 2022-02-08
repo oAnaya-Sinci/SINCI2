@@ -406,13 +406,15 @@ $('#btnSaveEvent').click(function() {
 
     var event = $('#dataEvent').serializeArray();
 
+    let datesChecked = checkDateToSave(event[3].value, event[4].value);
+
     if (validateModal(event)) {
         return false;
-    } else if (checkDateToSave(event[3].value, event[4].value)) {
+    } else if (datesChecked[0]) {
 
         $('#createEventCalendar').modal('hide');
 
-        showMessage('danger', 'Error', 'Formato de fechas incorrecto');
+        showMessage('danger', 'Error', datesChecked[1]);
 
         return false
     }
@@ -421,10 +423,14 @@ $('#btnSaveEvent').click(function() {
     event.push({ name: "totalHoras", value: calculeTotalTime(event[3].value, event[4].value) });
     event.push({ name: "idEvent", value: idEventUpdate });
 
-    if (updateEvent)
+    let message = "";
+    if (updateEvent) {
         urlEvent = urlData + "/updateDataFromCalendar";
-    else
+        message = "Información actualizada exitosamente";
+    } else {
         urlEvent = urlData + "/saveDataFromCalendar";
+        message = "Información guardada exitosamente ";
+    }
 
     $.ajax({
         type: "POST",
@@ -438,15 +444,16 @@ $('#btnSaveEvent').click(function() {
             updateEvent = false;
 
             $('#createEventCalendar').modal('hide');
-
             $('#btnDeleteEvent').addClass('btnDeleteNone');
 
             if (response.cantSaveData == "true") {
 
-                showMessage('danger', 'Error', 'Formato de fechas incorrecto');
+                showMessage('danger', 'Error', "Error ya existe registros en el rango de horas selccionadas \n favor de revisar la información a registrar");
 
                 return false;
             }
+
+            showMessage('success', 'Mensaje', message);
 
             /**
              * This block of code is temporal, the register of the event changues ahead to not refresh the page completly
@@ -526,7 +533,9 @@ function checkDateToSave(start, end) {
     start = new Date(start);
     end = new Date(end);
 
+
     let isValidate = false;
+    let message = "";
 
     let todayDate = new Date();
 
@@ -534,13 +543,16 @@ function checkDateToSave(start, end) {
 
     if (start > end) {
         isValidate = true;
+        message = "La fecha inicial no puede ser mayor a la fecha final";
     } else if (start > todayDate) {
         isValidate = true;
+        message = "La fecha inicial no puede ser mayor a la actual";
     } else if (end > todayDate) {
         isValidate = true;
+        message = "La fecha final no puede ser mayor a la actual";
     }
 
-    return isValidate;
+    return [isValidate, message];
 }
 
 /** 

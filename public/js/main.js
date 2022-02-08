@@ -94,19 +94,19 @@ function showMessage(type, header, message) {
         case 'success':
             $('#successToast .mssgHeader').text(header);
             $('#successToast .toast-body').text(message);
-            $('.bg-gradient-danger').click();
+            $('.bg-gradient-success').click();
             break;
 
         case 'warning':
             $('#warningToast .mssgHeader').text(header);
-            $('#successToast .toast-body').text(message);
-            $('.bg-gradient-danger').click();
+            $('#warningToast .toast-body').text(message);
+            $('.bg-gradient-warning').click();
             break;
 
         case 'info':
             $('#infoToast .mssgHeader').text(header);
             $('#infoToast .toast-body').text(message);
-            $('.bg-gradient-danger').click();
+            $('.bg-gradient-info').click();
             break;
 
         case 'danger':

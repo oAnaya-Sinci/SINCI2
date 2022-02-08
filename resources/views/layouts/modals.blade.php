@@ -57,7 +57,7 @@
               <div class="form-group body-bitacora">
                 <label for="recipient-name" class="col-form-label">Tipo:</label>
                 <select class="form-select modalForm" name="slctTipo" id="slctTipo" required>
-                  <!-- <option value="-1">Seleccione opcion</option> -->
+                  <option value="-1">Seleccione una opción</option>
                   <option value="0">Horas desarrollo</option>
                   <option value="1">Horas de puesta en servicio</option>
                   <option value="2">Administrativo</option>

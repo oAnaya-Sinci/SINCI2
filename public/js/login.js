@@ -8,11 +8,13 @@ currenUrl = currenUrl.split(":");
 
 var urlData = "https://" + currenUrl[0] + ":1880";
 
+urlData = "https://10.10.100.34:1880"; // PRODUCTION SERVER WITH SECURE PROTOCOL 443
+
 var keyAccess;
 
 $(document).ready(function() {
 
-    let keyAccess = fetch(urlData + "/authenticate/keyAccess").then(data => data.json()).then(data => { return data; });
+    let keyAccess = fetch(urlData + "/authenticate/keyAccess").then(data => data.json()).then(data => { window.localStorage.setItem('keyAccess', data[0].keyAccess); });
 
     console.log(keyAccess);
 

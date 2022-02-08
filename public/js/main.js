@@ -8,6 +8,8 @@ currenUrl = currenUrl.split(":");
 
 var urlData = "https://" + currenUrl[0] + ":1880";
 
+urlData = "https://10.10.100.34:1880"; // PRODUCTION SERVER WITH SECURE PROTOCOL 443
+
 $(document).ready(function() {
 
     let timeSession = 360000;

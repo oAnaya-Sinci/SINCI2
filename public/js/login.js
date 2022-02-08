@@ -10,9 +10,9 @@ var urlData = "https://" + currenUrl[0] + ":1880";
 
 var keyAccess;
 
-$(document).ready(async function() {
+$(document).ready(function() {
 
-    let keyAccess = await fetch(urlData + "/authenticate/keyAccess").then(data => data.json()).then(data => { return data; });
+    let keyAccess = fetch(urlData + "/authenticate/keyAccess").then(data => data.json()).then(data => { return data; });
 
     console.log(keyAccess);
 

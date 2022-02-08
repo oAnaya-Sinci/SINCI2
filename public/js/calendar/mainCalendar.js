@@ -340,10 +340,12 @@ function iniciateModalUpdate() {
             data: { "idEvent": idEventUpdate },
             success: function(response) {
 
+console.log( response);
+
                 $("#dataEvent")[0].reset();
 
                 response = JSON.parse(response)[0];
-
+console.log( response);
                 response.FECHA_INICIO = response.FECHA_INICIO.replace('T', ' ');
                 response.FECHA_INICIO = response.FECHA_INICIO.replace('Z', ' ');
                 response.FECHA_FIN = response.FECHA_FIN.replace('T', ' ');
@@ -439,6 +441,9 @@ $('#btnSaveEvent').click(function() {
         success: function(response) {
 
             response = JSON.parse(response)[0];
+
+console.log(response);
+            console.log(response.cantSaveData);
 
             idEventUpdate = null;
             updateEvent = false;
@@ -546,10 +551,10 @@ function checkDateToSave(start, end) {
         message = "La fecha inicial no puede ser mayor a la fecha final";
     } else if (start > todayDate) {
         isValidate = true;
-        message = "La fecha inicial no puede ser mayor a la actual";
+        message = "La fecha inicial no puede ser mayor a la fecha actual";
     } else if (end > todayDate) {
         isValidate = true;
-        message = "La fecha final no puede ser mayor a la actual";
+        message = "La fecha final no puede ser mayor a la fecha actual";
     }
 
     return [isValidate, message];

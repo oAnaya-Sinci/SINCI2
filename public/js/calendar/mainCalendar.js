@@ -250,12 +250,12 @@ async function modalCalendarSinci() {
     processDataToSelect(dataAsignar, '#slctAsignar');
 }
 
-function processDataToSelect(data, select, firstOption = true) {
+function processDataToSelect(data, select) {
 
     let options = "";
 
     $(select).empty();
-    firstOption ? options = "<option value=''>Seleccione una opción</option>" : null;
+    data.length > 1 ? options = "<option value=''>Seleccione una opción</option>" : null;
     $.each(data, function(index, value) {
 
         options += '<option value="' + value.VALUE_SELECT + '">' + value.OPTION_SELECT + '</option>';

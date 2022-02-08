@@ -5,7 +5,7 @@ var dataLogin;
 
 $(document).ready(function() {
 
-    // $('#slctProyecto').select2();
+    // $('#slctProyecto').selectize();
     calendarSinci();
 });
 

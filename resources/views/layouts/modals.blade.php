@@ -29,6 +29,10 @@
             <select class="form-select modalForm" name="slctProyecto" id="slctProyecto" required>
               <option value="">NAN</option>
             </select>
+
+            <!-- <select class="selectpicker" name="slctProyecto" id="slctProyecto" data-live-search="true">
+              <option value="">NAN</option>
+            </select> -->
           </div>
 
           <div class="form-group body-bitacora">

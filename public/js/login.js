@@ -38,6 +38,15 @@ $('#btnLogin').click(async function() {
 
     let userData = { "usuario": formData[1], "clave": formData[2], "token": formData[0] }
 
+    if (!checkInputs()) {
+
+        setTimeout(() => {
+            $(".invalid-feedback").css("display", "none");
+        }, 7000);
+
+        return false;
+    }
+
     await $.ajax({
         type: "POST",
         url: urlData + "/authenticate/login",
@@ -67,6 +76,28 @@ $('#btnLogin').click(async function() {
         }
     });
 });
+
+function checkInputs() {
+
+    let dataValid = true;
+
+    let nickName = $('#loginEmail').val();
+    let password = $('#loginPassword').val();
+
+    if (nickName == "" && password == "") {
+        dataValid = false;
+        $(".invalid-feedback.nickname").css("display", "block");
+        $(".invalid-feedback.password").css("display", "block");
+    } else if (nickName == "") {
+        dataValid = false;
+        $(".invalid-feedback.nickname").css("display", "block");
+    } else if (password == "") {
+        dataValid = false;
+        $(".invalid-feedback.password").css("display", "block");
+    }
+
+    return dataValid;
+}
 
 async function IsLogedIn() {
 

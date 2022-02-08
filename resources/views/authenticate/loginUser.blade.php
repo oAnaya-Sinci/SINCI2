@@ -58,11 +58,19 @@
                                         <div class="input-group input-group-outline my-4">
                                             <label class="form-label">Usuario</label>
                                             <input type="text" id="loginEmail" class="form-control @error('email') is-invalid @enderror" name="usuario" required autocomplete="email" autofocus>
+
+                                            <span class="invalid-feedback nickname" role="alert">
+                                            <strong>Campo requerido</strong>
+                                        </span>
                                         </div>
                                         
                                         <div class="input-group input-group-outline mb-4">
                                             <label class="form-label">Password</label>
                                             <input type="password" id="loginPassword" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+
+                                            <span class="invalid-feedback password" role="alert">
+                                            <strong>Campo requerido</strong>
+                                        </span>
                                         </div>
 
                                         <span class="invalid-feedback" role="alert">

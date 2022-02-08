@@ -714,3 +714,7 @@ table.fc-header {
     text-align: right;
     padding-right: 10px;
 }
+
+#createEventCalendar .modal-footer .btnDeleteNone {
+    display: none;
+}

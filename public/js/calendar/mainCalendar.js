@@ -3,10 +3,10 @@ var idEventUpdate;
 
 var dataLogin;
 
-// $(document).ready(function() {
+$(document).ready(function() {
 
-//     calendarSinci();
-// });
+    calendarSinci();
+});
 
 async function calendarSinci() {
 
@@ -168,10 +168,19 @@ async function calendarSinci() {
                 // $('.modalForm').prop("disabled", false);
 
                 let today = start.getFullYear() + "-" + (start.getMonth() < 9 ? "0" + (start.getMonth() + 1) : start.getMonth() + 1) + "-" + (start.getDate() < 10 ? "0" + (start.getDate()) : start.getDate());
-                // today += " " + (start.getHours() < 10 ? "0" + start.getHours() : start.getHours()) + ":" + (start.getMinutes() < 10 ? "0" + start.getMinutes() : start.getMinutes());
-                today += " 0" + 8 + ":" + "30";
+                let Hours = (start.getHours() < 10 ? "0" + start.getHours() : start.getHours()) + ":" + (start.getMinutes() < 10 ? "0" + start.getMinutes() : start.getMinutes());
+                today += Hours == "00:00" ? " 0" + 8 + ":" + "30" : " " + Hours;
 
-                $('.datetimepicker').val(today);
+                let todayEnd = end.getFullYear() + "-" + (end.getMonth() < 9 ? "0" + (end.getMonth() + 1) : end.getMonth() + 1) + "-" + (end.getDate() < 10 ? "0" + (end.getDate()) : start.getDate());
+                Hours = (end.getHours() < 10 ? "0" + end.getHours() : end.getHours()) + ":" + (end.getMinutes() < 10 ? "0" + end.getMinutes() : end.getMinutes());
+                todayEnd += Hours == "00:00" ? " 0" + 8 + ":" + "30" : " " + Hours;
+
+                // $('.datetimepicker').val(today);
+
+                $('#startDate').val(today);
+                $('#endDate').val(todayEnd);
+
+                $('#btnDeleteEvent').addClass('btnDeleteNone');
 
                 $('#createEventCalendar').modal('show');
             }
@@ -291,20 +300,22 @@ function showWeeksNumbers(weekNumber) {
 
 function buttonsNav(defaultView) {
 
+    console.log(defaultView);
+
     iniciateModalUpdate();
 
-    let date;
+    // let date;
 
-    if (defaultView == "month") {
+    // if (defaultView == "month") {
 
-        date = $('#calendar .fc-content .fc-view-month table .fc-week.fc-first .fc-first')[0].dataset['date'];
-    } else {
+    //     date = $('#calendar .fc-content .fc-view-month table .fc-week.fc-first .fc-first')[0].dataset['date'];
+    // } else {
 
-        date = null;
-    }
+    //     date = null;
+    // }
 
-    let weekNumber = getWeekNumber(new Date(date));
-    showWeeksNumbers(weekNumber);
+    // let weekNumber = getWeekNumber(new Date(date));
+    // showWeeksNumbers(weekNumber);
 }
 
 /** 
@@ -320,6 +331,9 @@ function iniciateModalUpdate() {
 
         idEventUpdate = this.lastChild.lastChild.textContent;
 
+        // console.log($('#btnDeleteEvent'));
+        // console.log($('.modal-footer button'));
+
         $.ajax({
             type: "GET",
             url: urlData + "/obtainEventsCalendarById",
@@ -328,7 +342,7 @@ function iniciateModalUpdate() {
 
                 $("#dataEvent")[0].reset();
 
-                response = response[0];
+                response = JSON.parse(response)[0];
 
                 response.FECHA_INICIO = response.FECHA_INICIO.replace('T', ' ');
                 response.FECHA_INICIO = response.FECHA_INICIO.replace('Z', ' ');
@@ -370,11 +384,12 @@ function iniciateModalUpdate() {
             },
             error: function(exception) {
 
-                console.log(exception);
+                showMessage('danger', 'Error', exception.text);
             }
         });
 
         updateEvent = true;
+        $('#btnDeleteEvent').removeClass('btnDeleteNone')
         $('#createEventCalendar').modal('show');
     });
 }
@@ -395,8 +410,9 @@ $('#btnSaveEvent').click(function() {
         return false;
     } else if (checkDateToSave(event[3].value, event[4].value)) {
 
-        $('#messageToDisplay').html("<p>Error en las fechas, no se puede seleccionar una fecha mayor a la del dia de hoy</p>");
-        $('#MessageSystem').modal('show');
+        $('#createEventCalendar').modal('hide');
+
+        showMessage('danger', 'Error', 'Formato de fechas incorrecto');
 
         return false
     }
@@ -415,18 +431,22 @@ $('#btnSaveEvent').click(function() {
         url: urlEvent,
         data: event,
         success: function(response) {
-            // console.log(response);
 
             response = JSON.parse(response)[0];
-
-            if (response.cantSaveData == "true") {
-
-            }
 
             idEventUpdate = null;
             updateEvent = false;
 
             $('#createEventCalendar').modal('hide');
+
+            $('#btnDeleteEvent').addClass('btnDeleteNone');
+
+            if (response.cantSaveData == "true") {
+
+                showMessage('danger', 'Error', 'Formato de fechas incorrecto');
+
+                return false;
+            }
 
             /**
              * This block of code is temporal, the register of the event changues ahead to not refresh the page completly
@@ -442,42 +462,79 @@ $('#btnSaveEvent').click(function() {
             idEventUpdate = null;
             updateEvent = false;
 
-            console.log(exception);
+            showMessage('danger', 'Error', exception.text);
         }
     }).done(function() {
         $("#dataEvent")[0].reset();
     });
 });
 
-/**
- * This function close the modals
- */
-
-$(".modal .modal-dialog .modal-header .close").click(function() {
-
-    $('.modal').modal('hide');
-});
-
-$('.btnCancelModal').click(function() {
-
-    $('.modal').modal('hide');
-});
-
 /** 
  * javascript comment 
  * @Author: flydreame 
+ * @Date: 2022-02-04 23:44:05 
+ * @Desc:  Delete Information from the database
+ */
+
+$('#btnDeleteEvent').click(function() {
+
+    $.ajax({
+        type: "POST",
+        url: urlData + "/deleteInformation",
+        data: { idEvent: idEventUpdate },
+        success: function(response) {
+
+            response = JSON.parse(response)[0];
+
+            idEventUpdate = null;
+            updateEvent = false;
+
+            $('#createEventCalendar').modal('hide');
+
+            showMessage('success', 'Exito', 'Informacion borrada');
+
+            /**
+             * This block of code is temporal, the register of the event changues ahead to not refresh the page completly
+             */
+            var timeout = 1000;
+
+            setTimeout(() => {
+                window.location.reload();
+            }, timeout);
+        },
+        error: function(exception) {
+
+            idEventUpdate = null;
+            updateEvent = false;
+
+            showMessage('danger', 'Error', exception.text);
+        }
+    }).done(function() {
+        $("#dataEvent")[0].reset();
+    });
+});
+
+/** 
+ * Function to validatre the dates of the proyect 
+ * @Author: Carlos Omar Anaya Barajas 
  * @Date: 2022-02-04 18:07:05 
  * @Desc:  
  */
 
 function checkDateToSave(start, end) {
 
+    start = new Date(start);
+    end = new Date(end);
+
     let isValidate = false;
 
     let todayDate = new Date();
 
-    // Function to obtaind the data from the modal
-    if (start > todayDate) {
+    // console.log(todayDate, start, end);
+
+    if (start > end) {
+        isValidate = true;
+    } else if (start > todayDate) {
         isValidate = true;
     } else if (end > todayDate) {
         isValidate = true;

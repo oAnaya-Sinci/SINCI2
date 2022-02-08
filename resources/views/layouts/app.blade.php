@@ -26,9 +26,7 @@
     <link id="pagestyle" href="/css/material-dashboard.css?v=3.0.0" rel="stylesheet" />
     
     <link href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.css" rel="stylesheet"/>
-
     <link href='../css/datepicker.min.css' rel='stylesheet' media='print' />
-
     <link href="/css/sinciStyles.css" rel="stylesheet" />
 
     @yield('cssSection')

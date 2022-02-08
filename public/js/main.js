@@ -14,17 +14,18 @@ currenUrl = currenUrl.split(":");
 
 var urlData = "https://" + currenUrl[0] + ":1880";
 
-// urlData = "https://10.10.103.206:1880"; // Servidor de Pruebas
+urlData = "https://10.10.103.206:1880"; // Servidor de Pruebas
 
 $(document).ready(function() {
 
+    let timeSession = 360000;
+    // let timeSession = 8000;
+
     setTimeout(() => {
         IsLogedIn();
-    }, 360000);
+    }, timeSession);
 
     IsLogedIn();
-
-    calendarSinci();
 
     $('.datetimepicker').datetimepicker({
         // follow MomentJS docs: https://momentjs.com/docs/#/displaying/format/
@@ -78,3 +79,56 @@ function IsLogedIn() {
         }
     });
 }
+
+/** 
+ * javascript comment 
+ * @Author: flydreame 
+ * @Date: 2022-02-04 22:08:25 
+ * @Desc: Show the message in the sistem 
+ */
+
+function showMessage(type, header, message) {
+
+    switch (type) {
+
+        case 'success':
+            $('#successToast .mssgHeader').text(header);
+            $('#successToast .toast-body').text(message);
+            $('.bg-gradient-danger').click();
+            break;
+
+        case 'warning':
+            $('#warningToast .mssgHeader').text(header);
+            $('#successToast .toast-body').text(message);
+            $('.bg-gradient-danger').click();
+            break;
+
+        case 'info':
+            $('#infoToast .mssgHeader').text(header);
+            $('#infoToast .toast-body').text(message);
+            $('.bg-gradient-danger').click();
+            break;
+
+        case 'danger':
+            $('#dangerToast .mssgHeader').text(header);
+            $('#dangerToast .toast-body').text(message);
+            $('.bg-gradient-danger').click();
+            break;
+    }
+
+
+}
+
+/**
+ * This function close the modals
+ */
+
+$(".modal .modal-dialog .modal-header .close").click(function() {
+
+    $('.modal').modal('hide');
+});
+
+$('.btnCancelModal').click(function() {
+
+    $('.modal').modal('hide');
+});

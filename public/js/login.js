@@ -12,7 +12,7 @@ currenUrl = currenUrl.split(":");
 
 var urlData = "https://" + currenUrl[0] + ":1880";
 
-// urlData = "https://10.10.103.206:1880"; // Servidor de Pruebas
+urlData = "https://10.10.103.206:1880"; // Servidor de Pruebas
 
 $(document).ready(function() {
 

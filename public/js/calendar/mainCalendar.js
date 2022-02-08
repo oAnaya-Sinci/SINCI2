@@ -164,7 +164,7 @@ async function calendarSinci() {
             // Function to obtaind the data from the modal
             if (start <= todayDate) {
 
-                // $("#dataEvent")[0].reset();
+                $("#dataEvent")[0].reset();
 
                 let today = start.getFullYear() + "-" + (start.getMonth() < 9 ? "0" + (start.getMonth() + 1) : start.getMonth() + 1) + "-" + (start.getDate() < 10 ? "0" + (start.getDate()) : start.getDate());
                 let Hours = (start.getHours() < 10 ? "0" + start.getHours() : start.getHours()) + ":" + (start.getMinutes() < 10 ? "0" + start.getMinutes() : start.getMinutes());
@@ -408,8 +408,6 @@ $('#btnSaveEvent').click(async function() {
         return false;
     } else if (datesChecked[0]) {
 
-        $('#createEventCalendar').modal('hide');
-
         showMessage('danger', 'Error', datesChecked[1]);
 
         return false
@@ -439,7 +437,6 @@ $('#btnSaveEvent').click(async function() {
             idEventUpdate = null;
             updateEvent = false;
 
-            $('#createEventCalendar').modal('hide');
             $('#btnDeleteEvent').addClass('btnDeleteNone');
 
             if (response.cantSaveData == "true") {
@@ -448,6 +445,8 @@ $('#btnSaveEvent').click(async function() {
 
                 return false;
             }
+
+            $('#createEventCalendar').modal('hide');
 
             showMessage('success', 'Mensaje', message);
 

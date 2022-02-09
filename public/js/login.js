@@ -36,6 +36,8 @@ $('#btnLogin').click(async function() {
 
     if (!checkInputs()) {
 
+        clearTimeout();
+
         setTimeout(() => {
             $(".invalid-feedback").css("display", "none");
         }, 7000);

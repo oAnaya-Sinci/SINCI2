@@ -15,6 +15,8 @@ $(document).ready(function() {
     let timeSession = 360000;
     // let timeSession = 8000;
 
+    clearTimeout();
+
     setTimeout(() => {
         IsLogedIn();
     }, timeSession);

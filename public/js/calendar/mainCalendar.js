@@ -524,7 +524,7 @@ $('#btnDeleteEvent').click(function() {
                     /**
                      * This block of code is temporal, the register of the event changues ahead to not refresh the page completly
                      */
-                    var timeout = 1000;
+                    var timeout = 1500;
 
                     setTimeout(() => {
                         window.location.reload();
@@ -657,6 +657,8 @@ function validateModal(event) {
         }
     });
 
+    clearTimeout();
+
     setTimeout(() => {
         $(".form-control").removeClass('requiredNull');
         $(".form-select").removeClass('requiredNull');
@@ -666,15 +668,3 @@ function validateModal(event) {
 
     return validate;
 }
-/** 
- * javascript comment 
- * @Author: flydreame 
- * @Date: 2022-02-09 16:00:48 
- * @Desc: Validate the select search don´t select info if the select was no open 
- */
-
-$('.btn.dropdown-toggle.bs-placeholder').click(function() {
-
-    console.log(this);
-    console.log($(this));
-});

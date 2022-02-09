@@ -64,8 +64,7 @@ async function IsLogedIn() {
                 window.localStorage.setItem('sasIsLogedIn', response.sessionAuth);
             } else {
                 window.localStorage.setItem('sasIsLogedIn', 'false');
-                // window.location.href = "/";
-                window.location.href = "/bitacoras/main";
+                window.location.href = "/";
             }
         },
         error: function(exception) {

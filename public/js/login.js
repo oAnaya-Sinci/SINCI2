@@ -14,10 +14,6 @@ var keyAccess;
 
 $(document).ready(function() {
 
-    // let keyAccess = fetch(urlData + "/authenticate/keyAccess").then(data => data.json()).then(data => { window.localStorage.setItem('keyAccess', data[0].keyAccess); });
-
-    // console.log(keyAccess);
-
     IsLogedIn();
 });
 

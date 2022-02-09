@@ -54,7 +54,8 @@ $('#btnLogin').click(async function() {
 
             if (response.sessionAuth != 'false') {
                 window.localStorage.setItem('sasIsLogedIn', response.sessionAuth);
-                window.location.href = "/dashboard";
+                // window.location.href = "/dashboard";
+                window.location.href = "/bitacoras/main";
             } else {
                 // window.localStorage.setItem('sasIsLogedIn', false);
                 window.localStorage.removeItem('sasIsLogedIn');

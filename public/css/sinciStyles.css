@@ -236,3 +236,13 @@ h5 {
 .dropdown-menu.show {
     z-index: 5 !important;
 }
+
+.dropdown-menu .bs-searchbox+.inner.show,
+.dropdown-menu .bs-searchbox+.inner.show .inner.show {
+    height: 1rem !important;
+}
+
+.dropdown-menu .bs-searchbox.is-focused+.inner.show,
+.dropdown-menu .bs-searchbox.is-focused+.inner.show .inner.show {
+    height: auto !important;
+}

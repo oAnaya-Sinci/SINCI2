@@ -103,6 +103,26 @@
   </div>
 </div>
 
+<!-- This is a modal confirm -->
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false" id="mi-modal">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+      <h4 class="modal-title" id="myModalLabel">Confirmar</h4>
+      <button type="button" class="close btn btn-secondary" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      </div>
+      <div class="modal-body"><p>Desea continuar co la acción</p></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="modal-btn-si">Si</button>
+        <button type="button" class="btn btn-secondary" id="modal-btn-no">No</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End -->
+
 <!-- This modal is to save de event on the calendar -->
 <!-- <div id="modalMessageSystem" class="modal modal-alert fade modal-lg" tabindex="-1" role="dialog" aria-labelledby="messageModal" aria-hidden="true">
   <div class="modal-dialog" role="document">

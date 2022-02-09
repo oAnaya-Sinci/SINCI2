@@ -496,38 +496,51 @@ $('#btnSaveEvent').click(async function() {
  * @Desc:  Delete Information from the database
  */
 
-$('#btnDeleteEvent').click(async function() {
+$('#btnDeleteEvent').click(function() {
 
-    await $.ajax({
-        type: "POST",
-        url: urlData + "/deleteInformation",
-        data: { idEvent: idEventUpdate },
-        success: function(response) {
 
-            response = JSON.parse(response)[0];
+    $("#mi-modal .modal-header h4").text("Confirmar Eliminacion");
+    $("#mi-modal .modal-body").html("<p>Esta a punto de elimiar este registro, al hacerlo la informacion se perdera y no podra ser recuperada.</p><p>¿Desea continuar con la eliminación?</p>");
+    $("#mi-modal").modal('show');
 
-            idEventUpdate = null;
-            updateEvent = false;
+    modalConfirm(function(confirm) {
+        if (confirm) {
 
-            $('#createEventCalendar').modal('hide');
+            $.ajax({
+                type: "POST",
+                url: urlData + "/deleteInformation",
+                data: { idEvent: idEventUpdate },
+                success: function(response) {
 
-            showMessage('success', 'Exito', 'Informacion borrada');
+                    response = JSON.parse(response)[0];
 
-            /**
-             * This block of code is temporal, the register of the event changues ahead to not refresh the page completly
-             */
-            var timeout = 1000;
+                    idEventUpdate = null;
+                    updateEvent = false;
 
-            setTimeout(() => {
-                window.location.reload();
-            }, timeout);
-        },
-        error: function(exception) {
+                    $('#createEventCalendar').modal('hide');
 
-            idEventUpdate = null;
-            updateEvent = false;
+                    showMessage('success', 'Exito', 'Informacion borrada');
 
-            showMessage('danger', 'Error', exception.text);
+                    /**
+                     * This block of code is temporal, the register of the event changues ahead to not refresh the page completly
+                     */
+                    var timeout = 1000;
+
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, timeout);
+                },
+                error: function(exception) {
+
+                    idEventUpdate = null;
+                    updateEvent = false;
+
+                    showMessage('danger', 'Error', exception.text);
+                }
+            });
+        } else {
+            //Acciones si el usuario no confirma
+            console.log(confirm);
         }
     });
 });
@@ -632,6 +645,9 @@ function validateModal(event) {
         if (value.value == '' || value.value == '-1') {
 
             if (value.name == 'slctProyecto')
+                $(".btn.dropdown-toggle").addClass('requiredNull');
+
+            else if (value.name == 'slctAsignar')
                 $(".btn.dropdown-toggle").addClass('requiredNull');
 
             $("[name='" + value.name + "']").addClass('requiredNull');

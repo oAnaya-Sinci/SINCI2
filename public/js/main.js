@@ -109,8 +109,6 @@ function showMessage(type, header, message) {
             $('.bg-gradient-danger').click();
             break;
     }
-
-
 }
 
 /**

@@ -500,7 +500,7 @@ $('#btnDeleteEvent').click(function() {
 
 
     $("#mi-modal .modal-header h4").text("Confirmar Eliminacion");
-    $("#mi-modal .modal-body").html("<p>Esta a punto de elimiar este registro, al hacerlo la informacion se perdera y no podra ser recuperada.</p><p>¿Desea continuar con la eliminación?</p>");
+    $("#mi-modal .modal-body").html("<p>Esta a punto de eliminar este registro, al hacerlo la informacion se perdera y no podra ser recuperada.</p><p>¿Desea continuar con la eliminación?</p>");
     $("#mi-modal").modal('show');
 
     modalConfirm(function(confirm) {
@@ -666,3 +666,15 @@ function validateModal(event) {
 
     return validate;
 }
+/** 
+ * javascript comment 
+ * @Author: flydreame 
+ * @Date: 2022-02-09 16:00:48 
+ * @Desc: Validate the select search don´t select info if the select was no open 
+ */
+
+$('.btn.dropdown-toggle.bs-placeholder').click(function() {
+
+    console.log(this);
+    console.log($(this));
+});

@@ -229,20 +229,21 @@ h5 {
     margin-top: -2.5rem !important;
 }
 
-.dropdown.bootstrap-select .dropdown-menu {
+
+/* .dropdown.bootstrap-select .dropdown-menu {
     z-index: -1;
 }
 
 .dropdown-menu.show {
     z-index: 5 !important;
-}
+} */
 
 .dropdown-menu .bs-searchbox+.inner.show,
 .dropdown-menu .bs-searchbox+.inner.show .inner.show {
-    height: 1rem !important;
+    margin-top: -100rem !important;
 }
 
-.dropdown-menu .bs-searchbox.is-focused+.inner.show,
-.dropdown-menu .bs-searchbox.is-focused+.inner.show .inner.show {
-    height: auto !important;
+.dropdown-menu.show .bs-searchbox+.inner.show,
+.dropdown-menu.show .bs-searchbox+.inner.show .inner.show {
+    margin-top: 2rem !important;
 }

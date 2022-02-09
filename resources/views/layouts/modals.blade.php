@@ -26,13 +26,15 @@
             <!-- <input type="search" class="form-control" id="recipient-name" name="slctProyecto" list="listaProyectos">
             <datalist id="listaProyectos"></datalist> -->
             
-            <select class="form-select modalForm" name="slctProyecto" id="slctProyecto" required>
+            <!-- <select class="form-select modalForm" name="slctProyecto" id="slctProyecto" required>
+              <option value="">NAN</option>
+            </select> -->
+
+            <select class="selectpicker form-control" name="slctProyecto" id="slctProyecto" data-live-search="true" data-hide-disabled="true" tabindex="null" aria-expanded="false">
               <option value="">NAN</option>
             </select>
 
-            <!-- <select class="selectpicker" name="slctProyecto" id="slctProyecto" data-live-search="true">
-              <option value="">NAN</option>
-            </select> -->
+            <!-- <select class="selectpicker form-control" id="number" data-live-search="true" title="Select a number" data-hide-disabled="true"></select> -->
           </div>
 
           <div class="form-group body-bitacora">

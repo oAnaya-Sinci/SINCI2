@@ -224,3 +224,7 @@ h5 {
     font-size: 19px;
     padding: 1rem 0 0 2rem;
 }
+
+.dropdown.bootstrap-select .dropdown-menu.show .inner.show ul li:first-child {
+    margin-top: -2.5rem !important;
+}

@@ -25,8 +25,11 @@
     <!-- CSS Files -->
     <link id="pagestyle" href="/css/material-dashboard.css?v=3.0.0" rel="stylesheet" />
     
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"> -->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
     <link href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.css" rel="stylesheet"/>
     <link href='../css/datepicker.min.css' rel='stylesheet' media='print' />
+    <link href="/css/bootstrap-select.css" rel="stylesheet" />
     <link href="/css/sinciStyles.css" rel="stylesheet" />
 
     @yield('cssSection')
@@ -71,13 +74,17 @@
     <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="/js/material-dashboard.min.js?v=3.0.0"></script>
 
-    <script src='../js/calendar/jquery-1.10.2.js' type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- <script src='../js/calendar/jquery-1.10.2.js' type="text/javascript"></script> -->
     <script src='../js/calendar/jquery-ui.custom.min.js' type="text/javascript"></script>
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.2/moment.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.js"></script> -->
+    <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script> -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src='../js/datepicker.min.js' type="text/javascript"></script>
+    <script src='../js/bootstrap-select.js' type="text/javascript"></script>
 
     <!-- <script src='../js/login.js' type="text/javascript"></script> -->
     <script src='../js/main.js' type="text/javascript"></script>

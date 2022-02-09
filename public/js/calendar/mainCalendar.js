@@ -5,9 +5,20 @@ var dataLogin;
 
 $(document).ready(function() {
 
-    // $('#slctProyecto').selectize();
+    // $('#slctProyecto').materialSelect();
+
+    document.getElementById("startDate").addEventListener("keyup", preventDef, false);
+    document.getElementById("startDate").addEventListener("keydown", preventDef, false);
+
+    document.getElementById("endDate").addEventListener("keyup", preventDef, false);
+    document.getElementById("endDate").addEventListener("keydown", preventDef, false);
+
     calendarSinci();
 });
+
+function preventDef(event) {
+    event.preventDefault();
+}
 
 async function calendarSinci() {
 
@@ -237,6 +248,7 @@ async function modalCalendarSinci() {
 
     let dataProyecto = await fetch(urlData + "/obtainDataProyecto").then(data => data.json()).then(data => { return data; });
     processDataToSelect(dataProyecto, '#slctProyecto', false);
+    $('#slctProyecto').selectpicker('refresh');
     // processDataToSelect(dataProyecto, '#listaProyectos', true);
 
     let dataUsuario = await fetch(urlData + "/obtainDataUser?dataLogin=" + dataLogin).then(data => data.json()).then(data => { return data; });

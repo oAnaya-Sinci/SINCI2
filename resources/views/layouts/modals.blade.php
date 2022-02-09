@@ -1,5 +1,5 @@
 <!-- This modal is to save de event on the calendar -->
-<div id="createEventCalendar" class="modal fade modal-lg" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div id="createEventCalendar" class="modal fade modal-lg" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" data-bs-backdrop="static" data-bs-keyboard="false" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -11,9 +11,9 @@
       <div class="modal-body">
         <form id="dataEvent">
           
-          <span class="invalidRequired hidden">
+          <!-- <span class="invalidRequired hidden">
             <strong>Faltan elementos para guardar el registro</strong>
-          </span>
+          </span> -->
 
           <div class="form-group">
             <label for="message-text" class="col-form-label">Resumen de la bitacora:</label>

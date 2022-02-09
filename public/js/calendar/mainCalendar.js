@@ -168,8 +168,9 @@ async function calendarSinci() {
              * the form of obtain the title of the event will changue ahead, this elment will be changed with a modal to obtain the information
              */
 
-            $('#slctProyecto').val('');
+            // $('#slctProyecto').val('');
             // $('#slctProyecto').selectpicker('refresh');
+            $('.selectpicker').val('');
             $('.selectpicker').selectpicker('refresh');
 
             idEventUpdate = null;

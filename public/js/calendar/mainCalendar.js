@@ -380,7 +380,7 @@ function iniciateModalUpdate() {
                 var eYear = endDate.getFullYear();
 
                 var endHour = new Date(response.Hora_fin);
-                var sHoraFin = (endHour.getHours() < 10 ? "0" + endHour.getHours() : endHour.getHours()) + ":" + (endHour.getMinutes() < 10 ? "0" * endHour.getMinutes() : endHour.getMinutes());
+                var sHoraFin = (endHour.getHours() < 10 ? "0" + endHour.getHours() : endHour.getHours()) + ":" + (endHour.getMinutes() < 10 ? "0" + endHour.getMinutes() : endHour.getMinutes());
 
                 $('#message-text').val(response.NOTAS);
                 $('#slctProyecto').val(response.ID_PROYECTO);

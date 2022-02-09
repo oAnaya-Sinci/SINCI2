@@ -30,7 +30,7 @@
               <option value="">NAN</option>
             </select> -->
 
-            <select class="selectpicker form-control" name="slctProyecto" id="slctProyecto" data-live-search="true" data-hide-disabled="true" tabindex="null" aria-expanded="false">
+            <select class="selectpicker form-control" name="slctProyecto" id="slctProyecto" data-live-search="true" data-virtual-scroll="false">
               <option value="">NAN</option>
             </select>
 

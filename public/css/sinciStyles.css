@@ -228,3 +228,11 @@ h5 {
 .dropdown.bootstrap-select .dropdown-menu.show .inner.show ul li:first-child {
     margin-top: -2.5rem !important;
 }
+
+.dropdown.bootstrap-select .dropdown-menu {
+    z-index: -1;
+}
+
+.dropdown-menu.show {
+    z-index: 5 !important;
+}

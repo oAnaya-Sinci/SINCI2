@@ -168,6 +168,9 @@ async function calendarSinci() {
              * the form of obtain the title of the event will changue ahead, this elment will be changed with a modal to obtain the information
              */
 
+            $('#slctProyecto').val('');
+            $('#slctProyecto').selectpicker('refresh');
+
             idEventUpdate = null;
             updateEvent = false;
 
@@ -249,6 +252,7 @@ async function modalCalendarSinci() {
     let dataProyecto = await fetch(urlData + "/obtainDataProyecto").then(data => data.json()).then(data => { return data; });
     processDataToSelect(dataProyecto, '#slctProyecto', false);
     $('#slctProyecto').selectpicker('refresh');
+    $('.dropdown.bootstrap-select .btn.dropdown-toggle').click();
     // processDataToSelect(dataProyecto, '#listaProyectos', true);
 
     let dataUsuario = await fetch(urlData + "/obtainDataUser?dataLogin=" + dataLogin).then(data => data.json()).then(data => { return data; });
@@ -257,6 +261,10 @@ async function modalCalendarSinci() {
     let dataAsignar = await fetch(urlData + "/obtainDataAsignar").then(data => data.json()).then(data => { return data; });
     processDataToSelect(dataAsignar, '#slctAsignar');
 }
+
+// $('.dropdown.bootstrap-select .btn.dropdown-toggle').click(function() {
+//     console.log("Button Clicked");
+// });
 
 function processDataToSelect(data, select, proyectoSearch = false) {
 
@@ -376,6 +384,7 @@ function iniciateModalUpdate() {
 
                 $('#message-text').val(response.NOTAS);
                 $('#slctProyecto').val(response.ID_PROYECTO);
+                $('#slctProyecto').selectpicker('refresh');
                 $('#slctUsuario').val(response.ID_PERSONAL);
 
                 $('#startDate').val(sYear + "-" + (sMonth < 9 ? "0" + (sMonth + 1) : sMonth + 1) + "-" + ((sDay + 1) < 10 ? "0" + (sDay + 1) : sDay + 1) + " " + sHoraInicio);
@@ -618,6 +627,9 @@ function validateModal(event) {
 
         if (value.value == '' || value.value == '-1') {
 
+            if (value.name == 'slctProyecto')
+                $(".btn.dropdown-toggle").addClass('requiredNull');
+
             $("[name='" + value.name + "']").addClass('requiredNull');
             $(".invalidRequired").removeClass('hidden');
             validate = true;
@@ -627,8 +639,9 @@ function validateModal(event) {
     setTimeout(() => {
         $(".form-control").removeClass('requiredNull');
         $(".form-select").removeClass('requiredNull');
+        $(".btn.dropdown-toggle").removeClass('requiredNull');
         $(".invalidRequired").addClass('hidden');
-    }, 8000);
+    }, 7000);
 
     return validate;
 }

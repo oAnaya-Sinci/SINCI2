@@ -79,8 +79,12 @@
               <div class="form-group body-bitacora">
                 <label for="recipient-name" class="col-form-label">Asignar_a:</label>
                 <!-- <input type="text" class="form-control" id="recipient-name" name="asignar"> -->
-                <select class="form-select modalForm" name="slctAsignar" id="slctAsignar" required>
-                <option value="">NAN</option>
+                <!-- <select class="form-select modalForm" name="slctAsignar" id="slctAsignar" required>
+                <option value="">NAN</option> -->
+
+                <select class="selectpicker form-control" name="slctAsignar" id="slctAsignar" data-live-search="true" data-virtual-scroll="false">
+              <option value="">NAN</option>
+            </select>
                 </select>
               </div>
             </div>

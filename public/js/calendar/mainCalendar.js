@@ -169,7 +169,8 @@ async function calendarSinci() {
              */
 
             $('#slctProyecto').val('');
-            $('#slctProyecto').selectpicker('refresh');
+            // $('#slctProyecto').selectpicker('refresh');
+            $('.selectpicker').selectpicker('refresh');
 
             idEventUpdate = null;
             updateEvent = false;
@@ -251,8 +252,6 @@ async function modalCalendarSinci() {
 
     let dataProyecto = await fetch(urlData + "/obtainDataProyecto").then(data => data.json()).then(data => { return data; });
     processDataToSelect(dataProyecto, '#slctProyecto', false);
-    $('#slctProyecto').selectpicker('refresh');
-    $('.dropdown.bootstrap-select .btn.dropdown-toggle').click();
     // processDataToSelect(dataProyecto, '#listaProyectos', true);
 
     let dataUsuario = await fetch(urlData + "/obtainDataUser?dataLogin=" + dataLogin).then(data => data.json()).then(data => { return data; });
@@ -260,6 +259,9 @@ async function modalCalendarSinci() {
 
     let dataAsignar = await fetch(urlData + "/obtainDataAsignar").then(data => data.json()).then(data => { return data; });
     processDataToSelect(dataAsignar, '#slctAsignar');
+
+    $('.selectpicker').selectpicker('refresh');
+    // $('.dropdown.bootstrap-select .btn.dropdown-toggle').click();
 }
 
 // $('.dropdown.bootstrap-select .btn.dropdown-toggle').click(function() {
@@ -384,7 +386,6 @@ function iniciateModalUpdate() {
 
                 $('#message-text').val(response.NOTAS);
                 $('#slctProyecto').val(response.ID_PROYECTO);
-                $('#slctProyecto').selectpicker('refresh');
                 $('#slctUsuario').val(response.ID_PERSONAL);
 
                 $('#startDate').val(sYear + "-" + (sMonth < 9 ? "0" + (sMonth + 1) : sMonth + 1) + "-" + ((sDay + 1) < 10 ? "0" + (sDay + 1) : sDay + 1) + " " + sHoraInicio);
@@ -392,6 +393,8 @@ function iniciateModalUpdate() {
 
                 $('#slctTipo').val(response.TIPO);
                 $('#slctAsignar').val(response.TIPO_RESUMEN);
+
+                $('.selectpicker').selectpicker('refresh');
 
                 // $('.modalForm').prop("disabled", true);
             },
@@ -451,15 +454,15 @@ $('#btnSaveEvent').click(async function() {
 
             response = JSON.parse(response)[0];
 
-            idEventUpdate = null;
-            updateEvent = false;
-
             if (response.cantSaveData == "true") {
 
                 showMessage('danger', 'Error', "Error ya existe registros en el rango de horas seleccionadas, favor de revisar la información a registrar");
 
                 return false;
             }
+
+            idEventUpdate = null;
+            updateEvent = false;
 
             $('#createEventCalendar').modal('hide');
             $('#btnDeleteEvent').addClass('btnDeleteNone');
@@ -469,7 +472,7 @@ $('#btnSaveEvent').click(async function() {
             /**
              * This block of code is temporal, the register of the event changues ahead to not refresh the page completly
              */
-            var timeout = 1000;
+            var timeout = 1500;
 
             setTimeout(() => {
                 window.location.reload();
@@ -631,7 +634,8 @@ function validateModal(event) {
                 $(".btn.dropdown-toggle").addClass('requiredNull');
 
             $("[name='" + value.name + "']").addClass('requiredNull');
-            $(".invalidRequired").removeClass('hidden');
+            // $(".invalidRequired").removeClass('hidden');
+            showMessage('danger', 'Error', "Favor de seleccionar los datos faltantes");
             validate = true;
         }
     });
@@ -640,7 +644,7 @@ function validateModal(event) {
         $(".form-control").removeClass('requiredNull');
         $(".form-select").removeClass('requiredNull');
         $(".btn.dropdown-toggle").removeClass('requiredNull');
-        $(".invalidRequired").addClass('hidden');
+        // $(".invalidRequired").addClass('hidden');
     }, 7000);
 
     return validate;

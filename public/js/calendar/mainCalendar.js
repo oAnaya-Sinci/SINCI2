@@ -645,10 +645,10 @@ function validateModal(event) {
         if (value.value == '' || value.value == '-1') {
 
             if (value.name == 'slctProyecto')
-                $(".btn.dropdown-toggle").addClass('requiredNull');
+                $("#slctProyecto+.btn.dropdown-toggle").addClass('requiredNull');
 
             else if (value.name == 'slctAsignar')
-                $(".btn.dropdown-toggle").addClass('requiredNull');
+                $("#slctAsignar+.btn.dropdown-toggle").addClass('requiredNull');
 
             $("[name='" + value.name + "']").addClass('requiredNull');
             // $(".invalidRequired").removeClass('hidden');

@@ -260,7 +260,7 @@ async function calendarSinci() {
         events: dataEvents,
     });
 
-    $('.fc-button.fc-button-agendaWeek').click();
+    // $('.fc-button.fc-button-agendaWeek').click();
 
     modalCalendarSinci();
     iniciateModalUpdate();

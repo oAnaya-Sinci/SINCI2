@@ -4,7 +4,7 @@
 // consistent naming. Ex: $nav-link-disabled-color and $modal-content-box-shadow-xs.
 // $soft-background-color: #fbfbfb !default;
 $soft-background-color: #ffffff !default; // Testing
-$font-color: #551900 !default;
+$font-color: #000 !default;
 $h-color: #344767 !default;
 // Color system
 $white: #fff !default;
@@ -23,7 +23,7 @@ $blue: #63B3ED !default;
 $indigo: #596CFF !default;
 $purple: #6f42c1 !default;
 $pink: #d63384 !default;
-$red: #F56565 !default;
+$red: #dc3545 !default;
 $rose: #d9531e !default;
 $orange: #fd7e14 !default;
 $yellow: #FBD38D !default;
@@ -33,12 +33,12 @@ $cyan: #0dcaf0 !default;
 // scss-docs-start colors-map
 $colors: ( "blue": $blue, "indigo": $indigo, "purple": $purple, "pink": $pink, "red": $red, "orange": $orange, "yellow": $yellow, "green": $green, "teal": $teal, "cyan": $cyan, "white": $white, "gray": $gray-600, "gray-dark": $gray-800, ) !default;
 // scss-docs-end colors-map
-$primary: #d9531e !default;
-$secondary: #7b809a !default;
+$primary: #D9531E !default;
+$secondary: #6c757d !default;
 $info: #1A73E8 !default;
 $success: #4CAF50 !default;
-$warning: #fb8c00 !default;
-$danger: #F44335 !default;
+$warning: #ffc107 !default;
+$danger: #dc3545 !default;
 $light: $gray-200 !default;
 $dark: $h-color !default;
 // scss-docs-start theme-colors-map
@@ -47,21 +47,21 @@ $theme-colors: ( "primary": $primary, "secondary": $secondary, "success": $succe
 // Gradient colors
 $primary-gradient: #D9531E !default;
 $primary-gradient-state: #D9531E !default;
-$secondary-gradient: #747b8a !default;
-$secondary-gradient-state: #495361 !default;
+$secondary-gradient: #6c757d !default;
+$secondary-gradient-state: #6c757d !default;
 $info-gradient: #49a3f1 !default;
 $info-gradient-state: #1A73E8 !default;
 $success-gradient: #66BB6A !default;
 $success-gradient-state: #43A047 !default;
-$danger-gradient: #EF5350 !default;
-$danger-gradient-state: #E53935 !default;
-$warning-gradient: #FFA726 !default;
-$warning-gradient-state: #FB8C00 !default;
-$dark-gradient: #551900 !default;
-$dark-gradient-state: #551900 !default;
+$danger-gradient: #dc3545 !default;
+$danger-gradient-state: #dc3545 !default;
+$warning-gradient: #ffc107 !default;
+$warning-gradient-state: #ffc107 !default;
+$dark-gradient: #8A1F03 !default;
+$dark-gradient-state: #8A1F03 !default;
 $light-gradient: #EBEFF4 !default;
 $light-gradient-state: #CED4DA !default;
-$dark-gradient-dark: #551900 !default;
+$dark-gradient-dark: #8A1F03 !default;
 $dark-gradient-state-dark: #1a2035 !default;
 // Gradient Colors map
 $theme-gradient-colors: ( "primary": ($primary-gradient, $primary-gradient-state), "secondary": ($secondary-gradient, $secondary-gradient-state), "success": ($success-gradient, $success-gradient-state), "info": ($info-gradient, $info-gradient-state), "warning": ($warning-gradient, $warning-gradient-state), "danger": ($danger-gradient, $danger-gradient-state), "light": ($light-gradient, $light-gradient-state), "dark": ($dark-gradient, $dark-gradient-state)) !default;

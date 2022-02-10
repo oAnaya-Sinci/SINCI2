@@ -62,7 +62,7 @@ async function calendarSinci() {
     /**
      * This Fetch petition obtain the calendar events registerd for the login user
      */
-    let dataDB = await fetch(urlData + "/obtainEventsCalendar?dataLogin=" + dataLogin).then(data => data.json()).then(data => { return data; });
+    let dataDB = await fetch(urlData + "/obtainEventsCalendar?isLogedIn=" + dataLogin).then(data => data.json()).then(data => { return data; });
 
     let event;
     $.each(dataDB, function(index, value) {
@@ -268,14 +268,14 @@ async function calendarSinci() {
 
 async function modalCalendarSinci() {
 
-    let dataProyecto = await fetch(urlData + "/obtainDataProyecto").then(data => data.json()).then(data => { return data; });
-    processDataToSelect(dataProyecto, '#slctProyecto', false);
+    let dataProyecto = await fetch(urlData + "/obtainDataProyecto?isLogedIn=" + dataLogin).then(data => data.json()).then(data => { return data; });
+    processDataToSelect(dataProyecto, '#slctProyecto');
     // processDataToSelect(dataProyecto, '#listaProyectos', true);
 
-    let dataUsuario = await fetch(urlData + "/obtainDataUser?dataLogin=" + dataLogin).then(data => data.json()).then(data => { return data; });
+    let dataUsuario = await fetch(urlData + "/obtainDataUser?isLogedIn=" + dataLogin).then(data => data.json()).then(data => { return data; });
     processDataToSelect(dataUsuario, '#slctUsuario');
 
-    let dataAsignar = await fetch(urlData + "/obtainDataAsignar").then(data => data.json()).then(data => { return data; });
+    let dataAsignar = await fetch(urlData + "/obtainDataAsignar?isLogedIn=" + dataLogin).then(data => data.json()).then(data => { return data; });
     processDataToSelect(dataAsignar, '#slctAsignar');
 
     $('.selectpicker').selectpicker('refresh');

@@ -42,7 +42,9 @@
 
   <script>
 
-    $('a[href = "/bitacoras/main"]').addClass('active').removeClass('bg-gradient-primary');
+    $('.navbar-nav li a').removeClass('bg-gradient-primary');
+    $('a[href = "/bitacoras/main"]').addClass('bg-gradient-primary');
+    // $('a[href = "/bitacoras/main"]').addClass('active').removeClass('bg-gradient-primary');
 
   </script>
 

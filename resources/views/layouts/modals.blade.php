@@ -4,9 +4,9 @@
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title" id="exampleModalLabel">Registro de Evento</h4>
-        <button type="button" class="close btn btn-secondary" data-dismiss="modal" aria-label="Close">
+        <!-- <button type="button" class="close btn btn-secondary" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
-        </button>
+        </button> -->
       </div>
       <div class="modal-body">
         <form id="dataEvent">
@@ -109,9 +109,9 @@
     <div class="modal-content">
       <div class="modal-header">
       <h4 class="modal-title" id="myModalLabel">Confirmar</h4>
-      <button type="button" class="close btn btn-secondary" data-dismiss="modal" aria-label="Close">
+      <!-- <button type="button" class="close btn btn-secondary" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
-      </button>
+      </button> -->
       </div>
       <div class="modal-body"><p>Desea continuar co la acción</p></div>
       <div class="modal-footer">
@@ -163,7 +163,7 @@
 
 <div class="position-fixed top-1 end-1 z-index-1" style="z-index: 1050 !important;">
   <div class="toast fade hide p-2 bg-white" role="alert" aria-live="assertive" id="successToast" aria-atomic="true">
-      <div class="toast-header border-0">
+      <div class="toast-header border-0 bg-primary">
           <i class="material-icons text-success me-2">
             check
           </i>

@@ -1,4 +1,4 @@
-/* body,
+body,
 body label,
 body p,
 body button,
@@ -12,8 +12,10 @@ body h5,
 body h6,
 body th,
 body tr {
-    font-family: din !important;
-} */
+    font-family: din-regular;
+    font-style: normal;
+    font-weight: 500;
+}
 
 
 /** 
@@ -32,7 +34,8 @@ body tr {
         display: none;
     } */
 
-.fc-slot17 .fc-widget-content,
+
+/* .fc-slot17 .fc-widget-content,
 .fc-slot18 .fc-widget-content,
 .fc-slot19 .fc-widget-content,
 .fc-slot20 .fc-widget-content,
@@ -54,12 +57,24 @@ body tr {
 .fc-slot36 .fc-widget-content,
 .fc-slot37 .fc-widget-content {
     background-color: #F1F1F1;
+} */
+
+.modal .modal-header {
+    /* background: #591900; */
+    background: #8A1F03;
 }
 
+.modal .modal-header h4 {
+    color: #FFF;
+}
 
-/* .modal .modal-content label {
-        display: block ruby;
-    } */
+#mi-modal {
+    margin-top: 10rem;
+}
+
+#createEventCalendar {
+    margin-top: 4rem;
+}
 
 
 /* .modal .modal-content .modal-body #dataEvent .form-group.body-bitacora {
@@ -155,7 +170,7 @@ body tr {
 }
 
 #navbarBlur {
-    background-color: #3b6f90;
+    background-color: #8A1F03;
     margin-top: 1rem !important;
 }
 

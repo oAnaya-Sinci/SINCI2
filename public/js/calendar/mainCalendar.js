@@ -16,6 +16,10 @@ $(document).ready(function() {
     calendarSinci();
 });
 
+$('.fc-button.fc-button-agendaWeek').click(function() {
+    alert("Week");
+});
+
 function preventDef(event) {
     event.preventDefault();
 }
@@ -63,15 +67,28 @@ async function calendarSinci() {
     let event;
     $.each(dataDB, function(index, value) {
 
-        value.FECHA_INICIO = value.FECHA_INICIO.replace('T', ' ');
-        value.FECHA_INICIO = value.FECHA_INICIO.replace('Z', ' ');
-        value.FECHA_FIN = value.FECHA_FIN.replace('T', ' ');
-        value.FECHA_FIN = value.FECHA_FIN.replace('Z', ' ');
+        if (window.navigator.vendor == "Google Inc.") {
+            value.FECHA_INICIO = value.FECHA_INICIO.replace('T', ' ');
+            value.FECHA_INICIO = value.FECHA_INICIO.replace('Z', ' ');
+            value.FECHA_FIN = value.FECHA_FIN.replace('T', ' ');
+            value.FECHA_FIN = value.FECHA_FIN.replace('Z', ' ');
 
-        value.Hora_inicio = value.Hora_inicio.replace('T', ' ');
-        value.Hora_inicio = value.Hora_inicio.replace('Z', ' ');
-        value.Hora_fin = value.Hora_fin.replace('T', ' ');
-        value.Hora_fin = value.Hora_fin.replace('Z', ' ');
+            value.Hora_inicio = value.Hora_inicio.replace('T', ' ');
+            value.Hora_inicio = value.Hora_inicio.replace('Z', ' ');
+            value.Hora_fin = value.Hora_fin.replace('T', ' ');
+            value.Hora_fin = value.Hora_fin.replace('Z', ' ');
+        } else {
+
+            let sD = new Date(value.FECHA_INICIO);
+            let eD = new Date(value.FECHA_FIN);
+            value.FECHA_INICIO = sD.setTime(sD.getTime() + sD.getTimezoneOffset() * 60 * 1000);
+            value.FECHA_FIN = eD.setTime(eD.getTime() + eD.getTimezoneOffset() * 60 * 1000);
+
+            let sH = new Date(value.Hora_inicio);
+            let eH = new Date(value.Hora_fin);
+            value.Hora_inicio = sH.setTime(sH.getTime() + sH.getTimezoneOffset() * 60 * 1000);
+            value.Hora_fin = eH.setTime(eH.getTime() + eH.getTimezoneOffset() * 60 * 1000);
+        }
 
         var startDate = new Date(value.FECHA_INICIO);
         var sDay = startDate.getDate();
@@ -80,7 +97,7 @@ async function calendarSinci() {
 
         var startHour = new Date(value.Hora_inicio);
         var horaInicio = (startHour.getHours() < 10 ? "0" + startHour.getHours() : startHour.getHours());
-        var mMinutosInicio = (startHour.getMinutes() < 10 ? "0" + startHour.getMinutes() : startHour.getMinutes());
+        var minutosInicio = (startHour.getMinutes() < 10 ? "0" + startHour.getMinutes() : startHour.getMinutes());
 
         var endDate = new Date(value.FECHA_FIN);
         var eDay = endDate.getDate();
@@ -91,12 +108,10 @@ async function calendarSinci() {
         var HoraFin = (endHour.getHours() < 10 ? "0" + endHour.getHours() : endHour.getHours());
         var minutosFin = (endHour.getMinutes() < 10 ? "0" * endHour.getMinutes() : endHour.getMinutes());
 
-        // let titleHTML = value.LOCATION + "<hr>" + value.NOTAS;
-
         event = {
             id: value.ID_PROYECTOS_AVANCE,
             title: value.LOCATION + "\n -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- \n " + value.NOTAS,
-            start: new Date(sYear, sMonth, sDay, horaInicio, mMinutosInicio),
+            start: new Date(sYear, sMonth, sDay, horaInicio, minutosInicio),
             end: new Date(eYear, eMonth, eDay, HoraFin, minutosFin),
             allDay: false,
             className: 'info',
@@ -205,15 +220,15 @@ async function calendarSinci() {
 
             // var title = prompt('Event Title:');
 
-            // // if (title) {
-            // calendar.fullCalendar('renderEvent', {
-            //         title: title,
-            //         start: start,
-            //         end: end,
-            //         allDay: allDay
-            //     },
-            //     true // make the event "stick"
-            // );
+            // if (title) {
+            //     calendar.fullCalendar('renderEvent', {
+            //             title: title,
+            //             start: start,
+            //             end: end,
+            //             allDay: allDay
+            //         },
+            //         true // make the event "stick"
+            //     );
             // }
             // calendar.fullCalendar('unselect');
         },
@@ -244,6 +259,8 @@ async function calendarSinci() {
 
         events: dataEvents,
     });
+
+    $('.fc-button.fc-button-agendaWeek').click();
 
     modalCalendarSinci();
     iniciateModalUpdate();
@@ -359,15 +376,38 @@ function iniciateModalUpdate() {
 
                 response = JSON.parse(response)[0];
 
-                response.FECHA_INICIO = response.FECHA_INICIO.replace('T', ' ');
-                response.FECHA_INICIO = response.FECHA_INICIO.replace('Z', ' ');
-                response.FECHA_FIN = response.FECHA_FIN.replace('T', ' ');
-                response.FECHA_FIN = response.FECHA_FIN.replace('Z', ' ');
+                // response.FECHA_INICIO = response.FECHA_INICIO.replace('T', ' ');
+                // response.FECHA_INICIO = response.FECHA_INICIO.replace('Z', ' ');
+                // response.FECHA_FIN = response.FECHA_FIN.replace('T', ' ');
+                // response.FECHA_FIN = response.FECHA_FIN.replace('Z', ' ');
 
-                response.Hora_inicio = response.Hora_inicio.replace('T', ' ');
-                response.Hora_inicio = response.Hora_inicio.replace('Z', ' ');
-                response.Hora_fin = response.Hora_fin.replace('T', ' ');
-                response.Hora_fin = response.Hora_fin.replace('Z', ' ');
+                // response.Hora_inicio = response.Hora_inicio.replace('T', ' ');
+                // response.Hora_inicio = response.Hora_inicio.replace('Z', ' ');
+                // response.Hora_fin = response.Hora_fin.replace('T', ' ');
+                // response.Hora_fin = response.Hora_fin.replace('Z', ' ');
+
+                if (window.navigator.vendor == "Google Inc.") {
+                    response.FECHA_INICIO = response.FECHA_INICIO.replace('T', ' ');
+                    response.FECHA_INICIO = response.FECHA_INICIO.replace('Z', ' ');
+                    response.FECHA_FIN = response.FECHA_FIN.replace('T', ' ');
+                    response.FECHA_FIN = response.FECHA_FIN.replace('Z', ' ');
+
+                    response.Hora_inicio = response.Hora_inicio.replace('T', ' ');
+                    response.Hora_inicio = response.Hora_inicio.replace('Z', ' ');
+                    response.Hora_fin = response.Hora_fin.replace('T', ' ');
+                    response.Hora_fin = response.Hora_fin.replace('Z', ' ');
+                } else {
+
+                    let sD = new Date(response.FECHA_INICIO);
+                    let eD = new Date(response.FECHA_FIN);
+                    response.FECHA_INICIO = sD.setTime(sD.getTime() + sD.getTimezoneOffset() * 60 * 1000);
+                    response.FECHA_FIN = eD.setTime(eD.getTime() + eD.getTimezoneOffset() * 60 * 1000);
+
+                    let sH = new Date(response.Hora_inicio);
+                    let eH = new Date(response.Hora_fin);
+                    response.Hora_inicio = sH.setTime(sH.getTime() + sH.getTimezoneOffset() * 60 * 1000);
+                    response.Hora_fin = eH.setTime(eH.getTime() + eH.getTimezoneOffset() * 60 * 1000);
+                }
 
                 var startDate = new Date(response.FECHA_INICIO);
                 var sDay = startDate.getDate() - 1;

@@ -473,7 +473,7 @@ $('#btnSaveEvent').click(async function() {
             /**
              * This block of code is temporal, the register of the event changues ahead to not refresh the page completly
              */
-            var timeout = 1500;
+            var timeout = 2000;
 
             setTimeout(() => {
                 window.location.reload();
@@ -499,7 +499,7 @@ $('#btnSaveEvent').click(async function() {
 $('#btnDeleteEvent').click(function() {
 
 
-    $("#mi-modal .modal-header h4").text("Confirmar Eliminacion");
+    $("#mi-modal .modal-header h4").text("Confirmar Eliminación");
     $("#mi-modal .modal-body").html("<p>Esta a punto de eliminar este registro, al hacerlo la informacion se perdera y no podra ser recuperada.</p><p>¿Desea continuar con la eliminación?</p>");
     $("#mi-modal").modal('show');
 
@@ -524,7 +524,7 @@ $('#btnDeleteEvent').click(function() {
                     /**
                      * This block of code is temporal, the register of the event changues ahead to not refresh the page completly
                      */
-                    var timeout = 1500;
+                    var timeout = 2000;
 
                     setTimeout(() => {
                         window.location.reload();

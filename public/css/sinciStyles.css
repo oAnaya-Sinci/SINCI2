@@ -34,8 +34,7 @@ body tr {
         display: none;
     } */
 
-
-/* .fc-slot17 .fc-widget-content,
+.fc-slot17 .fc-widget-content,
 .fc-slot18 .fc-widget-content,
 .fc-slot19 .fc-widget-content,
 .fc-slot20 .fc-widget-content,
@@ -57,7 +56,7 @@ body tr {
 .fc-slot36 .fc-widget-content,
 .fc-slot37 .fc-widget-content {
     background-color: #F1F1F1;
-} */
+}
 
 .modal .modal-header {
     /* background: #591900; */

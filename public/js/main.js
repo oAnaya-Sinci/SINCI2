@@ -44,6 +44,10 @@ $(document).ready(function() {
     });
 });
 
+$(document).click(function() {
+    IsLogedIn();
+});
+
 $('#logout').click(function() {
 
     // window.localStorage.removeItem('sasIsLogedIn');
@@ -72,6 +76,8 @@ async function IsLogedIn() {
         error: function(exception) {
 
             console.log(exception);
+            showMessage("danger", "error", exception)
+            window.location.href = "/";
         }
     });
 }
@@ -83,9 +89,9 @@ async function IsLogedIn() {
  * @Desc: Show the message in the sistem 
  */
 
-function showMessage(type, header, message) {
+function showMessage(type, header = "Mensaje del sistema", message = "") {
 
-    switch (type) {
+    switch (type.toLowerCase()) {
 
         case 'success':
             $('#successToast .mssgHeader').text(header);

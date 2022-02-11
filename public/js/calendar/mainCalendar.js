@@ -204,7 +204,7 @@ async function calendarSinci() {
 
                 let todayEnd = end.getFullYear() + "-" + (end.getMonth() < 9 ? "0" + (end.getMonth() + 1) : end.getMonth() + 1) + "-" + (end.getDate() < 10 ? "0" + (end.getDate()) : start.getDate());
                 Hours = (end.getHours() < 10 ? "0" + end.getHours() : end.getHours()) + ":" + (end.getMinutes() < 10 ? "0" + end.getMinutes() : end.getMinutes());
-                todayEnd += Hours == "00:00" ? " 09" + ":" + "00" : " " + Hours;
+                todayEnd += Hours == "00:00" ? " 09" + ":" + "30" : " " + Hours;
 
                 // $('.datetimepicker').val(today);
 

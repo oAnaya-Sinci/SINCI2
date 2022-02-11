@@ -54,7 +54,19 @@ $('#btnLogin').click(async function() {
             response = JSON.parse(response)[0];
             // response = response[0];
 
-            if (response.sessionAuth != 'false') {
+            if (response.sessionAuth == 'No Access Granted') {
+
+                $("#noAccessModal .modal-header h4").text(response.sessionAuth);
+                $("#noAccessModal").modal('show');
+
+                modalConfirm(function(confirm) {
+                    if (confirm) {
+
+                    } else {
+                        console.log(confirm);
+                    }
+                });
+            } else if (response.sessionAuth != 'false') {
                 window.localStorage.setItem('sasIsLogedIn', response.sessionAuth);
                 // window.location.href = "/dashboard";
                 window.location.href = "/bitacoras/main";
@@ -122,3 +134,16 @@ async function IsLogedIn() {
         }
     });
 }
+
+var modalConfirm = function(callback) {
+
+    // $("#modal-btn-si").on("click", function() {
+    //     callback(true);
+    //     $("#mi-modal").modal('hide');
+    // });
+
+    $("#modal-btn-no").on("click", function() {
+        callback(false);
+        $("#noAccessModal").modal('hide');
+    });
+};

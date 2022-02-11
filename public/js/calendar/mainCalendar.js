@@ -268,16 +268,14 @@ async function calendarSinci() {
 
 async function modalCalendarSinci() {
 
-    // let dataProyecto = await fetch(urlData + "/obtainDataProyecto?isLogedIn=" + dataLogin).then(data => data.json()).then(data => { return data; });
-    let dataProyecto = await fetch(urlData + "/obtainDataProyecto").then(data => data.json()).then(data => { return data; });
+    let dataProyecto = await fetch(urlData + "/obtainDataProyecto?isLogedIn=" + dataLogin).then(data => data.json()).then(data => { return data; });
     processDataToSelect(dataProyecto, '#slctProyecto');
     // processDataToSelect(dataProyecto, '#listaProyectos', true);
 
     let dataUsuario = await fetch(urlData + "/obtainDataUser?isLogedIn=" + dataLogin).then(data => data.json()).then(data => { return data; });
     processDataToSelect(dataUsuario, '#slctUsuario');
 
-    // let dataAsignar = await fetch(urlData + "/obtainDataAsignar?isLogedIn=" + dataLogin).then(data => data.json()).then(data => { return data; });
-    let dataAsignar = await fetch(urlData + "/obtainDataAsignar").then(data => data.json()).then(data => { return data; });
+    let dataAsignar = await fetch(urlData + "/obtainDataAsignar?isLogedIn=" + dataLogin).then(data => data.json()).then(data => { return data; });
     processDataToSelect(dataAsignar, '#slctAsignar');
 
     $('.selectpicker').selectpicker('refresh');
@@ -296,7 +294,7 @@ function processDataToSelect(data, select, proyectoSearch = false) {
     data.length > 1 ? options = "<option value=''>Seleccione una opción</option>" : null;
     $.each(data, function(index, value) {
 
-        options += !proyectoSearch ? '<option value="' + value.VALUE_SELECT + '">' + value.OPTION_SELECT + '</option>' : '<option value="' + value.OPTION_SELECT + '">' + value.VALUE_SELECT + '</option>';
+        options += '<option value="' + value.VALUE_SELECT + '">' + value.OPTION_SELECT + '</option>';
     });
 
     $(select).append(options);
@@ -373,7 +371,7 @@ function iniciateModalUpdate() {
         $.ajax({
             type: "GET",
             url: urlData + "/obtainEventsCalendarById",
-            data: { "idEvent": idEventUpdate },
+            data: { "idEvent": idEventUpdate, "isLogedIn": dataLogin },
             success: function(response) {
 
                 response = JSON.parse(response)[0];
@@ -479,6 +477,7 @@ $('#btnSaveEvent').click(async function() {
     event.push({ name: "usuarioNombre", value: $("#slctUsuario option:selected").text() });
     event.push({ name: "totalHoras", value: calculeTotalTime(event[3].value, event[4].value) });
     event.push({ name: "idEvent", value: idEventUpdate });
+    event.push({ name: "isLogedIn", value: dataLogin });
 
     let message = "";
     if (updateEvent) {
@@ -551,7 +550,7 @@ $('#btnDeleteEvent').click(function() {
             $.ajax({
                 type: "POST",
                 url: urlData + "/deleteInformation",
-                data: { idEvent: idEventUpdate },
+                data: { idEvent: idEventUpdate, "isLogedIn": dataLogin },
                 success: function(response) {
 
                     response = JSON.parse(response)[0];

@@ -229,7 +229,7 @@ html .fc,
 }
 
 .fc-state-default {
-    border-color: #d9531e;
+    border-color: #d9531e !important;
     color: #551900;
 }
 
@@ -276,7 +276,8 @@ html .fc,
     filter: alpha(opacity=65);
     box-shadow: none;
     border: 1px solid #FFE3E3;
-    color: #551900;
+    /* color: #551900; */
+    color: #fff
 }
 
 

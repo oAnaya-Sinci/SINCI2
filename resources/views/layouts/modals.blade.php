@@ -162,17 +162,17 @@
 </div>
 
 <div class="position-fixed top-1 end-1 z-index-1" style="z-index: 1050 !important;">
-  <div class="toast fade hide p-2 bg-white" role="alert" aria-live="assertive" id="successToast" aria-atomic="true">
-      <div class="toast-header border-0 bg-primary">
-          <i class="material-icons text-success me-2">
+  <div class="toast fade hide p-2 bg-gradient-success" role="alert" aria-live="assertive" id="successToast" aria-atomic="true">
+      <div class="toast-header border-0 bg-transparent">
+          <i class="material-icons text-success text-white me-2">
             check
           </i>
-          <span class="me-auto font-weight-bold mssgHeader">Material Dashboard</span>
+          <span class="me-auto font-weight-bold mssgHeader text-white">Material Dashboard</span>
           <!-- <small class="text-body">11 mins ago</small> -->
-          <i class="fas fa-times text-md ms-3 cursor-pointer" data-bs-dismiss="toast" aria-label="Close"></i>
+          <i class="fas fa-times text-md text-white ms-3 cursor-pointer" data-bs-dismiss="toast" aria-label="Close"></i>
       </div>
-      <hr class="horizontal dark m-0">
-      <div class="toast-body">
+      <hr class="horizontal light m-0">
+      <div class="toast-body text-white">
           Hello, world! This is a notification message.
         </div>
     </div>
@@ -190,31 +190,31 @@
           Hello, world! This is a notification message.
       </div>
   </div>
-  <div class="toast fade hide p-2 mt-2 bg-white" role="alert" aria-live="assertive" id="warningToast" aria-atomic="true">
-      <div class="toast-header border-0">
-          <i class="material-icons text-warning me-2">
+  <div class="toast fade hide p-2 mt-2 bg-gradient-warning" role="alert" aria-live="assertive" id="warningToast" aria-atomic="true">
+      <div class="toast-header border-0 bg-transparent">
+          <i class="material-icons text-warning me-2 text-white">
             travel_explore
           </i>
-          <span class="me-auto font-weight-bold mssgHeader">Material Dashboard </span>
+          <span class="me-auto font-weight-bold mssgHeader text-white">Material Dashboard </span>
           <!-- <small class="text-body">11 mins ago</small> -->
-          <i class="fas fa-times text-md ms-3 cursor-pointer" data-bs-dismiss="toast" aria-label="Close"></i>
+          <i class="fas fa-times text-md text-white ms-3 cursor-pointer" data-bs-dismiss="toast" aria-label="Close"></i>
       </div>
-      <hr class="horizontal dark m-0">
-      <div class="toast-body">
+      <hr class="horizontal light m-0">
+      <div class="toast-body text-white">
           Hello, world! This is a notification message.
       </div>
   </div>
-  <div class="toast fade hide p-2 mt-2 bg-white" role="alert" aria-live="assertive" id="dangerToast" aria-atomic="true">
-      <div class="toast-header border-0">
-          <i class="material-icons text-danger me-2">
+  <div class="toast fade hide p-2 mt-2 bg-gradient-danger" role="alert" aria-live="assertive" id="dangerToast" aria-atomic="true">
+      <div class="toast-header border-0 bg-transparent">
+          <i class="material-icons text-danger me-2 text-white">
           campaign
           </i>
-          <span class="me-auto text-gradient text-danger font-weight-bold mssgHeader">Material Dashboard </span>
+          <span class="me-auto font-weight-bold mssgHeader text-white">Material Dashboard </span>
           <!-- <small class="text-body">11 mins ago</small> -->
-          <i class="fas fa-times text-md ms-3 cursor-pointer" data-bs-dismiss="toast" aria-label="Close"></i>
+          <i class="fas fa-times text-md text-white ms-3 cursor-pointer" data-bs-dismiss="toast" aria-label="Close"></i>
       </div>
-      <hr class="horizontal dark m-0">
-      <div class="toast-body">
+      <hr class="horizontal light m-0">
+      <div class="toast-body text-white">
           Hello, world! This is a notification message.
       </div>
   </div>

@@ -21543,7 +21543,8 @@ hr.horizontal.gray-light {
 }
 
 .border-radius-xl {
-    border-radius: 0.75rem;
+    /* border-radius: 0.75rem; */
+    border-radius: 1.05rem;
 }
 
 .border-radius-2xl {

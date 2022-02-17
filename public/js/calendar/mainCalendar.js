@@ -1,7 +1,11 @@
+// const { trim } = require("lodash");
+
 var updateEvent = false;
 var idEventUpdate;
 
 var dataLogin;
+
+let calendar;
 
 $(document).ready(function() {
 
@@ -14,10 +18,6 @@ $(document).ready(function() {
     document.getElementById("endDate").addEventListener("keydown", preventDef, false);
 
     calendarSinci();
-});
-
-$('.fc-button.fc-button-agendaWeek').click(function() {
-    alert("Week");
 });
 
 function preventDef(event) {
@@ -107,6 +107,13 @@ async function calendarSinci() {
         var endHour = new Date(value.Hora_fin);
         var HoraFin = (endHour.getHours() < 10 ? "0" + endHour.getHours() : endHour.getHours());
         var minutosFin = (endHour.getMinutes() < 10 ? "0" * endHour.getMinutes() : endHour.getMinutes());
+
+        let tile = "";
+        if ("ontouchstart" in window || navigator.msMaxTouchPoints) {
+            tile = value.LOCATION
+        } else {
+            tile = value.LOCATION + "\n -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- \n " + value.NOTAS
+        }
 
         event = {
             id: value.ID_PROYECTOS_AVANCE,
@@ -262,6 +269,17 @@ async function calendarSinci() {
 
     // $('.fc-button.fc-button-agendaWeek').click();
 
+    if ("ontouchstart" in window || navigator.msMaxTouchPoints) {
+
+        $('#calendar .fc-header .fc-header-right .fc-button-agendaDay').html("D");
+        $('#calendar .fc-header .fc-header-right .fc-button-agendaWeek').text("S");
+        $('#calendar .fc-header .fc-header-right .fc-button-month').text("M");
+
+        $('.asignar_a select').remove();
+        $('.asignar_a .dropdown.bootstrap-select.form-control').remove();
+        $('.asignar_a label').after("<select id='slctAsignar' name='slctAsignar' class='form-select'><option value = ''> Seleccione una opción < /option></select>");
+    }
+
     modalCalendarSinci();
     iniciateModalUpdate();
 }
@@ -281,10 +299,6 @@ async function modalCalendarSinci() {
     $('.selectpicker').selectpicker('refresh');
     // $('.dropdown.bootstrap-select .btn.dropdown-toggle').click();
 }
-
-// $('.dropdown.bootstrap-select .btn.dropdown-toggle').click(function() {
-//     console.log("Button Clicked");
-// });
 
 function processDataToSelect(data, select, proyectoSearch = false) {
 
@@ -317,17 +331,26 @@ function getWeekNumber(d) {
 
 function showWeeksNumbers(weekNumber) {
 
+    let howWeek = "";
+
+    if ("ontouchstart" in window || navigator.msMaxTouchPoints)
+        howWeek = "S";
+
+    else
+        howWeek = "Semana ";
+
+
     $('#calendar .fc-content .fc-view-month table .fc-week').each(function(index) {
 
         let html = "";
 
         if (weekNumber == 52) {
-            html = '<div class="weekNumber">Semana ' + weekNumber + '</div>';
+            html = '<div class="weekNumber"> ' + howWeek + weekNumber + '</div>';
             weekNumber = 0;
         }
 
         weekNumber++;
-        html = '<div class="weekNumber">Semana ' + weekNumber + '</div>';
+        html = '<div class="weekNumber"> ' + howWeek + weekNumber + '</div>';
 
         $(this.firstChild.firstChild.firstChild).after(html);
     });
@@ -375,16 +398,6 @@ function iniciateModalUpdate() {
             success: function(response) {
 
                 response = JSON.parse(response)[0];
-
-                // response.FECHA_INICIO = response.FECHA_INICIO.replace('T', ' ');
-                // response.FECHA_INICIO = response.FECHA_INICIO.replace('Z', ' ');
-                // response.FECHA_FIN = response.FECHA_FIN.replace('T', ' ');
-                // response.FECHA_FIN = response.FECHA_FIN.replace('Z', ' ');
-
-                // response.Hora_inicio = response.Hora_inicio.replace('T', ' ');
-                // response.Hora_inicio = response.Hora_inicio.replace('Z', ' ');
-                // response.Hora_fin = response.Hora_fin.replace('T', ' ');
-                // response.Hora_fin = response.Hora_fin.replace('Z', ' ');
 
                 if (window.navigator.vendor == "Google Inc.") {
                     response.FECHA_INICIO = response.FECHA_INICIO.replace('T', ' ');
@@ -441,7 +454,7 @@ function iniciateModalUpdate() {
             },
             error: function(exception) {
 
-                showMessage('danger', 'Error', exception.text);
+                showMessage('danger', 'Error', exception.statusCode.name + " - " + exception.statusText);
             }
         });
 
@@ -488,6 +501,8 @@ $('#btnSaveEvent').click(async function() {
         message = "Información guardada exitosamente ";
     }
 
+    // testCalendar(event);
+
     await $.ajax({
         type: "POST",
         url: urlEvent,
@@ -525,7 +540,7 @@ $('#btnSaveEvent').click(async function() {
             idEventUpdate = null;
             updateEvent = false;
 
-            showMessage('danger', 'Error', exception.text);
+            showMessage('danger', 'Error', exception.statusCode.name + " - " + exception.statusText);
         }
     });
 });
@@ -538,7 +553,6 @@ $('#btnSaveEvent').click(async function() {
  */
 
 $('#btnDeleteEvent').click(function() {
-
 
     $("#mi-modal .modal-header h4").text("Confirmar Eliminación");
     $("#mi-modal .modal-body").html("<p>Esta a punto de eliminar este registro, al hacerlo la informacion se perdera y no podra ser recuperada.</p><p>¿Desea continuar con la eliminación?</p>");
@@ -576,7 +590,7 @@ $('#btnDeleteEvent').click(function() {
                     idEventUpdate = null;
                     updateEvent = false;
 
-                    showMessage('danger', 'Error', exception.text);
+                    showMessage('danger', 'Error', exception.statusCode.name + " - " + exception.statusText);
                 }
             });
         } else {
@@ -709,3 +723,76 @@ function validateModal(event) {
 
     return validate;
 }
+
+/** 
+ * javascript comment 
+ * @Author: oanaya@sinci.com 
+ * @Date: 2022-02-15 12:29:57 
+ * @Desc: Test function to check how the fullcalendar library works
+ */
+
+// function testCalendar(event) {
+
+//     console.log(event);
+
+//     let newEvent = {
+//         id: '1234656',
+//         title: "lkajldkajsdf \n -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- \n ljsabdlfkjabsdfbasdnb,masdnbf,nbas. va.sdnbfmasnd ,fmasdf asv ask  .asdbv,masndb,mansdvnhjfbmasd bva a,smdbas",
+//         start: new Date(2022, 2, 14),
+//         end: new Date(2022, 2, 14),
+//         allDay: false,
+//         className: 'info',
+//         editable: false,
+//     };
+
+//     /* initialize the external events
+//     -----------------------------------------------------------------*/
+
+//     $('#external-events div.external-event').each(function() {
+
+//         // create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
+//         // it doesn't need to have a start or end
+//         var eventObject = {
+//             title: $.trim($(this).text()) // use the element's text as the event title
+//         };
+
+//         // store the Event Object in the DOM element so we can get to it later
+//         $(this).data('eventObject', eventObject);
+
+//         // make the event draggable using jQuery UI
+//         $(this).draggable({
+//             zIndex: 999,
+//             revert: true, // will cause the event to go back to its
+//             revertDuration: 0 //  original position after the drag
+//         });
+//     });
+
+//     $('#calendar').fullCalendar({
+//         header: {
+//             left: 'title',
+//             right: 'today agendaDay,agendaWeek,month prev,next'
+//         },
+//         editable: true,
+//         firstDay: 0, //  1(Monday) this can be changed to 0(Sunday) for the USA system
+//         selectable: true,
+//         defaultView: 'month',
+
+//         axisFormat: 'h:mm',
+//         columnFormat: {
+//             month: 'ddd', // Mon
+//             week: 'ddd d', // Mon 7
+//             day: 'dddd M/d', // Monday 9/7
+//             agendaDay: 'dddd d'
+//         },
+//         titleFormat: {
+//             month: 'MMMM yyyy', // September 2009
+//             week: "MMMM yyyy", // September 2009
+//             day: 'MMMM yyyy' // Tuesday, Sep 8, 2009
+//         },
+//         allDaySlot: false,
+//         selectHelper: true,
+//         select: function(start, end, allDay) {},
+//         droppable: false,
+//         events: newEvent,
+//     });
+// }

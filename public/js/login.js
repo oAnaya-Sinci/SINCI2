@@ -6,7 +6,7 @@
 var currenUrl = window.location.href.split("/")[2];
 currenUrl = currenUrl.split(":");
 
-var urlData = "https://" + currenUrl[0] + ":1880";
+var urlData = "http://" + currenUrl[0] + ":1880";
 
 // urlData = "https://10.10.100.34:1880"; // PRODUCTION SERVER WITH SECURE PROTOCOL 443
 
@@ -83,6 +83,7 @@ $('#btnLogin').click(async function() {
         },
         error: function(exception) {
 
+            // showMessage('danger', 'Error', exception.statusCode + " - " + exception.statusText);
             console.log(exception);
         }
     });
@@ -130,20 +131,31 @@ async function IsLogedIn() {
         },
         error: function(exception) {
 
+            // showMessage('danger', 'Error', exception.statusCode + " - " + exception.statusText);
             console.log(exception);
+            console.log(exception.statusCode.name + " - " + exception.statusText);
         }
     });
 }
 
 var modalConfirm = function(callback) {
 
-    // $("#modal-btn-si").on("click", function() {
-    //     callback(true);
-    //     $("#mi-modal").modal('hide');
-    // });
-
     $("#modal-btn-no").on("click", function() {
         callback(false);
         $("#noAccessModal").modal('hide');
     });
 };
+
+function checkDevice() {
+
+    if (navigator.userAgent.match(/Android/i) ||
+        navigator.userAgent.match(/webOS/i) ||
+        navigator.userAgent.match(/iPhone/i) ||
+        navigator.userAgent.match(/iPad/i) ||
+        navigator.userAgent.match(/iPod/i) ||
+        navigator.userAgent.match(/BlackBerry/i) ||
+        navigator.userAgent.match(/Windows Phone/i)) {
+
+        alert("You're using Mobile Device!!")
+    }
+}

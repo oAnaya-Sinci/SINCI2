@@ -11,7 +11,7 @@
     
     <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon.png">
     <!-- <link rel="icon" type="image/png" href="/img/favicon.png"> -->
-    <link rel="icon" type="image/png" href="https://sinci.com/wp-content/uploads/2019/10/logo-sinci.-servicios-de-automatizacion-y-control-de-procesos-industriales-en-mexico-150x134.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/img/sinci.ico" sizes="32x32">
     <title>{{ config('app.name', 'SAS SINCI') }}</title>
     <!-- Fonts and icons -->
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />

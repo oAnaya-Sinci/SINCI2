@@ -4,8 +4,8 @@
 <nav class="navbar navbar-main navbar-expand-lg px-0 4 shadow-none border-radius-xl" id="navbarBlurLogo" navbar-scroll="true" >
       <div class="container-fluid py-2 px-3">
       
-          <img src="https://sinci.com/wp-content/uploads/2019/10/logo-sinci.-servicios-de-automatizacion-y-control-de-procesos-industriales-en-mexico.png" class="navbar-brand-img h-100" alt="main_logo">
-
+          <!-- <img src="https://sinci.com/wp-content/uploads/2019/10/logo-sinci.-servicios-de-automatizacion-y-control-de-procesos-industriales-en-mexico.png" class="navbar-brand-img h-100" alt="main_logo"> -->
+          <img src="/img/Logo_Sinci.svg" class="navbar-brand-img h-100" alt="main_logo" width="80px" height="80px">
           <span class="ms-1 font-weight-bold sinciLogoName">{{ config('app.name', 'SAS SINCI') }}</span>
     
         </div>

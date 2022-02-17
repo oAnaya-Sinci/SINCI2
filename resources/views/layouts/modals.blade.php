@@ -76,7 +76,7 @@
             </div>
 
             <div class="col-md-6">
-              <div class="form-group body-bitacora">
+              <div class="form-group body-bitacora asignar_a">
                 <label for="recipient-name" class="col-form-label">Asignar_a:</label>
                 <!-- <input type="text" class="form-control" id="recipient-name" name="asignar"> -->
                 <!-- <select class="form-select modalForm" name="slctAsignar" id="slctAsignar" required>

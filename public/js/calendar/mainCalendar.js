@@ -108,16 +108,21 @@ async function calendarSinci() {
         var HoraFin = (endHour.getHours() < 10 ? "0" + endHour.getHours() : endHour.getHours());
         var minutosFin = (endHour.getMinutes() < 10 ? "0" * endHour.getMinutes() : endHour.getMinutes());
 
-        let tile = "";
-        if ("ontouchstart" in window || navigator.msMaxTouchPoints) {
-            tile = value.LOCATION
-        } else {
-            tile = value.LOCATION + "\n -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- \n " + value.NOTAS
-        }
+        let titleBtcr = "";
+        // if ("ontouchstart" in window || navigator.msMaxTouchPoints) {
+        //     let proyectCode = value.LOCATION.split("(");
+        //     titleBtcr = proyectCode[0];
+
+        //     // for (let i = 0; i < proyectCode.length - 1; i++)
+        //     //     titleBtcr = proyectCode[i];
+        // } else {
+        //     titleBtcr = value.LOCATION + "\n -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- \n " + value.NOTAS
+        // }
 
         event = {
             id: value.ID_PROYECTOS_AVANCE,
             title: value.LOCATION + "\n -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- \n " + value.NOTAS,
+            // title: titleBtcr,
             start: new Date(sYear, sMonth, sDay, horaInicio, minutosInicio),
             end: new Date(eYear, eMonth, eDay, HoraFin, minutosFin),
             allDay: false,

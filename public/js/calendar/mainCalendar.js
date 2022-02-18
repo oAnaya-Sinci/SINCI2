@@ -109,20 +109,20 @@ async function calendarSinci() {
         var minutosFin = (endHour.getMinutes() < 10 ? "0" * endHour.getMinutes() : endHour.getMinutes());
 
         let titleBtcr = "";
-        // if ("ontouchstart" in window || navigator.msMaxTouchPoints) {
-        //     let proyectCode = value.LOCATION.split("(");
-        //     titleBtcr = proyectCode[0];
+        if ("ontouchstart" in window || navigator.msMaxTouchPoints) {
+            let proyectCode = value.LOCATION.split("(");
+            titleBtcr = proyectCode[0];
 
-        //     // for (let i = 0; i < proyectCode.length - 1; i++)
-        //     //     titleBtcr = proyectCode[i];
-        // } else {
-        //     titleBtcr = value.LOCATION + "\n -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- \n " + value.NOTAS
-        // }
+            // for (let i = 0; i < proyectCode.length - 1; i++)
+            // titleBtcr = proyectCode[i];
+        } else {
+            titleBtcr = value.LOCATION + "\n -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- \n " + value.NOTAS
+        }
 
         event = {
             id: value.ID_PROYECTOS_AVANCE,
-            title: value.LOCATION + "\n -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- \n " + value.NOTAS,
-            // title: titleBtcr,
+            // title: value.LOCATION + "\n -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- \n " + value.NOTAS,
+            title: titleBtcr,
             start: new Date(sYear, sMonth, sDay, horaInicio, minutosInicio),
             end: new Date(eYear, eMonth, eDay, HoraFin, minutosFin),
             allDay: false,

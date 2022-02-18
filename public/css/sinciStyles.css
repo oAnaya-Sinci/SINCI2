@@ -338,6 +338,10 @@
             margin-left: .5rem !important;
             margin-top: .5rem !important;
         }
+        .toast {
+            width: 100%;
+            font-size: .86rem;
+        }
     }
     
     @media screen and (max-height: 800px) and (orientation:landscape) {
@@ -425,6 +429,10 @@
         #sidenav-main {
             margin-left: .5rem !important;
             margin-top: .5rem !important;
+        }
+        .toast {
+            width: 100%;
+            font-size: .86rem;
         }
     }
     /** 

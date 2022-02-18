@@ -75,7 +75,7 @@ async function IsLogedIn() {
         },
         error: function(exception) {
 
-            console.log(exception);
+            console.log(exception.statusText, exception.statusText);
             showMessage("danger", "error", exception)
             window.location.href = "/";
         }

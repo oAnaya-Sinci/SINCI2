@@ -307,7 +307,8 @@
             padding: 0.5rem;
         }
         .btn.dropdown-toggle {
-            width: 18.5rem;
+            /* width: 18.5rem; */
+            width: 70vw !important;
         }
         .dropdown-menu {
             width: inherit;
@@ -339,7 +340,7 @@
         }
     }
     
-    @media screen and (max-height: 800px)and (orientation:landscape) {
+    @media screen and (max-height: 800px) and (orientation:landscape) {
         #createEventCalendar {
             margin-top: 0;
         }
@@ -394,7 +395,8 @@
             padding: 0.5rem;
         }
         .btn.dropdown-toggle {
-            width: 18.5rem;
+            /* width: 18.5rem; */
+            width: 70vw !important;
         }
         .dropdown-menu {
             width: inherit;
@@ -423,5 +425,24 @@
         #sidenav-main {
             margin-left: .5rem !important;
             margin-top: .5rem !important;
+        }
+    }
+    /** 
+     * @Author: Carlos Omar Anaya 
+     * @Date: 2022-02-18 11:59:56 
+     * @Desc:  Styles to devices with a less resolution in the screen
+     */
+    
+    @media screen and (max-width: 400px) and (orientation:portrait) {
+        .btn.dropdown-toggle {
+            /* width: 18.5rem; */
+            width: 60vw !important;
+        }
+    }
+    
+    @media screen and (max-width: 400px) and (orientation:landscape) {
+        .btn.dropdown-toggle {
+            /* width: 18.5rem; */
+            width: 60vw !important;
         }
     }

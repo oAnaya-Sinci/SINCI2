@@ -84,7 +84,7 @@ $('#btnLogin').click(async function() {
         error: function(exception) {
 
             // showMessage('danger', 'Error', exception.statusCode + " - " + exception.statusText);
-            console.log(exception);
+            console.log(exception.statusCode + " - " + exception.statusText);
         }
     });
 });

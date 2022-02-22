@@ -16,7 +16,7 @@
           </span> -->
 
           <div class="form-group">
-            <label for="message-text" class="col-form-label">Resumen de la bitacora:</label>
+            <label for="message-text" class="col-form-label">Resumen de la bitácora:</label>
             <textarea class="form-control" id="message-text" name="resumen" required></textarea>
           </div>
 
@@ -115,7 +115,7 @@
       </div>
       <div class="modal-body"><p>Desea continuar co la acción</p></div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" id="modal-btn-si">Si</button>
+        <button type="button" class="btn btn-primary" id="modal-btn-si">Sí</button>
         <button type="button" class="btn btn-secondary" id="modal-btn-no">No</button>
       </div>
     </div>

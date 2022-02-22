@@ -593,7 +593,7 @@ $('#btnSaveEvent').click(async function() {
 $('#btnDeleteEvent').click(function() {
 
     $("#mi-modal .modal-header h4").text("Confirmar Eliminación");
-    $("#mi-modal .modal-body").html("<p>Esta a punto de eliminar este registro, al hacerlo la informacion se perdera y no podra ser recuperada.</p><p>¿Desea continuar con la eliminación?</p>");
+    $("#mi-modal .modal-body").html("<p>Está a punto de eliminar este registro, al hacerlo la información se perderá y no podrá ser recuperada.</p><p>¿Desea continuar con la eliminación?</p>");
     $("#mi-modal").modal('show');
 
     modalConfirm(function(confirm) {
@@ -612,7 +612,7 @@ $('#btnDeleteEvent').click(function() {
 
                     $('#createEventCalendar').modal('hide');
 
-                    showMessage('success', 'Exito', 'Informacion borrada');
+                    showMessage('success', 'Exito', 'Información borrada');
 
                     /**
                      * This block of code is temporal, the register of the event changues ahead to not refresh the page completly

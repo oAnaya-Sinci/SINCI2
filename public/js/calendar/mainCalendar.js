@@ -7,8 +7,6 @@ let calendar;
 
 $(document).ready(function() {
 
-    // $('#slctProyecto').materialSelect();
-
     document.getElementById("startDate").addEventListener("keyup", preventDef, false);
     document.getElementById("startDate").addEventListener("keydown", preventDef, false);
 
@@ -25,7 +23,6 @@ function preventDef(event) {
 async function calendarSinci() {
 
     dataLogin = window.localStorage.getItem('sasIsLogedIn').split("/");
-    // dataLogin = dataLogin == 'false' ? window.location.href = "/dashboard" : dataLogin.split("/");
 
     let newStr = "";
     let x = 0;
@@ -108,12 +105,11 @@ async function calendarSinci() {
 
         let titleBtcr = "";
         if ("ontouchstart" in window || navigator.msMaxTouchPoints) {
+
             let proyectCode = value.LOCATION.split("(");
             titleBtcr = proyectCode[0];
-
-            // for (let i = 0; i < proyectCode.length - 1; i++)
-            // titleBtcr = proyectCode[i];
         } else {
+
             titleBtcr = value.LOCATION + "\n -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- \n " + value.NOTAS
         }
 
@@ -214,8 +210,6 @@ async function calendarSinci() {
                 Hours = (end.getHours() < 10 ? "0" + end.getHours() : end.getHours()) + ":" + (end.getMinutes() < 10 ? "0" + end.getMinutes() : end.getMinutes());
                 todayEnd += Hours == "00:00" ? " 09" + ":" + "30" : " " + Hours;
 
-                // $('.datetimepicker').val(today);
-
                 $('#startDate').val(today);
                 $('#endDate').val(todayEnd);
 
@@ -254,7 +248,6 @@ async function modalCalendarSinci() {
 
     let dataProyecto = await fetch(urlData + "/obtainDataProyecto?isLogedIn=" + dataLogin).then(data => data.json()).then(data => { return data; });
     processDataToSelect(dataProyecto, '#slctProyecto');
-    // processDataToSelect(dataProyecto, '#listaProyectos', true);
 
     let dataUsuario = await fetch(urlData + "/obtainDataUser?isLogedIn=" + dataLogin).then(data => data.json()).then(data => { return data; });
     processDataToSelect(dataUsuario, '#slctUsuario');
@@ -263,7 +256,6 @@ async function modalCalendarSinci() {
     processDataToSelect(dataAsignar, '#slctAsignar');
 
     $('.selectpicker').selectpicker('refresh');
-    // $('.dropdown.bootstrap-select .btn.dropdown-toggle').click();
 }
 
 function processDataToSelect(data, select, proyectoSearch = false) {
@@ -346,8 +338,6 @@ function showWeeksNumbers(weekNumber, isWeek, isDay, dayNum = 0) {
         isWeek ? $('#calendar .fc-header .fc-header-center').html("<h4 style='color: #344767;'>Semana " + (weekNumber < 52 ? (weekNumber + 1) : 1) + "</h4>") : null;
         isDay ? $('#calendar .fc-header .fc-header-center').html("<h4 style='color: #344767;'>Semana " + (weekNumber < 52 ? ((dayNum == 0 || dayNum == 1) ? weekNumber + 1 : weekNumber) : 1) + "</h4>") : null;
     }
-
-    // isDay ? $('#calendar .fc-header .fc-header-center').html("<h4 style='color: #344767;'>Semana " + (weekNumber < 52 ? weekNumber : 1) + "</h4>") : null;
 }
 
 function buttonsNav(defaultView) {
@@ -356,16 +346,6 @@ function buttonsNav(defaultView) {
 
     let isWeek = false;
     let isDay = false;
-
-    // let date;
-
-    // if (defaultView == "month") {
-
-    //     date = $('#calendar .fc-content .fc-view-month table .fc-week.fc-first .fc-first')[0].dataset['date'];
-    // } else {
-
-    //     date = null;
-    // }
 
     let months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
 
@@ -487,8 +467,6 @@ function iniciateModalUpdate() {
                 $('#slctAsignar').val(response.TIPO_RESUMEN);
 
                 $('.selectpicker').selectpicker('refresh');
-
-                // $('.modalForm').prop("disabled", true);
             },
             error: function(exception) {
 
@@ -509,19 +487,16 @@ function iniciateModalUpdate() {
 $('#btnSaveEvent').click(async function() {
 
     $('#slctUsuario').attr('disabled', false);
-
     let urlEvent = "";
-
     var event = $('#dataEvent').serializeArray();
-
     let datesChecked = checkDateToSave(event[3].value, event[4].value);
 
     if (validateModal(event)) {
+
         return false;
     } else if (datesChecked[0]) {
 
         showMessage('danger', 'Error', datesChecked[1]);
-
         return false
     }
 
@@ -532,14 +507,14 @@ $('#btnSaveEvent').click(async function() {
 
     let message = "";
     if (updateEvent) {
+
         urlEvent = urlData + "/updateDataFromCalendar";
         message = "Información actualizada exitosamente";
     } else {
+
         urlEvent = urlData + "/saveDataFromCalendar";
         message = "Información guardada exitosamente ";
     }
-
-    // testCalendar(event);
 
     await $.ajax({
         type: "POST",
@@ -552,7 +527,6 @@ $('#btnSaveEvent').click(async function() {
             if (response.cantSaveData == "true") {
 
                 showMessage('danger', 'Error', "Error ya existe registros en el rango de horas seleccionadas, favor de revisar la información a registrar");
-
                 return false;
             }
 
@@ -744,7 +718,7 @@ function validateModal(event) {
                 $("#slctAsignar+.btn.dropdown-toggle").addClass('requiredNull');
 
             $("[name='" + value.name + "']").addClass('requiredNull');
-            // $(".invalidRequired").removeClass('hidden');
+
             showMessage('danger', 'Error', "Favor de seleccionar los datos faltantes");
             validate = true;
         }
@@ -756,82 +730,7 @@ function validateModal(event) {
         $(".form-control").removeClass('requiredNull');
         $(".form-select").removeClass('requiredNull');
         $(".btn.dropdown-toggle").removeClass('requiredNull');
-        // $(".invalidRequired").addClass('hidden');
     }, 7000);
 
     return validate;
 }
-
-/** 
- * javascript comment 
- * @Author: oanaya@sinci.com 
- * @Date: 2022-02-15 12:29:57 
- * @Desc: Test function to check how the fullcalendar library works
- */
-
-// function testCalendar(event) {
-
-//     console.log(event);
-
-//     let newEvent = {
-//         id: '1234656',
-//         title: "lkajldkajsdf \n -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- \n ljsabdlfkjabsdfbasdnb,masdnbf,nbas. va.sdnbfmasnd ,fmasdf asv ask  .asdbv,masndb,mansdvnhjfbmasd bva a,smdbas",
-//         start: new Date(2022, 2, 14),
-//         end: new Date(2022, 2, 14),
-//         allDay: false,
-//         className: 'info',
-//         editable: false,
-//     };
-
-//     /* initialize the external events
-//     -----------------------------------------------------------------*/
-
-//     $('#external-events div.external-event').each(function() {
-
-//         // create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
-//         // it doesn't need to have a start or end
-//         var eventObject = {
-//             title: $.trim($(this).text()) // use the element's text as the event title
-//         };
-
-//         // store the Event Object in the DOM element so we can get to it later
-//         $(this).data('eventObject', eventObject);
-
-//         // make the event draggable using jQuery UI
-//         $(this).draggable({
-//             zIndex: 999,
-//             revert: true, // will cause the event to go back to its
-//             revertDuration: 0 //  original position after the drag
-//         });
-//     });
-
-//     $('#calendar').fullCalendar({
-//         header: {
-//             left: 'title',
-//             right: 'today agendaDay,agendaWeek,month prev,next'
-//         },
-//         editable: true,
-//         firstDay: 0, //  1(Monday) this can be changed to 0(Sunday) for the USA system
-//         selectable: true,
-//         defaultView: 'month',
-
-//         axisFormat: 'h:mm',
-//         columnFormat: {
-//             month: 'ddd', // Mon
-//             week: 'ddd d', // Mon 7
-//             day: 'dddd M/d', // Monday 9/7
-//             agendaDay: 'dddd d'
-//         },
-//         titleFormat: {
-//             month: 'MMMM yyyy', // September 2009
-//             week: "MMMM yyyy", // September 2009
-//             day: 'MMMM yyyy' // Tuesday, Sep 8, 2009
-//         },
-//         allDaySlot: false,
-//         selectHelper: true,
-//         select: function(start, end, allDay) {},
-//         droppable: false,
-//         events: newEvent,
-//     });
-// }   });
-// }

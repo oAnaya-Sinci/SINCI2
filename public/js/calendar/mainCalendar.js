@@ -242,6 +242,8 @@ async function calendarSinci() {
         $('.asignar_a select').remove();
         $('.asignar_a .dropdown.bootstrap-select.form-control').remove();
         $('.asignar_a label').after("<select id='slctAsignar' name='slctAsignar' class='form-select'><option value = ''> Seleccione una opción < /option></select>");
+
+        $('.fc-button.fc-button-agendaDay').click();
     }
 
     modalCalendarSinci();

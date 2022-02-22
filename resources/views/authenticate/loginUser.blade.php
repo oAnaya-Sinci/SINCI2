@@ -57,7 +57,7 @@
                                         </div>
 
                                         <span class="invalid-feedback login" role="alert">
-                                            <strong>Login pass fail</strong>
+                                            <strong>Error, el nombre de usuario o la contraseña son incorrectos</strong>
                                         </span>
                                         
                                         <div class="text-center">

@@ -85,7 +85,7 @@
             today: 'Hoy',
             month: 'Mes',
             week: 'Semana',
-            day: 'Dia'
+            day: 'Día'
         },
 
         // jquery-ui theming

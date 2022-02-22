@@ -4,17 +4,24 @@
  * @Desc: File with the styles of the project 
  */
 
-body {
-    font-family: din-regular;
-    font-style: normal;
-    font-weight: 500 !important;
+body,
+body .btn,
+body label {
+    font-family: din-regular !important;
+    font-style: normal !important;
+    /* font-weight: 600 !important; */
+}
+
+body .nav-link.text-white {
+    font-size: 17px;
+    /* font-weight: 600; */
 }
 
 
 /** 
  * @Author: Carlos Omar Anaya Barajas 
  * @Date: 2022-01-14 10:16:31 
- * @Desc: Calendar styles
+ * @Desc: This is the styles of the calendar to changue accordig the requires of the proyect
  */
 
 .fc-slot17 .fc-widget-content,
@@ -212,7 +219,7 @@ h5 {
 /** 
  * @Author: flydreame 
  * @Date: 2022-02-15 17:31:46 
- * @Desc: Resposive Desing to the proyect 
+ * @Desc: Resposive Desing to the proyect adapting to the smart devices
  */
 
 @media screen and (max-width: 800px) and (orientation:portrait) {

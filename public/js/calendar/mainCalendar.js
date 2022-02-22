@@ -195,8 +195,6 @@ async function calendarSinci() {
              * the form of obtain the title of the event will changue ahead, this elment will be changed with a modal to obtain the information
              */
 
-            // $('#slctProyecto').val('');
-            // $('#slctProyecto').selectpicker('refresh');
             $('.selectpicker').val('');
             $('.selectpicker').selectpicker('refresh');
 
@@ -229,50 +227,13 @@ async function calendarSinci() {
             }
 
             // END
-
-            // var title = prompt('Event Title:');
-
-            // if (title) {
-            //     calendar.fullCalendar('renderEvent', {
-            //             title: title,
-            //             start: start,
-            //             end: end,
-            //             allDay: allDay
-            //         },
-            //         true // make the event "stick"
-            //     );
-            // }
-            // calendar.fullCalendar('unselect');
         },
         droppable: false, // this allows things to be dropped onto the calendar !!!
-        // drop: function(date, allDay) { // this function is called when something is dropped
-
-        //     // retrieve the dropped element's stored Event Object
-        //     var originalEventObject = $(this).data('eventObject');
-
-        //     // we need to copy it, so that multiple events don't have a reference to the same object
-        //     var copiedEventObject = $.extend({}, originalEventObject);
-
-        //     // assign it the date that was reported
-        //     copiedEventObject.start = date;
-        //     copiedEventObject.allDay = allDay;
-
-        //     // render the event on the calendar
-        //     // the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
-        //     $('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
-
-        //     // is the "remove after drop" checkbox checked?
-        //     if ($('#drop-remove').is(':checked')) {
-        //         // if so, remove the element from the "Draggable Events" list
-        //         $(this).remove();
-        //     }
-
-        // },
 
         events: dataEvents,
     });
 
-    // $('.fc-button.fc-button-agendaWeek').click();
+    $('.fc-button.fc-button-agendaWeek').click();
 
     if ("ontouchstart" in window || navigator.msMaxTouchPoints) {
 
@@ -375,7 +336,17 @@ function buttonsNav(defaultView) {
     //     date = null;
     // }
 
-    date = $('#calendar .fc-content .fc-view-month table .fc-week.fc-first .fc-first')[0].dataset['date'];
+    try {
+        date = $('#calendar .fc-content .fc-view-month table .fc-week.fc-first .fc-first')[0].dataset['date'];
+    } catch (error) {
+        console.log(error);
+
+        let months = [];
+
+        date = $('#calendar .fc-content .fc-view-month table .fc-week.fc-first .fc-first');
+    }
+
+    console.log(date);
 
     let weekNumber = getWeekNumber(new Date(date));
     showWeeksNumbers(weekNumber);

@@ -10,17 +10,11 @@ var urlData = "https://" + currenUrl[0] + ":1880";
 
 // urlData = "https://10.10.100.34:1880"; // PRODUCTION SERVER WITH SECURE PROTOCOL 443
 
+var timeOut;
+
 $(document).ready(function() {
 
-    let timeSession = 360000;
-    // let timeSession = 8000;
-
-    clearTimeout();
-
-    setTimeout(() => {
-        IsLogedIn();
-    }, timeSession);
-
+    setTimeOut();
     IsLogedIn();
 
     $('.datetimepicker').datetimepicker({
@@ -43,6 +37,15 @@ $(document).ready(function() {
 
     });
 });
+
+function setTimeOut() {
+
+    let timeSession = 360000;
+
+    timeOut = setTimeout(() => {
+        IsLogedIn();
+    }, timeSession);
+}
 
 $(document).click(function() {
     IsLogedIn();
@@ -67,6 +70,8 @@ async function IsLogedIn() {
             response = JSON.parse(response)[0];
 
             if (response.sessionAuth != 'false') {
+                clearTimeout(timeOut);
+                setTimeOut();
                 window.localStorage.setItem('sasIsLogedIn', response.sessionAuth);
             } else {
                 window.localStorage.setItem('sasIsLogedIn', 'false');

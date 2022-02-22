@@ -58,4 +58,4 @@ Route::get('/', function(){ return view('authenticate/loginUser'); });
 
 Route::get('/dashboard', function(){ $titulo = "DASHBOARD"; return view('dashboard/main', compact('titulo')); });
 
-Route::get('/bitacoras/main', function(){ $titulo = "REGISTRO DE BITACORAS"; return view('bitacoras/main', compact('titulo')); });
+Route::get('/bitacoras/main', function(){ $titulo = "REGISTRO DE BITÁCORAS"; return view('bitacoras/main', compact('titulo')); });

@@ -1,5 +1,3 @@
-// const { trim } = require("lodash");
-
 var updateEvent = false;
 var idEventUpdate;
 
@@ -280,6 +278,12 @@ function processDataToSelect(data, select, proyectoSearch = false) {
     $(select).append(options);
 }
 
+/** 
+ * javascript comment 
+ * @Author: Carlos Omar Anaya Barajas 
+ * @Date: 2022-02-22 11:11:51 
+ * @Desc: This function obtain the week number
+ */
 function getWeekNumber(d) {
 
     // Copy date so don't modify original
@@ -295,7 +299,14 @@ function getWeekNumber(d) {
     return weekNo;
 }
 
-function showWeeksNumbers(weekNumber) {
+/** 
+ * javascript comment 
+ * @Author: Carlos Omar Anaya Barajas 
+ * @Date: 2022-02-22 11:11:18 
+ * @Desc:  This unction display the week number in the calendar
+ */
+
+function showWeeksNumbers(weekNumber, isWeek, isDay, dayNum = 0) {
 
     let howWeek = "";
 
@@ -304,6 +315,8 @@ function showWeeksNumbers(weekNumber) {
 
     else
         howWeek = "Semana ";
+
+    $('#calendar .fc-header .fc-header-center').text('');
 
 
     $('#calendar .fc-content .fc-view-month table .fc-week').each(function(index) {
@@ -320,11 +333,27 @@ function showWeeksNumbers(weekNumber) {
 
         $(this.firstChild.firstChild.firstChild).after(html);
     });
+
+    if ("ontouchstart" in window || navigator.msMaxTouchPoints) {
+
+        isWeek ? $('#calendar .fc-content .fc-agenda-days thead .fc-first .fc-agenda-axis').html("<h6 style='color: #344767;'>S-" + (weekNumber < 52 ? (weekNumber + 1) : 1) + "</h6>") : null;
+        isDay ? $('#calendar .fc-content .fc-agenda-days thead .fc-first .fc-agenda-axis').html("<h6 style='color: #344767;'>S-" + (weekNumber < 52 ? ((dayNum == 0 || dayNum == 1) ? weekNumber + 1 : weekNumber) : 1) + "</h6>") : null;
+        $('#calendar .fc-content .fc-agenda-days .fc-first .fc-agenda-axis').css("text-align", "center")
+    } else {
+
+        isWeek ? $('#calendar .fc-header .fc-header-center').html("<h4 style='color: #344767;'>Semana " + (weekNumber < 52 ? (weekNumber + 1) : 1) + "</h4>") : null;
+        isDay ? $('#calendar .fc-header .fc-header-center').html("<h4 style='color: #344767;'>Semana " + (weekNumber < 52 ? ((dayNum == 0 || dayNum == 1) ? weekNumber + 1 : weekNumber) : 1) + "</h4>") : null;
+    }
+
+    // isDay ? $('#calendar .fc-header .fc-header-center').html("<h4 style='color: #344767;'>Semana " + (weekNumber < 52 ? weekNumber : 1) + "</h4>") : null;
 }
 
 function buttonsNav(defaultView) {
 
     iniciateModalUpdate();
+
+    let isWeek = false;
+    let isDay = false;
 
     // let date;
 
@@ -336,27 +365,58 @@ function buttonsNav(defaultView) {
     //     date = null;
     // }
 
+    let months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+
+    let headerMonth = $('#calendar .fc-header .fc-header-left .fc-header-title').text().split(' ');
+    let year = headerMonth[1];
+
+    let day;
+    let dayDate;
+    let dayNum;
+
     try {
         date = $('#calendar .fc-content .fc-view-month table .fc-week.fc-first .fc-first')[0].dataset['date'];
     } catch (error) {
-        console.log(error);
 
-        let months = [];
+        let monthNum;
+        $.each(months, function(index, value) {
 
-        date = $('#calendar .fc-content .fc-view-month table .fc-week.fc-first .fc-first');
+            if (headerMonth[0] == value) {
+
+                if (index < 9) {
+                    monthNum = "0" + (index + 1);
+                } else {
+                    monthNum = index + 1;
+                }
+            }
+        });
+
+        try {
+
+            day = $('#calendar .fc-content .fc-view-agendaWeek table .fc-first .fc-sun').text().split(' ')[1].replace(/\s+/g, '');
+            isWeek = true;
+        } catch (error) {
+
+            day = $('#calendar .fc-content .fc-view-agendaDay table .fc-first .fc-widget-header').text().split(' ')[1].replace(/\s+/g, '');
+            dayDate = new Date(year + "-" + monthNum + "-" + day);
+            dayDate = day >= 10 ? new Date(dayDate.setDate(dayDate.getDate() + 1)) : dayDate;
+            dayNum = dayDate.getDay();
+            new Date(dayDate.setDate(dayDate.getDate() - dayDate.getDay()));
+            isDay = true;
+        }
+
+        date = year + "-" + monthNum + "-" + day;
     }
 
-    console.log(date);
-
     let weekNumber = getWeekNumber(new Date(date));
-    showWeeksNumbers(weekNumber);
+    showWeeksNumbers(weekNumber, isWeek, isDay, dayNum);
 }
 
 /** 
  * javascript comment 
  * @Author: flydreame 
  * @Date: 2022-01-12 17:31:20 
- * @Desc:  
+ * @Desc:  This funciton iniciate the modal to update the data in the calendar
  */
 
 function iniciateModalUpdate() {
@@ -771,4 +831,5 @@ function validateModal(event) {
 //         droppable: false,
 //         events: newEvent,
 //     });
+// }   });
 // }

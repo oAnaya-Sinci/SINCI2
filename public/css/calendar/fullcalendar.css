@@ -18,7 +18,7 @@
     .fc table {
         font-size: 1em;
         /* font-family: "Helvetica Neue", Helvetica; */
-        font-family: din-regular !important;
+        font-family: 'Poppins', sans-serif;
     }
     
     .fc td,

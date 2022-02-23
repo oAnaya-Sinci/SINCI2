@@ -1,442 +1,455 @@
-/** 
+    /** 
  * @Author: flydreame 
  * @Date: 2022-02-18 16:02:35 
  * @Desc: File with the styles of the project 
  */
-
-body,
-body .btn,
-body label,
-body h1,
-body h2,
-body h3,
-body h4,
-body h5,
-.form-control,
-.form-select {
-    font-family: din-regular !important;
-    font-style: normal !important;
-    /* font-weight: 600 !important; */
-}
-
-body .nav-link.text-white {
-    font-size: 17px;
-    /* font-weight: 600; */
-}
-
-
-/** 
+    
+    @font-face {
+        font-family: 'Poppins', sans-serif;
+        src: url("fonts/Poppins/Poppins-Thin.ttf");
+        /* src: url("CustomFont.woff") format("woff"), url("CustomFont.otf") format("opentype"), url("CustomFont.svg#filename") format("svg"); */
+    }
+    
+    body,
+    body .btn,
+    body label,
+    body h1,
+    body h2,
+    body h3,
+    body h4,
+    body h5,
+    .form-control,
+    .form-select {
+        font-family: 'Poppins', sans-serif;
+        font-weight: normal;
+        font-style: normal;
+    }
+    
+    body .nav-link.text-white {
+        font-size: 15px;
+        /* font-weight: 600; */
+    }
+    /** 
  * @Author: Carlos Omar Anaya Barajas 
  * @Date: 2022-01-14 10:16:31 
  * @Desc: This is the styles of the calendar to changue accordig the requires of the proyect
  */
-
-.fc-slot17 .fc-widget-content,
-.fc-slot18 .fc-widget-content,
-.fc-slot19 .fc-widget-content,
-.fc-slot20 .fc-widget-content,
-.fc-slot21 .fc-widget-content,
-.fc-slot22 .fc-widget-content,
-.fc-slot23 .fc-widget-content,
-.fc-slot24 .fc-widget-content,
-.fc-slot25 .fc-widget-content,
-.fc-slot26 .fc-widget-content,
-.fc-slot27 .fc-widget-content,
-.fc-slot28 .fc-widget-content,
-.fc-slot29 .fc-widget-content,
-.fc-slot30 .fc-widget-content,
-.fc-slot31 .fc-widget-content,
-.fc-slot32 .fc-widget-content,
-.fc-slot33 .fc-widget-content,
-.fc-slot34 .fc-widget-content,
-.fc-slot35 .fc-widget-content,
-.fc-slot36 .fc-widget-content,
-.fc-slot37 .fc-widget-content {
-    background-color: #F1F1F1;
-}
-
-.modal .modal-header {
-    /* background: #591900; */
-    background: #8A1F03;
-}
-
-.modal .modal-header h4 {
-    color: #FFF;
-}
-
-#mi-modal {
-    margin-top: 10rem;
-}
-
-#createEventCalendar {
-    margin-top: 4rem;
-}
-
-.modal input,
-.modal textarea {
-    /* background-color: #F1F1F1; */
-    border: 1px solid #d2d6da;
-    resize: none;
-}
-
-#message-text {
-    height: 15rem;
-}
-
-#createEventCalendar.modal-lg {
-    max-width: none !important;
-}
-
-#createEventCalendar .modal-dialog {
-    max-width: 63rem;
-}
-
-#createEventCalendar .modal-content {
-    height: 45.3rem;
-}
-
-.body-bitacora {
-    display: flex;
-    margin: .5rem 0 .5rem 0;
-}
-
-.body-bitacora label {
-    margin-right: .5rem;
-}
-
-.fc-header .fc-header-center span h5 {
-    color: #344767 !important;
-}
-
-.idEvent {
-    display: none;
-}
-
-#navbar .input-group label {
-    color: #fff;
-}
-
-#navbarBlur {
-    background-color: #8A1F03;
-    margin-top: 1rem !important;
-}
-
-#navbarBlurLogo {
-    /* background-color: #8A1F03; */
-    border: #8A1F03 1px solid;
-    /* padding: .4rem !important; */
-    padding: .38rem !important;
-}
-
-.sinciLogoName {
-    width: 100%;
-    text-align: center;
-    font-size: 20px;
-}
-
-#navbarBlur ol li,
-#navbarBlur ol li a {
-    color: #fff !important;
-}
-
-#navbarBlur #navbar ul li a {
-    color: #fff !important;
-}
-
-h5 {
-    color: #fff !important;
-}
-
-#navbar .input-group.input-group-outline {
-    display: none;
-}
-
-#sidenav-collapse-main {
-    height: 90%;
-}
-
-.mc-calendar {
-    z-index: 9999 !important;
-}
-
-#loginEmail:focus label {
-    display: none;
-}
-
-.input-group.input-group-outline .form-label::before,
-.input-group.input-group-outline .form-label::after {
-    content: none;
-}
-
-.input-group.input-group-outline .form-label {
-    top: -0.7rem !important;
-    line-height: 0 !important;
-}
-
-#loginEmail {
-    margin-bottom: 0.7rem !important;
-}
-
-.form-select,
-.form-control {
-    color: #000 !important;
-}
-
-.form-select:focus,
-.form-control:focus {
-    border-color: #d2d6da;
-}
-
-.requiredNull {
-    border: 1px solid red !important;
-}
-
-.invalidRequired {
-    color: red !important;
-}
-
-.hidden {
-    display: none;
-}
-
-.sidenav-header span {
-    font-size: 19px;
-    padding: 1rem 0 0 1.5rem;
-}
-
-.dropdown.bootstrap-select .dropdown-menu.show .inner.show ul li:first-child {
-    margin-top: -2.5rem !important;
-}
-
-.dropdown-menu .bs-searchbox+.inner.show,
-.dropdown-menu .bs-searchbox+.inner.show .inner.show {
-    margin-top: -100rem !important;
-}
-
-.dropdown-menu.show .bs-searchbox+.inner.show,
-.dropdown-menu.show .bs-searchbox+.inner.show .inner.show {
-    margin-top: 2rem !important;
-}
-
-[href="/dashboard"] {
-    margin-top: 1rem !important;
-}
-
-
-/** 
+    
+    .fc-slot17 .fc-widget-content,
+    .fc-slot18 .fc-widget-content,
+    .fc-slot19 .fc-widget-content,
+    .fc-slot20 .fc-widget-content,
+    .fc-slot21 .fc-widget-content,
+    .fc-slot22 .fc-widget-content,
+    .fc-slot23 .fc-widget-content,
+    .fc-slot24 .fc-widget-content,
+    .fc-slot25 .fc-widget-content,
+    .fc-slot26 .fc-widget-content,
+    .fc-slot27 .fc-widget-content,
+    .fc-slot28 .fc-widget-content,
+    .fc-slot29 .fc-widget-content,
+    .fc-slot30 .fc-widget-content,
+    .fc-slot31 .fc-widget-content,
+    .fc-slot32 .fc-widget-content,
+    .fc-slot33 .fc-widget-content,
+    .fc-slot34 .fc-widget-content,
+    .fc-slot35 .fc-widget-content,
+    .fc-slot36 .fc-widget-content,
+    .fc-slot37 .fc-widget-content {
+        background-color: #F1F1F1;
+    }
+    
+    .modal .modal-header {
+        /* background: #591900; */
+        background: #8A1F03;
+    }
+    
+    .modal .modal-header h4 {
+        color: #FFF;
+    }
+    
+    #mi-modal {
+        margin-top: 10rem;
+    }
+    
+    #createEventCalendar {
+        margin-top: 4rem;
+    }
+    
+    .modal input,
+    .modal textarea {
+        /* background-color: #F1F1F1; */
+        border: 1px solid #d2d6da;
+        resize: none;
+    }
+    
+    #message-text {
+        height: 15rem;
+    }
+    
+    #createEventCalendar.modal-lg {
+        max-width: none !important;
+    }
+    
+    #createEventCalendar .modal-dialog {
+        max-width: 63rem;
+    }
+    
+    #createEventCalendar .modal-content {
+        height: 45.3rem;
+    }
+    
+    .body-bitacora {
+        display: flex;
+        margin: .5rem 0 .5rem 0;
+    }
+    
+    .body-bitacora label {
+        margin-right: .5rem;
+    }
+    
+    .fc-header .fc-header-center span h5 {
+        color: #344767 !important;
+    }
+    
+    .idEvent {
+        display: none;
+    }
+    
+    #navbar .input-group label {
+        color: #fff;
+    }
+    
+    #navbarBlur {
+        background-color: #8A1F03;
+        margin-top: 1rem !important;
+    }
+    
+    #navbarBlurLogo {
+        /* background-color: #8A1F03; */
+        border: #8A1F03 1px solid;
+        padding: .4rem !important;
+        /* padding: .38rem !important; */
+    }
+    
+    #navbarBlurLogo .container-fluid {
+        width: auto;
+    }
+    
+    #navbarBlurLogo .container-fluid img {
+        /* max-height: 4rem !important; */
+        max-height: 3.5rem !important;
+    }
+    
+    .sinciLogoName {
+        width: 100%;
+        text-align: center;
+        font-size: 20px;
+    }
+    
+    #navbarBlur ol li,
+    #navbarBlur ol li a {
+        color: #fff !important;
+    }
+    
+    #navbarBlur #navbar ul li a {
+        color: #fff !important;
+    }
+    
+    h5 {
+        color: #fff !important;
+    }
+    
+    #navbar .input-group.input-group-outline {
+        display: none;
+    }
+    
+    #sidenav-collapse-main {
+        height: 87%;
+    }
+    
+    .mc-calendar {
+        z-index: 9999 !important;
+    }
+    
+    #loginEmail:focus label {
+        display: none;
+    }
+    
+    .input-group.input-group-outline .form-label::before,
+    .input-group.input-group-outline .form-label::after {
+        content: none;
+    }
+    
+    .input-group.input-group-outline .form-label {
+        top: -0.7rem !important;
+        line-height: 0 !important;
+    }
+    
+    #loginEmail {
+        margin-bottom: 0.7rem !important;
+    }
+    
+    .form-select,
+    .form-control {
+        color: #000 !important;
+    }
+    
+    .form-select:focus,
+    .form-control:focus {
+        border-color: #d2d6da;
+    }
+    
+    .requiredNull {
+        border: 1px solid red !important;
+    }
+    
+    .invalidRequired {
+        color: red !important;
+    }
+    
+    .hidden {
+        display: none;
+    }
+    
+    .sidenav-header span {
+        font-size: 19px;
+        padding: 1rem 0 0 1.5rem;
+    }
+    
+    .dropdown.bootstrap-select .dropdown-menu.show .inner.show ul li:first-child {
+        margin-top: -2.5rem !important;
+    }
+    
+    .dropdown-menu .bs-searchbox+.inner.show,
+    .dropdown-menu .bs-searchbox+.inner.show .inner.show {
+        margin-top: -100rem !important;
+    }
+    
+    .dropdown-menu.show .bs-searchbox+.inner.show,
+    .dropdown-menu.show .bs-searchbox+.inner.show .inner.show {
+        margin-top: 2rem !important;
+    }
+    
+    [href="/bitacoras/main"] {
+        margin-top: 1rem !important;
+    }
+    
+    #calendar .fc-header .fc-header-right .fc-button .fc-text-arrow {
+        font-weight: 100;
+    }
+    /** 
  * @Author: flydreame 
  * @Date: 2022-02-15 17:31:46 
  * @Desc: Resposive Desing to the proyect adapting to the smart devices
  */
-
-@media screen and (max-width: 800px) and (orientation:portrait) {
-    #createEventCalendar {
-        margin-top: 0;
+    
+    @media screen and (max-width: 800px) and (orientation: portrait) {
+        #createEventCalendar {
+            margin-top: 0;
+        }
+        .weekNumber {
+            font-size: 2.5vw;
+        }
+        #calendar .fc-header tr {
+            display: grid;
+        }
+        #calendar .fc-header td {
+            padding: 0;
+        }
+        #calendar .fc-header .fc-header-right .fc-button {
+            min-width: 35px;
+        }
+        #calendar .fc-content {
+            height: 30rem;
+        }
+        #calendar .fc-content .fc-view-agendaDay,
+        #calendar .fc-content .fc-view-agendaDay table,
+        #calendar .fc-content .fc-view-agendaWeek,
+        #calendar .fc-content .fc-view-agendaWeek table,
+        #calendar .fc-content .fc-view-month,
+        #calendar .fc-content .fc-view-month table {
+            height: 100%;
+        }
+        [style*="position: absolute; width: 100%; overflow: hidden auto"] {
+            height: 420px !important;
+        }
+        .fc-header-left .fc-header-title h2 {
+            font-size: 6vw;
+            font-weight: 600;
+        }
+        .navbar-main div h5 {
+            font-size: 4vw;
+        }
+        #navbar-main table .fc-header-left .fc-button-title {
+            font-size: 5vw;
+        }
+        #navbar-main .fc-header-right .fc-button-agendaDay {
+            display: none;
+        }
+        .fc-button-agendaWeek {
+            display: none;
+        }
+        .fc-button-month {
+            display: none;
+        }
+        #message-text {
+            height: 9rem;
+        }
+        .modal-footer button {
+            padding: 0.5rem;
+        }
+        .btn.dropdown-toggle {
+            /* width: 18.5rem; */
+            width: 70vw !important;
+        }
+        .dropdown-menu {
+            width: inherit;
+        }
+        .navbar .sidenav-toggler-inner .sidenav-toggler-line {
+            background-color: #FFF;
+        }
+        .sinciLogoName {
+            display: none;
+        }
+        .container-fluid.py-2.px-3 {
+            width: auto;
+        }
+        #navbarBlurLogo {
+            margin: .2rem;
+        }
+        .collapse.navbar-collapse.w-auto.max-height-vh-100 {
+            margin: .2rem;
+        }
+        .collapse.navbar-collapse.w-auto.max-height-vh-100 .navbar-nav [href="/dashboard"] {
+            margin-top: 1rem;
+        }
+        .collapse.navbar-collapse.mt-2 {
+            margin-top: 0 !important;
+        }
+        #sidenav-main {
+            margin-left: .5rem !important;
+            margin-top: .5rem !important;
+        }
+        .toast {
+            width: 100%;
+            font-size: .95rem;
+        }
+        .bootstrap-datetimepicker-widget.dropdown-menu {
+            border: 1px solid #000 !important;
+        }
     }
-    .weekNumber {
-        font-size: 2.5vw;
+    
+    @media screen and (max-height: 800px) and (orientation:landscape) {
+        #createEventCalendar {
+            margin-top: 0;
+        }
+        .weekNumber {
+            font-size: 2.5vw;
+        }
+        #calendar .fc-header tr {
+            display: grid;
+        }
+        #calendar .fc-header td {
+            padding: 0;
+        }
+        #calendar .fc-header .fc-header-right .fc-button {
+            min-width: 35px;
+        }
+        #calendar .fc-content {
+            height: 30rem;
+        }
+        #calendar .fc-content .fc-view-agendaDay,
+        #calendar .fc-content .fc-view-agendaDay table,
+        #calendar .fc-content .fc-view-agendaWeek,
+        #calendar .fc-content .fc-view-agendaWeek table,
+        #calendar .fc-content .fc-view-month,
+        #calendar .fc-content .fc-view-month table {
+            height: 100%;
+        }
+        [style*="position: absolute; width: 100%; overflow: hidden auto"] {
+            height: 420px !important;
+        }
+        .fc-header-left .fc-header-title h2 {
+            font-size: 3vw;
+        }
+        .navbar-main div h5 {
+            font-size: 2vw;
+        }
+        #navbar-main table .fc-header-left .fc-button-title {
+            font-size: 5vw;
+        }
+        #navbar-main .fc-header-right .fc-button-agendaDay {
+            display: none;
+        }
+        .fc-button-agendaWeek {
+            display: none;
+        }
+        .fc-button-month {
+            display: none;
+        }
+        #message-text {
+            height: 9rem;
+        }
+        .modal-footer button {
+            padding: 0.5rem;
+        }
+        .btn.dropdown-toggle {
+            /* width: 18.5rem; */
+            width: 70vw !important;
+        }
+        .dropdown-menu {
+            width: inherit;
+        }
+        .navbar .sidenav-toggler-inner .sidenav-toggler-line {
+            background-color: #FFF;
+        }
+        .sinciLogoName {
+            display: none;
+        }
+        .container-fluid.py-2.px-3 {
+            width: auto;
+        }
+        #navbarBlurLogo {
+            margin: .2rem;
+        }
+        .collapse.navbar-collapse.w-auto.max-height-vh-100 {
+            margin: .2rem;
+        }
+        .collapse.navbar-collapse.w-auto.max-height-vh-100 .navbar-nav [href="/dashboard"] {
+            margin-top: 1rem;
+        }
+        .collapse.navbar-collapse.mt-2 {
+            margin-top: 0 !important;
+        }
+        #sidenav-main {
+            margin-left: .5rem !important;
+            margin-top: .5rem !important;
+        }
+        .toast {
+            width: 100%;
+            font-size: .95rem;
+        }
+        .bootstrap-datetimepicker-widget.dropdown-menu {
+            border: 1px solid #000 !important;
+        }
     }
-    #calendar .fc-header tr {
-        display: grid;
-    }
-    #calendar .fc-header td {
-        padding: 0;
-    }
-    #calendar .fc-header .fc-header-right .fc-button {
-        min-width: 35px;
-    }
-    #calendar .fc-content {
-        height: 30rem;
-    }
-    #calendar .fc-content .fc-view-agendaDay,
-    #calendar .fc-content .fc-view-agendaDay table,
-    #calendar .fc-content .fc-view-agendaWeek,
-    #calendar .fc-content .fc-view-agendaWeek table,
-    #calendar .fc-content .fc-view-month,
-    #calendar .fc-content .fc-view-month table {
-        height: 100%;
-    }
-    [style*="position: absolute; width: 100%; overflow: hidden auto"] {
-        height: 420px !important;
-    }
-    .fc-header-left .fc-header-title h2 {
-        font-size: 6vw;
-        font-weight: 600;
-    }
-    .navbar-main div h5 {
-        font-size: 4vw;
-    }
-    #navbar-main table .fc-header-left .fc-button-title {
-        font-size: 5vw;
-    }
-    #navbar-main .fc-header-right .fc-button-agendaDay {
-        display: none;
-    }
-    .fc-button-agendaWeek {
-        display: none;
-    }
-    .fc-button-month {
-        display: none;
-    }
-    #message-text {
-        height: 9rem;
-    }
-    .modal-footer button {
-        padding: 0.5rem;
-    }
-    .btn.dropdown-toggle {
-        /* width: 18.5rem; */
-        width: 70vw !important;
-    }
-    .dropdown-menu {
-        width: inherit;
-    }
-    .navbar .sidenav-toggler-inner .sidenav-toggler-line {
-        background-color: #FFF;
-    }
-    .sinciLogoName {
-        display: none;
-    }
-    .container-fluid.py-2.px-3 {
-        width: auto;
-    }
-    #navbarBlurLogo {
-        margin: .2rem;
-    }
-    .collapse.navbar-collapse.w-auto.max-height-vh-100 {
-        margin: .2rem;
-    }
-    .collapse.navbar-collapse.w-auto.max-height-vh-100 .navbar-nav [href="/dashboard"] {
-        margin-top: 1rem;
-    }
-    .collapse.navbar-collapse.mt-2 {
-        margin-top: 0 !important;
-    }
-    #sidenav-main {
-        margin-left: .5rem !important;
-        margin-top: .5rem !important;
-    }
-    .toast {
-        width: 100%;
-        font-size: .95rem;
-    }
-    .bootstrap-datetimepicker-widget.dropdown-menu {
-        border: 1px solid #000 !important;
-    }
-}
-
-@media screen and (max-height: 800px) and (orientation:landscape) {
-    #createEventCalendar {
-        margin-top: 0;
-    }
-    .weekNumber {
-        font-size: 2.5vw;
-    }
-    #calendar .fc-header tr {
-        display: grid;
-    }
-    #calendar .fc-header td {
-        padding: 0;
-    }
-    #calendar .fc-header .fc-header-right .fc-button {
-        min-width: 35px;
-    }
-    #calendar .fc-content {
-        height: 30rem;
-    }
-    #calendar .fc-content .fc-view-agendaDay,
-    #calendar .fc-content .fc-view-agendaDay table,
-    #calendar .fc-content .fc-view-agendaWeek,
-    #calendar .fc-content .fc-view-agendaWeek table,
-    #calendar .fc-content .fc-view-month,
-    #calendar .fc-content .fc-view-month table {
-        height: 100%;
-    }
-    [style*="position: absolute; width: 100%; overflow: hidden auto"] {
-        height: 420px !important;
-    }
-    .fc-header-left .fc-header-title h2 {
-        font-size: 3vw;
-    }
-    .navbar-main div h5 {
-        font-size: 2vw;
-    }
-    #navbar-main table .fc-header-left .fc-button-title {
-        font-size: 5vw;
-    }
-    #navbar-main .fc-header-right .fc-button-agendaDay {
-        display: none;
-    }
-    .fc-button-agendaWeek {
-        display: none;
-    }
-    .fc-button-month {
-        display: none;
-    }
-    #message-text {
-        height: 9rem;
-    }
-    .modal-footer button {
-        padding: 0.5rem;
-    }
-    .btn.dropdown-toggle {
-        /* width: 18.5rem; */
-        width: 70vw !important;
-    }
-    .dropdown-menu {
-        width: inherit;
-    }
-    .navbar .sidenav-toggler-inner .sidenav-toggler-line {
-        background-color: #FFF;
-    }
-    .sinciLogoName {
-        display: none;
-    }
-    .container-fluid.py-2.px-3 {
-        width: auto;
-    }
-    #navbarBlurLogo {
-        margin: .2rem;
-    }
-    .collapse.navbar-collapse.w-auto.max-height-vh-100 {
-        margin: .2rem;
-    }
-    .collapse.navbar-collapse.w-auto.max-height-vh-100 .navbar-nav [href="/dashboard"] {
-        margin-top: 1rem;
-    }
-    .collapse.navbar-collapse.mt-2 {
-        margin-top: 0 !important;
-    }
-    #sidenav-main {
-        margin-left: .5rem !important;
-        margin-top: .5rem !important;
-    }
-    .toast {
-        width: 100%;
-        font-size: .95rem;
-    }
-    .bootstrap-datetimepicker-widget.dropdown-menu {
-        border: 1px solid #000 !important;
-    }
-}
-
-
-/** 
+    /** 
      * @Author: Carlos Omar Anaya 
      * @Date: 2022-02-18 11:59:56 
      * @Desc:  Styles to devices with a less resolution in the screen
      */
-
-@media screen and (max-width: 400px) and (orientation:portrait) {
-    .btn.dropdown-toggle {
-        /* width: 18.5rem; */
-        width: 60vw !important;
+    
+    @media screen and (max-width: 400px) and (orientation:portrait) {
+        .btn.dropdown-toggle {
+            /* width: 18.5rem; */
+            width: 60vw !important;
+        }
     }
-}
-
-@media screen and (max-width: 400px) and (orientation:landscape) {
-    .btn.dropdown-toggle {
-        /* width: 18.5rem; */
-        width: 60vw !important;
+    
+    @media screen and (max-width: 400px) and (orientation:landscape) {
+        .btn.dropdown-toggle {
+            /* width: 18.5rem; */
+            width: 60vw !important;
+        }
     }
-}

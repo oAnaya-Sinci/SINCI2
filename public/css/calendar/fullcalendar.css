@@ -277,10 +277,11 @@
         /* default BORDER color */
         background-color: #FFF;
         /* default BACKGROUND color */
-        color: #919191;
+        /* color: #919191; */
+        color: #424242;
         /* default TEXT color */
         font-size: 12px;
-        cursor: default;
+        cursor: pointer;
     }
     
     .fc-event.chill {
@@ -297,6 +298,11 @@
     
     .fc-event.success {
         background-color: #BEFFBF;
+    }
+    
+    .fc-event.sinci {
+        background-color: #FF8D5F;
+        /* background-color: #D9531E; */
     }
     
     .fc-event:hover {

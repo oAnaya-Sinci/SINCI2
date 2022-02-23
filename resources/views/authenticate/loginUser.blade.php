@@ -10,7 +10,7 @@
         <link rel="icon" type="image/png" href="https://sinci.com/wp-content/uploads/2019/10/logo-sinci.-servicios-de-automatizacion-y-control-de-procesos-industriales-en-mexico-150x134.png" sizes="32x32">
         <title>{{ config('app.name', 'SAS SINCI') }}</title>
         
-        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lora%3A400%2C400italic%2C700%2C700italic%7CPoppins%3A400%2C500%2C600%2C700&ver=1.1.3" />
+        <!-- <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lora%3A400%2C400italic%2C700%2C700italic%7CPoppins%3A400%2C500%2C600%2C700&ver=1.1.3" /> -->
 
         <!-- Nucleo Icons -->
         <link href="/css/nucleo-icons.css" rel="stylesheet" />

@@ -110,7 +110,7 @@ async function calendarSinci() {
             titleBtcr = proyectCode[0];
         } else {
 
-            titleBtcr = value.LOCATION + "\n -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- \n " + value.NOTAS
+            titleBtcr = value.LOCATION + "\n -- -- -- -- -- -- -- -- -- -- -- -- \n " + value.NOTAS
         }
 
         event = {
@@ -120,6 +120,7 @@ async function calendarSinci() {
             start: new Date(sYear, sMonth, sDay, horaInicio, minutosInicio),
             end: new Date(eYear, eMonth, eDay, HoraFin, minutosFin),
             allDay: false,
+            // className: 'sinci',
             className: 'info',
             editable: false,
         };
@@ -336,7 +337,8 @@ function showWeeksNumbers(weekNumber, isWeek, isDay, dayNum = 0) {
     } else {
 
         isWeek ? $('#calendar .fc-header .fc-header-center').html("<h4 style='color: #344767;'>Semana " + (weekNumber < 52 ? (weekNumber + 1) : 1) + "</h4>") : null;
-        isDay ? $('#calendar .fc-header .fc-header-center').html("<h4 style='color: #344767;'>Semana " + (weekNumber < 52 ? ((dayNum == 0 || dayNum == 1) ? weekNumber + 1 : weekNumber) : 1) + "</h4>") : null;
+        // isDay ? $('#calendar .fc-header .fc-header-center').html("<h4 style='color: #344767;'>Semana " + (weekNumber < 52 ? ((dayNum == 0 || dayNum == 1) ? weekNumber + 1 : weekNumber) : 1) + "</h4>") : null;
+        isDay ? $('#calendar .fc-header .fc-header-center').html("<h4 style='color: #344767;'>Semana " + (weekNumber < 52 ? (weekNumber + 1) : 1) + "</h4>") : null;
     }
 }
 
@@ -352,12 +354,15 @@ function buttonsNav(defaultView) {
     let headerMonth = $('#calendar .fc-header .fc-header-left .fc-header-title').text().split(' ');
     let year = headerMonth[1];
 
+    let date;
     let day;
     let dayDate;
     let dayNum;
 
     try {
+
         date = $('#calendar .fc-content .fc-view-month table .fc-week.fc-first .fc-first')[0].dataset['date'];
+
     } catch (error) {
 
         let monthNum;
@@ -376,18 +381,29 @@ function buttonsNav(defaultView) {
         try {
 
             day = $('#calendar .fc-content .fc-view-agendaWeek table .fc-first .fc-sun').text().split(' ')[1].replace(/\s+/g, '');
+            date = year + "-" + monthNum + "-" + day;
             isWeek = true;
+
         } catch (error) {
 
+            // console.log("---------------------------------------------------------------------------------------------------------------------------------------------------");
             day = $('#calendar .fc-content .fc-view-agendaDay table .fc-first .fc-widget-header').text().split(' ')[1].replace(/\s+/g, '');
+            // console.log(day);
             dayDate = new Date(year + "-" + monthNum + "-" + day);
+            // console.log(dayDate);
             dayDate = day >= 10 ? new Date(dayDate.setDate(dayDate.getDate() + 1)) : dayDate;
+            // console.log(dayDate);
             dayNum = dayDate.getDay();
-            new Date(dayDate.setDate(dayDate.getDate() - dayDate.getDay()));
+            // console.log(dayNum);
+            // console.log(new Date(dayDate.setDate(dayDate.getDate() - dayNum)));
+            let newDate = new Date(dayDate.setDate(dayDate.getDate() - dayNum));
+            // console.log(newDate);
             isDay = true;
+
+            date = year + "-" + (newDate.getMonth() + 1) + "-" + newDate.getDate();
         }
 
-        date = year + "-" + monthNum + "-" + day;
+        // console.log(date);
     }
 
     let weekNumber = getWeekNumber(new Date(date));
@@ -719,7 +735,7 @@ function validateModal(event) {
 
             $("[name='" + value.name + "']").addClass('requiredNull');
 
-            showMessage('danger', 'Error', "Favor de seleccionar los datos faltantes");
+            showMessage('danger', 'Error', "Favor de llenar los datos faltantes");
             validate = true;
         }
     });

@@ -21,7 +21,7 @@
           <ul class="navbar-nav  justify-content-end">
             <li class="nav-item d-flex align-items-center">
               <a href="#" id="logout" class="nav-link text-body font-weight-bold px-0">
-                <i class="fa fa-user me-sm-1"></i>
+                <i class="fa fa-sign-out me-sm-1"></i>
                 <span class="d-sm-inline d-none"> | Log Out</span>
               </a>
             </li>
@@ -118,3 +118,5 @@
       </div>
     </nav>  
     <!-- End Navbar -->
+
+    <!-- <i class="fa-solid fa-right-from-bracket"></i> -->

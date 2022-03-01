@@ -4,6 +4,14 @@
  * @Desc: File with the styles of the project 
  */
     
+    .ps__rail-x {
+        bottom: -427px;
+    }
+    
+    .ps__rail-y {
+        top: 427px;
+    }
+    
     @font-face {
         font-family: 'Poppins';
         src: url("fonts/Poppins/Poppins-Regular.ttf");
@@ -448,14 +456,12 @@
     
     @media screen and (max-width: 400px) and (orientation:portrait) {
         .btn.dropdown-toggle {
-            /* width: 18.5rem; */
             width: 60vw !important;
         }
     }
     
     @media screen and (max-width: 400px) and (orientation:landscape) {
         .btn.dropdown-toggle {
-            /* width: 18.5rem; */
             width: 60vw !important;
         }
     }

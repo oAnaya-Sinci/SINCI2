@@ -54,10 +54,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/testingRoutes', function(){ return "Omar Anaya"; });
 
 // This route only shows the PHP info of the server
-Route::get('infoPHP', function(){ return view('info'); });
+Route::get('/infoPHP', function(){ return view('info'); });
 
 Route::get('/', function(){ return view('authenticate/loginUser'); });
 
-Route::get('dashboard', function(){ $titulo = "DASHBOARD"; return view('dashboard/main', compact('titulo')); });
+Route::get('/dashboard', function(){ $titulo = "DASHBOARD"; return view('dashboard/main', compact('titulo')); });
 
-Route::get('bitacoras/main', function(){ $titulo = "REGISTRO DE BITÁCORAS"; return view('bitacoras/main', compact('titulo')); });
+Route::get('/bitacoras/main', function(){ $titulo = "REGISTRO DE BITÁCORAS"; return view('bitacoras/main', compact('titulo')); });

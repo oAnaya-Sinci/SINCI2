@@ -3935,8 +3935,8 @@
                         // not enough room for title, put it in the time (TODO: maybe make both display:inline instead)
                         eventElement.find('div.fc-event-time')
                             .text(formatDate(event.start, opt('timeFormat')) + ' - ' + event.title);
-                        eventElement.find('div.fc-event-title')
-                            .remove();
+                        // eventElement.find('div.fc-event-title')
+                        //     .remove();
                     }
                     trigger('eventAfterRender', event, event, eventElement);
                 }

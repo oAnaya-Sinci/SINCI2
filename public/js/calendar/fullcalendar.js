@@ -3933,10 +3933,14 @@
                     event = seg.event;
                     if (seg.contentTop !== undefined && height - seg.contentTop < 10) {
                         // not enough room for title, put it in the time (TODO: maybe make both display:inline instead)
-                        eventElement.find('div.fc-event-time')
+                        /* eventElement.find('div.fc-event-time')
                             .text(formatDate(event.start, opt('timeFormat')) + ' - ' + event.title);
-                        // eventElement.find('div.fc-event-title')
-                        //     .remove();
+                        eventElement.find('div.fc-event-title')
+                            .remove(); */
+
+                        eventElement.find('div.fc-event-time')
+                            .text(formatDate(event.start, opt('timeFormat')));
+
                     }
                     trigger('eventAfterRender', event, event, eventElement);
                 }

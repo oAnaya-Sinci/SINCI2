@@ -8,11 +8,7 @@ currenUrl = currenUrl.split(":");
 
 var urlData = "https://" + currenUrl[0] + ":1880";
 
-<<<<<<< HEAD
-// var urlData = "https://45.79.1.19:1880";
-=======
 // var urlData = "https://localhost:1880";
->>>>>>> 4a4b6f21a5960850d2b22a248e4daabddc8cd12a
 
 // urlData = "https://10.10.100.34:1880"; // PRODUCTION SERVER WITH SECURE PROTOCOL 443
 

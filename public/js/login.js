@@ -16,6 +16,7 @@ var timeOut;
 
 $(document).ready(function() {
 
+    fetch(urlData + "/openconn");
     IsLogedIn();
 });
 

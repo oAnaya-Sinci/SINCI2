@@ -3980,6 +3980,7 @@
                 ">" +
                 "<div class='fc-event-inner'>" +
                 "<div class='fc-event-time'>" +
+                "<div class='idEvent'>" + event.id + "</div>" +
                 htmlEscape(formatDates(event.start, event.end, opt('timeFormat'))) +
                 "</div>" +
                 "<div class='fc-event-title'>" +
@@ -5348,6 +5349,7 @@
                     htmlEscape(
                         formatDates(event.start, event.end, opt('timeFormat'))
                     ) +
+                    "<div class='idEvent'>" + event.id + "</div>" +
                     "</span>";
             }
             html +=

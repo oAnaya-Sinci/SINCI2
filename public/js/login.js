@@ -18,6 +18,7 @@ $(document).ready(function() {
 
     fetch(urlData + "/openconn");
     IsLogedIn();
+    // location.reload();
 });
 
 $(document).keyup(function(key) {
@@ -81,6 +82,7 @@ $('#btnLogin').click(async function() {
 
             // showMessage('danger', 'Error', exception.statusCode + " - " + exception.statusText);
             console.log(exception.statusCode + " - " + exception.statusText);
+            location.reload();
         }
     });
 });
@@ -127,9 +129,9 @@ async function IsLogedIn() {
         },
         error: function(exception) {
 
-            // showMessage('danger', 'Error', exception.statusCode + " - " + exception.statusText);
             console.log(exception);
             console.log(exception.statusCode.name + " - " + exception.statusText);
+            location.reload();
         }
     });
 }

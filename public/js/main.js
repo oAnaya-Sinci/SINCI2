@@ -14,6 +14,12 @@ var urlData = "https://" + currenUrl[0] + ":1880";
 
 var timeOut;
 
+/** 
+ * javascript comment 
+ * @Author: flydreame 
+ * @Date: 2022-03-03 12:23:26 
+ * @Desc: Here inciate some of the elements required for a good work of the proyect 
+ */
 $(document).ready(function() {
 
     setTimeOut();
@@ -40,6 +46,12 @@ $(document).ready(function() {
     });
 });
 
+/** 
+ * javascript comment 
+ * @Author: flydreame 
+ * @Date: 2022-03-03 12:24:43 
+ * @Desc: This function set a timer, to close the proyect if the  
+ */
 function setTimeOut() {
 
     let timeSession = 360000;
@@ -49,15 +61,27 @@ function setTimeOut() {
     }, timeSession);
 }
 
+/** 
+ * javascript comment 
+ * @Author: flydreame 
+ * @Date: 2022-03-03 12:22:39 
+ * @Desc:  This function let the user login to the proyect using the enter key
+ */
+
 $(document).click(function() {
     IsLogedIn();
 });
 
+/** 
+ * javascript comment 
+ * @Author: flydreame 
+ * @Date: 2022-03-03 12:22:11 
+ * @Desc: This function close the session of the user in the proyect 
+ */
+
 $('#logout').click(function() {
 
-    // window.localStorage.removeItem('sasIsLogedIn');
     window.localStorage.setItem('sasIsLogedIn', 'false');
-
     window.location.href = "/";
 });
 

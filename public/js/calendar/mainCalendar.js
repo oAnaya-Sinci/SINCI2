@@ -5,6 +5,12 @@ var dataLogin;
 
 let calendar;
 
+/** 
+ * javascript comment 
+ * @Author: Carlos Omar Anaya Barajas 
+ * @Date: 2022-03-03 13:53:19 
+ * @Desc: Here the date inputs was bloqueck to not use the keyborad
+ */
 $(document).ready(function() {
 
     document.getElementById("startDate").addEventListener("keyup", preventDef, false);
@@ -20,6 +26,12 @@ function preventDef(event) {
     event.preventDefault();
 }
 
+/** 
+ * javascript comment 
+ * @Author: flydreame 
+ * @Date: 2022-03-03 13:54:38 
+ * @Desc: This function inciate the calendar in the proyect and show all the data ti the users
+ */
 async function calendarSinci() {
 
     dataLogin = window.localStorage.getItem('sasIsLogedIn').split("/");
@@ -243,7 +255,15 @@ async function calendarSinci() {
 
     modalCalendarSinci();
     iniciateModalUpdate();
+    outLoader();
 }
+
+/** 
+ * javascript comment 
+ * @Author: flydreame 
+ * @Date: 2022-03-03 13:55:50 
+ * @Desc: Here the selects was inciated with the information required to dd the registers
+ */
 
 async function modalCalendarSinci() {
 
@@ -412,7 +432,7 @@ function buttonsNav(defaultView) {
 
 /** 
  * javascript comment 
- * @Author: flydreame 
+ * @Author: Carlos Omar Anaya Barajas 
  * @Date: 2022-01-12 17:31:20 
  * @Desc:  This funciton iniciate the modal to update the data in the calendar
  */
@@ -420,6 +440,8 @@ function buttonsNav(defaultView) {
 function iniciateModalUpdate() {
 
     $('.fc-content .fc-event-container .fc-event .fc-event-inner').click(function() {
+
+        inLoader()
 
         $("#dataEvent")[0].reset();
 
@@ -483,6 +505,8 @@ function iniciateModalUpdate() {
                 $('#slctAsignar').val(response.TIPO_RESUMEN);
 
                 $('.selectpicker').selectpicker('refresh');
+
+                outLoader();
             },
             error: function(exception) {
 
@@ -575,7 +599,7 @@ $('#btnSaveEvent').click(async function() {
 
 /** 
  * javascript comment 
- * @Author: flydreame 
+ * @Author: Carlos Omar Anaya Barajas 
  * @Date: 2022-02-04 23:44:05 
  * @Desc:  Delete Information from the database
  */

@@ -6,7 +6,7 @@
 var currenUrl = window.location.href.split("/")[2];
 currenUrl = currenUrl.split(":");
 
-var urlData = "https://" + currenUrl[0] + ":1880";
+var urlData = "http://" + currenUrl[0] + ":1880";
 
 // var urlData = "https://localhost:1880";
 
@@ -181,3 +181,19 @@ var modalConfirm = function(callback) {
         $("#mi-modal").modal('hide');
     });
 };
+
+/** 
+ * javascript comment 
+ * @Author: flydreame 
+ * @Date: 2022-03-04 10:58:32 
+ * @Desc: This block of code is for the load page waiter 
+ */
+
+
+var inLoader = () => {
+    $(".loader").fadeIn("slow");
+}
+
+var outLoader = () => {
+    $(".loader").fadeOut("slow");
+}

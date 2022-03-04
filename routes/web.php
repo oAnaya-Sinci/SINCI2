@@ -51,8 +51,6 @@ use Illuminate\Support\Facades\Route;
 //     Route::post('/logout', [logout::class, 'logout']);
 // });
 
-Route::get('/testingRoutes', function(){ return "Omar Anaya"; });
-
 // This route only shows the PHP info of the server
 Route::get('/infoPHP', function(){ return view('info'); });
 

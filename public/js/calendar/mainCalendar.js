@@ -556,6 +556,8 @@ $('#btnSaveEvent').click(async function() {
         message = "Información guardada exitosamente ";
     }
 
+    inLoader();
+
     await $.ajax({
         type: "POST",
         url: urlEvent,
@@ -573,6 +575,8 @@ $('#btnSaveEvent').click(async function() {
             idEventUpdate = null;
             updateEvent = false;
 
+            outLoader();
+
             $('#createEventCalendar').modal('hide');
             $('#btnDeleteEvent').addClass('btnDeleteNone');
 
@@ -588,6 +592,8 @@ $('#btnSaveEvent').click(async function() {
             }, timeout);
         },
         error: function(exception) {
+
+            outLoader();
 
             idEventUpdate = null;
             updateEvent = false;
@@ -613,11 +619,15 @@ $('#btnDeleteEvent').click(function() {
     modalConfirm(function(confirm) {
         if (confirm) {
 
+            inLoader();
+
             $.ajax({
                 type: "POST",
                 url: urlData + "/deleteInformation",
                 data: { idEvent: idEventUpdate, "isLogedIn": dataLogin },
                 success: function(response) {
+
+                    outLoader();
 
                     response = JSON.parse(response)[0];
 
@@ -638,6 +648,8 @@ $('#btnDeleteEvent').click(function() {
                     }, timeout);
                 },
                 error: function(exception) {
+
+                    outLoader();
 
                     idEventUpdate = null;
                     updateEvent = false;

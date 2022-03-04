@@ -524,7 +524,7 @@ function iniciateModalUpdate() {
  * Queda pendiente el poder agregar la informcion sin tener que recargar la pagina para ello utilizando la funcion de select en el fullcalendar.
  */
 
-$('#btnSaveEvent').click(async function() {
+$('#btnSaveEvent').click(function() {
 
     $('#slctUsuario').attr('disabled', false);
     let urlEvent = "";
@@ -558,13 +558,15 @@ $('#btnSaveEvent').click(async function() {
 
     inLoader();
 
-    await $.ajax({
+    $.ajax({
         type: "POST",
         url: urlEvent,
         data: event,
         success: function(response) {
 
             response = JSON.parse(response)[0];
+
+            outLoader();
 
             if (response.cantSaveData == "true") {
 
@@ -574,8 +576,6 @@ $('#btnSaveEvent').click(async function() {
 
             idEventUpdate = null;
             updateEvent = false;
-
-            outLoader();
 
             $('#createEventCalendar').modal('hide');
             $('#btnDeleteEvent').addClass('btnDeleteNone');

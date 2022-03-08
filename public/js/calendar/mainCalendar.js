@@ -28,9 +28,9 @@ function preventDef(event) {
 
 /** 
  * javascript comment 
- * @Author: flydreame 
+ * @Author: Carlos Omar Anaya Barajas 
  * @Date: 2022-03-03 13:54:38 
- * @Desc: This function inciate the calendar in the proyect and show all the data ti the users
+ * @Desc: This function inciate the calendar in the proyect and show all the data to the users
  */
 async function calendarSinci() {
 
@@ -233,7 +233,7 @@ async function calendarSinci() {
 
             // END
         },
-        droppable: false, // this allows things to be dropped onto the calendar !!!
+        droppable: false, // this allows things to be dropped into the calendar !!!
 
         events: dataEvents,
     });
@@ -260,7 +260,7 @@ async function calendarSinci() {
 
 /** 
  * javascript comment 
- * @Author: flydreame 
+ * @Author: Carlos Omar Anaya Barajas 
  * @Date: 2022-03-03 13:55:50 
  * @Desc: Here the selects was inciated with the information required to dd the registers
  */
@@ -526,6 +526,12 @@ function iniciateModalUpdate() {
 
 $('#btnSaveEvent').click(function() {
 
+    setTimeout(() => {
+        // $('#btnSaveEvent').click();
+        outLoader();
+        showMessage('danger', 'Error', "Ocurrio un error al guardar la información, realize otro intento");
+    }, 4000);
+
     $('#slctUsuario').attr('disabled', false);
     let urlEvent = "";
     var event = $('#dataEvent').serializeArray();
@@ -566,7 +572,7 @@ $('#btnSaveEvent').click(function() {
 
             response = JSON.parse(response)[0];
 
-            outLoader();
+            // outLoader();
 
             if (response.cantSaveData == "true") {
 
@@ -585,7 +591,7 @@ $('#btnSaveEvent').click(function() {
             /**
              * This block of code is temporal, the register of the event changues ahead to not refresh the page completly
              */
-            var timeout = 2000;
+            var timeout = 3000;
 
             setTimeout(() => {
                 window.location.reload();
@@ -593,12 +599,19 @@ $('#btnSaveEvent').click(function() {
         },
         error: function(exception) {
 
+            let messageError = "Ocurrió un error la pagina se reiniciará para actualizarse.";
+
             outLoader();
 
             idEventUpdate = null;
             updateEvent = false;
 
-            showMessage('danger', 'Error', exception.statusCode.name + " - " + exception.statusText);
+            // showMessage('danger', 'Error', exception.statusCode.name + " - " + exception.statusText);
+            showMessage('danger', 'Error', messageError);
+
+            setTimeout(() => {
+                window.location.reload();
+            }, 5000);
         }
     });
 });
@@ -627,7 +640,7 @@ $('#btnDeleteEvent').click(function() {
                 data: { idEvent: idEventUpdate, "isLogedIn": dataLogin },
                 success: function(response) {
 
-                    outLoader();
+                    // outLoader();
 
                     response = JSON.parse(response)[0];
 

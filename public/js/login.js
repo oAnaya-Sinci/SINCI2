@@ -48,6 +48,8 @@ $('#btnLogin').click(async function() {
         data: userData,
         success: function(response) {
 
+            inLoader();
+
             response = JSON.parse(response)[0];
             // response = response[0];
 

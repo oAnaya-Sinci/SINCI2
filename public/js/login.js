@@ -145,3 +145,11 @@ var modalConfirm = function(callback) {
         $("#noAccessModal").modal('hide');
     });
 };
+
+var inLoader = () => {
+    $(".loader").fadeIn("slow");
+}
+
+var outLoader = () => {
+    $(".loader").fadeOut("slow");
+}

@@ -19,6 +19,7 @@ $(document).ready(function() {
     fetch(urlData + "/openconn");
     IsLogedIn();
     // location.reload();
+    outLoader();
 });
 
 $(document).keyup(function(key) {

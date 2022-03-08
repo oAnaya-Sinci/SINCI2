@@ -527,10 +527,10 @@ function iniciateModalUpdate() {
 $('#btnSaveEvent').click(function() {
 
     setTimeout(() => {
-        // $('#btnSaveEvent').click();
+
         outLoader();
         showMessage('danger', 'Error', "Ocurrio un error al guardar la información, realize otro intento");
-    }, 4000);
+    }, 11000);
 
     $('#slctUsuario').attr('disabled', false);
     let urlEvent = "";
@@ -538,7 +538,6 @@ $('#btnSaveEvent').click(function() {
     let datesChecked = checkDateToSave(event[3].value, event[4].value);
 
     if (validateModal(event)) {
-
         return false;
     } else if (datesChecked[0]) {
 
@@ -572,7 +571,7 @@ $('#btnSaveEvent').click(function() {
 
             response = JSON.parse(response)[0];
 
-            // outLoader();
+            outLoader();
 
             if (response.cantSaveData == "true") {
 

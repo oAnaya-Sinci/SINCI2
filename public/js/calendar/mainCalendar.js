@@ -598,7 +598,7 @@ $('#btnSaveEvent').click(function() {
         },
         error: function(exception) {
 
-            let messageError = "Ocurrió un error la pagina se reiniciará para actualizarse.";
+            let messageError = "Ocurrió un error, la pagina se reiniciará para actualizarse.";
 
             outLoader();
 

@@ -69,10 +69,13 @@ $('#btnLogin').click(async function() {
                 // window.localStorage.setItem('sasIsLogedIn', false);
                 window.localStorage.removeItem('sasIsLogedIn');
 
-                $(".invalid-feedback.login").css("display", "block");
+                outLoader();
+
+                showMessage('danger', 'Error', "el correo o la contraseña introducidos son erroneos");
+                // $(".invalid-feedback.login").css("display", "block");
 
                 setTimeout(() => {
-                    $(".invalid-feedback").css("display", "none");
+                    // $(".invalid-feedback").css("display", "none");
                 }, 7000);
             }
         },
@@ -131,7 +134,7 @@ async function IsLogedIn() {
         error: function(exception) {
 
             console.log(exception);
-            console.log(exception.statusCode.name + " - " + exception.statusText);
+            showMessage('danger', 'Error', exception.statusCode + " - " + exception.statusText);
             location.reload();
         }
     });

@@ -53,7 +53,7 @@
         
     </main>
 
-    @include('layouts.modals')
+    @include('layouts.modals')  
 
     <!--   Core JS Files   -->
     <script src="/js/core/popper.min.js"></script>

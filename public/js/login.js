@@ -8,17 +8,12 @@ currenUrl = currenUrl.split(":");
 
 var urlData = "https://" + currenUrl[0] + ":1880";
 
-// var urlData = "https://localhost:1880";
-
-// urlData = "https://10.10.100.34:1880"; // PRODUCTION SERVER WITH SECURE PROTOCOL 443
-
 var timeOut;
 
 $(document).ready(function() {
 
     fetch(urlData + "/openconn");
     IsLogedIn();
-    // location.reload();
     outLoader();
 });
 
@@ -83,9 +78,12 @@ $('#btnLogin').click(async function() {
         },
         error: function(exception) {
 
-            // showMessage('danger', 'Error', exception.statusCode + " - " + exception.statusText);
-            console.log(exception.statusCode + " - " + exception.statusText);
-            location.reload();
+            showMessage('danger', 'Error', exception.statusCode + " - " + exception.statusText);
+            // console.log(exception.statusCode + " - " + exception.statusText);
+
+            setTimeout(() => {
+                location.reload();
+            }, 6000);
         }
     });
 });
@@ -153,4 +151,41 @@ var inLoader = () => {
 
 var outLoader = () => {
     $(".loader").fadeOut("slow");
+}
+
+/** 
+ * javascript comment 
+ * @Author: flydreame 
+ * @Date: 2022-02-04 22:08:25 
+ * @Desc: this function show the messaes in the system abouts the tasks
+ */
+
+function showMessage(type, header = "Mensaje del sistema", message = "") {
+
+    switch (type.toLowerCase()) {
+
+        case 'success':
+            $('#successToast .mssgHeader').text(header);
+            $('#successToast .toast-body').text(message);
+            $('.bg-gradient-success').click();
+            break;
+
+        case 'warning':
+            $('#warningToast .mssgHeader').text(header);
+            $('#warningToast .toast-body').text(message);
+            $('.bg-gradient-warning').click();
+            break;
+
+        case 'info':
+            $('#infoToast .mssgHeader').text(header);
+            $('#infoToast .toast-body').text(message);
+            $('.bg-gradient-info').click();
+            break;
+
+        case 'danger':
+            $('#dangerToast .mssgHeader').text(header);
+            $('#dangerToast .toast-body').text(message);
+            $('.bg-gradient-danger').click();
+            break;
+    }
 }

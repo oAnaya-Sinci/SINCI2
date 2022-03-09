@@ -144,6 +144,23 @@
   </div>
 </div> -->
 
+  <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="noAccessModal">
+      <div class="modal-dialog modal-md">
+          <div class="modal-content">
+              <div class="modal-header">
+              <h4 class="modal-title" id="myModalLabel">Mensaje</h4>
+          </div>
+          <div class="modal-body">
+              <p>Su cuenta se encuentra desactivada.</p>
+              <p>Para cualquier aclaración por favor contacte con el administrador del sistema o con su jefe inmediato.</p>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" id="modal-btn-no">Cerrar</button>
+          </div>
+          </div>
+      </div>
+  </div>
+
 <!--  -->
 
 <div class="row" style="display: none;">

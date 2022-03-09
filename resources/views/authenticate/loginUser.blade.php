@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         
         <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon.png">
-        <link rel="icon" type="image/png" href="https://sinci.com/wp-content/uploads/2019/10/logo-sinci.-servicios-de-automatizacion-y-control-de-procesos-industriales-en-mexico-150x134.png" sizes="32x32">
+        <link rel="icon" type="image/png" href="/img/sinci.ico" sizes="32x32">
         <title>{{ config('app.name', 'SAS SINCI') }}</title>
         
         <!-- <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lora%3A400%2C400italic%2C700%2C700italic%7CPoppins%3A400%2C500%2C600%2C700&ver=1.1.3" /> -->
@@ -77,22 +77,8 @@
                 </div>
             </div>
 
-            <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="noAccessModal">
-                <div class="modal-dialog modal-md">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                        <h4 class="modal-title" id="myModalLabel">Mensaje</h4>
-                    </div>
-                    <div class="modal-body">
-                        <p>Su cuenta se encuentra desactivada.</p>
-                        <p>Para cualquier aclaración por favor contacte con el administrador del sistema o con su jefe inmediato.</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" id="modal-btn-no">Cerrar</button>
-                    </div>
-                    </div>
-                </div>
-            </div>
+            @include('layouts.modals')  
+
         </main>
 
         <script src="/js/core/bootstrap.min.js"></script>

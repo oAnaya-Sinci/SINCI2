@@ -84,7 +84,7 @@ $('#btnLogin').click(async function() {
         },
         error: function(exception) {
 
-            showMessage('danger', 'Error', exception.statusCode + " - " + exception.statusText);
+            showMessage('danger', 'Error', "Error, trate de iniciar sesion de nuevo");
             // console.log(exception.statusCode + " - " + exception.statusText);
 
             setTimeout(() => {

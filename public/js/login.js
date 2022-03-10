@@ -85,12 +85,12 @@ $('#btnLogin').click(async function() {
         error: function(exception) {
 
             outLoader();
-            showMessage('danger', 'Error', "Error, trate de iniciar sesion de nuevo");
+            showMessage('danger', 'Error', "Trate de iniciar sesion de nuevo");
             // console.log(exception.statusCode + " - " + exception.statusText);
 
             setTimeout(() => {
                 location.reload();
-            }, 3000);
+            }, 2000);
         }
     });
 });

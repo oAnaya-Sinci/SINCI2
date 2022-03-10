@@ -688,7 +688,7 @@ $('#btnDeleteEvent').click(function() {
 function checkDateToSave(start, end) {
 
     start = new Date(start);
-    end = new Date(end.getHours() + 3);
+    end = new Date(end);
 
     let isValidate = false;
     let message = "";
@@ -703,7 +703,8 @@ function checkDateToSave(start, end) {
         message = "La fecha inicial no puede ser mayor a la fecha actual";
     } else if (end > todayDate) {
         isValidate = true;
-        message = "La fecha final no puede ser mayor a la fecha actual";
+        // message = "La fecha final no puede ser mayor a la fecha actual";
+        message = "Esta tratando de registrar una fecha mayor a la actual, o en horas mayores a la hora actual";
     }
 
     return [isValidate, message];

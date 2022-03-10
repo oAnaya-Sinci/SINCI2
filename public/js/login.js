@@ -25,6 +25,8 @@ $(document).keyup(function(key) {
 
 $('#btnLogin').click(async function() {
 
+    inLoader();
+
     var formData = $('#loginForm').serializeArray();
 
     let userData = { "usuario": formData[1], "clave": formData[2], "token": formData[0] }
@@ -43,8 +45,6 @@ $('#btnLogin').click(async function() {
         url: urlData + "/authenticate/login",
         data: userData,
         success: function(response) {
-
-            inLoader();
 
             response = JSON.parse(response)[0];
             // response = response[0];
@@ -86,7 +86,7 @@ $('#btnLogin').click(async function() {
 
             setTimeout(() => {
                 location.reload();
-            }, 6000);
+            }, 3000);
         }
     });
 });

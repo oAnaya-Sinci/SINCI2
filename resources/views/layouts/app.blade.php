@@ -14,7 +14,6 @@
     <link rel="icon" type="image/png" href="/img/sinci.ico" sizes="32x32">
     <title>{{ config('app.name', 'SAS SINCI') }}</title>
     <!-- Fonts and icons -->
-    <!-- <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" /> -->
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lora%3A400%2C400italic%2C700%2C700italic%7CPoppins%3A400%2C500%2C600%2C700&ver=1.1.3" />
     <!-- Nucleo Icons -->
     <link href="/css/nucleo-icons.css" rel="stylesheet" />
@@ -25,9 +24,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
     <!-- CSS Files -->
     <link id="pagestyle" href="/css/material-dashboard.css?v=3.0.0" rel="stylesheet" />
-    
-    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"> -->
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+
     <link href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.css" rel="stylesheet"/>
     <link href='../css/datepicker.min.css' rel='stylesheet' media='print' />
     <link href="/css/bootstrap-select.css" rel="stylesheet" />
@@ -62,7 +59,7 @@
     <script src="/js/plugins/smooth-scrollbar.min.js"></script>
     <script src="/js/plugins/chartjs.min.js"></script>
 
-    <script>
+    <!-- <script>
         var win = navigator.platform.indexOf('Win') > -1;
         if (win && document.querySelector('#sidenav-scrollbar')) {
             var options = {
@@ -70,7 +67,7 @@
             }
             Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
         }
-    </script>
+    </script> -->
   
     <!-- Github buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>

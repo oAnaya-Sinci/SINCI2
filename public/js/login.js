@@ -12,6 +12,8 @@ var timeOut;
 
 $(document).ready(function() {
 
+    $('.input-group.input-group-outline').removeClass('is-filled');
+
     fetch(urlData + "/openconn");
     IsLogedIn();
     outLoader();

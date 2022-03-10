@@ -10,11 +10,7 @@
         <!-- <link rel="icon" type="image/png" href="/img/favicon.png"> -->
         <link rel="icon" type="image/png" href="/img/sinci.ico" sizes="32x32">
         <title>{{ config('app.name', 'SAS SINCI') }}</title>
-        <!-- Fonts and icons -->
-        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lora%3A400%2C400italic%2C700%2C700italic%7CPoppins%3A400%2C500%2C600%2C700&ver=1.1.3" />
-        <!-- Nucleo Icons -->
-        <link href="/css/nucleo-icons.css" rel="stylesheet" />
-        <link href="/css/nucleo-svg.css" rel="stylesheet" />
+        
         <!-- Font Awesome Icons -->
         <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
         <!-- Material Icons -->

@@ -71,11 +71,11 @@ $('#btnLogin').click(async function() {
 
                 outLoader();
 
-                showMessage('danger', 'Error', "el correo o la contraseña introducidos son erroneos");
-                // $(".invalid-feedback.login").css("display", "block");
+                // showMessage('danger', 'Error', "el correo o la contraseña introducidos son erroneos");
+                $(".invalid-feedback.login").css("display", "block");
 
                 setTimeout(() => {
-                    // $(".invalid-feedback").css("display", "none");
+                    $(".invalid-feedback").css("display", "none");
                 }, 7000);
             }
         },

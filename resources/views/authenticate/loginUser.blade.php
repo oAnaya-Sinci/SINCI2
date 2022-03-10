@@ -87,6 +87,8 @@
         <script src="/js/plugins/smooth-scrollbar.min.js"></script>
         <script src="/js/plugins/chartjs.min.js"></script>
     
+        <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+        <script src="/js/material-dashboard.min.js?v=3.0.0"></script>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     

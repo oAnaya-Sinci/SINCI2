@@ -561,7 +561,7 @@ $('#btnSaveEvent').click(function() {
         message = "Información guardada exitosamente ";
     }
 
-    inLoader();
+    // inLoader();
 
     $.ajax({
         type: "POST",
@@ -571,7 +571,7 @@ $('#btnSaveEvent').click(function() {
 
             response = JSON.parse(response)[0];
 
-            outLoader();
+            // outLoader();
 
             if (response.cantSaveData == "true") {
 
@@ -593,6 +593,7 @@ $('#btnSaveEvent').click(function() {
             var timeout = 3000;
 
             setTimeout(() => {
+                inLoader();
                 window.location.reload();
             }, timeout);
         },
@@ -600,7 +601,7 @@ $('#btnSaveEvent').click(function() {
 
             let messageError = "Ocurrió un error, la pagina se reiniciará para actualizarse.";
 
-            outLoader();
+            // outLoader();
 
             idEventUpdate = null;
             updateEvent = false;
@@ -631,7 +632,7 @@ $('#btnDeleteEvent').click(function() {
     modalConfirm(function(confirm) {
         if (confirm) {
 
-            inLoader();
+            // inLoader();
 
             $.ajax({
                 type: "POST",
@@ -656,12 +657,13 @@ $('#btnDeleteEvent').click(function() {
                     var timeout = 2000;
 
                     setTimeout(() => {
+                        inLoader();
                         window.location.reload();
                     }, timeout);
                 },
                 error: function(exception) {
 
-                    outLoader();
+                    // outLoader();
 
                     idEventUpdate = null;
                     updateEvent = false;

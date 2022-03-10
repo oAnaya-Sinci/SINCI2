@@ -280,7 +280,7 @@ h5 {
  * @Desc: Resposive Desing to the proyect adapting to the smart devices
  */
 
-@media screen and (max-width: 800px) and (orientation: portrait) {
+@media screen and (max-width: 700px) and (orientation: portrait) {
     #createEventCalendar {
         margin-top: 0;
     }
@@ -376,7 +376,7 @@ h5 {
     }
 }
 
-@media screen and (max-height: 800px) and (orientation:landscape) {
+@media screen and (max-height: 700px) and (orientation:landscape) {
     #createEventCalendar {
         margin-top: 0;
     }

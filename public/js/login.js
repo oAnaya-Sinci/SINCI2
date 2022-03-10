@@ -202,3 +202,9 @@ $('.form-control').blur(function() {
     $('.input-group-outline').removeClass('is-filled');
     $('.input-group-outline').removeClass('is-focused');
 });
+
+$('.form-control').focus(function() {
+
+    $('.input-group-outline').removeClass('is-filled');
+    $('.input-group-outline').removeClass('is-focused');
+});

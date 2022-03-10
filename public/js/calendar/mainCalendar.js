@@ -688,9 +688,7 @@ $('#btnDeleteEvent').click(function() {
 function checkDateToSave(start, end) {
 
     start = new Date(start);
-    end = new Date(end);
-
-    end.setDate(end.getHours() + 3);
+    end = new Date(end.getHours() + 3);
 
     let isValidate = false;
     let message = "";

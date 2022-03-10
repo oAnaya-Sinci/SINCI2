@@ -71,12 +71,12 @@ $('#btnLogin').click(async function() {
 
                 outLoader();
 
-                // showMessage('danger', 'Error', "el correo o la contraseña introducidos son erroneos");
-                $(".invalid-feedback.login").css("display", "block");
+                showMessage('danger', 'Error', "el correo o la contraseña introducidos son erroneos");
+                // $(".invalid-feedback.login").css("display", "block");
 
-                setTimeout(() => {
-                    $(".invalid-feedback").css("display", "none");
-                }, 7000);
+                // setTimeout(() => {
+                //     $(".invalid-feedback").css("display", "none");
+                // }, 7000);
             }
         },
         error: function(exception) {
@@ -134,8 +134,9 @@ async function IsLogedIn() {
         error: function(exception) {
 
             console.log(exception);
+            outLoader();
             showMessage('danger', 'Error', exception.statusCode + " - " + exception.statusText);
-            location.reload();
+            // location.reload();
         }
     });
 }

@@ -7,16 +7,21 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         
         <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon.png">
+        <!-- <link rel="icon" type="image/png" href="/img/favicon.png"> -->
         <link rel="icon" type="image/png" href="/img/sinci.ico" sizes="32x32">
         <title>{{ config('app.name', 'SAS SINCI') }}</title>
-        
-        <!-- <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lora%3A400%2C400italic%2C700%2C700italic%7CPoppins%3A400%2C500%2C600%2C700&ver=1.1.3" /> -->
-
+        <!-- Fonts and icons -->
+        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lora%3A400%2C400italic%2C700%2C700italic%7CPoppins%3A400%2C500%2C600%2C700&ver=1.1.3" />
         <!-- Nucleo Icons -->
         <link href="/css/nucleo-icons.css" rel="stylesheet" />
         <link href="/css/nucleo-svg.css" rel="stylesheet" />
-        
+        <!-- Font Awesome Icons -->
+        <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+        <!-- Material Icons -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+        <!-- CSS Files -->
         <link id="pagestyle" href="/css/material-dashboard.css?v=3.0.0" rel="stylesheet" />
+
         <link href="/css/sinciStyles.css" rel="stylesheet" />
         
     </head>
@@ -79,10 +84,22 @@
 
         </main>
 
-        <!-- @include('layouts.modals')   -->
+        @include('layouts.modals')  
 
+        <!--   Core JS Files   -->
+        <script src="/js/core/popper.min.js"></script>
         <script src="/js/core/bootstrap.min.js"></script>
+        <script src="/js/plugins/perfect-scrollbar.min.js"></script>
+        <script src="/js/plugins/smooth-scrollbar.min.js"></script>
+        <script src="/js/plugins/chartjs.min.js"></script>
+    
+        <!-- Github buttons -->
+        <script async defer src="https://buttons.github.io/buttons.js"></script>
+        <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+        <script src="/js/material-dashboard.min.js?v=3.0.0"></script>
+
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
         <script src="/js/login.js" type="text/javascript"></script>
 
     </body>

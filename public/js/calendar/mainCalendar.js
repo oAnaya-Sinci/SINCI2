@@ -526,11 +526,11 @@ function iniciateModalUpdate() {
 
 $('#btnSaveEvent').click(function() {
 
-    setTimeout(() => {
+    // setTimeout(() => {
 
-        outLoader();
-        showMessage('danger', 'Error', "Ocurrio un error al guardar la información, realize otro intento");
-    }, 11000);
+    //     outLoader();
+    //     showMessage('danger', 'Error', "Ocurrio un error al guardar la información, realize otro intento");
+    // }, 11000);
 
     $('#slctUsuario').attr('disabled', false);
     let urlEvent = "";
@@ -590,7 +590,7 @@ $('#btnSaveEvent').click(function() {
             /**
              * This block of code is temporal, the register of the event changues ahead to not refresh the page completly
              */
-            var timeout = 3000;
+            var timeout = 2000;
 
             setTimeout(() => {
                 inLoader();
@@ -689,7 +689,6 @@ function checkDateToSave(start, end) {
 
     start = new Date(start);
     end = new Date(end);
-
 
     let isValidate = false;
     let message = "";

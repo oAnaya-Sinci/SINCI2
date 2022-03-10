@@ -12,7 +12,8 @@ var timeOut;
 
 $(document).ready(function() {
 
-    $('.input-group.input-group-outline').removeClass('is-filled');
+    $('.input-group-outline').removeClass('is-filled');
+    $('.input-group-outline').removeClass('is-focused');
 
     fetch(urlData + "/openconn");
     IsLogedIn();

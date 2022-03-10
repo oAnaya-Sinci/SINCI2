@@ -561,7 +561,7 @@ $('#btnSaveEvent').click(function() {
         message = "Información guardada exitosamente ";
     }
 
-    // inLoader();
+    inLoader();
 
     $.ajax({
         type: "POST",
@@ -571,10 +571,9 @@ $('#btnSaveEvent').click(function() {
 
             response = JSON.parse(response)[0];
 
-            // outLoader();
-
             if (response.cantSaveData == "true") {
 
+                outLoader();
                 showMessage('danger', 'Error', "Error ya existe registros en el rango de horas seleccionadas, favor de revisar la información a registrar");
                 return false;
             }
@@ -585,7 +584,7 @@ $('#btnSaveEvent').click(function() {
             $('#createEventCalendar').modal('hide');
             $('#btnDeleteEvent').addClass('btnDeleteNone');
 
-            showMessage('success', 'Mensaje', message);
+            // showMessage('success', 'Mensaje', message);
 
             /**
              * This block of code is temporal, the register of the event changues ahead to not refresh the page completly
@@ -593,15 +592,15 @@ $('#btnSaveEvent').click(function() {
             var timeout = 2000;
 
             setTimeout(() => {
-                inLoader();
+                // inLoader();
                 window.location.reload();
             }, timeout);
         },
         error: function(exception) {
 
-            let messageError = "Ocurrió un error, la pagina se reiniciará para actualizarse.";
+            outLoader();
 
-            // outLoader();
+            let messageError = "Ocurrió un error, la pagina se reiniciará para actualizarse.";
 
             idEventUpdate = null;
             updateEvent = false;
@@ -632,7 +631,7 @@ $('#btnDeleteEvent').click(function() {
     modalConfirm(function(confirm) {
         if (confirm) {
 
-            // inLoader();
+            inLoader();
 
             $.ajax({
                 type: "POST",
@@ -649,7 +648,7 @@ $('#btnDeleteEvent').click(function() {
 
                     $('#createEventCalendar').modal('hide');
 
-                    showMessage('success', 'Exito', 'Información borrada');
+                    // showMessage('success', 'Exito', 'Información borrada');
 
                     /**
                      * This block of code is temporal, the register of the event changues ahead to not refresh the page completly
@@ -657,13 +656,13 @@ $('#btnDeleteEvent').click(function() {
                     var timeout = 2000;
 
                     setTimeout(() => {
-                        inLoader();
+                        // inLoader();
                         window.location.reload();
                     }, timeout);
                 },
                 error: function(exception) {
 
-                    // outLoader();
+                    outLoader();
 
                     idEventUpdate = null;
                     updateEvent = false;

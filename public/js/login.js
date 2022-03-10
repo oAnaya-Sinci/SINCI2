@@ -196,3 +196,9 @@ function showMessage(type, header = "Mensaje del sistema", message = "") {
             break;
     }
 }
+
+$('.form-control').blur(function() {
+
+    $('.input-group-outline').removeClass('is-filled');
+    $('.input-group-outline').removeClass('is-focused');
+});

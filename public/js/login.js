@@ -138,7 +138,7 @@ async function IsLogedIn() {
 
             console.log(exception);
             outLoader();
-            showMessage('danger', 'Error', exception.statusCode + " - " + exception.statusText);
+            showMessage('danger', 'Error', "Error, trate de iniciar sesion de nuevo");
             // location.reload();
         }
     });

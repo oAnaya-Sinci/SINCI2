@@ -690,7 +690,7 @@ function checkDateToSave(start, end) {
     start = new Date(start);
     end = new Date(end);
 
-    end = (end.setDate(end.getHours() + 3)).toISOString();
+    end.setDate(end.getHours() + 3);
 
     let isValidate = false;
     let message = "";

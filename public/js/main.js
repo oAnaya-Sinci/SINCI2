@@ -18,7 +18,11 @@ var timeOut;
  */
 $(document).ready(function() {
 
-    setTimeOut();
+    timeOut = setTimeout(() => {
+
+    }, 100);
+
+    set_TimeOut();
     IsLogedIn();
 
     $('.datetimepicker').datetimepicker({
@@ -48,9 +52,11 @@ $(document).ready(function() {
  * @Date: 2022-03-03 12:24:43 
  * @Desc: This function set a timer, to close the proyect if the  
  */
-function setTimeOut() {
+function set_TimeOut() {
 
     let timeSession = 360000;
+
+    clearTimeout(timeOut);
 
     timeOut = setTimeout(() => {
         IsLogedIn();
@@ -92,8 +98,8 @@ async function IsLogedIn() {
             response = JSON.parse(response)[0];
 
             if (response.sessionAuth != 'false') {
-                clearTimeout(timeOut);
-                setTimeOut();
+
+                set_TimeOut();
                 window.localStorage.setItem('sasIsLogedIn', response.sessionAuth);
             } else {
                 window.localStorage.setItem('sasIsLogedIn', 'false');

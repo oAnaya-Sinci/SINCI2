@@ -28,8 +28,6 @@ $(document).keyup(function(key) {
 
 $('#btnLogin').click(async function() {
 
-    inLoader();
-
     var formData = $('#loginForm').serializeArray();
 
     let userData = { "usuario": formData[1], "clave": formData[2], "token": formData[0] }
@@ -42,6 +40,8 @@ $('#btnLogin').click(async function() {
 
         return false;
     }
+
+    inLoader();
 
     await $.ajax({
         type: "POST",

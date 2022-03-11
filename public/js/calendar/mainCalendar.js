@@ -210,6 +210,10 @@ async function calendarSinci() {
 
             let todayDate = new Date();
 
+            var numberOfMlSeconds = todayDate.getTime();
+            var addMlSeconds = (1 * 60) * 60000;
+            todayDate = new Date(numberOfMlSeconds + addMlSeconds);
+
             // Function to obtaind the data from the modal
             if (start <= todayDate) {
 
@@ -526,11 +530,11 @@ function iniciateModalUpdate() {
 
 $('#btnSaveEvent').click(function() {
 
-    // setTimeout(() => {
+    setTimeout(() => {
 
-    //     outLoader();
-    //     showMessage('danger', 'Error', "Ocurrio un error al guardar la información, realize otro intento");
-    // }, 11000);
+        outLoader();
+        showMessage('danger', 'Error', "Ocurrio un error al tratar de guardar la información, \n por favor realize otro intento");
+    }, 12000);
 
     $('#slctUsuario').attr('disabled', false);
     let urlEvent = "";
@@ -573,7 +577,7 @@ $('#btnSaveEvent').click(function() {
 
             if (response.cantSaveData == "true") {
 
-                outLoader();
+                // outLoader();
                 showMessage('danger', 'Error', "Error ya existe registros en el rango de horas seleccionadas, favor de revisar la información a registrar");
                 return false;
             }
@@ -584,7 +588,7 @@ $('#btnSaveEvent').click(function() {
             $('#createEventCalendar').modal('hide');
             $('#btnDeleteEvent').addClass('btnDeleteNone');
 
-            // showMessage('success', 'Mensaje', message);
+            showMessage('success', 'Mensaje', message);
 
             /**
              * This block of code is temporal, the register of the event changues ahead to not refresh the page completly
@@ -648,7 +652,7 @@ $('#btnDeleteEvent').click(function() {
 
                     $('#createEventCalendar').modal('hide');
 
-                    // showMessage('success', 'Exito', 'Información borrada');
+                    showMessage('success', 'Exito', 'Información borrada');
 
                     /**
                      * This block of code is temporal, the register of the event changues ahead to not refresh the page completly
@@ -693,6 +697,10 @@ function checkDateToSave(start, end) {
     let message = "";
 
     let todayDate = new Date();
+
+    var numberOfMlSeconds = todayDate.getTime();
+    var addMlSeconds = (1 * 60) * 60000;
+    todayDate = new Date(numberOfMlSeconds + addMlSeconds);
 
     if (start > end) {
         isValidate = true;

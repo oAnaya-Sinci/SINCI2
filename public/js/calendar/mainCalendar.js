@@ -210,6 +210,10 @@ async function calendarSinci() {
 
             let todayDate = new Date();
 
+            var numberOfMlSeconds = todayDate.getTime();
+            var addMlSeconds = (1 * 60) * 60000;
+            todayDate = new Date(numberOfMlSeconds + addMlSeconds);
+
             // Function to obtaind the data from the modal
             if (start <= todayDate) {
 
@@ -526,11 +530,11 @@ function iniciateModalUpdate() {
 
 $('#btnSaveEvent').click(function() {
 
-    // setTimeout(() => {
+    setTimeout(() => {
 
-    //     outLoader();
-    //     showMessage('danger', 'Error', "Ocurrio un error al guardar la información, realize otro intento");
-    // }, 11000);
+        outLoader();
+        showMessage('danger', 'Error', "Ocurrio un error al tratar de guardar la información, \n por favor realize otro intento");
+    }, 11000);
 
     $('#slctUsuario').attr('disabled', false);
     let urlEvent = "";
@@ -561,7 +565,7 @@ $('#btnSaveEvent').click(function() {
         message = "Información guardada exitosamente ";
     }
 
-    inLoader();
+    // inLoader();
 
     $.ajax({
         type: "POST",
@@ -573,7 +577,7 @@ $('#btnSaveEvent').click(function() {
 
             if (response.cantSaveData == "true") {
 
-                outLoader();
+                // outLoader();
                 showMessage('danger', 'Error', "Error ya existe registros en el rango de horas seleccionadas, favor de revisar la información a registrar");
                 return false;
             }
@@ -693,6 +697,10 @@ function checkDateToSave(start, end) {
     let message = "";
 
     let todayDate = new Date();
+
+    var numberOfMlSeconds = todayDate.getTime();
+    var addMlSeconds = (1 * 60) * 60000;
+    todayDate = new Date(numberOfMlSeconds + addMlSeconds);
 
     if (start > end) {
         isValidate = true;

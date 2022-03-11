@@ -534,7 +534,7 @@ $('#btnSaveEvent').click(function() {
 
         outLoader();
         showMessage('danger', 'Error', "Ocurrio un error al tratar de guardar la información, \n por favor realize otro intento");
-    }, 11000);
+    }, 12000);
 
     $('#slctUsuario').attr('disabled', false);
     let urlEvent = "";
@@ -565,7 +565,7 @@ $('#btnSaveEvent').click(function() {
         message = "Información guardada exitosamente ";
     }
 
-    // inLoader();
+    inLoader();
 
     $.ajax({
         type: "POST",
@@ -588,7 +588,7 @@ $('#btnSaveEvent').click(function() {
             $('#createEventCalendar').modal('hide');
             $('#btnDeleteEvent').addClass('btnDeleteNone');
 
-            // showMessage('success', 'Mensaje', message);
+            showMessage('success', 'Mensaje', message);
 
             /**
              * This block of code is temporal, the register of the event changues ahead to not refresh the page completly
@@ -652,7 +652,7 @@ $('#btnDeleteEvent').click(function() {
 
                     $('#createEventCalendar').modal('hide');
 
-                    // showMessage('success', 'Exito', 'Información borrada');
+                    showMessage('success', 'Exito', 'Información borrada');
 
                     /**
                      * This block of code is temporal, the register of the event changues ahead to not refresh the page completly

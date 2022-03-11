@@ -1,12 +1,12 @@
 // HTTPS
-var urlData = "https://10.10.100.34:1880"; // PRODUCTION SERVER WITH SECURE PROTOCOL 443
+// var urlData = "https://10.10.100.34:1880"; // PRODUCTION SERVER WITH SECURE PROTOCOL 443
 // HTTP
 // var urlData = "http://10.10.100.34:1880"; // PRODUCTION SERVER WITHOUT SECURE PROTOCOL 80
 
 var currenUrl = window.location.href.split("/")[2];
 currenUrl = currenUrl.split(":");
 
-// var urlData = "https://" + currenUrl[0] + ":1880";
+var urlData = "https://" + currenUrl[0] + ":1880";
 
 var timeOut;
 
@@ -28,15 +28,11 @@ $(document).keyup(function(key) {
 
 $('#btnLogin').click(async function() {
 
-    inLoader();
-
     var formData = $('#loginForm').serializeArray();
 
     let userData = { "usuario": formData[1], "clave": formData[2], "token": formData[0] }
 
     if (!checkInputs()) {
-
-        outLoader();
 
         timeOut = setTimeout(() => {
             $(".invalid-feedback").css("display", "none");
@@ -44,6 +40,8 @@ $('#btnLogin').click(async function() {
 
         return false;
     }
+
+    inLoader();
 
     await $.ajax({
         type: "POST",

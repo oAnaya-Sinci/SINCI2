@@ -90,7 +90,7 @@ $('#btnLogin').click(async function() {
 
             setTimeout(() => {
                 location.reload();
-            }, 2000);
+            }, 1000);
         }
     });
 });

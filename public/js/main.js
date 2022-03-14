@@ -18,12 +18,10 @@ var timeOut;
  */
 $(document).ready(function() {
 
-    timeOut = setTimeout(() => {
-
-    }, 100);
+    timeOut = setTimeout(() => { return false }, 100);
 
     set_TimeOut();
-    IsLogedIn();
+    // IsLogedIn();
 
     $('.datetimepicker').datetimepicker({
         // follow MomentJS docs: https://momentjs.com/docs/#/displaying/format/

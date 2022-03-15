@@ -71,74 +71,76 @@ async function calendarSinci() {
      */
     let dataDB = await fetch(urlData + "/obtainEventsCalendar?isLogedIn=" + dataLogin).then(data => data.json()).then(data => { return data; });
 
-    let event;
-    $.each(dataDB, function(index, value) {
+    dataEvents = eventsCalendar(dataDB);
 
-        if (window.navigator.vendor == "Google Inc.") {
-            value.FECHA_INICIO = value.FECHA_INICIO.replace('T', ' ');
-            value.FECHA_INICIO = value.FECHA_INICIO.replace('Z', ' ');
-            value.FECHA_FIN = value.FECHA_FIN.replace('T', ' ');
-            value.FECHA_FIN = value.FECHA_FIN.replace('Z', ' ');
+    // let event;
+    // $.each(dataDB, function(index, value) {
 
-            value.Hora_inicio = value.Hora_inicio.replace('T', ' ');
-            value.Hora_inicio = value.Hora_inicio.replace('Z', ' ');
-            value.Hora_fin = value.Hora_fin.replace('T', ' ');
-            value.Hora_fin = value.Hora_fin.replace('Z', ' ');
-        } else {
+    //     if (window.navigator.vendor == "Google Inc.") {
+    //         value.FECHA_INICIO = value.FECHA_INICIO.replace('T', ' ');
+    //         value.FECHA_INICIO = value.FECHA_INICIO.replace('Z', ' ');
+    //         value.FECHA_FIN = value.FECHA_FIN.replace('T', ' ');
+    //         value.FECHA_FIN = value.FECHA_FIN.replace('Z', ' ');
 
-            let sD = new Date(value.FECHA_INICIO);
-            let eD = new Date(value.FECHA_FIN);
-            value.FECHA_INICIO = sD.setTime(sD.getTime() + sD.getTimezoneOffset() * 60 * 1000);
-            value.FECHA_FIN = eD.setTime(eD.getTime() + eD.getTimezoneOffset() * 60 * 1000);
+    //         value.Hora_inicio = value.Hora_inicio.replace('T', ' ');
+    //         value.Hora_inicio = value.Hora_inicio.replace('Z', ' ');
+    //         value.Hora_fin = value.Hora_fin.replace('T', ' ');
+    //         value.Hora_fin = value.Hora_fin.replace('Z', ' ');
+    //     } else {
 
-            let sH = new Date(value.Hora_inicio);
-            let eH = new Date(value.Hora_fin);
-            value.Hora_inicio = sH.setTime(sH.getTime() + sH.getTimezoneOffset() * 60 * 1000);
-            value.Hora_fin = eH.setTime(eH.getTime() + eH.getTimezoneOffset() * 60 * 1000);
-        }
+    //         let sD = new Date(value.FECHA_INICIO);
+    //         let eD = new Date(value.FECHA_FIN);
+    //         value.FECHA_INICIO = sD.setTime(sD.getTime() + sD.getTimezoneOffset() * 60 * 1000);
+    //         value.FECHA_FIN = eD.setTime(eD.getTime() + eD.getTimezoneOffset() * 60 * 1000);
 
-        var startDate = new Date(value.FECHA_INICIO);
-        var sDay = startDate.getDate();
-        var sMonth = startDate.getMonth();
-        var sYear = startDate.getFullYear();
+    //         let sH = new Date(value.Hora_inicio);
+    //         let eH = new Date(value.Hora_fin);
+    //         value.Hora_inicio = sH.setTime(sH.getTime() + sH.getTimezoneOffset() * 60 * 1000);
+    //         value.Hora_fin = eH.setTime(eH.getTime() + eH.getTimezoneOffset() * 60 * 1000);
+    //     }
 
-        var startHour = new Date(value.Hora_inicio);
-        var horaInicio = (startHour.getHours() < 10 ? "0" + startHour.getHours() : startHour.getHours());
-        var minutosInicio = (startHour.getMinutes() < 10 ? "0" + startHour.getMinutes() : startHour.getMinutes());
+    //     var startDate = new Date(value.FECHA_INICIO);
+    //     var sDay = startDate.getDate();
+    //     var sMonth = startDate.getMonth();
+    //     var sYear = startDate.getFullYear();
 
-        var endDate = new Date(value.FECHA_FIN);
-        var eDay = endDate.getDate();
-        var eMonth = startDate.getMonth();
-        var eYear = endDate.getFullYear();
+    //     var startHour = new Date(value.Hora_inicio);
+    //     var horaInicio = (startHour.getHours() < 10 ? "0" + startHour.getHours() : startHour.getHours());
+    //     var minutosInicio = (startHour.getMinutes() < 10 ? "0" + startHour.getMinutes() : startHour.getMinutes());
 
-        var endHour = new Date(value.Hora_fin);
-        var HoraFin = (endHour.getHours() < 10 ? "0" + endHour.getHours() : endHour.getHours());
-        var minutosFin = (endHour.getMinutes() < 10 ? "0" * endHour.getMinutes() : endHour.getMinutes());
+    //     var endDate = new Date(value.FECHA_FIN);
+    //     var eDay = endDate.getDate();
+    //     var eMonth = startDate.getMonth();
+    //     var eYear = endDate.getFullYear();
 
-        let titleBtcr = "";
-        if ("ontouchstart" in window || navigator.msMaxTouchPoints) {
+    //     var endHour = new Date(value.Hora_fin);
+    //     var HoraFin = (endHour.getHours() < 10 ? "0" + endHour.getHours() : endHour.getHours());
+    //     var minutosFin = (endHour.getMinutes() < 10 ? "0" * endHour.getMinutes() : endHour.getMinutes());
 
-            let proyectCode = value.LOCATION.split("(");
-            titleBtcr = proyectCode[0];
-        } else {
+    //     let titleBtcr = "";
+    //     if ("ontouchstart" in window || navigator.msMaxTouchPoints) {
 
-            titleBtcr = value.LOCATION + "\n -- -- -- -- -- -- -- -- -- -- -- -- \n " + value.NOTAS
-        }
+    //         let proyectCode = value.LOCATION.split("(");
+    //         titleBtcr = proyectCode[0];
+    //     } else {
 
-        event = {
-            id: value.ID_PROYECTOS_AVANCE,
-            // title: value.LOCATION + "\n -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- \n " + value.NOTAS,
-            title: titleBtcr,
-            start: new Date(sYear, sMonth, sDay, horaInicio, minutosInicio),
-            end: new Date(eYear, eMonth, eDay, HoraFin, minutosFin),
-            allDay: false,
-            // className: 'sinci',
-            className: 'info',
-            editable: false,
-        };
+    //         titleBtcr = value.LOCATION + "\n -- -- -- -- -- -- -- -- -- -- -- -- \n " + value.NOTAS
+    //     }
 
-        dataEvents.push(event);
-    });
+    //     event = {
+    //         id: value.ID_PROYECTOS_AVANCE,
+    //         // title: value.LOCATION + "\n -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- \n " + value.NOTAS,
+    //         title: titleBtcr,
+    //         start: new Date(sYear, sMonth, sDay, horaInicio, minutosInicio),
+    //         end: new Date(eYear, eMonth, eDay, HoraFin, minutosFin),
+    //         allDay: false,
+    //         // className: 'sinci',
+    //         className: 'info',
+    //         editable: false,
+    //     };
+
+    //     dataEvents.push(event);
+    // });
     // END
 
     /*  className colors
@@ -265,6 +267,89 @@ async function calendarSinci() {
 /** 
  * javascript comment 
  * @Author: Carlos Omar Anaya Barajas 
+ * @Date: 2022-03-15 10:36:04 
+ * @Desc:  
+ */
+
+let eventsCalendar = (dataDB) => {
+
+    let eventsToSend = [];
+
+    let event;
+    $.each(dataDB, function(index, value) {
+
+        if (window.navigator.vendor == "Google Inc.") {
+            value.FECHA_INICIO = value.FECHA_INICIO.replace('T', ' ');
+            value.FECHA_INICIO = value.FECHA_INICIO.replace('Z', ' ');
+            value.FECHA_FIN = value.FECHA_FIN.replace('T', ' ');
+            value.FECHA_FIN = value.FECHA_FIN.replace('Z', ' ');
+
+            value.Hora_inicio = value.Hora_inicio.replace('T', ' ');
+            value.Hora_inicio = value.Hora_inicio.replace('Z', ' ');
+            value.Hora_fin = value.Hora_fin.replace('T', ' ');
+            value.Hora_fin = value.Hora_fin.replace('Z', ' ');
+        } else {
+
+            let sD = new Date(value.FECHA_INICIO);
+            let eD = new Date(value.FECHA_FIN);
+            value.FECHA_INICIO = sD.setTime(sD.getTime() + sD.getTimezoneOffset() * 60 * 1000);
+            value.FECHA_FIN = eD.setTime(eD.getTime() + eD.getTimezoneOffset() * 60 * 1000);
+
+            let sH = new Date(value.Hora_inicio);
+            let eH = new Date(value.Hora_fin);
+            value.Hora_inicio = sH.setTime(sH.getTime() + sH.getTimezoneOffset() * 60 * 1000);
+            value.Hora_fin = eH.setTime(eH.getTime() + eH.getTimezoneOffset() * 60 * 1000);
+        }
+
+        var startDate = new Date(value.FECHA_INICIO);
+        var sDay = startDate.getDate();
+        var sMonth = startDate.getMonth();
+        var sYear = startDate.getFullYear();
+
+        var startHour = new Date(value.Hora_inicio);
+        var horaInicio = (startHour.getHours() < 10 ? "0" + startHour.getHours() : startHour.getHours());
+        var minutosInicio = (startHour.getMinutes() < 10 ? "0" + startHour.getMinutes() : startHour.getMinutes());
+
+        var endDate = new Date(value.FECHA_FIN);
+        var eDay = endDate.getDate();
+        var eMonth = startDate.getMonth();
+        var eYear = endDate.getFullYear();
+
+        var endHour = new Date(value.Hora_fin);
+        var HoraFin = (endHour.getHours() < 10 ? "0" + endHour.getHours() : endHour.getHours());
+        var minutosFin = (endHour.getMinutes() < 10 ? "0" * endHour.getMinutes() : endHour.getMinutes());
+
+        let titleBtcr = "";
+        if ("ontouchstart" in window || navigator.msMaxTouchPoints) {
+
+            let proyectCode = value.LOCATION.split("(");
+            titleBtcr = proyectCode[0];
+        } else {
+
+            titleBtcr = value.LOCATION + "\n -- -- -- -- -- -- -- -- -- -- -- -- \n " + value.NOTAS
+        }
+
+        event = {
+            id: value.ID_PROYECTOS_AVANCE,
+            // title: value.LOCATION + "\n -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- \n " + value.NOTAS,
+            title: titleBtcr,
+            start: new Date(sYear, sMonth, sDay, horaInicio, minutosInicio),
+            end: new Date(eYear, eMonth, eDay, HoraFin, minutosFin),
+            allDay: false,
+            // className: 'sinci',
+            className: 'info',
+            editable: false,
+        };
+
+        eventsToSend.push(event);
+    });
+
+    return eventsToSend;
+}
+
+/** 
+ * javascript comment 
+ * @Author: Carlos Omar Anaya Barajas 
  * @Date: 2022-03-03 13:55:50 
  * @Desc: Here the selects was inciated with the information required to dd the registers
  */
@@ -286,6 +371,12 @@ async function modalCalendarSinci() {
 function processDataToSelect(data, select, proyectoSearch = false) {
 
     let options = "";
+
+    if (data.length == 1) {
+        $('#slctUsuario').remove();
+        let select = '<label id="lblUsuario" for="recipient-name" class="col-form-label">Usuario:</label> <select class="form-select" name="slctUsuario" id="slctUsuario">';
+        $('#divUsuarios').html(select);
+    }
 
     $(select).empty();
     data.length > 1 ? options = "<option value=''>Seleccione una opción</option>" : null;
@@ -336,7 +427,6 @@ function showWeeksNumbers(weekNumber, isWeek, isDay, dayNum = 0) {
         howWeek = "Semana ";
 
     $('#calendar .fc-header .fc-header-center').text('');
-
 
     $('#calendar .fc-content .fc-view-month table .fc-week').each(function(index) {
 
@@ -521,6 +611,8 @@ function iniciateModalUpdate() {
         updateEvent = true;
         $('#btnDeleteEvent').removeClass('btnDeleteNone')
         $('#createEventCalendar').modal('show');
+
+        // $(this).parent().addClass('removeEvent');
     });
 }
 
@@ -530,11 +622,11 @@ function iniciateModalUpdate() {
 
 $('#btnSaveEvent').click(function() {
 
-    setTimeout(() => {
+    // setTimeout(() => {
 
-        outLoader();
-        showMessage('danger', 'Error', "Ocurrio un error al tratar de guardar la información, \n por favor realize otro intento");
-    }, 12000);
+    //     outLoader();
+    //     showMessage('danger', 'Error', "Ocurrio un error al tratar de guardar la información, \n por favor realize otro intento");
+    // }, 12000);
 
     $('#slctUsuario').attr('disabled', false);
     let urlEvent = "";
@@ -573,32 +665,52 @@ $('#btnSaveEvent').click(function() {
         data: event,
         success: function(response) {
 
+            outLoader();
+
             response = JSON.parse(response)[0];
 
             if (response.cantSaveData == "true") {
 
-                // outLoader();
                 showMessage('danger', 'Error', "Error ya existe registros en el rango de horas seleccionadas, favor de revisar la información a registrar");
                 return false;
             }
-
-            idEventUpdate = null;
-            updateEvent = false;
 
             $('#createEventCalendar').modal('hide');
             $('#btnDeleteEvent').addClass('btnDeleteNone');
 
             showMessage('success', 'Mensaje', message);
 
+            let eventSaved = eventsCalendar([response])[0];
+
+            if (!updateEvent) {
+                calendar.fullCalendar('renderEvent',
+                    eventSaved,
+                    true // make the event "stick"
+                );
+            } else {
+
+                var timeout = 2000;
+
+                setTimeout(() => {
+                    // inLoader();
+                    window.location.reload();
+                }, timeout);
+            }
+
+            idEventUpdate = null;
+            updateEvent = false;
+
+            iniciateModalUpdate();
+
             /**
              * This block of code is temporal, the register of the event changues ahead to not refresh the page completly
              */
-            var timeout = 2000;
+            // var timeout = 2000;
 
-            setTimeout(() => {
-                // inLoader();
-                window.location.reload();
-            }, timeout);
+            // setTimeout(() => {
+            //     // inLoader();
+            //     window.location.reload();
+            // }, timeout);
         },
         error: function(exception) {
 
@@ -614,7 +726,7 @@ $('#btnSaveEvent').click(function() {
 
             setTimeout(() => {
                 window.location.reload();
-            }, 5000);
+            }, 3000);
         }
     });
 });
@@ -807,3 +919,8 @@ function validateModal(event) {
 
     return validate;
 }
+
+$('.btnCancelModal').click(function() {
+
+    $('.' + eventWhenUpdate).removeClass('removeEvent');
+})

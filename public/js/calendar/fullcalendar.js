@@ -3984,12 +3984,12 @@
                 ">" +
                 "<div class='fc-event-inner'>" +
                 "<div class='fc-event-time'>" +
-                "<div class='idEvent'>" + event.id + "</div>" +
+                "<div class='idEvent " + event.id + "'>" + event.id + "</div>" +
                 htmlEscape(formatDates(event.start, event.end, opt('timeFormat'))) +
                 "</div>" +
                 "<div class='fc-event-title'>" +
                 htmlEscape(event.title || '') +
-                "<div class='idEvent'>" + event.id + "</div>" +
+                "<div class='idEvent " + event.id + "'>" + event.id + "</div>" +
                 "</div>" +
                 "</div>" +
                 "<div class='fc-event-bg'></div>";
@@ -5353,13 +5353,13 @@
                     htmlEscape(
                         formatDates(event.start, event.end, opt('timeFormat'))
                     ) +
-                    "<div class='idEvent'>" + event.id + "</div>" +
+                    "<div class='idEvent " + event.id + "'>" + event.id + "</div>" +
                     "</span>";
             }
             html +=
                 "<span class='fc-event-title'>" +
                 htmlEscape(event.title || '') +
-                "<div class='idEvent'>" + event.id + "</div>" +
+                "<div class='idEvent " + event.id + "'>" + event.id + "</div>" +
                 "</span>" +
                 "</div>";
             if (segment.isEnd && isEventResizable(event)) {

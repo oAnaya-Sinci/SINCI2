@@ -4,6 +4,10 @@
  * (c) 2013 Adam Shaw
  */
     
+    .removeEvent {
+        display: none;
+    }
+    
     .fc {
         direction: ltr;
         text-align: left;

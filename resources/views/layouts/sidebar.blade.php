@@ -38,9 +38,18 @@
         <li class="nav-item">
           <a class="nav-link text-white bg-gradient-primary" href="/bitacoras/main">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">event</i>
+              <i class="material-icons opacity-10">event_note</i>
             </div>
             <span class="nav-link-text ms-1">Bitácoras</span>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link text-white bg-gradient-primary" href="/compras/main">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">point_of_sale</i>
+            </div>
+            <span class="nav-link-text ms-1">Compras</span>
           </a>
         </li>
 

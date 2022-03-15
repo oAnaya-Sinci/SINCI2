@@ -52,10 +52,22 @@ use Illuminate\Support\Facades\Route;
 // });
 
 // This route only shows the PHP info of the server
-Route::get('/infoPHP', function(){ return view('info'); });
+// Route::get('/infoPHP', function(){ return view('info'); });
 
 Route::get('/', function(){ return view('authenticate/loginUser'); });
 
 Route::get('/dashboard', function(){ $titulo = "DASHBOARD"; return view('dashboard/main', compact('titulo')); });
 
+/** 
+ * @Author: `Carlos Omar Anaya Barajas` 
+ * @Date: 2022-03-14 13:48:29 
+ * @Desc: Ruta para el modulo de bitacoras en WEBSAS
+ */
 Route::get('/bitacoras/main', function(){ $titulo = "REGISTRO DE BITÁCORAS"; return view('bitacoras/main', compact('titulo')); });
+
+/** 
+ * @Author: Carlos Omar Anaya Barajas 
+ * @Date: 2022-03-14 13:48:53 
+ * @Desc: Ruta para el modulo de Compras en WEBSAS 
+ */
+Route::get('/compras/main', function(){ $titulo = "COMPRAS"; return view('compras/main', compact('titulo')); });

@@ -58,9 +58,8 @@ Route::get('/', function(){ return view('authenticate/loginUser'); });
 
 Route::get('/dashboard', function(){ $titulo = "DASHBOARD"; return view('dashboard/main', compact('titulo')); });
 
-<<<<<<< HEAD
 Route::get('/bitacoras/main', function(){ $titulo = "REGISTRO DE BITÁCORAS"; return view('bitacoras/main', compact('titulo')); });
-=======
+
 /** 
  * @Author: `Carlos Omar Anaya Barajas` 
  * @Date: 2022-03-14 13:48:29 
@@ -74,4 +73,4 @@ Route::get('/bitacoras/main', function(){ $titulo = "REGISTRO DE BITÁCORAS"; re
  * @Desc: Ruta para el modulo de Compras en WEBSAS 
  */
 Route::get('/compras/main', function(){ $titulo = "COMPRAS"; return view('compras/main', compact('titulo')); });
->>>>>>> 28e75e3aaea573ab7f63b60ff115740ae634c108
+

@@ -196,3 +196,12 @@ var inLoader = () => {
 var outLoader = () => {
     $(".loader").fadeOut("slow");
 }
+
+/** 
+ * javascript comment 
+ * @Author: flydreame 
+ * @Date: 2022-03-15 15:58:13 
+ * @Desc:  
+ */
+
+$('a[href = "/compras/main"]').addClass('removeEvent');

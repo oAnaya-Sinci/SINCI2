@@ -4,6 +4,10 @@
  * @Desc: this block of css is for the load page waiter 
  */
 
+.removeEvent {
+    display: none;
+}
+
 .loader {
     position: fixed;
     left: 0px;

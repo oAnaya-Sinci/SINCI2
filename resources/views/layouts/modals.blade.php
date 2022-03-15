@@ -37,11 +37,12 @@
             <!-- <select class="selectpicker form-control" id="number" data-live-search="true" title="Select a number" data-hide-disabled="true"></select> -->
           </div>
 
-          <div class="form-group body-bitacora">
-            <label for="recipient-name" class="col-form-label">Usuario:</label>
+          <div id="divUsuarios" class="form-group body-bitacora">
+            <label id="lblUsuario" for="recipient-name" class="col-form-label">Usuario:</label>
             <!-- <input type="text" class="form-control" id="recipient-name" name="usuario"> -->
-            <select class="form-select modalForm" name="slctUsuario" id="slctUsuario" required>
-            <option value="">NAN</option>
+            <!-- <select class="form-select modalForm" name="slctUsuario" id="slctUsuario" required> -->
+            <select class="selectpicker form-control" name="slctUsuario" id="slctUsuario" data-live-search="true" data-virtual-scroll="false">
+            <!-- <option value="">NAN</option> -->
             </select>
           </div>
 

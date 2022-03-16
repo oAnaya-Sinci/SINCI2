@@ -1,12 +1,12 @@
 // HTTPS
-// var urlData = "https://10.10.100.34:1880"; // PRODUCTION SERVER WITH SECURE PROTOCOL 443
+var urlData = "https://10.10.100.34:1880"; // PRODUCTION SERVER WITH SECURE PROTOCOL 443
 // HTTP
 // var urlData = "http://10.10.100.34:1880"; // PRODUCTION SERVER WITHOUT SECURE PROTOCOL 80
 
 var currenUrl = window.location.href.split("/")[2];
 currenUrl = currenUrl.split(":");
 
-var urlData = "https://" + currenUrl[0] + ":1880";
+// var urlData = "https://" + currenUrl[0] + ":1880";
 
 var timeOut;
 
@@ -196,12 +196,3 @@ var inLoader = () => {
 var outLoader = () => {
     $(".loader").fadeOut("slow");
 }
-
-/** 
- * javascript comment 
- * @Author: flydreame 
- * @Date: 2022-03-15 15:58:13 
- * @Desc:  
- */
-
-$('a[href = "/compras/main"]').remove();

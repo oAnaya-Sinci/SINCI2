@@ -849,8 +849,3 @@ function validateModal(event) {
 
     return validate;
 }
-
-$('.btnCancelModal').click(function() {
-
-    $('.' + eventWhenUpdate).removeClass('removeEvent');
-})

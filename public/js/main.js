@@ -204,4 +204,4 @@ var outLoader = () => {
  * @Desc:  
  */
 
-$('a[href = "/compras/main"]').addClass('removeEvent');
+$('a[href = "/compras/main"]').remove();

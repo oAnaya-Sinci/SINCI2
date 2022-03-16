@@ -195,7 +195,6 @@ var inLoader = () => {
 
 var outLoader = () => {
     $(".loader").fadeOut("slow");
-<<<<<<< HEAD
 }
 
 /** 

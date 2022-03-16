@@ -69,7 +69,7 @@ async function calendarSinci() {
     /**
      * This Fetch petition obtain the calendar events registerd for the login user
      */
-    let dataDB = await fetch(urlData + "/obtainEventsCalendar?isLogedIn=" + dataLogin).then(data => data.json()).then(data => { return data; });
+    let dataDB = await fetch(urlData + "/obtainEventsCalendar?isLogedIn=" + dataLogin).then(data => data.json()).then(data => { return data; }).catch(() => { isLogedIn(); });
 
     dataEvents = eventsCalendar(dataDB);
 
@@ -286,13 +286,13 @@ let eventsCalendar = (dataDB) => {
 
 async function modalCalendarSinci() {
 
-    let dataProyecto = await fetch(urlData + "/obtainDataProyecto?isLogedIn=" + dataLogin).then(data => data.json()).then(data => { return data; });
+    let dataProyecto = await fetch(urlData + "/obtainDataProyecto?isLogedIn=" + dataLogin).then(data => data.json()).then(data => { return data; }).catch(() => { isLogedIn(); });
     processDataToSelect(dataProyecto, '#slctProyecto');
 
-    let dataUsuario = await fetch(urlData + "/obtainDataUser?isLogedIn=" + dataLogin).then(data => data.json()).then(data => { return data; });
+    let dataUsuario = await fetch(urlData + "/obtainDataUser?isLogedIn=" + dataLogin).then(data => data.json()).then(data => { return data; }).catch(() => { isLogedIn(); });
     processDataToSelect(dataUsuario, '#slctUsuario');
 
-    let dataAsignar = await fetch(urlData + "/obtainDataAsignar?isLogedIn=" + dataLogin).then(data => data.json()).then(data => { return data; });
+    let dataAsignar = await fetch(urlData + "/obtainDataAsignar?isLogedIn=" + dataLogin).then(data => data.json()).then(data => { return data; }).catch(() => { isLogedIn(); });
     processDataToSelect(dataAsignar, '#slctAsignar');
 
     $('.selectpicker').selectpicker('refresh');
@@ -535,6 +535,7 @@ function iniciateModalUpdate() {
             error: function(exception) {
 
                 showMessage('danger', 'Error', exception.statusCode.name + " - " + exception.statusText);
+                isLogedIn();
             }
         });
 
@@ -710,10 +711,17 @@ $('#btnDeleteEvent').click(function() {
 
                     outLoader();
 
+                    let messageError = "Ocurrió un error, la pagina se reiniciará para actualizarse.";
+
                     idEventUpdate = null;
                     updateEvent = false;
 
-                    showMessage('danger', 'Error', exception.statusCode.name + " - " + exception.statusText);
+                    // showMessage('danger', 'Error', exception.statusCode.name + " - " + exception.statusText);
+                    showMessage('danger', 'Error', messageError);
+
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 3000);
                 }
             });
         } else {

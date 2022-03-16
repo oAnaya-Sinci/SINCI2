@@ -52,7 +52,8 @@
             day: 'dddd M/d'
         },
         timeFormat: { // for event elements
-            '': 'h(:mm)t' // default
+            // '': 'h(:mm)t' // default
+            '': 'H:mm' // default
         },
 
         // locale
@@ -2752,9 +2753,9 @@
         firstHour: 6,
         slotMinutes: 30,
         defaultEventMinutes: 120,
-        axisFormat: 'h(:mm)tt',
+        axisFormat: 'H(:mm)tt',
         timeFormat: {
-            agenda: 'h:mm{ - h:mm}'
+            agenda: 'H:mm{ - H:mm}'
         },
         dragOpacity: {
             agenda: .5

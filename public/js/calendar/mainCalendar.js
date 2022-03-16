@@ -73,76 +73,6 @@ async function calendarSinci() {
 
     dataEvents = eventsCalendar(dataDB);
 
-    // let event;
-    // $.each(dataDB, function(index, value) {
-
-    //     if (window.navigator.vendor == "Google Inc.") {
-    //         value.FECHA_INICIO = value.FECHA_INICIO.replace('T', ' ');
-    //         value.FECHA_INICIO = value.FECHA_INICIO.replace('Z', ' ');
-    //         value.FECHA_FIN = value.FECHA_FIN.replace('T', ' ');
-    //         value.FECHA_FIN = value.FECHA_FIN.replace('Z', ' ');
-
-    //         value.Hora_inicio = value.Hora_inicio.replace('T', ' ');
-    //         value.Hora_inicio = value.Hora_inicio.replace('Z', ' ');
-    //         value.Hora_fin = value.Hora_fin.replace('T', ' ');
-    //         value.Hora_fin = value.Hora_fin.replace('Z', ' ');
-    //     } else {
-
-    //         let sD = new Date(value.FECHA_INICIO);
-    //         let eD = new Date(value.FECHA_FIN);
-    //         value.FECHA_INICIO = sD.setTime(sD.getTime() + sD.getTimezoneOffset() * 60 * 1000);
-    //         value.FECHA_FIN = eD.setTime(eD.getTime() + eD.getTimezoneOffset() * 60 * 1000);
-
-    //         let sH = new Date(value.Hora_inicio);
-    //         let eH = new Date(value.Hora_fin);
-    //         value.Hora_inicio = sH.setTime(sH.getTime() + sH.getTimezoneOffset() * 60 * 1000);
-    //         value.Hora_fin = eH.setTime(eH.getTime() + eH.getTimezoneOffset() * 60 * 1000);
-    //     }
-
-    //     var startDate = new Date(value.FECHA_INICIO);
-    //     var sDay = startDate.getDate();
-    //     var sMonth = startDate.getMonth();
-    //     var sYear = startDate.getFullYear();
-
-    //     var startHour = new Date(value.Hora_inicio);
-    //     var horaInicio = (startHour.getHours() < 10 ? "0" + startHour.getHours() : startHour.getHours());
-    //     var minutosInicio = (startHour.getMinutes() < 10 ? "0" + startHour.getMinutes() : startHour.getMinutes());
-
-    //     var endDate = new Date(value.FECHA_FIN);
-    //     var eDay = endDate.getDate();
-    //     var eMonth = startDate.getMonth();
-    //     var eYear = endDate.getFullYear();
-
-    //     var endHour = new Date(value.Hora_fin);
-    //     var HoraFin = (endHour.getHours() < 10 ? "0" + endHour.getHours() : endHour.getHours());
-    //     var minutosFin = (endHour.getMinutes() < 10 ? "0" * endHour.getMinutes() : endHour.getMinutes());
-
-    //     let titleBtcr = "";
-    //     if ("ontouchstart" in window || navigator.msMaxTouchPoints) {
-
-    //         let proyectCode = value.LOCATION.split("(");
-    //         titleBtcr = proyectCode[0];
-    //     } else {
-
-    //         titleBtcr = value.LOCATION + "\n -- -- -- -- -- -- -- -- -- -- -- -- \n " + value.NOTAS
-    //     }
-
-    //     event = {
-    //         id: value.ID_PROYECTOS_AVANCE,
-    //         // title: value.LOCATION + "\n -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- \n " + value.NOTAS,
-    //         title: titleBtcr,
-    //         start: new Date(sYear, sMonth, sDay, horaInicio, minutosInicio),
-    //         end: new Date(eYear, eMonth, eDay, HoraFin, minutosFin),
-    //         allDay: false,
-    //         // className: 'sinci',
-    //         className: 'info',
-    //         editable: false,
-    //     };
-
-    //     dataEvents.push(event);
-    // });
-    // END
-
     /*  className colors
         className: default(transparent), important(red), chill(pink), success(green), info(blue)
     */
@@ -183,7 +113,7 @@ async function calendarSinci() {
         selectable: true,
         defaultView: 'month',
 
-        axisFormat: 'h:mm',
+        axisFormat: 'H:mm',
         columnFormat: {
             month: 'ddd', // Mon
             week: 'ddd d', // Mon 7

@@ -69,7 +69,11 @@ async function calendarSinci() {
     /**
      * This Fetch petition obtain the calendar events registerd for the login user
      */
-    let dataDB = await fetch(urlData + "/obtainEventsCalendar?isLogedIn=" + dataLogin).then(data => data.json()).then(data => { return data; }).catch(() => { IsLogedIn(); });
+    let dataDB = await fetch(urlData + "/obtainEventsCalendar?isLogedIn=" + dataLogin).then(data => data.json()).then(data => { return data; });
+
+    if (dataDB[0].sessionAuth == "false") {
+        IsLogedIn();
+    }
 
     dataEvents = eventsCalendar(dataDB);
 

@@ -52,7 +52,7 @@ $(document).ready(function() {
  */
 function set_TimeOut() {
 
-    let timeSession = 360000;
+    let timeSession = 300000;
 
     clearTimeout(timeOut);
 

@@ -69,7 +69,7 @@ async function calendarSinci() {
     /**
      * This Fetch petition obtain the calendar events registerd for the login user
      */
-    let dataDB = await fetch(urlData + "/obtainEventsCalendar?isLogedIn=" + dataLogin).then(data => data.json()).then(data => { return data; }).catch(isLogedIn());
+    let dataDB = await fetch(urlData + "/obtainEventsCalendar?isLogedIn=" + dataLogin).then(data => data.json()).then(data => { return data; }).catch(() => { IsLogedIn(); });
 
     dataEvents = eventsCalendar(dataDB);
 
@@ -286,13 +286,13 @@ let eventsCalendar = (dataDB) => {
 
 async function modalCalendarSinci() {
 
-    let dataProyecto = await fetch(urlData + "/obtainDataProyecto?isLogedIn=" + dataLogin).then(data => data.json()).then(data => { return data; }).catch(() => { isLogedIn(); });
+    let dataProyecto = await fetch(urlData + "/obtainDataProyecto?isLogedIn=" + dataLogin).then(data => data.json()).then(data => { return data; }).catch(() => { IsLogedIn(); });
     processDataToSelect(dataProyecto, '#slctProyecto');
 
-    let dataUsuario = await fetch(urlData + "/obtainDataUser?isLogedIn=" + dataLogin).then(data => data.json()).then(data => { return data; }).catch(() => { isLogedIn(); });
+    let dataUsuario = await fetch(urlData + "/obtainDataUser?isLogedIn=" + dataLogin).then(data => data.json()).then(data => { return data; }).catch(() => { IsLogedIn(); });
     processDataToSelect(dataUsuario, '#slctUsuario');
 
-    let dataAsignar = await fetch(urlData + "/obtainDataAsignar?isLogedIn=" + dataLogin).then(data => data.json()).then(data => { return data; }).catch(() => { isLogedIn(); });
+    let dataAsignar = await fetch(urlData + "/obtainDataAsignar?isLogedIn=" + dataLogin).then(data => data.json()).then(data => { return data; }).catch(() => { IsLogedIn(); });
     processDataToSelect(dataAsignar, '#slctAsignar');
 
     $('.selectpicker').selectpicker('refresh');
@@ -535,7 +535,7 @@ function iniciateModalUpdate() {
             error: function(exception) {
 
                 showMessage('danger', 'Error', exception.statusCode.name + " - " + exception.statusText);
-                isLogedIn();
+                IsLogedIn();
             }
         });
 

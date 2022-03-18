@@ -48,9 +48,9 @@
 
         <input type="hidden" class="form-control" id="userData" value="">
         
+        @include('layouts.modals')  
+        
     </main>
-
-    @include('layouts.modals')  
 
     <!--   Core JS Files   -->
     <script src="/js/core/popper.min.js"></script>

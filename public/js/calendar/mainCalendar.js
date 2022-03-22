@@ -69,8 +69,7 @@ async function calendarSinci() {
     /**
      * This Fetch petition obtain the calendar events registerd for the login user
      */
-    let dataDB = await fetch(urlData + "/obtainEventsCalendar?isLogedIn=" + dataLogin).then(data => data.json()).then(data => { return data; }).catch(() => { IsLogedIn(); });;
-
+    let dataDB = await fetch(urlData + "/obtainEventsCalendar?isLogedIn=" + dataLogin).then(data => data.json()).then(data => { return data; }).catch(() => { IsLogedIn(); });
     dataEvents = eventsCalendar(dataDB);
 
     /*  className colors
@@ -202,6 +201,8 @@ async function calendarSinci() {
  */
 
 let eventsCalendar = (dataDB) => {
+
+    console.log(dataDB);
 
     let eventsToSend = [];
 
@@ -535,7 +536,7 @@ function iniciateModalUpdate() {
             error: function(exception) {
 
                 showMessage('danger', 'Error', exception.statusCode.name + " - " + exception.statusText);
-                IsLogedIn();
+                resetcalendar();
             }
         });
 
@@ -543,7 +544,7 @@ function iniciateModalUpdate() {
         $('#btnDeleteEvent').removeClass('btnDeleteNone')
         $('#createEventCalendar').modal('show');
 
-        // $(this).parent().addClass('removeEvent');
+        $(this).parent().addClass('removeEvent');
     });
 }
 
@@ -603,45 +604,40 @@ $('#btnSaveEvent').click(function() {
             if (response.cantSaveData == "true") {
 
                 showMessage('danger', 'Error', "Error ya existe registros en el rango de horas seleccionadas, favor de revisar la información a registrar");
+                showEvent();
+
                 return false;
             }
+
+            $('.fc-event.fc-event-vert.fc-event-start.fc-event-end.info.removeEvent').remove();
 
             $('#createEventCalendar').modal('hide');
             $('#btnDeleteEvent').addClass('btnDeleteNone');
 
             showMessage('success', 'Mensaje', message);
 
-            let eventSaved = eventsCalendar([response])[0];
-
             if (!updateEvent) {
+
+                let eventSaved = eventsCalendar([response])[0];
+
                 calendar.fullCalendar('renderEvent',
                     eventSaved,
                     true // make the event "stick"
                 );
             } else {
 
-                var timeout = 2000;
+                // calendar.fullCalendar('renderEvent',
+                //     eventSaved,
+                //     true // make the event "stick"
+                // );
 
-                setTimeout(() => {
-                    // inLoader();
-                    window.location.reload();
-                }, timeout);
+                resetcalendar();
             }
 
             idEventUpdate = null;
             updateEvent = false;
 
             iniciateModalUpdate();
-
-            /**
-             * This block of code is temporal, the register of the event changues ahead to not refresh the page completly
-             */
-            // var timeout = 2000;
-
-            // setTimeout(() => {
-            //     // inLoader();
-            //     window.location.reload();
-            // }, timeout);
         },
         error: function(exception) {
 
@@ -652,12 +648,11 @@ $('#btnSaveEvent').click(function() {
             idEventUpdate = null;
             updateEvent = false;
 
-            // showMessage('danger', 'Error', exception.statusCode.name + " - " + exception.statusText);
             showMessage('danger', 'Error', messageError);
 
             setTimeout(() => {
-                window.location.reload();
-            }, 3000);
+                resetcalendar();
+            }, 2000);
         }
     });
 });
@@ -686,8 +681,6 @@ $('#btnDeleteEvent').click(function() {
                 data: { idEvent: idEventUpdate, "isLogedIn": dataLogin },
                 success: function(response) {
 
-                    // outLoader();
-
                     response = JSON.parse(response)[0];
 
                     idEventUpdate = null;
@@ -695,20 +688,12 @@ $('#btnDeleteEvent').click(function() {
 
                     $('#createEventCalendar').modal('hide');
 
+                    outLoader();
                     showMessage('success', 'Exito', 'Información borrada');
-
-                    /**
-                     * This block of code is temporal, the register of the event changues ahead to not refresh the page completly
-                     */
-                    var timeout = 2000;
-
-                    setTimeout(() => {
-                        // inLoader();
-                        window.location.reload();
-                    }, timeout);
                 },
                 error: function(exception) {
 
+                    showEvent();
                     outLoader();
 
                     let messageError = "Ocurrió un error, la pagina se reiniciará para actualizarse.";
@@ -720,8 +705,8 @@ $('#btnDeleteEvent').click(function() {
                     showMessage('danger', 'Error', messageError);
 
                     setTimeout(() => {
-                        window.location.reload();
-                    }, 3000);
+                        resetcalendar();
+                    }, 2000);
                 }
             });
         } else {
@@ -856,4 +841,19 @@ function validateModal(event) {
     }, 7000);
 
     return validate;
+}
+
+$('.btnCancelModal').click(function() {
+    showEvent();
+})
+
+let showEvent = () => {
+    $('.fc-event.fc-event-vert.fc-event-start.fc-event-end.info.removeEvent').removeClass('removeEvent');
+}
+
+let resetcalendar = () => {
+
+    calendar = "";
+    $('#calendar').empty();
+    calendarSinci();
 }

@@ -1,0 +1,131 @@
+#registrarRequisicion.modalsSinciClass {
+    margin-top: 2rem;
+    width: 105%;
+}
+
+#registrarRequisicion .btn {
+    margin-bottom: 0 !important
+}
+
+#modalDetalleOrden .modal-dialog,
+#registrarRequisicion.modalsSinciClass .modal-dialog {
+    max-width: 84rem;
+}
+
+#registrarRequisicion.modalsSinciClass .modal-content {
+    height: 51rem;
+}
+
+.materialRequired {
+    height: 18rem;
+}
+
+#tableRequisiciones thead,
+#tableRequisicionesAuth thead,
+#tableOrdenesCompra thead,
+#tableCanceladas thead,
+#tableMaterials thead,
+#tableDetailMaterial thead {
+    font-size: 14px !important;
+    padding: 0 !important;
+    text-align: center;
+}
+
+#tableRequisiciones tbody,
+#tableRequisicionesAuth tbody,
+#tableOrdenesCompra tbody,
+#tableCanceladas tbody,
+#tableMaterials tbody,
+#tableDetailMaterial tbody {
+    text-align: center;
+    font-size: 13px;
+}
+
+#tableMaterials tbody tr td input {
+    font-size: 12px;
+    line-height: 0rem;
+}
+
+#tableMaterials tbody tr td select {
+    font-size: .6rem;
+    line-height: .8rem;
+}
+
+#tableMaterials tbody .material-icons {
+    cursor: pointer;
+}
+
+
+/**
+ * @Author: Carlos Omar Anaya Barajas
+ * @Date: 2022-03-22 14:03:43
+ * @Desc: This block of code is for the scroll in the table to add materials
+ */
+
+.materialRequired .form-group {
+    overflow-y: scroll;
+    height: 18rem;
+    width: 100%;
+    padding-right: 0.5rem;
+}
+
+.materialRequired .form-group #tableMaterials {
+    width: auto;
+}
+
+
+/**
+ * @Author: Carlos Omar Anaya Barajas
+ * @Date: 2022-03-24 13:25:00
+ * @Desc: This block of code is for the scroll in the table to materials details
+ */
+
+#modalDetalleOrden .modal-body div {
+    overflow-y: scroll;
+    height: 25rem;
+    width: 100%;
+    padding-right: 0.5rem;
+}
+
+#modalDetalleOrden .modal-body div #tableDetailMaterial {
+    width: 100%;
+}
+
+
+/**
+ * @Author: Carlos Omar Anaya Barajas
+ * @Date: 2022-03-22 16:50:04
+ * @Desc: This styles are for the modal of notes
+ */
+
+#notesDB {
+    height: 580px;
+    overflow-y: auto;
+}
+
+#notesDB hr,
+#notesDB p {
+    margin: 0 !important;
+}
+
+#notesDB p {
+    padding: .5rem 0 !important;
+}
+
+.noteCatalog.active {
+    background-color: #E7E5E5;
+}
+
+.textAreaViewer {
+    border: 1px solid #000;
+}
+
+table tbody tr td {
+    cursor: pointer;
+}
+
+.rowSelected {
+    /* background-color: #D9531E !important; */
+    background-color: rgb(217, 83, 30, .85) !important;
+    color: #fff;
+}

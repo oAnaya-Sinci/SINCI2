@@ -44,6 +44,11 @@ body .btn {
     font-weight: 600 !important;
 }
 
+.form-control,
+.form-select {
+    padding: 0.5rem;
+}
+
 body,
 body .btn,
 body label,
@@ -58,6 +63,11 @@ body h5,
     font-weight: normal;
     font-style: normal;
     letter-spacing: normal;
+}
+
+body .modal label,
+body .modal table thead {
+    font-size: 15px !important;
 }
 
 body .nav-link.text-white {
@@ -108,7 +118,7 @@ body .nav-link.text-white {
     margin-top: 10rem;
 }
 
-#createEventCalendar {
+.modalsSinciClass {
     margin-top: 4rem;
 }
 
@@ -123,24 +133,24 @@ body .nav-link.text-white {
     height: 15rem;
 }
 
-#createEventCalendar.modal-lg {
+.modalsSinciClass.modal-lg {
     max-width: none !important;
 }
 
-#createEventCalendar .modal-dialog {
+.modalsSinciClass .modal-dialog {
     max-width: 63rem;
 }
 
-#createEventCalendar .modal-content {
+.modalsSinciClass .modal-content {
     height: 45.3rem;
 }
 
-.body-bitacora {
+.body-modalsSinci {
     display: flex;
     margin: .5rem 0 .5rem 0;
 }
 
-.body-bitacora label {
+.body-modalsSinci label {
     margin-right: .5rem;
 }
 
@@ -289,7 +299,7 @@ h5 {
  */
 
 @media screen and (max-width: 700px) and (orientation: portrait) {
-    #createEventCalendar {
+    .modalsSinciClass {
         margin-top: 0;
     }
     .weekNumber {
@@ -385,7 +395,7 @@ h5 {
 }
 
 @media screen and (max-height: 700px) and (orientation:landscape) {
-    #createEventCalendar {
+    .modalsSinciClass {
         margin-top: 0;
     }
     .weekNumber {

@@ -3,18 +3,21 @@
 // HTTP
 // var urlData = "http://10.10.100.34:1880"; // PRODUCTION SERVER WITHOUT SECURE PROTOCOL 80
 
+// var URL to my Local UBUTBU Server for the update
+var urlData = "https://192.168.0.102:1880";
+
 var currenUrl = window.location.href.split("/")[2];
 currenUrl = currenUrl.split(":");
 
-var urlData = "https://" + currenUrl[0] + ":1880";
+// var urlData = "https://" + currenUrl[0] + ":1880";
 
 var timeOut;
 
-/** 
- * javascript comment 
- * @Author: flydreame 
- * @Date: 2022-03-03 12:23:26 
- * @Desc: Here inciate some of the elements required for a good work of the proyect 
+/**
+ * javascript comment
+ * @Author: Carlos Omar Anaya Barajas
+ * @Date: 2022-03-03 12:23:26
+ * @Desc: Here inciate some of the elements required for a good work of the proyect
  */
 $(document).ready(function() {
 
@@ -22,37 +25,17 @@ $(document).ready(function() {
 
     set_TimeOut();
     // IsLogedIn();
-
-    $('.datetimepicker').datetimepicker({
-        // follow MomentJS docs: https://momentjs.com/docs/#/displaying/format/
-        format: 'YYYY-MM-DD HH:mm',
-
-        // Your Icons
-        // as Bootstrap 4 is not using Glyphicons anymore
-        icons: {
-            time: 'fa fa-clock-o',
-            date: 'fa fa-calendar',
-            up: 'fa fa-chevron-up',
-            down: 'fa fa-chevron-down',
-            previous: 'fa fa-chevron-left',
-            next: 'fa fa-chevron-right',
-            today: 'fa fa-check',
-            clear: 'fa fa-trash',
-            close: 'fa fa-times'
-        },
-
-    });
 });
 
-/** 
- * javascript comment 
- * @Author: flydreame 
- * @Date: 2022-03-03 12:24:43 
- * @Desc: This function set a timer, to close the proyect if the  
+/**
+ * javascript comment
+ * @Author: Carlos Omar Anaya Barajas
+ * @Date: 2022-03-03 12:24:43
+ * @Desc: This function set a timer, to close the proyect if the
  */
 function set_TimeOut() {
 
-    let timeSession = 300000;
+    let timeSession = 600000;
 
     clearTimeout(timeOut);
 
@@ -61,10 +44,10 @@ function set_TimeOut() {
     }, timeSession);
 }
 
-/** 
- * javascript comment 
- * @Author: flydreame 
- * @Date: 2022-03-03 12:22:39 
+/**
+ * javascript comment
+ * @Author: Carlos Omar Anaya Barajas
+ * @Date: 2022-03-03 12:22:39
  * @Desc:  This function let the user login to the proyect using the enter key
  */
 
@@ -72,11 +55,11 @@ $(document).click(function() {
     IsLogedIn();
 });
 
-/** 
- * javascript comment 
- * @Author: flydreame 
- * @Date: 2022-03-03 12:22:11 
- * @Desc: This function close the session of the user in the proyect 
+/**
+ * javascript comment
+ * @Author: Carlos Omar Anaya Barajas
+ * @Date: 2022-03-03 12:22:11
+ * @Desc: This function close the session of the user in the proyect
  */
 
 $('#logout').click(function() {
@@ -113,10 +96,10 @@ async function IsLogedIn() {
     });
 }
 
-/** 
- * javascript comment 
- * @Author: flydreame 
- * @Date: 2022-02-04 22:08:25 
+/**
+ * javascript comment
+ * @Author: Carlos Omar Anaya Barajas
+ * @Date: 2022-02-04 22:08:25
  * @Desc: this function show the messaes in the system abouts the tasks
  */
 
@@ -154,10 +137,10 @@ function showMessage(type, header = "Mensaje del sistema", message = "") {
  * This function close the modals
  */
 
-$(".modal .modal-dialog .modal-header .close").click(function() {
+// $(".modal .modal-dialog .modal-header .close").click(function() {
 
-    $('.modal').modal('hide');
-});
+//     $('.modal').modal('hide');
+// });
 
 $('.btnCancelModal').click(function() {
 
@@ -182,11 +165,11 @@ var modalConfirm = function(callback) {
     });
 };
 
-/** 
- * javascript comment 
- * @Author: flydreame 
- * @Date: 2022-03-04 10:58:32 
- * @Desc: This block of code is for the load page waiter 
+/**
+ * javascript comment
+ * @Author: Carlos Omar Anaya Barajas
+ * @Date: 2022-03-04 10:58:32
+ * @Desc: This block of code is for the load page waiter
  */
 
 var inLoader = () => {
@@ -196,3 +179,46 @@ var inLoader = () => {
 var outLoader = () => {
     $(".loader").fadeOut("slow");
 }
+
+var dataLogin = () => {
+
+    let keyLogin = window.localStorage.getItem('sasIsLogedIn').split("/");
+
+    let newStr = "";
+    let x = 0;
+    $.each(keyLogin, function(index, value) {
+
+        if (x < keyLogin.length - 1)
+            newStr += value + "-";
+        else
+            newStr += value;
+
+        x++;
+    });
+    keyLogin = newStr;
+
+    keyLogin = keyLogin.split("+");
+
+    newStr = "";
+    x = 0;
+    $.each(keyLogin, function(index, value) {
+
+        if (x < keyLogin.length - 1)
+            newStr += value + "_";
+        else
+            newStr += value;
+
+        x++;
+    });
+    keyLogin = newStr;
+
+    return keyLogin;
+}
+
+
+/**
+ * javascript comment
+ * @Author: Carlos Omar Anaya Barajas
+ * @Date: 2022-03-31 09:03:25
+ * @Desc: Github Copilot
+ */

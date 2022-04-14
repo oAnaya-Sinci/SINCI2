@@ -17,7 +17,7 @@
       </div>
   </div>
 
-<!-- All thos block of code is for the notification modals  -->
+<!-- All thos block of code is for the notification modalsgit  -->
 
 <div class="row" style="display: none;">
     <div class="col-lg-3 col-sm-6 col-12">

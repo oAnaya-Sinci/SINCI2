@@ -35,7 +35,7 @@
 
   <!-- In this space is deployed the modals required to the calendar plugin -->
   <!-- This modal is to save de event on the calendar -->
-  <div id="createEventCalendar" class="modal fade modal-lg" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" data-bs-backdrop="static" data-bs-keyboard="false" aria-hidden="true">
+  <div id="createEventCalendar" class="modal fade modal-lg modalsSinciClass" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" data-bs-backdrop="static" data-bs-keyboard="false" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -46,7 +46,7 @@
         </div>
         <div class="modal-body">
           <form id="dataEvent">
-            
+
             <!-- <span class="invalidRequired hidden">
               <strong>Faltan elementos para guardar el registro</strong>
             </span> -->
@@ -56,12 +56,12 @@
               <textarea class="form-control" id="message-text" name="resumen" required></textarea>
             </div>
 
-            <div class="form-group body-bitacora">
+            <div class="form-group body-modalsSinci">
               <label for="recipient-name" class="col-form-label">Proyecto:</label>
-              
+
               <!-- <input type="search" class="form-control" id="recipient-name" name="slctProyecto" list="listaProyectos">
               <datalist id="listaProyectos"></datalist> -->
-              
+
               <!-- <select class="form-select modalForm" name="slctProyecto" id="slctProyecto" required>
                 <option value="">NAN</option>
               </select> -->
@@ -73,7 +73,7 @@
               <!-- <select class="selectpicker form-control" id="number" data-live-search="true" title="Select a number" data-hide-disabled="true"></select> -->
             </div>
 
-            <div id="divUsuarios" class="form-group body-bitacora">
+            <div id="divUsuarios" class="form-group body-modalsSinci">
               <label id="lblUsuario" for="recipient-name" class="col-form-label">Usuario:</label>
               <!-- <input type="text" class="form-control" id="recipient-name" name="usuario"> -->
               <!-- <select class="form-select modalForm" name="slctUsuario" id="slctUsuario" required> -->
@@ -84,14 +84,14 @@
 
             <div class="row">
               <div class="col-md-6">
-                <div class="form-group body-bitacora">
+                <div class="form-group body-modalsSinci">
                   <label for="recipient-name" class="col-form-label">Inicio:</label>
                   <input type="text" class="form-control datetimepicker modalForm" id="startDate" name="inicio" required>
                 </div>
               </div>
 
               <div class="col-md-6">
-                <div class="form-group body-bitacora">
+                <div class="form-group body-modalsSinci">
                   <label for="recipient-name" class="col-form-label">Fin:</label>
                   <input type="text" class="form-control datetimepicker modalForm" id="endDate" name="fin" required>
                 </div>
@@ -100,7 +100,7 @@
 
             <div class="row">
               <div class="col-md-6">
-                <div class="form-group body-bitacora">
+                <div class="form-group body-modalsSinci">
                   <label for="recipient-name" class="col-form-label">Tipo:</label>
                   <select class="form-select modalForm" name="slctTipo" id="slctTipo" required>
                     <option value="-1">Seleccione una opción</option>
@@ -113,15 +113,10 @@
               </div>
 
               <div class="col-md-6">
-                <div class="form-group body-bitacora asignar_a">
+                <div class="form-group body-modalsSinci asignar_a">
                   <label for="recipient-name" class="col-form-label">Asignar_a:</label>
-                  <!-- <input type="text" class="form-control" id="recipient-name" name="asignar"> -->
-                  <!-- <select class="form-select modalForm" name="slctAsignar" id="slctAsignar" required>
-                  <option value="">NAN</option> -->
-
                   <select class="selectpicker form-control" name="slctAsignar" id="slctAsignar" data-live-search="true" data-virtual-scroll="false">
-                <option value="">NAN</option>
-              </select>
+                    <option value="">NAN</option>
                   </select>
                 </div>
               </div>
@@ -130,7 +125,7 @@
           </form>
         </div>
         <div class="modal-footer">
-          
+
           <button id="btnSaveEvent" type="button" class="btn btn-primary">Guardar</button>
           <button type="button" class="btn btn-secondary btnCancelModal" data-dismiss="modal">Cancelar</button>
           <button id="btnDeleteEvent" type="button" class="btn btn-danger btnDeleteNone">Eliminar</button>
@@ -164,6 +159,7 @@
 
 @section('jsSection')
 
+    <!-- <script src='../js/calendar/jquery-ui.custom.min.js' type="text/javascript"></script> -->
   <script src='../js/calendar/fullcalendar.js' type="text/javascript"></script>
   <script src='../js/calendar/mainCalendar.js' type="text/javascript"></script>
 

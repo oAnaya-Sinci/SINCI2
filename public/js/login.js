@@ -3,10 +3,13 @@
 // HTTP
 // var urlData = "http://10.10.100.34:1880"; // PRODUCTION SERVER WITHOUT SECURE PROTOCOL 80
 
+// var URL to my Local UBUTBU Server for the update
+var urlData = "https://192.168.0.102:1880";
+
 var currenUrl = window.location.href.split("/")[2];
 currenUrl = currenUrl.split(":");
 
-var urlData = "https://" + currenUrl[0] + ":1880";
+// var urlData = "https://" + currenUrl[0] + ":1880";
 
 var timeOut;
 
@@ -161,10 +164,10 @@ var outLoader = () => {
     $(".loader").fadeOut("slow");
 }
 
-/** 
- * javascript comment 
- * @Author: flydreame 
- * @Date: 2022-02-04 22:08:25 
+/**
+ * javascript comment
+ * @Author: flydreame
+ * @Date: 2022-02-04 22:08:25
  * @Desc: this function show the messaes in the system abouts the tasks
  */
 

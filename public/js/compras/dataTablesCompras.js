@@ -4,7 +4,7 @@
  * @Date: 2022-04-05 11:31:14
  * @Desc: This function inciate all the tables of the requisicion part
  */
-let inciateTablesDT = async() => {
+let iniciateTablesDT = () => {
 
     let dl = dataLogin();
 
@@ -14,13 +14,15 @@ let inciateTablesDT = async() => {
         }
     });
 
-    let pageLength = 10;
+    let pageLength = 25;
     let searching = true;
+    let tableScrollX = true;
+    let tableScrollY = false;
 
-    tableRequisicion(dl, pageLength, searching);
-    tableRequisicionAuth(dl, pageLength, searching);
-    tableOrdenCompra(dl, pageLength, searching);
-    tableCanceladas(dl, pageLength, searching);
+    tableRequisicion(dl, pageLength, searching, tableScrollX, tableScrollY);
+    tableRequisicionAuth(dl, pageLength, searching, tableScrollX, tableScrollY);
+    tableOrdenCompra(dl, pageLength, searching, tableScrollX, tableScrollY);
+    tableCanceladas(dl, pageLength, searching, tableScrollX, tableScrollY);
 
     return true;
 }
@@ -31,7 +33,7 @@ let inciateTablesDT = async() => {
  * @Date: 2022-04-04 15:30:37
  * @Desc: this function inciate the dataTable for the "Requisicion Data" table;
  */
-let tableRequisicion = async(dl, pageLength, searching) => {
+let tableRequisicion = async(dl, pageLength, searching, tableScrollX, tableScrollY) => {
 
     await $('#tableRequisiciones').DataTable({
         dom: 'Bfrtip',
@@ -40,7 +42,7 @@ let tableRequisicion = async(dl, pageLength, searching) => {
             url: urlData + "/obtainDataRequisicion?isLogedIn=" + dl,
             type: "GET",
             dataSrc: 'data',
-            beforeSend: function() {
+            beforeSend: () => {
                 console.time('tableRequisiciones');
             },
             // data: function(d) {
@@ -55,6 +57,9 @@ let tableRequisicion = async(dl, pageLength, searching) => {
                 requisicionesInciatePagesTables();
             }
         },
+
+        scrollX: tableScrollX,
+        scrollY: tableScrollY,
 
         columns: [
             { data: "FOLIO", className: "folio" },
@@ -104,7 +109,7 @@ let tableRequisicion = async(dl, pageLength, searching) => {
  * @Date: 2022-04-04 15:30:41
  * @Desc:this function inciate the dataTable for the "Requisiscion authorizadas" table
  */
-let tableRequisicionAuth = async(dl, pageLength, searching) => {
+let tableRequisicionAuth = async(dl, pageLength, searching, tableScrollX, tableScrollY) => {
 
     await $('#tableRequisicionesAuth').DataTable({
         dom: 'Bfrtip',
@@ -113,16 +118,19 @@ let tableRequisicionAuth = async(dl, pageLength, searching) => {
             url: urlData + "/obtainDataRequisicionAuth?isLogedIn=" + dl,
             type: "GET",
             dataSrc: 'data',
-            beforeSend: function() {
+            beforeSend: () => {
                 console.time('tableRequisicionesAuth');
             },
-            complete: function() {
+            complete: () => {
 
                 console.timeEnd('tableRequisicionesAuth');
 
                 requisicionesAuthInciatePagesTables();
             }
         },
+
+        scrollX: tableScrollX,
+        scrollY: tableScrollY,
 
         columns: [
             { data: "STATUS" },
@@ -143,9 +151,9 @@ let tableRequisicionAuth = async(dl, pageLength, searching) => {
             { data: "AUTORIZADOPOR" },
             { data: "FECHA_AUTORIZACION" },
             { data: "ORDENCOMPRAPOR" },
-            { data: "NOTAS_ORDENCOMPRA", visible: false, className: "notaOrdenCompraRA" },
-            { data: "NOTAS_REQUISICION", visible: false, className: "notaRequisicionRA" },
-            { data: "ENTREGAR_EN", visible: false, className: "notaEntregarEnRA" },
+            // { data: "NOTAS_ORDENCOMPRA", visible: false, className: "notaOrdenCompraRA" },
+            // { data: "NOTAS_REQUISICION", visible: false, className: "notaRequisicionRA" },
+            // { data: "ENTREGAR_EN", visible: false, className: "notaEntregarEnRA" },
         ],
         columnDefs: [{
                 targets: [3, 4, 13, 16],
@@ -169,7 +177,6 @@ let tableRequisicionAuth = async(dl, pageLength, searching) => {
                         numero = 0;
 
                     return '$' + numero.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
-
                 }
             }
         ],
@@ -192,7 +199,7 @@ let tableRequisicionAuth = async(dl, pageLength, searching) => {
  * @Date: 2022-04-04 15:30:44
  * @Desc: this function inciate the datatable for the "Orden de Compra" table
  */
-let tableOrdenCompra = async(dl, pageLength, searching) => {
+let tableOrdenCompra = async(dl, pageLength, searching, tableScrollX, tableScrollY) => {
 
     await $('#tableOrdenesCompra').DataTable({
         dom: 'Bfrtip',
@@ -203,16 +210,16 @@ let tableOrdenCompra = async(dl, pageLength, searching) => {
             data: function(d) {
                 return $.extend({}, d, {
                     "isLogedIn": dl,
-                    "yearSearch": $('#slctYearOrdenCompra').val()
+                    "yearSearch": $('#slctYearOrdenCompra').val() == undefined ? moment().format("YYYY") : $('#slctYearOrdenCompra').val()
                 });
             },
             dataSrc: 'data',
-            beforeSend: function() {
+            beforeSend: () => {
                 console.time('tableOrdenesCompra');
 
                 inLoader();
             },
-            complete: function() {
+            complete: () => {
 
                 console.timeEnd('tableOrdenesCompra');
 
@@ -221,6 +228,9 @@ let tableOrdenCompra = async(dl, pageLength, searching) => {
                 outLoader();
             }
         },
+
+        scrollX: tableScrollX,
+        scrollY: tableScrollY,
 
         columns: [
             { data: "CODIGO" },
@@ -244,8 +254,8 @@ let tableOrdenCompra = async(dl, pageLength, searching) => {
             { data: "FECHA_AUTORIZACION" },
             { data: "FECHA_REQUISICION" },
             { data: "CERRO" },
-            { data: "NOTAS_ORDENCOMPRA", visible: false, className: "notaOrdenCompraOC" },
-            { data: "NOTAS_REQUISICION", visible: false, className: "notaRequisicionOC" },
+            // { data: "NOTAS_ORDENCOMPRA", visible: false, className: "notaOrdenCompraOC" },
+            // { data: "NOTAS_REQUISICION", visible: false, className: "notaRequisicionOC" },
         ],
 
         columnDefs: [{
@@ -307,7 +317,7 @@ let tableOrdenCompra = async(dl, pageLength, searching) => {
  * @Date: 2022-04-04 15:30:47
  * @Desc: this function iniciate the dataTable of the "Canceladas" Table
  */
-let tableCanceladas = async(dl, pageLength, searching) => {
+let tableCanceladas = async(dl, pageLength, searching, tableScrollX, tableScrollY) => {
 
     await $('#tableCanceladas').DataTable({
         dom: 'Bfrtip',
@@ -316,16 +326,19 @@ let tableCanceladas = async(dl, pageLength, searching) => {
             url: urlData + "/obtainDataCanceladas?isLogedIn=" + dl,
             type: "GET",
             dataSrc: 'data',
-            beforeSend: function() {
+            beforeSend: () => {
                 console.time('tableCanceladas');
             },
-            complete: function() {
+            complete: () => {
 
                 console.timeEnd('tableCanceladas');
 
                 canceladasInciatePagesTables();
             }
         },
+
+        scrollX: tableScrollX,
+        scrollY: tableScrollY,
 
         columns: [
             { data: "FOLIO", className: "folio" },
@@ -415,8 +428,12 @@ let requisicionesInciatePagesTables = () => {
         });
     });
 
-    $('.paginate_button').click(function() {
+    $('.paginate_button').click(() => {
 
+        requisicionesInciatePagesTables();
+    });
+
+    $('#tableRequisiciones_wrapper thead .sorting').click(function() {
         requisicionesInciatePagesTables();
     });
 }
@@ -431,7 +448,7 @@ let requisicionesAuthInciatePagesTables = () => {
 
     $('#tableRequisicionesAuth_wrapper tbody tr td').each(function() {
 
-        $(this).click(function() {
+        $(this).click(() => {
 
             $('.dataTables_wrapper tbody tr').removeClass("rowSelected");
             $(this).parent().addClass("rowSelected");
@@ -443,8 +460,12 @@ let requisicionesAuthInciatePagesTables = () => {
         });
     });
 
-    $('.paginate_button').click(function() {
+    $('.paginate_button').click(() => {
 
+        requisicionesAuthInciatePagesTables();
+    });
+
+    $('#tableRequisicionesAuth_wrapper thead .sorting').click(function() {
         requisicionesAuthInciatePagesTables();
     });
 }
@@ -459,7 +480,7 @@ let ordenCompraInciatePagesTables = () => {
 
     $('#tableOrdenesCompra_wrapper tbody tr td').each(function() {
 
-        $(this).click(function() {
+        $(this).click(() => {
 
             $('.dataTables_wrapper tbody tr').removeClass("rowSelected");
             $(this).parent().addClass("rowSelected");
@@ -471,8 +492,12 @@ let ordenCompraInciatePagesTables = () => {
         });
     });
 
-    $('.paginate_button').click(function() {
+    $('.paginate_button').click(() => {
 
+        ordenCompraInciatePagesTables();
+    });
+
+    $('#tableOrdenesCompra_wrapper thead .sorting').click(function() {
         ordenCompraInciatePagesTables();
     });
 }
@@ -487,7 +512,7 @@ let canceladasInciatePagesTables = () => {
 
     $('#tableCanceladas_wrapper tbody tr td').each(function() {
 
-        $(this).click(function() {
+        $(this).click(() => {
 
             $('.dataTables_wrapper tbody tr').removeClass("rowSelected");
             $(this).parent().addClass("rowSelected");
@@ -498,33 +523,19 @@ let canceladasInciatePagesTables = () => {
 
         canceladasInciatePagesTables();
     });
-}
 
+    $('#tableCanceladas_wrapper thead .sorting').click(function() {
+        canceladasInciatePagesTables();
+    });
+}
 
 /**
  * javascript comment
- * @Author: flydreame
- * @Date: 2022-03-24 12:06:26
- * @Desc: This event show the details of a row selected from a table
+ * @Author: Carlos Omar Anaya Barajas
+ * @Date: 2022-04-19 16:47:14
+ * @Desc:
  */
+$('#myTab button').click(() => {
 
-$('#btnVerDetalle').click(async function() {
-
-    // console.log($('.dataTables_wrapper tbody tr.rowSelected td.folio')[0].innerText);
-
-    let dl = dataLogin();
-    let idCompra = $('.dataTables_wrapper tbody tr.rowSelected td.folio')[0].innerText;
-
-    await $.ajax({
-        type: "GET",
-        url: urlData + "/obtainDataDetalleRequisicionOrden",
-        data: { "isLogedIn": dl, "idCompra": idCompra },
-        success: function(response) {
-
-            displayDetailsDataModal(response);
-        },
-        error: function(exception) {
-
-        }
-    });
+    $('.dataTables_wrapper tbody tr').removeClass("rowSelected");
 });

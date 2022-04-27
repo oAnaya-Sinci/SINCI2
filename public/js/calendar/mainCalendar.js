@@ -633,10 +633,6 @@ $('#btnSaveEvent').click(function() {
             updateEvent = false;
 
             showMessage('danger', 'Error', messageError);
-
-            // setTimeout(() => {
-            //     resetcalendar();
-            // }, 2000);
         }
     });
 });

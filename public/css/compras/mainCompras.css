@@ -118,6 +118,8 @@
 
 .textAreaViewer {
     border: 1px solid #000;
+    resize: none;
+    height: 10rem;
 }
 
 table tbody tr td {
@@ -128,4 +130,26 @@ table tbody tr td {
     /* background-color: #D9531E !important; */
     background-color: rgb(217, 83, 30, .85) !important;
     color: #fff;
+}
+
+.tabContents {
+    margin-top: 2rem;
+}
+
+.dataTables_wrapper {
+    margin-bottom: 2rem;
+}
+
+.nav.nav-tabs .nav-link.active {
+    color: #D9531E !important;
+    background-color: #fff;
+    border-color: #dee2e6 #dee2e6 #fff;
+}
+
+.nav.nav-tabs .nav-link {
+    color: #495057 !important;
+}
+
+.displayButton {
+    display: none;
 }

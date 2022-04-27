@@ -390,8 +390,12 @@ let registroRequisicion = (requisicionData, update) => {
         },
         success: function(response) {
 
+            $('#tableRequisiciones').DataTable().ajax.reload();
+            // $('#tableRequisicionesAuth').DataTable().ajax.reload();
+            // $('#tableOrdenesCompra').DataTable().ajax.reload();
+            // $('#tableCanceladas').DataTable().ajax.reload();
+
             $('#registrarRequisicion').modal('hide');
-            outLoader();
         },
         error: function(exception) {
 

@@ -493,7 +493,6 @@ let ordenCompraInciatePagesTables = () => {
     });
 
     $('.paginate_button').click(() => {
-
         ordenCompraInciatePagesTables();
     });
 
@@ -501,6 +500,16 @@ let ordenCompraInciatePagesTables = () => {
         ordenCompraInciatePagesTables();
     });
 }
+
+$('#slctOrdenCompra').change(function() {
+
+    console.log($('#tableOrdenesCompra_wrapper tbody tr.rowSelected td.folio'));
+
+    let folio = $('#tableOrdenesCompra_wrapper tbody tr.rowSelected td.folio')[0].innerText;
+    let tipo = $(this).val();
+
+    fetch(urlData + "/obtainNotasOrdenCompra?folio=" + folio + "&slctTipo=" + tipo).then(data => data.json()).then(nota => { $('#notesOrdenesCompra').val(nota[0].RESPONSE); }).catch(() => { IsLogedIn(); });
+});
 
 /**
  * javascript comment

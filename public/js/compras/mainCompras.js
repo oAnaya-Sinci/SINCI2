@@ -35,6 +35,18 @@ $(document).ready(function() {
 /**
  * javascript comment
  * @Author: Carlos Omar Anaya Barajas
+ * @Date: 2022-04-27 14:07:32
+ * @Desc:
+ */
+
+$('#mi-modal-message #modal-btn-cerrar').click(function() {
+
+    $('#mi-modal-message').modal('hide');
+});
+
+/**
+ * javascript comment
+ * @Author: Carlos Omar Anaya Barajas
  * @Date: 2022-04-25 10:22:45
  * @Desc:
  */
@@ -108,7 +120,6 @@ async function modalComprasSinci() {
  */
 
 function processDataToSelect(data, select, firstOption = "") {
-
 
     let options = "";
 
@@ -416,7 +427,19 @@ $('.btnCancelModal').click(function() {
 $('#btnVerDetalle').click(async() => {
 
     let dl = dataLogin();
-    let idCompra = $('.dataTables_wrapper tbody tr.rowSelected td.folio')[0].innerText;
+    let idCompra;
+
+    try {
+
+        idCompra = $('.dataTables_wrapper tbody tr.rowSelected td.folio')[0].innerText;
+    } catch (error) {
+
+        $("#mi-modal-message .modal-header h4").text("Mensaje:");
+        $("#mi-modal-message .modal-body").html("<p>primero se debe de elegir una fila de la tabla para mostrar el detalle</p>");
+        $("#mi-modal-message").modal('show');
+
+        return false;
+    }
 
     await $.ajax({
         type: "GET",
@@ -545,27 +568,6 @@ let cleanModalrequisicion = () => {
 
 /**
  * javascript comment
- * @Author: Carlos Omar Anaya Barajas
- * @Date: 2022-04-26 13:06:51
- * @Desc:
- */
-var modalConfirmCompras = function(callback) {
-
-    // alert("Funcion para abrir modal de confirmacion");
-
-    $("#modal-btn-si").on("click", function() {
-        callback(true);
-        $("#mi-modal").modal('hide');
-    });
-
-    $("#modal-btn-no").on("click", function() {
-        callback(false);
-        $("#mi-modal").modal('hide');
-    });
-};
-
-/**
- * javascript comment
  * @Author: flydreame
  * @Date: 2022-03-24 12:06:26
  * @Desc: This event show the details of a row selected from a table
@@ -574,7 +576,19 @@ var modalConfirmCompras = function(callback) {
 $('#btnCancelar').click(() => {
 
     let dl = dataLogin();
-    let folio = $('.dataTables_wrapper tbody tr.rowSelected td.folio')[0].innerText;
+    let folio;
+
+    try {
+
+        folio = $('.dataTables_wrapper tbody tr.rowSelected td.folio')[0].innerText;
+    } catch (error) {
+
+        $("#mi-modal-message .modal-header h4").text("Mensaje:");
+        $("#mi-modal-message .modal-body").html("<p>primero se debe de elegir una fila de la tabla para cancelar el registro</p>");
+        $("#mi-modal-message").modal('show');
+
+        return false;
+    }
 
     $("#mi-modal .modal-header h4").text("Confirmar Cancelación");
     $("#mi-modal .modal-body").html("<p>Está a punto de cancelar este registro.</p><p>¿Desea continuar con la cancelación?</p>");
@@ -618,7 +632,19 @@ $('#btnCancelar').click(() => {
 $('#btnEliminar').click(() => {
 
     let dl = dataLogin();
-    let folio = $('.dataTables_wrapper tbody tr.rowSelected td.folio')[0].innerText;
+    let folio;
+
+    try {
+
+        folio = $('.dataTables_wrapper tbody tr.rowSelected td.folio')[0].innerText;
+    } catch (error) {
+
+        $("#mi-modal-message .modal-header h4").text("Mensaje:");
+        $("#mi-modal-message .modal-body").html("<p>primero se debe de elegir una fila de la tabla para eliminar el registro</p>");
+        $("#mi-modal-message").modal('show');
+
+        return false;
+    }
 
     $("#mi-modal .modal-header h4").text("Confirmar Eliminación");
     $("#mi-modal .modal-body").html("<p>Está a punto de eliminar este registro, al hacerlo la información se perderá y no podrá ser recuperada.</p><p>¿Desea continuar con la eliminación?</p>");

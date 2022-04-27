@@ -128,7 +128,15 @@
                             <!-- Table Ordenes Compra -->
                             <div class="ordenCompra tabContents">
 
-                                <select name="" id="slctYearOrdenCompra" class="form-select"></select>
+                                <div class="row">
+
+                                    <div class="col-md-3">
+
+                                        <select name="" id="slctYearOrdenCompra" class="form-select"></select>
+
+                                    </div>
+
+                                </div>
 
                                 <table id="tableOrdenesCompra" class="table table-bordered align-items-center mb-0">
                                     <thead>
@@ -162,10 +170,18 @@
                                     <tbody></tbody>
                                 </table>
 
-                                <select name="" id="slctOrdenCompra" class="form-select">
-                                    <option value="1">Requisición</option>
-                                    <option value="2">Orden de compra</option>
-                                </select>
+                                <div class="row" style="margin-bottom: 1rem;">
+
+                                    <div class="col-md-3">
+
+                                        <select name="" id="slctOrdenCompra" class="form-select">
+                                            <option value="1">Requisición</option>
+                                            <option value="2">Orden de compra</option>
+                                        </select>
+
+                                    </div>
+
+                                </div>
 
                                 <textarea name="" class="form-control textAreaViewer" id="notesOrdenesCompra"></textarea>
 
@@ -383,6 +399,22 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-primary" id="modal-btn-si">Sí</button>
           <button type="button" class="btn btn-secondary" id="modal-btn-no">No</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END -->
+
+  <!-- This is a modal message -->
+  <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false" id="mi-modal-message">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+        <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel"></h4>
+        </div>
+        <div class="modal-body"></div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" id="modal-btn-cerrar">Salir</button>
         </div>
       </div>
     </div>

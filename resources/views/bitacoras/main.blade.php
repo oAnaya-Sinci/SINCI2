@@ -145,7 +145,7 @@
           <span aria-hidden="true">&times;</span>
         </button> -->
         </div>
-        <div class="modal-body"><p>Desea continuar co la acción</p></div>
+        <div class="modal-body"><p>Desea continuar con la acción</p></div>
         <div class="modal-footer">
           <button type="button" class="btn btn-primary" id="modal-btn-si">Sí</button>
           <button type="button" class="btn btn-secondary" id="modal-btn-no">No</button>

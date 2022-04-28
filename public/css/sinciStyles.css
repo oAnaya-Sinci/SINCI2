@@ -1,7 +1,7 @@
-/** 
- * @Author: Carlos Omar Anaya Barajas 
- * @Date: 2022-03-04 10:57:25 
- * @Desc: this block of css is for the load page waiter 
+/**
+ * @Author: Carlos Omar Anaya Barajas
+ * @Date: 2022-03-04 10:57:25
+ * @Desc: this block of css is for the load page waiter
  */
 
 .removeEvent {
@@ -20,10 +20,10 @@
 }
 
 
-/** 
- * @Author: Carlos Omar Anaya Barajas 
- * @Date: 2022-02-18 16:02:35 
- * @Desc: File with the styles of the project 
+/**
+ * @Author: Carlos Omar Anaya Barajas
+ * @Date: 2022-02-18 16:02:35
+ * @Desc: File with the styles of the project
  */
 
 .ps__rail-x {
@@ -76,9 +76,9 @@ body .nav-link.text-white {
 }
 
 
-/** 
- * @Author: Carlos Omar Anaya Barajas 
- * @Date: 2022-01-14 10:16:31 
+/**
+ * @Author: Carlos Omar Anaya Barajas
+ * @Date: 2022-01-14 10:16:31
  * @Desc: This is the styles of the calendar to changue accordig the requires of the proyect
  */
 
@@ -200,8 +200,12 @@ body .nav-link.text-white {
     color: #fff !important;
 }
 
-#navbarBlur #navbar ul li a {
+#navbarBlur #navbar .navbar-nav .nav-item .nav-link {
     color: #fff !important;
+}
+
+#navbarBlur #navbar .navbar-nav .nav-item .nav-link .sidenav-toggler-line {
+    background: #FFF !important;
 }
 
 h5 {
@@ -292,9 +296,9 @@ h5 {
 }
 
 
-/** 
- * @Author: Carlos Omar Anaya Barajas 
- * @Date: 2022-02-15 17:31:46 
+/**
+ * @Author: Carlos Omar Anaya Barajas
+ * @Date: 2022-02-15 17:31:46
  * @Desc: Resposive Desing to the proyect adapting to the smart devices
  */
 
@@ -490,9 +494,9 @@ h5 {
 }
 
 
-/** 
-     * @Author: Carlos Omar Anaya 
-     * @Date: 2022-02-18 11:59:56 
+/**
+     * @Author: Carlos Omar Anaya
+     * @Date: 2022-02-18 11:59:56
      * @Desc:  Styles to devices with a less resolution in the screen
      */
 
@@ -505,5 +509,48 @@ h5 {
 @media screen and (max-width: 400px) and (orientation:landscape) {
     .btn.dropdown-toggle {
         width: 60vw !important;
+    }
+}
+
+
+/**
+* @author: Carlos Omar Anaya Barajas
+* @date: 2022-04-28 10:21:29
+* @param:
+* @return:
+* @desc:
+*/
+
+@media screen and (max-width: 1919px) and (orientation: portrait) {
+    .sidenav.fixed-start+.main-content {
+        margin-left: 0;
+    }
+    .g-sidenav-show:not(.rtl) .sidenav {
+        -webkit-transform: translateX(-17.125rem);
+        transform: translateX(-17.125rem);
+    }
+    .g-sidenav-show.g-sidenav-pinned .sidenav {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+    }
+    #navbarBlurLogo {
+        background-color: #fff;
+    }
+}
+
+@media screen and (max-height: 965px) and (orientation: landscape) {
+    .sidenav.fixed-start+.main-content {
+        margin-left: 0;
+    }
+    .g-sidenav-show:not(.rtl) .sidenav {
+        -webkit-transform: translateX(-17.125rem);
+        transform: translateX(-17.125rem);
+    }
+    .g-sidenav-show.g-sidenav-pinned .sidenav {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+    }
+    #navbarBlurLogo {
+        background-color: #fff;
     }
 }

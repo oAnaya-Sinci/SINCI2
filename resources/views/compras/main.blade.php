@@ -53,7 +53,7 @@
 
                                 <table id="tableRequisiciones" class="table table-bordered align-items-center mb-0">
                                     <thead>
-                                    <tr>
+                                    <tr class="headTable">
                                         <th>Folio</th>
                                         <th>Fecha Solicitud</th>
                                         <th>Fecha requerida</th>
@@ -84,39 +84,48 @@
 
                                 <table id="tableRequisicionesAuth" class="table table-bordered align-items-center mb-0">
                                     <thead>
-                                    <tr>
+                                    <tr class="headTable">
                                         <th colspan="11">Orden de compra</th>
                                         <th colspan="7">Datos de la requisición</th>
                                     </tr>
-                                    <tr>
-                                        <th>Stataus</th>
+                                    <tr class="headTable">
+                                        <th>Status</th>
                                         <th>Orden de compra</th>
                                         <th>Proveedor</th>
-                                        <th>Fecha de orden de compra</th>
+                                        <th>Fecha orden compra</th>
                                         <th>Por entregar</th>
                                         <th>Moneda</th>
                                         <th>Total</th>
-                                        <th>Condiciones de Pago</th>
+                                        <th>Condiciones Pago</th>
                                         <th>Aplica</th>
                                         <th>Prioridad</th>
                                         <th>Oficina</th>
-                                        <th>Folio requisición</th>
+                                        <th>Folio</th>
                                         <th>Código</th>
                                         <th>Solicitado el</th>
                                         <th>Solicitado por</th>
                                         <th>Autorizado por</th>
                                         <th>Autorizado</th>
-                                        <th>Orden de compra por</th>
+                                        <th>Orden compra por</th>
                                     </tr>
                                     </thead>
                                     <tbody></tbody>
                                 </table>
 
-                                <select name="" id="slctRequisicionAuth" class="form-select">
-                                    <option value="1">Requisición</option>
-                                    <option value="2">Orden de compra</option>
-                                    <option value="3">Entregar en</option>
-                                </select>
+                                <div class="row" style="margin-bottom: 1rem;">
+
+                                    <div class="col-md-3">
+
+                                        <select name="" id="slctRequisicionAuth" class="form-select">
+                                            <option value="1">Requisición</option>
+                                            <option value="2">Orden de compra</option>
+                                            <option value="3">Entregar en</option>
+                                        </select>
+
+                                    </div>
+
+                                </div>
+
                                 <textarea name="" class="form-control textAreaViewer" id="notesRequisicionAuth"></textarea>
 
                             </div>
@@ -140,19 +149,19 @@
 
                                 <table id="tableOrdenesCompra" class="table table-bordered align-items-center mb-0">
                                     <thead>
-                                    <tr>
+                                    <tr class="headTable">
                                         <th colspan="12">Orden de compra</th>
                                         <th colspan="8">Requisición</th>
                                     </tr>
-                                    <tr>
+                                    <tr class="headTable">
                                         <th>Proyecto</th>
                                         <th>Recepcion</th>
-                                        <th>Orden de compra</th>
-                                        <th>Fecha de la orden de compra</th>
+                                        <th>Orden compra</th>
+                                        <th>Fecha orden de compra</th>
                                         <th>Fecha de cierre</th>
                                         <th>Por entregar el</th>
                                         <th>Moneda</th>
-                                        <th>Condiciones de pago</th>
+                                        <th>Condiciones pago</th>
                                         <th>Total</th>
                                         <th>Aplica</th>
                                         <th>Prioridad</th>
@@ -196,8 +205,8 @@
 
                                 <table id="tableCanceladas" class="table table-bordered align-items-center mb-0">
                                 <thead>
-                                    <tr>
-                                    <th>Requisición</th>
+                                    <tr class="headTable">
+                                    <th>Folio</th>
                                     <th>Fecha de Solicitud</th>
                                     <th>Proyecto</th>
                                     <th>Solictado por</th>

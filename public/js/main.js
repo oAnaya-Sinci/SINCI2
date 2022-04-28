@@ -5,8 +5,8 @@
 
 // var URL to my Local UBUTBU Server for the update
 // var urlData = "https://192.168.0.102:1880";
-// var urlData = "http://localhost:1880";
-var urlData = "https://10.10.100.34:1880";
+var urlData = "http://localhost:1880";
+// var urlData = "https://10.10.100.34:1880";
 
 var currenUrl = window.location.href.split("/")[2];
 currenUrl = currenUrl.split(":");
@@ -23,9 +23,25 @@ var timeOut;
  */
 $(document).ready(function() {
 
-    timeOut = setTimeout(() => { return false }, 100);
+    console.time('Session');
+
+    timeOut = setTimeout(() => { return false }, 1000);
 
     set_TimeOut();
+
+    moment.updateLocale('en', {
+        months: [
+            "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
+            "Augosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+        ]
+    });
+
+    moment.updateLocale('en', {
+        monthsShort: [
+            "Ene", "Feb", "Mar", "Abr", "May", "Jun",
+            "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"
+        ]
+    });
 });
 
 /**
@@ -36,7 +52,7 @@ $(document).ready(function() {
  */
 function set_TimeOut() {
 
-    let timeSession = 600000;
+    let timeSession = 300000;
 
     clearTimeout(timeOut);
 
@@ -85,7 +101,9 @@ async function IsLogedIn() {
                 window.localStorage.setItem('sasIsLogedIn', response.sessionAuth);
             } else {
                 window.localStorage.setItem('sasIsLogedIn', 'false');
-                window.location.href = "/";
+                // window.location.href = "/";
+                console.timeEnd('Session');
+                alert('Ya se cerro la sesión');
             }
         },
         error: function(exception) {

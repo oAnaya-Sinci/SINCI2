@@ -474,7 +474,20 @@ $('#btnEditarRequisicion').click(async() => {
     $('#btnEditEvent').removeClass('displayButton');
 
     let dl = dataLogin();
-    let folio = $('.dataTables_wrapper tbody tr.rowSelected td.folio')[0].innerText;
+    let folio;
+    // let folio = $('.dataTables_wrapper tbody tr.rowSelected td.folio')[0].innerText;
+
+    try {
+
+        folio = $('.dataTables_wrapper tbody tr.rowSelected td.folio')[0].innerText;
+    } catch (error) {
+
+        $("#mi-modal-message .modal-header h4").text("Mensaje:");
+        $("#mi-modal-message .modal-body").html("<p>primero se debe de elegir una fila de la tabla para modificar el registro</p>");
+        $("#mi-modal-message").modal('show');
+
+        return false;
+    }
 
     await $.ajax({
         type: "GET",

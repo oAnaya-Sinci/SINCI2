@@ -14,10 +14,10 @@ let iniciateTablesDT = () => {
         }
     });
 
-    let pageLength = 25;
+    let pageLength = 15;
     let searching = true;
-    let tableScrollX = true;
-    let tableScrollY = false;
+    let tableScrollX = false;
+    let tableScrollY = 700;
 
     tableRequisicion(dl, pageLength, searching, tableScrollX, tableScrollY);
     tableRequisicionAuth(dl, pageLength, searching, tableScrollX, tableScrollY);
@@ -37,6 +37,10 @@ let tableRequisicion = async(dl, pageLength, searching, tableScrollX, tableScrol
 
     await $('#tableRequisiciones').DataTable({
         dom: 'Bfrtip',
+
+        language: {
+            url: "../plugins/dataTable/lang/ES-MX.json"
+        },
 
         ajax: {
             url: urlData + "/obtainDataRequisicion?isLogedIn=" + dl,
@@ -58,8 +62,8 @@ let tableRequisicion = async(dl, pageLength, searching, tableScrollX, tableScrol
             }
         },
 
-        scrollX: tableScrollX,
-        scrollY: tableScrollY,
+        // scrollX: tableScrollX,
+        // scrollY: tableScrollY,
 
         columns: [
             { data: "FOLIO", className: "folio" },
@@ -83,7 +87,8 @@ let tableRequisicion = async(dl, pageLength, searching, tableScrollX, tableScrol
                 if (value != null) {
 
                     let dateFormated = formatDates(value);
-                    return moment(dateFormated).format("DD-MMM-YYYY");
+                    // return moment(dateFormated).format("DD-MMM-YYYY");
+                    return moment(dateFormated).format("YYYY-MMM-DD");
                 } else {
 
                     return "";
@@ -92,7 +97,7 @@ let tableRequisicion = async(dl, pageLength, searching, tableScrollX, tableScrol
         }],
 
         order: [
-            [1, 'asc']
+            [1, 'desc']
         ],
 
         "pageLength": pageLength,
@@ -114,6 +119,10 @@ let tableRequisicionAuth = async(dl, pageLength, searching, tableScrollX, tableS
     await $('#tableRequisicionesAuth').DataTable({
         dom: 'Bfrtip',
 
+        language: {
+            url: "../plugins/dataTable/lang/ES-MX.json"
+        },
+
         ajax: {
             url: urlData + "/obtainDataRequisicionAuth?isLogedIn=" + dl,
             type: "GET",
@@ -129,8 +138,8 @@ let tableRequisicionAuth = async(dl, pageLength, searching, tableScrollX, tableS
             }
         },
 
-        scrollX: tableScrollX,
-        scrollY: tableScrollY,
+        // scrollX: tableScrollX,
+        // scrollY: tableScrollY,
 
         columns: [
             { data: "STATUS" },
@@ -162,7 +171,7 @@ let tableRequisicionAuth = async(dl, pageLength, searching, tableScrollX, tableS
                     if (value != null) {
 
                         let dateFormated = formatDates(value);
-                        return moment(dateFormated).format("DD-MMM-YYYY");
+                        return moment(dateFormated).format("YYYY-MMM-DD");
                     } else {
 
                         return "";
@@ -182,7 +191,7 @@ let tableRequisicionAuth = async(dl, pageLength, searching, tableScrollX, tableS
         ],
 
         order: [
-            [3, 'asc']
+            [3, 'desc']
         ],
 
         "pageLength": pageLength,
@@ -203,6 +212,10 @@ let tableOrdenCompra = async(dl, pageLength, searching, tableScrollX, tableScrol
 
     await $('#tableOrdenesCompra').DataTable({
         dom: 'Bfrtip',
+
+        language: {
+            url: "../plugins/dataTable/lang/ES-MX.json"
+        },
 
         ajax: {
             url: urlData + "/obtainDataOrdenesCompra",
@@ -229,8 +242,8 @@ let tableOrdenCompra = async(dl, pageLength, searching, tableScrollX, tableScrol
             }
         },
 
-        scrollX: tableScrollX,
-        scrollY: tableScrollY,
+        // scrollX: tableScrollX,
+        // scrollY: tableScrollY,
 
         columns: [
             { data: "CODIGO" },
@@ -265,7 +278,7 @@ let tableOrdenCompra = async(dl, pageLength, searching, tableScrollX, tableScrol
                     if (value != null) {
 
                         let dateFormated = formatDates(value);
-                        return moment(dateFormated).format("DD-MMM-YYYY");
+                        return moment(dateFormated).format("YYYY-MMM-DD");
                     } else {
 
                         return "";
@@ -279,7 +292,7 @@ let tableOrdenCompra = async(dl, pageLength, searching, tableScrollX, tableScrol
                     if (value != null) {
 
                         let dateFormated = formatDates(value);
-                        return moment(dateFormated).format("DD-MMM-YYYY hh:mm a");
+                        return moment(dateFormated).format("YYYY-MMM-DD hh:mm a");
                     } else {
 
                         return "";
@@ -300,7 +313,7 @@ let tableOrdenCompra = async(dl, pageLength, searching, tableScrollX, tableScrol
         ],
 
         order: [
-            [3, 'asc']
+            [3, 'desc']
         ],
 
         "pageLength": pageLength,
@@ -322,6 +335,10 @@ let tableCanceladas = async(dl, pageLength, searching, tableScrollX, tableScroll
     await $('#tableCanceladas').DataTable({
         dom: 'Bfrtip',
 
+        language: {
+            url: "../plugins/dataTable/lang/ES-MX.json"
+        },
+
         ajax: {
             url: urlData + "/obtainDataCanceladas?isLogedIn=" + dl,
             type: "GET",
@@ -337,8 +354,8 @@ let tableCanceladas = async(dl, pageLength, searching, tableScrollX, tableScroll
             }
         },
 
-        scrollX: tableScrollX,
-        scrollY: tableScrollY,
+        // scrollX: tableScrollX,
+        // scrollY: tableScrollY,
 
         columns: [
             { data: "FOLIO", className: "folio" },
@@ -362,7 +379,7 @@ let tableCanceladas = async(dl, pageLength, searching, tableScrollX, tableScroll
                 if (value != null) {
 
                     let dateFormated = formatDates(value);
-                    return moment(dateFormated).format("DD-MMM-YYYY");
+                    return moment(dateFormated).format("YYYY-MMM-DD");
                 } else {
 
                     return "";
@@ -371,7 +388,7 @@ let tableCanceladas = async(dl, pageLength, searching, tableScrollX, tableScroll
         }],
 
         order: [
-            [1, 'asc']
+            [1, 'desc']
         ],
 
         "pageLength": pageLength,
@@ -424,7 +441,10 @@ let requisicionesInciatePagesTables = () => {
 
             let folio = $(this).parent()[0].firstChild.textContent;
 
-            fetch(urlData + "/obtainNotasRequisicion?folio=" + folio).then(data => data.json()).then(nota => { $('#notesRequisicion').val(nota[0].NOTAS_REQUISICION); }).catch(() => { IsLogedIn(); });
+            fetch(urlData + "/obtainNotasRequisicion?folio=" + folio).then(data => data.json()).then(nota => {
+                nota = nota.data;
+                $('#notesRequisicion').val(nota[0].NOTAS_REQUISICION);
+            }).catch(() => { IsLogedIn(); });
         });
     });
 
@@ -434,6 +454,10 @@ let requisicionesInciatePagesTables = () => {
     });
 
     $('#tableRequisiciones_wrapper thead .sorting').click(function() {
+        requisicionesInciatePagesTables();
+    });
+
+    $('#tableRequisiciones_wrapper [type="search"]').keyup(function() {
         requisicionesInciatePagesTables();
     });
 }
@@ -456,7 +480,10 @@ let requisicionesAuthInciatePagesTables = () => {
             let folio = $(this).parent().children()[11].textContent;
             let tipo = $('#slctRequisicionAuth').val();
 
-            fetch(urlData + "/obtainNotasRequisicionAuth?folio=" + folio + "&slctTipo=" + tipo).then(data => data.json()).then(nota => { $('#notesRequisicionAuth').val(nota[0].RESPONSE); }).catch(() => { IsLogedIn(); });
+            fetch(urlData + "/obtainNotasRequisicionAuth?folio=" + folio + "&slctTipo=" + tipo).then(data => data.json()).then(nota => {
+                nota = nota.data;
+                $('#notesRequisicionAuth').val(nota[0].RESPONSE);
+            }).catch(() => { IsLogedIn(); });
         });
     });
 
@@ -466,6 +493,10 @@ let requisicionesAuthInciatePagesTables = () => {
     });
 
     $('#tableRequisicionesAuth_wrapper thead .sorting').click(function() {
+        requisicionesAuthInciatePagesTables();
+    });
+
+    $('#tableRequisicionesAuth_wrapper [type="search"]').keyup(function() {
         requisicionesAuthInciatePagesTables();
     });
 }
@@ -488,7 +519,10 @@ let ordenCompraInciatePagesTables = () => {
             let folio = $(this).parent().children()[12].textContent;
             let tipo = $('#slctOrdenCompra').val();
 
-            fetch(urlData + "/obtainNotasOrdenCompra?folio=" + folio + "&slctTipo=" + tipo).then(data => data.json()).then(nota => { $('#notesOrdenesCompra').val(nota[0].RESPONSE); }).catch(() => { IsLogedIn(); });
+            fetch(urlData + "/obtainNotasOrdenCompra?folio=" + folio + "&slctTipo=" + tipo).then(data => data.json()).then(nota => {
+                nota = nota.data;
+                $('#notesOrdenesCompra').val(nota[0].RESPONSE);
+            }).catch(() => { IsLogedIn(); });
         });
     });
 
@@ -499,16 +533,39 @@ let ordenCompraInciatePagesTables = () => {
     $('#tableOrdenesCompra_wrapper thead .sorting').click(function() {
         ordenCompraInciatePagesTables();
     });
+
+    $('#tableOrdenesCompra_wrapper [type="search"]').keyup(function() {
+        ordenCompraInciatePagesTables();
+    });
 }
 
-$('#slctOrdenCompra').change(function() {
+/**
+ * javascript comment
+ * @Author: Carlos Omar Anaya Barajas
+ * @Date: 2022-04-28 12:14:41
+ * @Desc:
+ */
 
-    console.log($('#tableOrdenesCompra_wrapper tbody tr.rowSelected td.folio'));
+$('#slctRequisicionAuth').change(function() {
+
+    let folio = $('#tableRequisicionesAuth_wrapper tbody tr.rowSelected td.folio')[0].innerText;
+    let tipo = $(this).val();
+
+    fetch(urlData + "/obtainNotasOrdenCompra?folio=" + folio + "&slctTipo=" + tipo).then(data => data.json()).then(nota => {
+        nota = nota.data;
+        nota.length > 0 ? $('#notesRequisicionAuth').val(nota[0].RESPONSE) : $('#notesRequisicionAuth').val('');
+    }).catch(() => { IsLogedIn(); });
+});
+
+$('#slctOrdenCompra').change(function() {
 
     let folio = $('#tableOrdenesCompra_wrapper tbody tr.rowSelected td.folio')[0].innerText;
     let tipo = $(this).val();
 
-    fetch(urlData + "/obtainNotasOrdenCompra?folio=" + folio + "&slctTipo=" + tipo).then(data => data.json()).then(nota => { $('#notesOrdenesCompra').val(nota[0].RESPONSE); }).catch(() => { IsLogedIn(); });
+    fetch(urlData + "/obtainNotasOrdenCompra?folio=" + folio + "&slctTipo=" + tipo).then(data => data.json()).then(nota => {
+        nota = nota.data;
+        nota.length > 0 ? $('#notesOrdenesCompra').val(nota[0].RESPONSE) : $('#notesOrdenesCompra').val('');
+    }).catch(() => { IsLogedIn(); });
 });
 
 /**
@@ -534,6 +591,10 @@ let canceladasInciatePagesTables = () => {
     });
 
     $('#tableCanceladas_wrapper thead .sorting').click(function() {
+        canceladasInciatePagesTables();
+    });
+
+    $('#tableCanceladas_wrapper [type="search"]').keyup(function() {
         canceladasInciatePagesTables();
     });
 }

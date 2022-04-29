@@ -465,6 +465,39 @@ $('#btnVerDetalle').click(async() => {
 /**
  * javascript comment
  * @Author: Carlos Omar Anaya Barajas
+ * @Date: 2022-04-29 12:37:57
+ * @Desc:
+ */
+
+$('#btnAutorizar').click(function() {
+
+    let folio = "<strong>Folio: </strong>" + $('#tableRequisiciones tbody tr.rowSelected td.folio').text();
+    $("#autorizarRequisicion .modal-body .content__requisicion .folio").html(folio);
+
+    let proyecto = "<strong>Proyecto: </strong>" + $('#tableRequisiciones tbody tr.rowSelected td.proyetoReqs').text();
+    $("#autorizarRequisicion .modal-body .content__requisicion .proyecto").html(proyecto);
+
+    let fechaSolicitud = "<strong>Fecha Solicitud: </strong>" + $('#tableRequisiciones tbody tr.rowSelected td.fechaSolicitud').text();
+    $("#autorizarRequisicion .modal-body .content__requisicion .fecha__solicitud").html(fechaSolicitud);
+
+    let fechaRequerida = "<strong>Fecha requerida: </strong>" + $('#tableRequisiciones tbody tr.rowSelected td.fechaRequerida').text();
+    $("#autorizarRequisicion .modal-body .content__requisicion .fecha__requerida").html(fechaRequerida);
+
+    let solcitado = "<strong>Solicitdo por: </strong>" + $('#tableRequisiciones tbody tr.rowSelected td.solicitado').text();
+    $("#autorizarRequisicion .modal-body .content__requisicion .solicitado").html(solcitado);
+
+    let compannia = "<strong>Compañia: </strong>" + $('#tableRequisiciones tbody tr.rowSelected td.compania').text();
+    $("#autorizarRequisicion .modal-body .content__requisicion .compannia").html(compannia);
+
+    let ciudad = "<strong>Ciudad: </strong>" + $('#tableRequisiciones tbody tr.rowSelected td.ciudad').text();
+    $("#autorizarRequisicion .modal-body .content__requisicion .ciudad").html(ciudad);
+
+    $('#autorizarRequisicion').modal('show');
+});
+
+/**
+ * javascript comment
+ * @Author: Carlos Omar Anaya Barajas
  * @Date: 2022-04-26 13:52:05
  * @Desc:
  */

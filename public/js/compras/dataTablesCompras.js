@@ -67,14 +67,14 @@ let tableRequisicion = async(dl, pageLength, searching, tableScrollX, tableScrol
 
         columns: [
             { data: "FOLIO", className: "folio" },
-            { data: "FECHA_SOLICITUD" },
-            { data: "FECHA_REQUISICION" },
+            { data: "FECHA_SOLICITUD", className: "fechaSolicitud" },
+            { data: "FECHA_REQUISICION", className: "fechaRequerida" },
             { data: "FECHA_PORENTREGA" },
-            { data: "PROYECTO" },
+            { data: "PROYECTO", className: "proyetoReqs" },
             { data: "OFICINA_Texto" },
-            { data: "PEDIDOPOR" },
-            { data: "COMPANIA" },
-            { data: "CIUDAD" },
+            { data: "PEDIDOPOR", className: "solicitado" },
+            { data: "COMPANIA", className: "compania" },
+            { data: "CIUDAD", className: "ciudad" },
             { data: "Area" },
             { data: "AplicaV2" },
             { data: "Prioridad" }
@@ -292,7 +292,7 @@ let tableOrdenCompra = async(dl, pageLength, searching, tableScrollX, tableScrol
                     if (value != null) {
 
                         let dateFormated = formatDates(value);
-                        return moment(dateFormated).format("YYYY-MMM-DD hh:mm a");
+                        return moment(dateFormated).format("YYYY-MMM-DD hh:mma");
                     } else {
 
                         return "";
@@ -313,7 +313,7 @@ let tableOrdenCompra = async(dl, pageLength, searching, tableScrollX, tableScrol
         ],
 
         order: [
-            [3, 'desc']
+            [4, 'desc']
         ],
 
         "pageLength": pageLength,

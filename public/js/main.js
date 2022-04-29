@@ -70,6 +70,8 @@ function set_TimeOut() {
 
 $(document).click(function() {
     IsLogedIn();
+
+    $('.g-sidenav-pinned #sidenav-main').removeClass('bg-white');
 });
 
 /**
@@ -101,14 +103,14 @@ async function IsLogedIn() {
                 window.localStorage.setItem('sasIsLogedIn', response.sessionAuth);
             } else {
                 window.localStorage.setItem('sasIsLogedIn', 'false');
-                // window.location.href = "/";
                 console.timeEnd('Session');
                 alert('Ya se cerro la sesión');
+                window.location.href = "/";
             }
         },
         error: function(exception) {
 
-            console.log(exception.statusText, exception.statusText);
+            console.error(exception);
             showMessage("danger", "error", exception)
                 // window.location.href = "/";
         }

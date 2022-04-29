@@ -217,7 +217,7 @@ h5 {
 }
 
 #sidenav-collapse-main {
-    height: 87%;
+    height: 89%;
 }
 
 .mc-calendar {
@@ -293,6 +293,12 @@ h5 {
 
 .fc-event-time {
     font-weight: bold;
+}
+
+.bg-white {}
+
+.navbar-vertical.bg-white {
+    box-shadow: none;
 }
 
 

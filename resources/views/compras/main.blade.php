@@ -25,6 +25,7 @@
                     <button id="btnRegistraRequisicion" class="btn btn-success">Registrar Requisición</button>
                     <button id="btnEditarRequisicion" class="btn btn-primary">Editar Requisición</button>
                     <button id="btnVerDetalle" class="btn btn-secondary">Ver detalle</button>
+                    <button id="btnAutorizar" class="btn btn-success">Autorizar</button>
                     <button id="btnCancelar" class="btn btn-warning">Cancelar</button>
                     <button id="btnEliminar" class="btn btn-danger">Eliminar</button>
 
@@ -90,13 +91,13 @@
                                     </tr>
                                     <tr class="headTable">
                                         <th>Status</th>
-                                        <th>Orden de compra</th>
+                                        <th>Orden compra</th>
                                         <th>Proveedor</th>
                                         <th>Fecha orden compra</th>
                                         <th>Por entregar</th>
                                         <th>Moneda</th>
                                         <th>Total</th>
-                                        <th>Condiciones Pago</th>
+                                        <th>Condicion Pago</th>
                                         <th>Aplica</th>
                                         <th>Prioridad</th>
                                         <th>Oficina</th>
@@ -157,8 +158,8 @@
                                         <th>Proyecto</th>
                                         <th>Recepcion</th>
                                         <th>Orden compra</th>
-                                        <th>Fecha orden de compra</th>
-                                        <th>Fecha de cierre</th>
+                                        <th>Fecha orden compra</th>
+                                        <th>Fecha cierre</th>
                                         <th>Por entregar el</th>
                                         <th>Moneda</th>
                                         <th>Condiciones pago</th>
@@ -170,7 +171,7 @@
                                         <th>Solicitado</th>
                                         <th>Solicitado por</th>
                                         <th>Autorizado por</th>
-                                        <th>Orden de compra por</th>
+                                        <th>Orden compra por</th>
                                         <th>Autorizado</th>
                                         <th>Requisitado</th>
                                         <th>Se cerro por</th>
@@ -396,6 +397,56 @@
       </div>
     </div>
   </div>
+
+  <!-- This is a modal to auth the requisición -->
+  <div id="autorizarRequisicion" class="modal fade modal-lg modalsSinciClass" tabindex="-1" role="dialog" aria-labelledby="autorizarRequisicion" data-bs-backdrop="static" data-bs-keyboard="false" aria-hidden="true">
+    <div class="modal-dialog ">
+      <div class="modal-content" style="height: 31rem !important">
+        <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Autorizar requisición de compras</h4>
+        </div>
+        <div class="modal-body">
+
+            <hr>
+
+            <div class="content__requisicion">
+                <div class="row">
+                    <div class="col-md-3 folio"></div>
+                    <div class="col-md-4 fecha__solicitud"></div>
+                    <div class="col-md-4 fecha__requerida"></div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 proyecto"></div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 solicitado"></div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 compannia"></div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 ciudad"></div>
+                </div>
+            </div>
+
+            <hr>
+
+            <p style="text-align: right;">Haga clic en "autorizar" y la requisición continuara con el proceso de compras</p>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" id="modal-btn-si">Autorizar</button>
+          <!-- <button type="button" class="btn btn-primary" id="modal-btn-si">Autorizar y enviar correo</button> -->
+          <button type="button" class="btn btn-secondary btnCancelModal" id="modal-btn-no">Cancelar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END -->
 
   <!-- This is a modal confirm -->
   <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false" id="mi-modal">

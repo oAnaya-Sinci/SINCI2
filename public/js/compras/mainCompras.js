@@ -20,8 +20,7 @@ $(document).ready(function() {
 
     });
 
-    let date = new Date();
-
+    // let date = new Date();
     // let today = date.getFullYear() + "-" + (date.getMonth() < 9 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1) + "-" + (date.getDate() < 10 ? "0" + (date.getDate()) : date.getDate());
     let today = moment().format('YYYY-MM-DD');
     $('#dateRequired').val(today);
@@ -30,6 +29,13 @@ $(document).ready(function() {
 
     iniciateTablesDT();
     modalComprasSinci();
+
+    // $('#modalDetalleOrden').modal('show');
+});
+
+$('#btnCerrarModal').click(function() {
+
+    $('#registrarRequisicion').modal('hide');
 });
 
 /**
@@ -99,7 +105,12 @@ async function modalComprasSinci() {
     await fetch(urlData + "/obtainDataAsignar?isLogedIn=" + dl).then(data => data.json()).then(dataAsignar => { processDataToSelect(dataAsignar, '#slctAsignar'); }).catch(() => { IsLogedIn(); });
     await fetch(urlData + "/obtainDataCiudades?isLogedIn=" + dl).then(data => data.json()).then(dataAsignar => { processDataToSelect(dataAsignar, '#slctCiudades'); }).catch(() => { IsLogedIn(); });
     await fetch(urlData + "/obtainDataCompannia?isLogedIn=" + dl).then(data => data.json()).then(dataAsignar => { processDataToSelect(dataAsignar, '#slctCompannia'); }).catch(() => { IsLogedIn(); });
-    await fetch(urlData + "/obtainDataProveedores?isLogedIn=" + dl).then(data => data.json()).then(dataAsignar => { processDataToSelect(dataAsignar, '#slctProveedor', 'Sin proveedor'); }).catch(() => { IsLogedIn(); });
+
+    await fetch(urlData + "/obtainDataProveedores?isLogedIn=" + dl).then(data => data.json()).then(dataAsignar => {
+        processDataToSelect(dataAsignar, '#slctProveedor', 'Sin proveedor');
+        processDataToSelect(dataAsignar, '#slctProveedorOrdenCompra', 'Sin proveedor');
+    }).catch(() => { IsLogedIn(); });
+
     await fetch(urlData + "/obtainDataUnidadesMedida?isLogedIn=" + dl).then(data => data.json()).then(dataAsignar => { processDataToSelect(dataAsignar, '#slctUnidad', "-"); }).catch(() => { IsLogedIn(); });
     await fetch(urlData + "/obtainDataNotesCatalog?isLogedIn=" + dl).then(data => data.json()).then(dataAsignar => { processDataToModalNotes(dataAsignar); }).catch(() => { IsLogedIn(); });
 
@@ -146,6 +157,27 @@ function processDataToSelect(data, select, firstOption = "") {
 }
 
 let displayDetailsDataModal = (dataDetails) => {
+
+    let folio = "<strong>Folio: </strong>" + $('#tableRequisiciones tbody tr.rowSelected td.folio').text();
+    $("#modalDetalleOrden .modal-body .content__requisicion .folio").html(folio);
+
+    let proyecto = "<strong>Proyecto: </strong>" + $('#tableRequisiciones tbody tr.rowSelected td.proyetoReqs').text();
+    $("#modalDetalleOrden .modal-body .content__requisicion .proyecto").html(proyecto);
+
+    let fechaSolicitud = "<strong>Fecha Solicitud: </strong>" + $('#tableRequisiciones tbody tr.rowSelected td.fechaSolicitud').text();
+    $("#modalDetalleOrden .modal-body .content__requisicion .fecha__solicitud").html(fechaSolicitud);
+
+    let fechaRequerida = "<strong>Fecha requerida: </strong>" + $('#tableRequisiciones tbody tr.rowSelected td.fechaRequerida').text();
+    $("#modalDetalleOrden .modal-body .content__requisicion .fecha__requerida").html(fechaRequerida);
+
+    let solcitado = "<strong>Solicitdo por: </strong>" + $('#tableRequisiciones tbody tr.rowSelected td.solicitado').text();
+    $("#modalDetalleOrden .modal-body .content__requisicion .solicitado").html(solcitado);
+
+    let compannia = "<strong>Compañia: </strong>" + $('#tableRequisiciones tbody tr.rowSelected td.compania').text();
+    $("#modalDetalleOrden .modal-body .content__requisicion .compannia").html(compannia);
+
+    let ciudad = "<strong>Ciudad: </strong>" + $('#tableRequisiciones tbody tr.rowSelected td.ciudad').text();
+    $("#modalDetalleOrden .modal-body .content__requisicion .ciudad").html(ciudad);
 
     $('#tableDetailMaterial tbody').empty();
 
@@ -231,6 +263,7 @@ $('#modalAddNote').click(function() {
 $('#addMaterial').click(function() {
 
     let cantidad = $('#txtCantidad').val();
+    // let unidadId = $('#slctUnidad').val();
     let unidad = $('#slctUnidad option:selected').text();
     let material = $('#txtMaterial').val();
     let proveedorId = $('#slctProveedor').val();
@@ -248,14 +281,86 @@ $('#addMaterial').click(function() {
         "<td id='proveedor' data-mtrlvalue='" + proveedorId + "'>" + proveedor + "</td>" +
         "<td id='marca' data-mtrlvalue='" + marca + "'>" + marca + "</td>" +
         "<td id='catalogo' data-mtrlvalue='" + catalogo + "'>" + catalogo + "</td>" +
-        "<td> <i class='material-icons opacity-10' id='removeMaterial'>clear</i> </td>" +
+        "<td> <i class='material-icons opacity-10' id='removeMaterial'>clear</i> " +
+        "<i class='material-icons opacity-10' id='editMaterial'>drive_file_rename_outline</i> </td>" +
         "</tr>";
 
     // $('#materialsRequired').before(newRowMaterial);
     $('#materialsRequired').after(newRowMaterial);
 
+    iniciateEditMaterial();
     iniciateRemovematerials();
 });
+
+/**
+ * javascript comment
+ * @Author: Carlos Omar Anaya Barajas
+ * @Date: 2022-04-26 15:56:10
+ * @Desc: Funciones necesarios para editar el apartado de requiciones
+ */
+
+let showDataCompra = (dataCompra, datDetalleCompra) => {
+
+    cleanModalrequisicion();
+
+    $('#dateRequired').val(moment(dataCompra[0].FECHA_SOLICITUD).format('YYYY-MM-DD'));
+    $('#endDate').val(moment(dataCompra[0].FECHA_REQUISICION).format('YYYY-MM-DD'));
+    $('#prioridad').val(dataCompra[0].Prioridad);
+    $('#slctProyecto').val(dataCompra[0].ID_PROYECTO);
+    $('#entregarEn').val(dataCompra[0].ENTREGAR_EN);
+    $('#slctUsuario').val(dataCompra[0].ID_USUARIO);
+    $('#slctCiudades').val(dataCompra[0].CIUDAD);
+    $('#slctCompannia').val(dataCompra[0].COMPANIA);
+    $('#slctAsignar').val(dataCompra[0].APLICA);
+    $('#notasRequisicion').val(dataCompra[0].NOTAS_REQUISICION);
+
+    $('.selectpicker').selectpicker('refresh');
+
+    let RowsMaterial = "";
+    datDetalleCompra.forEach(function(valor, indice) {
+
+        RowsMaterial += "<tr>" +
+            "<td id='consecutivo' data-mtrlvalue='" + valor.CONSECUTIVO + "'>" + valor.CONSECUTIVO + "</td>" +
+            "<td id='cantidad' data-mtrlvalue='" + valor.CANTIDAD + "'>" + valor.CANTIDAD + "</td>" +
+            "<td id='unidad' data-mtrlvalue='" + valor.UNIDAD + "'>" + valor.UNIDAD + "</td>" +
+            "<td id='material' data-mtrlvalue='" + valor.MATERIAL + "'>" + valor.MATERIAL + "</td>" +
+            "<td id='proveedor' data-mtrlvalue='" + valor.ID_PROVEEDOR + "'>" + valor.PROVEEDOR + "</td>" +
+            "<td id='marca' data-mtrlvalue='" + valor.MARCA + "'>" + valor.MARCA + "</td>" +
+            "<td id='catalogo' data-mtrlvalue='" + valor.CATALOGO + "'>" + valor.CATALOGO + "</td>" +
+            "<td> <i class='material-icons opacity-10' id='removeMaterial'>clear</i> " +
+            "<i class='material-icons opacity-10' id='editMaterial'>drive_file_rename_outline</i> </td>" +
+            "</tr>";
+    });
+
+    $('#materialsRequired').after(RowsMaterial);
+
+    iniciateEditMaterial();
+    iniciateRemovematerials();
+
+    $('#registrarRequisicion').modal('show');
+
+    return true;
+}
+
+let cleanModalrequisicion = () => {
+
+    $('#dateRequired').val(moment().format('YYYY-MM-DD'));
+    $('#endDate').val(moment().format('YYYY-MM-DD'));
+    $('#prioridad').val(1);
+    $('#slctProyecto').val('');
+    $('#entregarEn').val('');
+    $('#slctUsuario').val('');
+    $('#slctCiudades').val('');
+    $('#slctCompannia').val('');
+    $('#slctAsignar').val('');
+    $('#notasRequisicion').val('');
+
+    $('.selectpicker').selectpicker('refresh');
+
+    $('#tableMaterials tbody tr #removeMaterial').each(function() {
+        $(this).click();
+    });
+}
 
 /**
  * javascript comment
@@ -273,22 +378,40 @@ let iniciateRemovematerials = () => {
     $('#txtCatalogo').val("");
 
     $('#tableMaterials tbody tr #removeMaterial').each(function() {
-        $(this).click(function() { removeMaterial(this); });
+        $(this).click(function() {
+            $(this).parent().parent().remove();
+            // iniciateRemovematerials();
+        });
     });
 }
 
-/**
- * javascript comment
- * @Author: Carlos Omar Anaya Barajas
- * @Date: 2022-03-22 15:59:04
- * @Desc: In this function the data selected to delete for the user was removed from the table
- */
+let iniciateEditMaterial = () => {
 
-let removeMaterial = (row) => {
+    $('#tableMaterials tbody tr #editMaterial').each(function() {
+        $(this).click(function() {
 
-    $(row).parent().parent().remove();
-    iniciateRemovematerials();
+            let rowData = $(this).parent().parent().find('td');
+            let dataContainer = [];
+
+            rowData.each(function(index, value) {
+                dataContainer.push($(this).data('mtrlvalue'));
+            });
+
+            $('#consecutivo').val(dataContainer[0]);
+            $('#txtCantidad').val(dataContainer[1]);
+            $('#slctUnidad').val(dataContainer[2]);
+            $('#txtMaterial').val(dataContainer[3]);
+            $('#slctProveedor').val(dataContainer[4]);
+            $('#txtMarca').val(dataContainer[5]);
+            $('#txtCatalogo').val(dataContainer[6]);
+
+            $(this).parent().parent().remove();
+            // iniciateEditMaterial();
+            // iniciateRemovematerials();
+        });
+    });
 }
+
 
 /**
  * javascript comment
@@ -330,7 +453,6 @@ let obtainDataMaterials = async(update) => {
 
                 if (totTd < 8) {
 
-                    // dataRow.push($(this).text());
                     dataRow.push($(this).data('mtrlvalue'));
                 } else {
 
@@ -367,6 +489,8 @@ let obtainDataMaterials = async(update) => {
  */
 let registroRequisicion = (requisicionData, update) => {
 
+    console.log(requisicionData);
+
     let url, type, folio = null;
 
     if (update) {
@@ -396,6 +520,8 @@ let registroRequisicion = (requisicionData, update) => {
             // $('#tableCanceladas').DataTable().ajax.reload();
 
             $('#registrarRequisicion').modal('hide');
+
+            outLoader();
         },
         error: function(exception) {
 
@@ -548,73 +674,6 @@ $('#btnEditarRequisicion').click(async() => {
 
 });
 
-/**
- * javascript comment
- * @Author: Carlos Omar Anaya Barajas
- * @Date: 2022-04-26 15:56:10
- * @Desc: Funciones necesarios para editar el apartado de requiciones
- */
-
-let showDataCompra = (dataCompra, datDetalleCompra) => {
-
-    cleanModalrequisicion();
-
-    $('#dateRequired').val(moment(dataCompra[0].FECHA_SOLICITUD).format('YYYY-MM-DD'));
-    $('#endDate').val(moment(dataCompra[0].FECHA_REQUISICION).format('YYYY-MM-DD'));
-    $('#prioridad').val(dataCompra[0].Prioridad);
-    $('#slctProyecto').val(dataCompra[0].ID_PROYECTO);
-    $('#entregarEn').val(dataCompra[0].ENTREGAR_EN);
-    $('#slctUsuario').val(dataCompra[0].ID_USUARIO);
-    $('#slctCiudades').val(dataCompra[0].CIUDAD);
-    $('#slctCompannia').val(dataCompra[0].COMPANIA);
-    $('#slctAsignar').val(dataCompra[0].APLICA);
-    $('#notasRequisicion').val(dataCompra[0].NOTAS_REQUISICION);
-
-    $('.selectpicker').selectpicker('refresh');
-
-    let RowsMaterial = "";
-    datDetalleCompra.forEach(function(valor, indice) {
-
-        RowsMaterial += "<tr>" +
-            "<td id='consecutivo' data-mtrlvalue='" + valor.CONSECUTIVO + "'>" + valor.CONSECUTIVO + "</td>" +
-            "<td id='cantidad' data-mtrlvalue='" + valor.CANTIDAD + "'>" + valor.CANTIDAD + "</td>" +
-            "<td id='unidad' data-mtrlvalue='" + valor.UNIDAD + "'>" + valor.UNIDAD + "</td>" +
-            "<td id='material' data-mtrlvalue='" + valor.MATERIAL + "'>" + valor.MATERIAL + "</td>" +
-            "<td id='proveedor' data-mtrlvalue='" + valor.ID_PROVEEDOR + "'>" + valor.PROVEEDOR + "</td>" +
-            "<td id='marca' data-mtrlvalue='" + valor.MARCA + "'>" + valor.MARCA + "</td>" +
-            "<td id='catalogo' data-mtrlvalue='" + valor.CATALOGO + "'>" + valor.CATALOGO + "</td>" +
-            "<td> <i class='material-icons opacity-10' id='removeMaterial'>clear</i> </td>" +
-            "</tr>";
-    });
-
-    $('#materialsRequired').after(RowsMaterial);
-
-    iniciateRemovematerials();
-
-    $('#registrarRequisicion').modal('show');
-
-    return true;
-}
-
-let cleanModalrequisicion = () => {
-
-    $('#dateRequired').val(moment().format('YYYY-MM-DD'));
-    $('#endDate').val(moment().format('YYYY-MM-DD'));
-    $('#prioridad').val(1);
-    $('#slctProyecto').val('');
-    $('#entregarEn').val('');
-    $('#slctUsuario').val('');
-    $('#slctCiudades').val('');
-    $('#slctCompannia').val('');
-    $('#slctAsignar').val('');
-    $('#notasRequisicion').val('');
-
-    $('.selectpicker').selectpicker('refresh');
-
-    $('#tableMaterials tbody tr #removeMaterial').each(function() {
-        $(this).click();
-    });
-}
 
 /**
  * javascript comment
@@ -644,7 +703,7 @@ $('#btnCancelar').click(() => {
     $("#mi-modal .modal-body").html("<p>Está a punto de cancelar este registro.</p><p>¿Desea continuar con la cancelación?</p>");
     $("#mi-modal").modal('show');
 
-    modalConfirm(async function(confirm) {
+    modalConfirmRequisicion(async function(confirm) {
         if (confirm) {
 
             await $.ajax({
@@ -700,7 +759,7 @@ $('#btnEliminar').click(() => {
     $("#mi-modal .modal-body").html("<p>Está a punto de eliminar este registro, al hacerlo la información se perderá y no podrá ser recuperada.</p><p>¿Desea continuar con la eliminación?</p>");
     $("#mi-modal").modal('show');
 
-    modalConfirm(async function(confirm) {
+    modalConfirmRequisicion(async function(confirm) {
         if (confirm) {
 
             await $.ajax({
@@ -727,4 +786,85 @@ $('#btnEliminar').click(() => {
         }
 
     });
+});
+
+var modalConfirmRequisicion = function(callback) {
+
+    $("#modal-btn-si").on("click", function() {
+        callback(true);
+        $("#mi-modal").modal('hide');
+    });
+
+    $("#modal-btn-no").on("click", function() {
+        callback(false);
+        $("#mi-modal").modal('hide');
+    });
+};
+
+/**
+ * javascript comment
+ * @Author: Carlos Omar Anaya Barajas
+ * @Date: 2022-05-05 12:57:45
+ * @Desc: Apartado ordenes de compra
+ */
+
+$('#btnRegistraOrdenCompra').click(async function() {
+
+    let dl = dataLogin();
+    let folio = $('#tableRequisicionesAuth tbody tr.rowSelected td.folio').text();
+
+    await fetch(urlData + "/obtainOrdenCompra?folio=" + folio).then(data => data.json()).then(dataOrdenCompra => {
+
+        let OrdenCompra = dataOrdenCompra.compra[0];
+
+        // let folio = "<strong>Folio: </strong>" + dataOrdenCompra;
+        $("#modalCrearOrdenCompra .modal-body .content__requisicion .folio").html("<strong>Folio: </strong>" + folio);
+
+        let proyecto = "<strong>Proyecto: </strong>" + OrdenCompra.PROYECTO;
+        $("#modalCrearOrdenCompra .modal-body .content__requisicion .proyecto").html(proyecto);
+
+        let fechaSolicitud = "<strong>Fecha Solicitud: </strong>" + moment(OrdenCompra.FECHA_SOLICITUD).format("YYYY-MM-DD");
+        $("#modalCrearOrdenCompra .modal-body .content__requisicion .fecha__solicitud").html(fechaSolicitud);
+
+        let fechaRequerida = "<strong>Fecha requerida: </strong>" + moment(OrdenCompra.FECHA_REQUISICION).format("YYYY-MM-DD");
+        $("#modalCrearOrdenCompra .modal-body .content__requisicion .fecha__requerida").html(fechaRequerida);
+
+        let solcitado = "<strong>Solicitdo por: </strong>" + OrdenCompra.NOMBRE;
+        $("#modalCrearOrdenCompra .modal-body .content__requisicion .solicitado").html(solcitado);
+
+        let compannia = "<strong>Compañia: </strong>" + OrdenCompra.COMPANIA;
+        $("#modalCrearOrdenCompra .modal-body .content__requisicion .compannia").html(compannia);
+
+        let ciudad = "<strong>Ciudad: </strong>" + OrdenCompra.CIUDAD;
+        $("#modalCrearOrdenCompra .modal-body .content__requisicion .ciudad").html(ciudad);
+
+        $('#consideracionesEspc').val(OrdenCompra.Consideraciones_Especiales);
+
+        let dataDetails = dataOrdenCompra.detalleCompra;
+
+        $('#tableDetailOrdenCompra tbody').empty();
+
+        let rows = "";
+        $.each(dataDetails, function(index, value) {
+
+            rows += "<tr style='padding: 0 !important;'>" +
+                "<td>" + value.CONSECUTIVO + "</td>" +
+                "<td>" + value.CANTIDAD + "</td>" +
+                "<td>" + value.UNIDAD + "</td>" +
+                "<td><p class='ajusteTextoTablasModal'>" + value.MATERIAL + "</p></td>" +
+                "<td>" + value.PROVEEDOR + "</td>" +
+                "<td><select class='form-select' value='1'><option>1</option></select></td>" +
+                "</tr>";
+        })
+
+        $('#tableDetailOrdenCompra tbody').append(rows);
+
+    }).catch(() => { IsLogedIn(); });
+
+    $('#modalCrearOrdenCompra').modal('show');
+});
+
+$('#btnEditarOrdenCompra').click(function() {
+
+    $('#modalEditarOrdenCompra').modal('show');
 });

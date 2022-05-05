@@ -1,67 +1,111 @@
+#modalEditarOrdenCompra.modalsSinciClass,
 #registrarRequisicion.modalsSinciClass {
     margin-top: 2rem;
     width: 105%;
 }
 
+#modalEditarOrdenCompra .btn,
 #registrarRequisicion .btn {
     margin-bottom: 0 !important
 }
 
 #modalDetalleOrden .modal-dialog,
+#modalEditarOrdenCompra.modalsSinciClass .modal-dialog,
 #registrarRequisicion.modalsSinciClass .modal-dialog {
     max-width: 84rem;
 }
 
+#modalEditarOrdenCompra.modalsSinciClass .modal-content,
 #registrarRequisicion.modalsSinciClass .modal-content {
     height: 51rem;
 }
 
+.materialRequiredOrdenCompra,
 .materialRequired {
     height: 18rem;
 }
 
-#tableRequisiciones thead,
-#tableRequisicionesAuth thead,
-#tableOrdenesCompra thead,
-#tableCanceladas thead,
-#tableMaterials thead,
-#tableDetailMaterial thead {
+#tableMaterialsOrdenCompra thead tr th,
+#tableMaterials thead tr th {
+    font-size: 12px !important;
+}
+
+#tableMaterialsOrdenCompra tbody tr td,
+#tableMaterials tbody tr td {
+    text-align: left;
+    font-size: 11px;
+}
+
+#tableDetailOrdenCompra thead tr th {
+    font-size: 12px !important;
+}
+
+#tableDetailOrdenCompra tbody tr td {
+    text-align: left;
+    font-size: 11px;
+}
+
+.dataTables_wrapper thead {
     font-size: 12px !important;
     padding: 0 !important;
     text-align: left;
 }
 
-#tableRequisiciones tbody,
-#tableRequisicionesAuth tbody,
-#tableOrdenesCompra tbody,
-#tableCanceladas tbody,
-#tableMaterials tbody,
-#tableDetailMaterial tbody {
+.dataTables_wrapper tbody,
+.dataTables_wrapper tbody p {
     text-align: left;
     font-size: 11px;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
+#tableMaterialsOrdenCompra tbody tr td input,
 #tableMaterials tbody tr td input {
     font-size: 11px;
     line-height: 0rem;
 }
 
+#tableMaterialsOrdenCompra tbody tr td select,
 #tableMaterials tbody tr td select {
     font-size: .6rem;
     line-height: .8rem;
 }
 
+#tableMaterialsOrdenCompra tbody .material-icons,
 #tableMaterials tbody .material-icons {
     cursor: pointer;
 }
 
+#tableDetailOrdenCompra tbody tr td select {
+    font-size: .6rem;
+    line-height: .8rem;
+}
+
+.modal .modal-content .modal-body input,
+.modal .modal-content .modal-body select,
+.modal .modal-content .modal-body label,
+.modal .modal-content .modal-body textarea,
+.modal .modal-content .modal-body btn {
+    font-size: .6rem;
+    line-height: .8rem;
+}
+
+.btn.dropdown-toggle {
+    height: 2rem !important;
+}
+
+.btn.dropdown-toggle .filter-option-inner-inner {
+    font-size: 10px !important;
+}
+
 
 /**
-    * @Author: Carlos Omar Anaya Barajas
-    * @Date: 2022-03-22 14:03:43
-    * @Desc: This block of code is for the scroll in the table to add materials
-    */
+* @Author: Carlos Omar Anaya Barajas
+* @Date: 2022-03-22 14:03:43
+* @Desc: This block of code is for the scroll in the table to add materials
+*/
 
+.materialRequiredOrdenCompra .form-group,
 .materialRequired .form-group {
     overflow-y: scroll;
     height: 18rem;
@@ -69,20 +113,22 @@
     padding-right: 0.5rem;
 }
 
+.materialsRequiredOrden .form-group #tableMaterialsOrdenCompra,
 .materialRequired .form-group #tableMaterials {
     width: auto;
 }
 
 
 /**
-    * @Author: Carlos Omar Anaya Barajas
-    * @Date: 2022-03-24 13:25:00
-    * @Desc: This block of code is for the scroll in the table to materials details
-    */
+* @Author: Carlos Omar Anaya Barajas
+* @Date: 2022-03-24 13:25:00
+* @Desc: This block of code is for the scroll in the table to materials details
+*/
 
-#modalDetalleOrden .modal-body div {
+.modal-body div.tableDetailOrden,
+.modal-body div.tableDetail {
     overflow-y: scroll;
-    height: 25rem;
+    height: 17rem;
     width: 100%;
     padding-right: 0.5rem;
 }
@@ -93,10 +139,10 @@
 
 
 /**
-    * @Author: Carlos Omar Anaya Barajas
-    * @Date: 2022-03-22 16:50:04
-    * @Desc: This styles are for the modal of notes
-    */
+* @Author: Carlos Omar Anaya Barajas
+* @Date: 2022-03-22 16:50:04
+* @Desc: This styles are for the modal of notes
+*/
 
 #notesDB {
     height: 580px;
@@ -130,7 +176,7 @@ table tbody tr td {
 .rowSelected {
     /* background-color: #D9531E !important; */
     background-color: rgb(217, 83, 30, .85) !important;
-    color: #fff;
+    color: #fff !important;
 }
 
 .headTable {
@@ -167,6 +213,13 @@ table tbody tr td {
     padding: 0 !important;
 }
 
+
+/* #tableDetailOrdenCompra thead tr th, */
+
+#tableDetailOrdenCompra tbody tr td {
+    padding: 0 !important;
+}
+
 .dataTables_wrapper table {
     width: auto !important;
 }
@@ -181,28 +234,96 @@ table tbody tr td {
     width: 0px !important;
 }
 
+.content__requisicion .row div {
+    padding: 0.2rem .5rem;
+}
 
-/* #autorizarRequisicion .content__requisicion {
-
-    padding: 0 1rem;
-} */
-
-#autorizarRequisicion .content__requisicion .row div {
-    padding: 0.5rem 1rem;
+#tableRequisiciones_paginate,
+tableRequisiciones_filter label,
+#tableRequisiciones_info {
+    font-size: 14px;
 }
 
 
 /**
-    * @author: Carlos Omar Anaya Barajas
-    * @date: 2022-04-29 10:55:34
-    * @desc: this classes make the text in the cell small
-    */
+* @author: Carlos Omar Anaya Barajas
+* @date: 2022-04-29 10:55:34
+* @desc: this classes make the text in the cell small
+*/
 
 
-/* .dataTables_wrapper table.dataTable thead th.recortartexto,
-    .dataTables_wrapper table.dataTable tbody td.recortartexto {
-        width: 230px !important;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        overflow: hidden;
-    } */
+/* .dataTables_wrapper table.dataTable thead .recortartexto, */
+
+.dataTables_wrapper table.dataTable tbody .recortartexto {
+    width: 180px !important;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.dataTables_wrapper table.dataTable tbody .recortartextoCompania {
+    width: 150px !important;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.dataTables_wrapper table.dataTable tbody .recortartextoRequisicion {
+    width: 250px !important;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.dataTables_wrapper table.dataTable tbody .recortartextoCanceladas {
+    width: 380px !important;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.dataTables_wrapper table.dataTable tbody .ajustarTextoSeleccionado {
+    white-space: normal !important;
+}
+
+#tableRequisicionesAuth_wrapper table tbody tr td:nth-child(7),
+#tableOrdenesCompra_wrapper table tbody tr td:nth-child(9) {
+    text-align: right;
+}
+
+textarea:focus,
+input:focus,
+select:focus {
+    outline: none;
+}
+
+.form-material {
+    display: block;
+    width: 100%;
+    padding: 0.5rem 0;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.5rem;
+    color: #495057;
+    background-color: transparent;
+    background-clip: padding-box;
+    border: 1px solid #d2d6da;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 0.375rem;
+    -webkit-transition: 0.2s ease;
+    transition: 0.2s ease;
+    padding: 0.5rem;
+    color: #000 !important;
+}
+
+.modal-body,
+.modal-body p {
+    font-size: 14px;
+}
+
+.ajusteTextoTablasModal {
+    white-space: normal !important;
+    font-size: 11px;
+}

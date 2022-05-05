@@ -16,13 +16,13 @@ let iniciateTablesDT = () => {
 
     let pageLength = 15;
     let searching = true;
-    let tableScrollX = false;
-    let tableScrollY = 700;
+    // let tableScrollX = false;
+    // let tableScrollY = 700;
 
-    tableRequisicion(dl, pageLength, searching, tableScrollX, tableScrollY);
-    tableRequisicionAuth(dl, pageLength, searching, tableScrollX, tableScrollY);
-    tableOrdenCompra(dl, pageLength, searching, tableScrollX, tableScrollY);
-    tableCanceladas(dl, pageLength, searching, tableScrollX, tableScrollY);
+    tableRequisicion(dl, pageLength, searching /* , tableScrollX, tableScrollY */ );
+    tableRequisicionAuth(dl, pageLength, searching /* , tableScrollX, tableScrollY */ );
+    tableOrdenCompra(dl, pageLength, searching /* , tableScrollX, tableScrollY */ );
+    tableCanceladas(dl, pageLength, searching /* , tableScrollX, tableScrollY */ );
 
     return true;
 }
@@ -33,7 +33,7 @@ let iniciateTablesDT = () => {
  * @Date: 2022-04-04 15:30:37
  * @Desc: this function inciate the dataTable for the "Requisicion Data" table;
  */
-let tableRequisicion = async(dl, pageLength, searching, tableScrollX, tableScrollY) => {
+let tableRequisicion = async(dl, pageLength, searching /* , tableScrollX, tableScrollY */ ) => {
 
     await $('#tableRequisiciones').DataTable({
         dom: 'Bfrtip',
@@ -47,6 +47,7 @@ let tableRequisicion = async(dl, pageLength, searching, tableScrollX, tableScrol
             type: "GET",
             dataSrc: 'data',
             beforeSend: () => {
+
                 console.time('tableRequisiciones');
             },
             // data: function(d) {
@@ -94,6 +95,34 @@ let tableRequisicion = async(dl, pageLength, searching, tableScrollX, tableScrol
                     return "";
                 }
             }
+        }, {
+            targets: [4, 8, 10],
+            render: function(value) {
+
+                let auxValue = "";
+
+                if (value == "" || value == null)
+                    auxValue = "";
+
+                else
+                    auxValue = "<p class='recortartextoRequisicion'>" + value + "</p>";
+
+                return auxValue;
+            }
+        }, {
+            targets: [7],
+            render: function(value) {
+
+                let auxValue = "";
+
+                if (value == "" || value == null)
+                    auxValue = "";
+
+                else
+                    auxValue = "<p class='recortartextoCompania'>" + value + "</p>";
+
+                return auxValue;
+            }
         }],
 
         order: [
@@ -114,7 +143,7 @@ let tableRequisicion = async(dl, pageLength, searching, tableScrollX, tableScrol
  * @Date: 2022-04-04 15:30:41
  * @Desc:this function inciate the dataTable for the "Requisiscion authorizadas" table
  */
-let tableRequisicionAuth = async(dl, pageLength, searching, tableScrollX, tableScrollY) => {
+let tableRequisicionAuth = async(dl, pageLength, searching /* , tableScrollX, tableScrollY */ ) => {
 
     await $('#tableRequisicionesAuth').DataTable({
         dom: 'Bfrtip',
@@ -128,6 +157,7 @@ let tableRequisicionAuth = async(dl, pageLength, searching, tableScrollX, tableS
             type: "GET",
             dataSrc: 'data',
             beforeSend: () => {
+
                 console.time('tableRequisicionesAuth');
             },
             complete: () => {
@@ -160,9 +190,6 @@ let tableRequisicionAuth = async(dl, pageLength, searching, tableScrollX, tableS
             { data: "AUTORIZADOPOR" },
             { data: "FECHA_AUTORIZACION" },
             { data: "ORDENCOMPRAPOR" },
-            // { data: "NOTAS_ORDENCOMPRA", visible: false, className: "notaOrdenCompraRA" },
-            // { data: "NOTAS_REQUISICION", visible: false, className: "notaRequisicionRA" },
-            // { data: "ENTREGAR_EN", visible: false, className: "notaEntregarEnRA" },
         ],
         columnDefs: [{
                 targets: [3, 4, 13, 16],
@@ -187,6 +214,20 @@ let tableRequisicionAuth = async(dl, pageLength, searching, tableScrollX, tableS
 
                     return '$' + numero.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
                 }
+            }, {
+                targets: [2, 8, 12],
+                render: function(value) {
+
+                    let auxValue = "";
+
+                    if (value == "" || value == null)
+                        auxValue = "";
+
+                    else
+                        auxValue = "<p class='recortartexto'>" + value + "</p>";
+
+                    return auxValue;
+                }
             }
         ],
 
@@ -208,7 +249,7 @@ let tableRequisicionAuth = async(dl, pageLength, searching, tableScrollX, tableS
  * @Date: 2022-04-04 15:30:44
  * @Desc: this function inciate the datatable for the "Orden de Compra" table
  */
-let tableOrdenCompra = async(dl, pageLength, searching, tableScrollX, tableScrollY) => {
+let tableOrdenCompra = async(dl, pageLength, searching /* , tableScrollX, tableScrollY */ ) => {
 
     await $('#tableOrdenesCompra').DataTable({
         dom: 'Bfrtip',
@@ -228,6 +269,7 @@ let tableOrdenCompra = async(dl, pageLength, searching, tableScrollX, tableScrol
             },
             dataSrc: 'data',
             beforeSend: () => {
+
                 console.time('tableOrdenesCompra');
 
                 inLoader();
@@ -309,6 +351,20 @@ let tableOrdenCompra = async(dl, pageLength, searching, tableScrollX, tableScrol
                     return '$' + numero.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
 
                 }
+            }, {
+                targets: [9],
+                render: function(value) {
+
+                    let auxValue = "";
+
+                    if (value == "" || value == null)
+                        auxValue = "";
+
+                    else
+                        auxValue = "<p class='recortartexto'>" + value + "</p>";
+
+                    return auxValue;
+                }
             }
         ],
 
@@ -330,7 +386,7 @@ let tableOrdenCompra = async(dl, pageLength, searching, tableScrollX, tableScrol
  * @Date: 2022-04-04 15:30:47
  * @Desc: this function iniciate the dataTable of the "Canceladas" Table
  */
-let tableCanceladas = async(dl, pageLength, searching, tableScrollX, tableScrollY) => {
+let tableCanceladas = async(dl, pageLength, searching /* , tableScrollX, tableScrollY */ ) => {
 
     await $('#tableCanceladas').DataTable({
         dom: 'Bfrtip',
@@ -344,6 +400,7 @@ let tableCanceladas = async(dl, pageLength, searching, tableScrollX, tableScroll
             type: "GET",
             dataSrc: 'data',
             beforeSend: () => {
+
                 console.time('tableCanceladas');
             },
             complete: () => {
@@ -384,6 +441,20 @@ let tableCanceladas = async(dl, pageLength, searching, tableScrollX, tableScroll
 
                     return "";
                 }
+            }
+        }, {
+            targets: [2],
+            render: function(value) {
+
+                let auxValue = "";
+
+                if (value == "" || value == null)
+                    auxValue = "";
+
+                else
+                    auxValue = "<p class='recortartextoCanceladas'>" + value + "</p>";
+
+                return auxValue;
             }
         }],
 
@@ -432,11 +503,20 @@ let formatDates = (dateSended) => {
  */
 let requisicionesInciatePagesTables = () => {
 
+    $('.dataTables_wrapper tbody tr').removeClass("rowSelected");
+    $('.textAreaViewer').val('');
+
     $('#tableRequisiciones_wrapper tbody tr td').each(function() {
+
+        $(this).find('p.recortartextoRequisicion').removeClass('ajustarTextoSeleccionado');
 
         $(this).click(function() {
 
             $('.dataTables_wrapper tbody tr').removeClass("rowSelected");
+            $('.dataTables_wrapper tbody tr td p').removeClass('ajustarTextoSeleccionado');
+            $('.textAreaViewer').val('');
+
+            $(this).parent().find('td p').addClass('ajustarTextoSeleccionado');
             $(this).parent().addClass("rowSelected");
 
             let folio = $(this).parent()[0].firstChild.textContent;
@@ -449,7 +529,6 @@ let requisicionesInciatePagesTables = () => {
     });
 
     $('.paginate_button').click(() => {
-
         requisicionesInciatePagesTables();
     });
 
@@ -459,6 +538,15 @@ let requisicionesInciatePagesTables = () => {
 
     $('#tableRequisiciones_wrapper [type="search"]').keyup(function() {
         requisicionesInciatePagesTables();
+    });
+
+    $('#tableRequisiciones_wrapper tbody tr').each(function() {
+
+        let textContent = $(this).find('td')[11].textContent;
+
+        if (textContent == 1) {
+            $(this).css("color", "red");
+        }
     });
 }
 
@@ -470,11 +558,19 @@ let requisicionesInciatePagesTables = () => {
  */
 let requisicionesAuthInciatePagesTables = () => {
 
+    $('.dataTables_wrapper tbody tr').removeClass("rowSelected");
+    $('.textAreaViewer').val('');
+
     $('#tableRequisicionesAuth_wrapper tbody tr td').each(function() {
 
         $(this).click(() => {
 
             $('.dataTables_wrapper tbody tr').removeClass("rowSelected");
+            $('.dataTables_wrapper tbody tr td p').removeClass('ajustarTextoSeleccionado');
+            $('.textAreaViewer').val('');
+
+            $(this).parent().find('td p').addClass('ajustarTextoSeleccionado');
+
             $(this).parent().addClass("rowSelected");
 
             let folio = $(this).parent().children()[11].textContent;
@@ -488,7 +584,6 @@ let requisicionesAuthInciatePagesTables = () => {
     });
 
     $('.paginate_button').click(() => {
-
         requisicionesAuthInciatePagesTables();
     });
 
@@ -498,6 +593,15 @@ let requisicionesAuthInciatePagesTables = () => {
 
     $('#tableRequisicionesAuth_wrapper [type="search"]').keyup(function() {
         requisicionesAuthInciatePagesTables();
+    });
+
+    $('#tableRequisicionesAuth_wrapper tbody tr').each(function() {
+
+        let textContent = $(this).find('td')[9].textContent;
+
+        if (textContent == 1) {
+            $(this).css("color", "red");
+        }
     });
 }
 
@@ -509,11 +613,19 @@ let requisicionesAuthInciatePagesTables = () => {
  */
 let ordenCompraInciatePagesTables = () => {
 
+    $('.dataTables_wrapper tbody tr').removeClass("rowSelected");
+    $('.textAreaViewer').val('');
+
     $('#tableOrdenesCompra_wrapper tbody tr td').each(function() {
 
         $(this).click(() => {
 
             $('.dataTables_wrapper tbody tr').removeClass("rowSelected");
+            $('.dataTables_wrapper tbody tr td p').removeClass('ajustarTextoSeleccionado');
+            $('.textAreaViewer').val('');
+
+            $(this).parent().find('td p').addClass('ajustarTextoSeleccionado');
+
             $(this).parent().addClass("rowSelected");
 
             let folio = $(this).parent().children()[12].textContent;
@@ -537,36 +649,16 @@ let ordenCompraInciatePagesTables = () => {
     $('#tableOrdenesCompra_wrapper [type="search"]').keyup(function() {
         ordenCompraInciatePagesTables();
     });
+
+    $('#tableOrdenesCompra_wrapper tbody tr').each(function() {
+
+        let textContent = $(this).find('td')[10].textContent;
+
+        if (textContent == 1) {
+            $(this).css("color", "red");
+        }
+    });
 }
-
-/**
- * javascript comment
- * @Author: Carlos Omar Anaya Barajas
- * @Date: 2022-04-28 12:14:41
- * @Desc:
- */
-
-$('#slctRequisicionAuth').change(function() {
-
-    let folio = $('#tableRequisicionesAuth_wrapper tbody tr.rowSelected td.folio')[0].innerText;
-    let tipo = $(this).val();
-
-    fetch(urlData + "/obtainNotasOrdenCompra?folio=" + folio + "&slctTipo=" + tipo).then(data => data.json()).then(nota => {
-        nota = nota.data;
-        nota.length > 0 ? $('#notesRequisicionAuth').val(nota[0].RESPONSE) : $('#notesRequisicionAuth').val('');
-    }).catch(() => { IsLogedIn(); });
-});
-
-$('#slctOrdenCompra').change(function() {
-
-    let folio = $('#tableOrdenesCompra_wrapper tbody tr.rowSelected td.folio')[0].innerText;
-    let tipo = $(this).val();
-
-    fetch(urlData + "/obtainNotasOrdenCompra?folio=" + folio + "&slctTipo=" + tipo).then(data => data.json()).then(nota => {
-        nota = nota.data;
-        nota.length > 0 ? $('#notesOrdenesCompra').val(nota[0].RESPONSE) : $('#notesOrdenesCompra').val('');
-    }).catch(() => { IsLogedIn(); });
-});
 
 /**
  * javascript comment
@@ -576,17 +668,24 @@ $('#slctOrdenCompra').change(function() {
  */
 let canceladasInciatePagesTables = () => {
 
+    $('.dataTables_wrapper tbody tr').removeClass("rowSelected");
+
     $('#tableCanceladas_wrapper tbody tr td').each(function() {
 
         $(this).click(() => {
 
             $('.dataTables_wrapper tbody tr').removeClass("rowSelected");
+
+            $('.dataTables_wrapper tbody tr td p').removeClass('ajustarTextoSeleccionado');
+            $('.textAreaViewer').val('');
+
+            $(this).parent().find('td p').addClass('ajustarTextoSeleccionado');
+
             $(this).parent().addClass("rowSelected");
         });
     });
 
     $('.paginate_button').click(function() {
-
         canceladasInciatePagesTables();
     });
 
@@ -602,10 +701,49 @@ let canceladasInciatePagesTables = () => {
 /**
  * javascript comment
  * @Author: Carlos Omar Anaya Barajas
+ * @Date: 2022-04-28 12:14:41
+ * @Desc:
+ */
+
+$('#slctRequisicionAuth').change(function() {
+
+    $('.textAreaViewer').val('');
+
+    let folio = $('#tableRequisicionesAuth_wrapper tbody tr.rowSelected td.folio')[0].innerText;
+    let tipo = $(this).val();
+
+    fetch(urlData + "/obtainNotasRequisicionAuth?folio=" + folio + "&slctTipo=" + tipo).then(data => data.json()).then(nota => { $('#notesRequisicionAuth').val(nota.data[0].RESPONSE) }).catch(() => { IsLogedIn(); });
+});
+
+$('#slctOrdenCompra').change(function() {
+
+    $('.textAreaViewer').val('');
+
+    let folio = $('#tableOrdenesCompra_wrapper tbody tr.rowSelected td.folio')[0].innerText;
+    let tipo = $(this).val();
+
+    fetch(urlData + "/obtainNotasOrdenCompra?folio=" + folio + "&slctTipo=" + tipo).then(data => data.json()).then(nota => { $('#notesOrdenesCompra').val(nota.data[0].RESPONSE) }).catch(() => { IsLogedIn(); });
+});
+
+/**
+ * javascript comment
+ * @Author: Carlos Omar Anaya Barajas
  * @Date: 2022-04-19 16:47:14
  * @Desc:
  */
 $('#myTab button').click(() => {
 
     $('.dataTables_wrapper tbody tr').removeClass("rowSelected");
+    $('.textAreaViewer').val('');
 });
+
+let changueAdjustTextRow = (row, type = true) => {
+
+    if (type) {
+
+        row.find('td p.recortartextoRequisicion').removeClass('recortartextoRequisicion');
+    } else {
+        row.find('td p.recortartextoRequisicion').removeClass('ajustarTextoSeleccionado');
+        row.find('td p.recortartextoRequisicion').addClass('recortartextoRequisicion');
+    }
+}

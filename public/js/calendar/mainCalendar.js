@@ -179,6 +179,8 @@ async function calendarSinci() {
     modalCalendarSinci();
     iniciateModalUpdate();
     outLoader();
+
+    $('#calendar .fc-content table thead .fc-col' + moment().day() + '.fc-widget-header').addClass('resaltarDia');
 }
 
 /**

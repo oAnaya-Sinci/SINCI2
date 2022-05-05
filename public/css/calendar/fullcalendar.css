@@ -676,3 +676,8 @@ border-top-right-radius: 3px;
     #createEventCalendar .modal-footer .btnDeleteNone {
         display: none;
     }
+    
+    .resaltarDia {
+        background-color: #d9531e;
+        color: #fff;
+    }

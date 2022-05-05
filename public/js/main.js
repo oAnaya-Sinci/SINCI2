@@ -31,28 +31,30 @@ $(document).ready(function() {
 
     moment.updateLocale('en', {
         months: [
-            "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
-            "Augosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+            "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Augosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
         ]
     });
 
     moment.updateLocale('en', {
         monthsShort: [
-            "Ene", "Feb", "Mar", "Abr", "May", "Jun",
-            "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"
+            "Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"
         ]
     });
+
+    // $('body').addClass('g-sidenav-pinned');
 });
 
 /**
  * javascript comment
  * @Author: Carlos Omar Anaya Barajas
  * @Date: 2022-03-03 12:24:43
- * @Desc: This function set a timer, to close the proyect if the
+ * @Desc: This function set a timer, to close the proyect if the time is over
  */
 function set_TimeOut() {
 
-    let timeSession = 300000;
+    // let timeSession = 300000; // 5 minutes
+    let timeSession = 600000; // 10 minutes
+    // let timeSession = 6000000; // 100 minutes
 
     clearTimeout(timeOut);
 

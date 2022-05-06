@@ -158,26 +158,26 @@ function processDataToSelect(data, select, firstOption = "") {
 
 let displayDetailsDataModal = (dataDetails) => {
 
-    let folio = "<strong>Folio: </strong>" + $('#tableRequisiciones tbody tr.rowSelected td.folio').text();
-    $("#modalDetalleOrden .modal-body .content__requisicion .folio").html(folio);
+    // let folio = "<strong>Folio: </strong>" + $('#tableRequisiciones tbody tr.rowSelected td.folio').text();
+    // $("#modalDetalleOrden .modal-body .content__requisicion .folio").html(folio);
 
-    let proyecto = "<strong>Proyecto: </strong>" + $('#tableRequisiciones tbody tr.rowSelected td.proyetoReqs').text();
-    $("#modalDetalleOrden .modal-body .content__requisicion .proyecto").html(proyecto);
+    // let proyecto = "<strong>Proyecto: </strong>" + $('#tableRequisiciones tbody tr.rowSelected td.proyetoReqs').text();
+    // $("#modalDetalleOrden .modal-body .content__requisicion .proyecto").html(proyecto);
 
-    let fechaSolicitud = "<strong>Fecha Solicitud: </strong>" + $('#tableRequisiciones tbody tr.rowSelected td.fechaSolicitud').text();
-    $("#modalDetalleOrden .modal-body .content__requisicion .fecha__solicitud").html(fechaSolicitud);
+    // let fechaSolicitud = "<strong>Fecha Solicitud: </strong>" + $('#tableRequisiciones tbody tr.rowSelected td.fechaSolicitud').text();
+    // $("#modalDetalleOrden .modal-body .content__requisicion .fecha__solicitud").html(fechaSolicitud);
 
-    let fechaRequerida = "<strong>Fecha requerida: </strong>" + $('#tableRequisiciones tbody tr.rowSelected td.fechaRequerida').text();
-    $("#modalDetalleOrden .modal-body .content__requisicion .fecha__requerida").html(fechaRequerida);
+    // let fechaRequerida = "<strong>Fecha requerida: </strong>" + $('#tableRequisiciones tbody tr.rowSelected td.fechaRequerida').text();
+    // $("#modalDetalleOrden .modal-body .content__requisicion .fecha__requerida").html(fechaRequerida);
 
-    let solcitado = "<strong>Solicitdo por: </strong>" + $('#tableRequisiciones tbody tr.rowSelected td.solicitado').text();
-    $("#modalDetalleOrden .modal-body .content__requisicion .solicitado").html(solcitado);
+    // let solcitado = "<strong>Solicitdo por: </strong>" + $('#tableRequisiciones tbody tr.rowSelected td.solicitado').text();
+    // $("#modalDetalleOrden .modal-body .content__requisicion .solicitado").html(solcitado);
 
-    let compannia = "<strong>Compañia: </strong>" + $('#tableRequisiciones tbody tr.rowSelected td.compania').text();
-    $("#modalDetalleOrden .modal-body .content__requisicion .compannia").html(compannia);
+    // let compannia = "<strong>Compañia: </strong>" + $('#tableRequisiciones tbody tr.rowSelected td.compania').text();
+    // $("#modalDetalleOrden .modal-body .content__requisicion .compannia").html(compannia);
 
-    let ciudad = "<strong>Ciudad: </strong>" + $('#tableRequisiciones tbody tr.rowSelected td.ciudad').text();
-    $("#modalDetalleOrden .modal-body .content__requisicion .ciudad").html(ciudad);
+    // let ciudad = "<strong>Ciudad: </strong>" + $('#tableRequisiciones tbody tr.rowSelected td.ciudad').text();
+    // $("#modalDetalleOrden .modal-body .content__requisicion .ciudad").html(ciudad);
 
     $('#tableDetailMaterial tbody').empty();
 
@@ -851,15 +851,46 @@ $('#btnRegistraOrdenCompra').click(async function() {
                 "<td>" + value.CONSECUTIVO + "</td>" +
                 "<td>" + value.CANTIDAD + "</td>" +
                 "<td>" + value.UNIDAD + "</td>" +
-                "<td><p class='ajusteTextoTablasModal'>" + value.MATERIAL + "</p></td>" +
+                "<td><p class='ajusteTextoTablasModal' style='font-size: 11px !important    ;'>" + value.MATERIAL + "</p></td>" +
                 "<td>" + value.PROVEEDOR + "</td>" +
-                "<td><select class='form-select' value='1'><option>1</option></select></td>" +
+                "<td><select class='form-select slctOrdenCompraTable'></select></td>" +
                 "</tr>";
         })
 
         $('#tableDetailOrdenCompra tbody').append(rows);
 
+        let optionsSelect = "";
+        optionsSelect += "<option value=''>-</option>";
+        for (let i = 1; i <= 20; i++) {
+
+            optionsSelect += "<option value='" + i + "'>" + i + "</option>";
+        }
+
+        $('.slctOrdenCompraTable').append(optionsSelect);
+
+        $('.slctOrdenCompraTable').val("1");
+
     }).catch(() => { IsLogedIn(); });
+
+    $('#btnOrdenesAutomaticas').click(function() {
+
+        $('.slctOrdenCompraTable').val("1");
+
+        $('#tableDetailOrdenCompra tbody tr').each(function() {
+
+            $(this).removeClass('cleanOrders');
+        });
+    });
+
+    $('#btnLimpiarOrdenes').click(function() {
+
+        $('.slctOrdenCompraTable').val("");
+
+        $('#tableDetailOrdenCompra tbody tr').each(function() {
+
+            $(this).addClass('cleanOrders');
+        });
+    });
 
     $('#modalCrearOrdenCompra').modal('show');
 });
@@ -867,4 +898,30 @@ $('#btnRegistraOrdenCompra').click(async function() {
 $('#btnEditarOrdenCompra').click(function() {
 
     $('#modalEditarOrdenCompra').modal('show');
+});
+
+/**
+ * javascript comment
+ * @Author: Carlos Omar Anaya Barajas
+ * @Date: 2022-05-06 18:14:00
+ * @Desc: Buttons to save and update the information of the "ordenes de compra"
+ */
+
+$('#btnCrearOrdenCompra').click(async() => {
+
+    let dataOrdenCompra = [];
+
+    await $.ajax({
+        type: "DELETE",
+        url: urlData + "/deleteData",
+        data: { "isLogedIn": dl, "folio": folio },
+        success: function(response) {
+
+        },
+        error: function(exception) {
+
+            console.error(exception);
+            showMessage('danger', 'Error', exception.showMessage());
+        }
+    });
 });

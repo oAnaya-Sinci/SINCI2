@@ -4,7 +4,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title" id="exampleModalLabel">Nueva Requisición</h4>
+          <h5 class="modal-title" id="exampleModalLabel">Nueva Requisición</h5>
         </div>
         <div class="modal-body">
           <form id="dataRequisiciones">
@@ -106,6 +106,7 @@
                         <th>Proveedor</th>
                         <th>Marca</th>
                         <th>Catalogo</th>
+                        <th></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -133,14 +134,14 @@
 
             <div class="row">
               <div class="col-md-10">
-                <div class="form-group body-modalsSinci">
+                <!-- <div class="form-group body-modalsSinci"> -->
                   <label for="recipient-name" class="col-form-label">Notas:</label>
                   <input type="text" class="form-control" id="notasRequisicion" name="notasRequisicion" style="line-height: 4rem !important">
-                </div>
+                <!-- </div> -->
               </div>
 
               <div class="col-md-2">
-                <button type="button" id="btnNotesCatalog" class="btn btn-primary" style="margin-top: 0.5rem;;">Añadir Nota</button>
+                <button type="button" id="btnNotesCatalog" class="btn btn-primary" style="margin-top: 3rem;">Añadir Nota</button>
               </div>
             </div>
 
@@ -163,7 +164,7 @@
     <div class="modal-dialog ">
       <div class="modal-content" style="height: 31rem !important">
         <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel">Autorizar requisición de compras</h4>
+        <h5 class="modal-title" id="myModalLabel">Autorizar requisición de compras</h5>
         </div>
         <div class="modal-body">
 
@@ -213,7 +214,7 @@
     <div class="modal-dialog ">
       <div class="modal-content">
         <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel">Orden de Compra</h4>
+        <h5 class="modal-title" id="myModalLabel">Orden de Compra</h5>
         </div>
         <div class="modal-body">
 
@@ -233,7 +234,7 @@
     <div class="modal-dialog modal-md">
       <div class="modal-content">
         <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel">Confirmar</h4>
+        <h5 class="modal-title" id="myModalLabel">Confirmar</h5>
         </div>
         <div class="modal-body"><p>Desea continuar con la acción</p></div>
         <div class="modal-footer">
@@ -250,7 +251,7 @@
     <div class="modal-dialog modal-md">
       <div class="modal-content">
         <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel"></h4>
+        <h5 class="modal-title" id="myModalLabel"></h5>
         </div>
         <div class="modal-body"></div>
         <div class="modal-footer">
@@ -266,7 +267,7 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-        <h4 class="modal-title" id="">Notas del catalogo</h4>
+        <h5 class="modal-title" id="">Notas del catalogo</h5>
         </div>
         <div class="modal-body">
           <div id="notesDB"></div>
@@ -285,12 +286,12 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-        <h4 class="modal-title" id="">Detalle de la orden</h4>
+        <h5 class="modal-title" id="">Detalle de la orden</h5>
         </div>
         <div class="modal-body">
           <div>
 
-            <hr>
+            <!-- <hr>
 
             <div class="content__requisicion">
                 <div class="row">
@@ -316,7 +317,7 @@
                 </div>
             </div>
 
-            <hr>
+            <hr> -->
 
             <div class="row">
                 <div class="col-md-12 tableDetail">
@@ -347,16 +348,17 @@
 
 
   <!-- This modals are requierd for the registration of the requisicion autorized and the ordenes de compra -->
-   <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false" id="modalCrearOrdenCompra" style="margin-top: 2rem;">
-    <div class="modal-dialog modal-lg" style="max-width: 53rem;">
-      <div class="modal-content" style="height: 51rem; margin-top:-1rem;">
+   <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false" id="modalCrearOrdenCompra" style="margin-top: 1rem;">
+    <div class="modal-dialog modal-lg" style="max-width: 56rem;">
+      <div class="modal-content" style="height: 49rem; margin-top:-1rem;">
         <div class="modal-header">
-        <h4 class="modal-title" id="">Crear ordenes de compra</h4>
+        <h5 class="modal-title" id="">Crear ordenes de compra</h5>
         </div>
         <div class="modal-body">
           <div>
 
-            <hr>
+            <label>Datos de la requisición</label>
+            <hr style="margin-top: 0.1rem !important;">
 
             <div class="content__requisicion">
                 <div class="row">
@@ -381,12 +383,12 @@
                     <div class="col-md-12 ciudad"></div>
                 </div>
 
-                <hr>
+                <hr style="margin-top: 0.1rem !important;">
 
                 <div class="row">
                     <div class="col-md-12">
                         <label>Consideraciones especiales</label>
-                        <textarea name="" class="form-control textAreaViewer" id="consideracionesEspc" style="height: 7rem; font-size: 11px !important;"></textarea>
+                        <textarea name="" class="form-control textAreaViewer" id="consideracionesEspc" style="height: 7rem;"></textarea>
                     </div>
                 </div>
             </div>
@@ -412,14 +414,14 @@
             <div class="row">
                 <div class="col-md-3">
 
-                    <button type="button" class="btn btn-secondary" id="modalCrearOrdenCompra">Actualizar</button>
+                    <button type="button" class="btn btn-secondary" id="btnActualizar">Actualizar</button>
 
                 </div>
 
                 <div class="col-md-9" style="text-align: right;">
 
-                    <button type="button" class="btn btn-secondary" id="modalCrearOrdenCompra">Ordenes automaticas</button>
-                    <button type="button" class="btn btn-secondary btnCancelModal" id="modalCancelarOrdenCompra">Limpiar Ordenes</button>
+                    <button type="button" class="btn btn-secondary" id="btnOrdenesAutomaticas">Ordenes automaticas</button>
+                    <button type="button" class="btn btn-secondary" id="btnLimpiarOrdenes">Limpiar Ordenes</button>
 
                 </div>
             </div>
@@ -427,7 +429,7 @@
           </div>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-success" id="modalCrearOrdenCompra">Crear</button>
+            <button type="button" class="btn btn-success" id="btnCrearOrdenCompra">Crear</button>
           <!-- <button type="button" class="btn btn-primary" id="modal-btn-si">Crear y enviar correo</button> -->
           <button type="button" class="btn btn-secondary btnCancelModal" id="modalCancelarOrdenCompra">Cancelar</button>
         </div>
@@ -441,10 +443,10 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content" style="height: 56rem !important;">
         <div class="modal-header">
-          <h4 class="modal-title" id="exampleModalLabel">Orden de compra</h4>
+          <h5 class="modal-title" id="exampleModalLabel">Orden de compra</h5>
         </div>
         <div class="modal-body">
-          <form id="dataRequisiciones">
+          <form id="dataEditOrdenCompra">
 
             <div class="row">
               <div class="col-md-3">
@@ -549,8 +551,6 @@
                     <tbody>
                       <tr id="materialsRequiredOrden">
 
-
-
                       </tr>
                     </tbody>
                   </table>
@@ -564,16 +564,16 @@
               <div class="col-md-5">
                 <div class="form-group body-modalsSinci">
                   <label for="recipient-name" class="col-form-label">Notas:</label>
-                  <input type="text" class="form-control" id="" name="" style="line-height: 7rem !important;">
+                  <input type="text" class="form-control" id="" name="" style="line-height: 9.5rem !important;">
                 </div>
               </div>
 
               <div class="col-md-2">
-                <button type="button" id="btnNotesCatalog" class="btn btn-primary" style="margin-top: 0.5rem;">Añadir <br> Nota</button>
+                <button type="button" id="btnNotesCatalog" class="btn btn-primary" style="margin-top: 4rem;">Añadir <br> Nota</button>
               </div>
 
               <div class="col-md-2">
-                <button type="button" id="btnNotesCatalog" class="btn btn-primary" style="margin-top: 0.5rem;">Calcular</button>
+                <button type="button" id="btnNotesCatalog" class="btn btn-primary" style="margin-top: 4.5rem;">Calcular</button>
               </div>
 
               <div class="col-md-3">

@@ -39,7 +39,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title" id="exampleModalLabel">Registro de Evento</h4>
+          <h5 class="modal-title" id="exampleModalLabel">Registro de Evento</h5>
           <!-- <button type="button" class="close btn btn-secondary" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button> -->
@@ -140,7 +140,7 @@
     <div class="modal-dialog modal-md">
       <div class="modal-content">
         <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel">Confirmar</h4>
+        <h5 class="modal-title" id="myModalLabel">Confirmar</h5>
         <!-- <button type="button" class="close btn btn-secondary" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button> -->

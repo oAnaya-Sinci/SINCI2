@@ -111,8 +111,6 @@
                     </thead>
                     <tbody>
                       <tr id="materialsRequired">
-                        <!-- <td colspan="7" class="addMaterialRow">Haz clic aqui para agregar material</td> -->
-
                           <td>--</td>
                           <td> <input type='text' class='form-material' id='txtCantidad' value="1" style="text-align: center;"> </td>
                           <td> <select class='form-select' id='slctUnidad'></select> </td>
@@ -451,22 +449,22 @@
             <div class="row">
               <div class="col-md-3">
                 <div class="form-group body-modalsSinci">
-                  <label for="recipient-name" class="col-form-label">Orden_compra:*</label>
-                  <input type="text" class="form-control modalForm" id="dateRequired" name="ordenCompra">
+                  <label for="recipient-name" class="col-form-label">Orden_compra:</label>
+                  <input type="text" class="form-control modalForm" id="idOrdenCompra" name="idOrdenCompra" disabled>
                 </div>
               </div>
 
               <div class="col-md-4">
                 <div class="form-group body-modalsSinci">
                   <label for="recipient-name" class="col-form-label">Fecha:</label>
-                  <input type="text" class="form-control datetimepicker modalForm" id="date" name="date">
+                  <input type="text" class="form-control datetimepicker compras modalForm" id="dateOrden" name="dateOrden">
                 </div>
               </div>
 
               <div class="col-md-3">
                 <div class="form-group body-modalsSinci">
                   <label for="recipient-name" class="col-form-label">Entregar:</label>
-                  <input type="text" class="form-control datetimepicker modalForm" id="dateEntregar" name="dateEntregar">
+                  <input type="text" class="form-control datetimepicker compras modalForm" id="dateEntregar" name="dateEntregar">
                 </div>
               </div>
             </div>
@@ -475,14 +473,18 @@
               <div class="col-md-3">
                 <div class="form-group body-modalsSinci">
                   <label for="recipient-name" class="col-form-label">Condiciones:</label>
-                  <input type="text" class="form-control datetimepicker compras modalForm" id="dateRequired" name="dateRequired">
+                  <input type="text" class="form-control modalForm" id="condiciones" name="condiciones">
                 </div>
               </div>
 
               <div class="col-md-4">
                 <div class="form-group body-modalsSinci">
                   <label for="recipient-name" class="col-form-label">Moneda:</label>
-                  <input type="text" class="form-control datetimepicker compras modalForm" id="endDate" name="endDate">
+                  <!-- <input type="text" class="form-control modalForm" id="moneda" name="moneda"> -->
+                  <select class="form-select modalForm" id="moneda" name="moneda">
+                      <option value="Pesos">Pesos</option>
+                      <option value="Dolar"></option>
+                  </select>
                 </div>
               </div>
 
@@ -497,45 +499,39 @@
             </div>
 
             <div class="row">
-              <div class="col-md-6">
+              <div class="col-md-6" style="margin-top: 1.1rem;">
                 <div id="divUsuarios" class="form-group body-modalsSinci">
                   <label id="lblUsuario" for="recipient-name" class="col-form-label">Facturar_a:</label>
-                  <select class="selectpicker form-control" id="slctUsuario" data-live-search="true" data-virtual-scroll="false" name="slctUsuario">
+                  <select class="selectpicker form-control" id="slctFacturarA" data-live-search="true" data-virtual-scroll="false" name="slctFacturarA">
                   </select>
                 </div>
-              </div>
-<!--
-              <div class="col-md-6">
 
-                  <label id="lblUsuario" for="recipient-name" class="col-form-label">Condiciones especiales:</label>
-                  <textarea class="form-control textAreaViewer" name="" id=""></textarea>
-
-              </div>
-            </div> -->
-
-            <div class="row">
-              <div class="col-md-6">
                 <div class="form-group body-modalsSinci">
                   <label for="recipient-name" class="col-form-label">RFC:</label>
                   <input type="text" class="form-control datetimepicker compras modalForm" id="rfc" name="rfc">
                 </div>
-              </div>
-            </div>
 
-            <div class="row">
-              <div class="col-md-6">
                 <div class="form-group body-modalsSinci">
                   <label for="recipient-name" class="col-form-label">Domicilio:</label>
-                  <input type="text" class="form-control datetimepicker compras modalForm" id="rfc" name="rfc">
+                  <input type="text" class="form-control datetimepicker compras modalForm" id="domicilio" name="domicilio">
                 </div>
+
               </div>
+
+                <div class="col-md-6">
+
+                    <label id="lblUsuario" for="recipient-name" class="col-form-label">Condiciones especiales:</label>
+                    <textarea class="form-control textAreaViewer" name="" id="condicionesE" style="height: 6.5rem;" name="condicionesE"></textarea>
+
+                </div>
+
             </div>
 
             <hr>
 
-            <div class="row materialRequiredOrdenCompra">
+            <div class="row materialRequiredOrdenCompra" style="height: 16rem !important;">
               <div class="col-md-12">
-                <div class="form-group">
+                <div class="form-group" style="height: 16rem !important;">
                   <table id="tableMaterialsOrdenCompra" class="table align-items-center mb-0">
                     <thead>
                       <tr>
@@ -549,8 +545,19 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr id="materialsRequiredOrden">
+                      <!-- <tr id="materialsRequiredOrden"> </tr> -->
 
+                      <tr id="materialsRequiredOrden">
+                          <td></td>
+                          <td> <input type='text' class='form-material' id='txtCantidadOrden' value="1" style="text-align: center;"> </td>
+                          <td> <select class='form-select' id='slctUnidadOrden'></select> </td>
+                          <td> <input type='text' class='form-material' id='txtMaterialOrden'> </td>
+                          <td> <input type='text' class='form-material' id='txtCatalogoOrden'> </td>
+                          <td> <input type='text' class='form-material' id='txtPrecioOrden'> </td>
+                          <td class="importeOrden"> </td>
+                          <td style="text-align: center; cursor: pointer;">
+                            <i class="material-icons opacity-10" id="addMaterialOrden">check</i>
+                          </td>
                       </tr>
                     </tbody>
                   </table>
@@ -563,40 +570,40 @@
             <div class="row">
               <div class="col-md-5">
                 <div class="form-group body-modalsSinci">
-                  <label for="recipient-name" class="col-form-label">Notas:</label>
-                  <input type="text" class="form-control" id="" name="" style="line-height: 9.5rem !important;">
+                  <!-- <label for="recipient-name" class="col-form-label">Notas:</label> -->
+                  <input type="text" class="form-control" id="notaOrdenCompra" name="notaOrdenCompra" style="line-height: 7.5rem !important;">
                 </div>
               </div>
 
               <div class="col-md-2">
-                <button type="button" id="btnNotesCatalog" class="btn btn-primary" style="margin-top: 4rem;">Añadir <br> Nota</button>
+                <button type="button" id="btnNotesCatalog" class="btn btn-primary" style="margin-top: 3rem;">Añadir <br> Nota</button>
               </div>
 
-              <div class="col-md-2">
-                <button type="button" id="btnNotesCatalog" class="btn btn-primary" style="margin-top: 4.5rem;">Calcular</button>
+              <div class="col-md-2" style="text-align: center;">
+                <button type="button" id="btnCalculateOrdenCompra" class="btn btn-primary" style="margin-top: 3.5rem;">Calcular</button>
               </div>
 
               <div class="col-md-3">
 
                 <div class="form-group body-modalsSinci">
                   <label for="recipient-name" class="col-form-label">Descuento:</label>
-                  <input type="text" class="form-control" id="rfc" name="rfc" style="margin-right: .5rem;">
-                  <input type="text" class="form-control" id="rfc" name="rfc">
+                  <input type="text" class="form-control" id="descuentoPorcentaje" name="descuentoPorcentaje" style="margin-right: .5rem;">
+                  <input type="text" class="form-control" id="descuentoTotal" name="descuentoTotal">
                 </div>
 
                 <div class="form-group body-modalsSinci">
                   <label for="recipient-name" class="col-form-label">Importe:</label>
-                  <input type="text" class="form-control" id="rfc" name="rfc">
+                  <input type="text" class="form-control" id="importe" name="importe">
                 </div>
 
                 <div class="form-group body-modalsSinci">
                   <label for="recipient-name" class="col-form-label">IVA:</label>
-                  <input type="text" class="form-control" id="rfc" name="rfc">
+                  <input type="text" class="form-control" id="iva" name="iva">
                 </div>
 
                 <div class="form-group body-modalsSinci">
                   <label for="recipient-name" class="col-form-label">Total:</label>
-                  <input type="text" class="form-control" id="rfc" name="rfc">
+                  <input type="text" class="form-control" id="total" name="total">
                 </div>
 
               </div>
@@ -605,12 +612,24 @@
 
           </form>
         </div>
-        <div class="modal-footer">
+        <div class="modal-footer" style="display: block;">
 
-          <button id="btnSaveEvent" type="button" class="btn btn-primary">Guardar</button>
-          <button id="btnEditEvent" type="button" class="btn btn-primary displayButton">Editar</button>
-          <!-- <button id="btnDeleteEvent" type="button" class="btn btn-danger btnDeleteNone">Guardar y enviar correo</button> --> <!-- Este boton queda pendiente hasta verificar la opcion de guardar y enviar por correo -->
-          <button type="button" class="btn btn-secondary btnCancelModal" id="btnCerrarModal" data-dismiss="modal">Cancelar</button>
+            <div class="row">
+
+                <div class="col-md-6" style="margin-top: -0.5rem;">
+                    <div class="form-group body-modalsSinci">
+                        <label for="recipient-name" class="col-form-label" style="margin-top: -0.2rem;">Status:</label>
+                        <!-- <input type="text" class="form-control modalForm" id="statusOrden" name="statusOrden" style="font-size: .7rem; line-height: .8rem; width: 45%; height: 100%;"> -->
+                        <select class="form-select modalForm" id="statusOrden" name="statusOrden" style="font-size: .7rem; line-height: .8rem; width: 45%; height: 100%;"></select>
+                    </div>
+                </div>
+
+                <div class="col-md-6" style="text-align: end;">
+                    <button id="btnActualizarOrdenCompra" type="button" class="btn btn-primary">Aceptar</button>
+                    <button type="button" class="btn btn-secondary btnCancelModal" id="btnCerrarModal" data-dismiss="modal">Cancelar</button>
+                </div>
+
+            </div>
 
         </div>
       </div>

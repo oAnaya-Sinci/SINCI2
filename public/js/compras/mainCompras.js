@@ -17,6 +17,25 @@ $(document).ready(function() {
             clear: 'fa fa-trash',
             close: 'fa fa-times'
         },
+    });
+
+    $('.datetimepicker').datetimepicker({
+        // follow MomentJS docs: https://momentjs.com/docs/#/displaying/format/
+        format: 'YYYY-MM-DD HH:mm',
+
+        // Your Icons
+        // as Bootstrap 4 is not using Glyphicons anymore
+        icons: {
+            time: 'fa fa-clock-o',
+            date: 'fa fa-calendar',
+            up: 'fa fa-chevron-up',
+            down: 'fa fa-chevron-down',
+            previous: 'fa fa-chevron-left',
+            next: 'fa fa-chevron-right',
+            today: 'fa fa-check',
+            clear: 'fa fa-trash',
+            close: 'fa fa-times'
+        },
 
     });
 
@@ -30,7 +49,7 @@ $(document).ready(function() {
     iniciateTablesDT();
     modalComprasSinci();
 
-    // $('#modalDetalleOrden').modal('show');
+    // $('#modalEditarOrdenCompra').modal('show');
 });
 
 $('#btnCerrarModal').click(function() {
@@ -274,15 +293,15 @@ $('#addMaterial').click(function() {
     let consecutivo = $('#tableMaterials tbody tr').length;
 
     let newRowMaterial = "<tr>" +
-        "<td id='consecutivo' data-mtrlvalue='" + consecutivo + "'>" + consecutivo + "</td>" +
-        "<td id='cantidad' data-mtrlvalue='" + cantidad + "'>" + cantidad + "</td>" +
-        "<td id='unidad' data-mtrlvalue='" + unidad + "'>" + unidad + "</td>" +
-        "<td id='material' data-mtrlvalue='" + material + "'>" + material + "</td>" +
-        "<td id='proveedor' data-mtrlvalue='" + proveedorId + "'>" + proveedor + "</td>" +
-        "<td id='marca' data-mtrlvalue='" + marca + "'>" + marca + "</td>" +
-        "<td id='catalogo' data-mtrlvalue='" + catalogo + "'>" + catalogo + "</td>" +
-        "<td> <i class='material-icons opacity-10' id='removeMaterial'>clear</i> " +
-        "<i class='material-icons opacity-10' id='editMaterial'>drive_file_rename_outline</i> </td>" +
+        "<td class='consecutivo' data-mtrlvalue='" + consecutivo + "'>" + consecutivo + "</td>" +
+        "<td class='cantidad' data-mtrlvalue='" + cantidad + "'>" + cantidad + "</td>" +
+        "<td class='unidad' data-mtrlvalue='" + unidad + "'>" + unidad + "</td>" +
+        "<td class='material' data-mtrlvalue='" + material + "'>" + material + "</td>" +
+        "<td class='proveedor' data-mtrlvalue='" + proveedorId + "'>" + proveedor + "</td>" +
+        "<td class='marca' data-mtrlvalue='" + marca + "'>" + marca + "</td>" +
+        "<td class='catalogo' data-mtrlvalue='" + catalogo + "'>" + catalogo + "</td>" +
+        "<td> <i class='material-icons opacity-10' class='removeMaterial'>clear</i> " +
+        "<i class='material-icons opacity-10' class='editMaterial'>drive_file_rename_outline</i> </td>" +
         "</tr>";
 
     // $('#materialsRequired').before(newRowMaterial);
@@ -320,15 +339,15 @@ let showDataCompra = (dataCompra, datDetalleCompra) => {
     datDetalleCompra.forEach(function(valor, indice) {
 
         RowsMaterial += "<tr>" +
-            "<td id='consecutivo' data-mtrlvalue='" + valor.CONSECUTIVO + "'>" + valor.CONSECUTIVO + "</td>" +
-            "<td id='cantidad' data-mtrlvalue='" + valor.CANTIDAD + "'>" + valor.CANTIDAD + "</td>" +
-            "<td id='unidad' data-mtrlvalue='" + valor.UNIDAD + "'>" + valor.UNIDAD + "</td>" +
-            "<td id='material' data-mtrlvalue='" + valor.MATERIAL + "'>" + valor.MATERIAL + "</td>" +
-            "<td id='proveedor' data-mtrlvalue='" + valor.ID_PROVEEDOR + "'>" + valor.PROVEEDOR + "</td>" +
-            "<td id='marca' data-mtrlvalue='" + valor.MARCA + "'>" + valor.MARCA + "</td>" +
-            "<td id='catalogo' data-mtrlvalue='" + valor.CATALOGO + "'>" + valor.CATALOGO + "</td>" +
-            "<td> <i class='material-icons opacity-10' id='removeMaterial'>clear</i> " +
-            "<i class='material-icons opacity-10' id='editMaterial'>drive_file_rename_outline</i> </td>" +
+            "<td class='consecutivo' data-mtrlvalue='" + valor.CONSECUTIVO + "'>" + valor.CONSECUTIVO + "</td>" +
+            "<td class='cantidad' data-mtrlvalue='" + valor.CANTIDAD + "'>" + valor.CANTIDAD + "</td>" +
+            "<td class='unidad' data-mtrlvalue='" + valor.UNIDAD + "'>" + valor.UNIDAD + "</td>" +
+            "<td class='material' data-mtrlvalue='" + valor.MATERIAL + "'>" + valor.MATERIAL + "</td>" +
+            "<td class='proveedor' data-mtrlvalue='" + valor.ID_PROVEEDOR + "'>" + valor.PROVEEDOR + "</td>" +
+            "<td class='marca' data-mtrlvalue='" + valor.MARCA + "'>" + valor.MARCA + "</td>" +
+            "<td class='catalogo' data-mtrlvalue='" + valor.CATALOGO + "'>" + valor.CATALOGO + "</td>" +
+            "<td> <i class='material-icons opacity-10' class='removeMaterial'>clear</i> " +
+            "<i class='material-icons opacity-10' class='editMaterial'>drive_file_rename_outline</i> </td>" +
             "</tr>";
     });
 
@@ -357,7 +376,7 @@ let cleanModalrequisicion = () => {
 
     $('.selectpicker').selectpicker('refresh');
 
-    $('#tableMaterials tbody tr #removeMaterial').each(function() {
+    $('#tableMaterials tbody tr .removeMaterial').each(function() {
         $(this).click();
     });
 }
@@ -377,7 +396,7 @@ let iniciateRemovematerials = () => {
     $('#txtMarca').val("");
     $('#txtCatalogo').val("");
 
-    $('#tableMaterials tbody tr #removeMaterial').each(function() {
+    $('#tableMaterials tbody tr .removeMaterial').each(function() {
         $(this).click(function() {
             $(this).parent().parent().remove();
             // iniciateRemovematerials();
@@ -387,7 +406,7 @@ let iniciateRemovematerials = () => {
 
 let iniciateEditMaterial = () => {
 
-    $('#tableMaterials tbody tr #editMaterial').each(function() {
+    $('#tableMaterials tbody tr .editMaterial').each(function() {
         $(this).click(function() {
 
             let rowData = $(this).parent().parent().find('td');
@@ -637,7 +656,6 @@ $('#btnEditarRequisicion').click(async() => {
     // let folio = $('.dataTables_wrapper tbody tr.rowSelected td.folio')[0].innerText;
 
     try {
-
         folio = $('.dataTables_wrapper tbody tr.rowSelected td.folio')[0].innerText;
     } catch (error) {
 
@@ -911,10 +929,14 @@ $('#btnCrearOrdenCompra').click(async() => {
 
     let dataOrdenCompra = [];
 
+    dataOrdenCompra.push({ "Facturar": "SINCI GDL S. de R.L. de C.V." });
+    dataOrdenCompra.push({ "RFC": "SGD 070919 8U3" });
+    dataOrdenCompra.push({ "Domicilio_Compania": "Aurelio L Gallardo 615  Col Ladrón de Guevara   Guadalajara Jal  44600" });
+
     await $.ajax({
-        type: "DELETE",
-        url: urlData + "/deleteData",
-        data: { "isLogedIn": dl, "folio": folio },
+        type: "PUT",
+        url: urlData + "/saveDataOrdenCompra",
+        data: { "isLogedIn": dl, "data": dataOrdenCompra },
         success: function(response) {
 
         },
@@ -925,3 +947,180 @@ $('#btnCrearOrdenCompra').click(async() => {
         }
     });
 });
+
+$('#btnActualizarOrdenCompra').click(async() => {
+
+    dataOrdenCompra = $('#dataEditOrdenCompra').serializeArray();
+
+    let dataTable = [];
+    let dataRow = [];
+    let totTd = 1;
+    let firstRow = 1;
+
+    $('#tableMaterialsOrdenCompra tbody tr').each(function(index, tr) {
+
+        if (firstRow != 1) {
+
+            $(tr).find('td').each(function(index, td) {
+
+                if (totTd < 8) {
+
+                    dataRow.push($(this).data('mtrlvalueOrden'));
+                } else {
+
+                    dataTable.push(dataRow);
+                    dataRow = [];
+                    totTd = 0;
+                }
+
+                totTd++;
+            });
+        }
+
+        firstRow++;
+    });
+
+    dataOrdenCompra.push({ "name": `Materials`, "value": JSON.stringify(dataTable) });
+
+    console.log(dataOrdenCompra);
+});
+
+let updateOrdenCompra = () => {
+
+    let dataOrdenCompra = [];
+
+    let dl = dataLogin();
+
+    $.ajax({
+        type: "PUT",
+        url: urlData + "/updateDataOrdenCompra",
+        data: { "isLogedIn": dl, "data": dataOrdenCompra },
+        success: function(response) {
+
+        },
+        error: function(exception) {
+
+            console.error(exception);
+            showMessage('danger', 'Error', exception.showMessage());
+        }
+    });
+}
+
+/**
+ * javascript comment
+ * @Author: Carlos Omar Anaya Barajas
+ * @Date: 2022-05-09 13:51:44
+ * @Desc:
+ */
+$('#addMaterialOrden').click(function() {
+
+    let cantidad = $('#txtCantidad').val();
+    let unidad = $('#slctUnidad option:selected').text();
+    let material = $('#txtMaterial').val();
+    let catalogo = $('#txtCatalogo').val();
+    let precio = $('#slctProveedor').val();
+    let importe = $('#txtMarca').val();
+
+    let consecutivo = $('#tableMaterialsOrdenCompra tbody tr').length;
+
+    let newRowMaterial = "<tr>" +
+        "<td class='consecutivo' data-mtrlvalueOrden='" + consecutivo + "'>" + consecutivo + "</td>" +
+        "<td class='cantidad' data-mtrlvalueOrden='" + cantidad + "'>" + cantidad + "</td>" +
+        "<td class='unidad' data-mtrlvalueOrden='" + unidad + "'>" + unidad + "</td>" +
+        "<td class='material' data-mtrlvalueOrden='" + material + "'>" + material + "</td>" +
+        "<td class='catalogo' data-mtrlvalueOrden='" + catalogo + "'>" + catalogo + "</td>" +
+        "<td class='precio' data-mtrlvalueOrden='" + precio + "'>" + precio + "</td>" +
+        "<td class='importe' data-mtrlvalueOrden='" + importe + "'>" + importe + "</td>" +
+        "<td> <i class='material-icons opacity-10' class='removeMaterialOrden'>clear</i> " +
+        "<i class='material-icons opacity-10' class='editMaterialOrden'>drive_file_rename_outline</i> </td>" +
+        "</tr>";
+
+    $('#materialsRequiredOrden').after(newRowMaterial);
+
+    iniciateEditMaterialOrden();
+    iniciateRemovematerialsOrden();
+});
+
+/**
+ * javascript comment
+ * @Author: Carlos Omar Anaya Barajas
+ * @Date: 2022-05-09 13:53:50
+ * @Desc:
+ */
+let iniciateEditMaterialOrden = () => {
+
+    $('#tableMaterialsOrdenCompra tbody tr .editMaterialOrden').each(function() {
+        $(this).click(function() {
+
+            let rowData = $(this).parent().parent().find('td');
+            let dataContainer = [];
+
+            rowData.each(function(index, value) {
+                dataContainer.push($(this).data('mtrlvalueOrden'));
+            });
+
+            $('#consecutivo').val(dataContainer[0]);
+            $('#txtCantidadOrden').val(dataContainer[1]);
+            $('#slctUnidadOrden').val(dataContainer[2]);
+            $('#txtMaterialOrden').val(dataContainer[3])
+            $('#txtCatalogoOrden').val(dataContainer[4]);;
+            $('#txtPrecioOrden').val(dataContainer[5]);
+
+            calcularImporte(dataContainer[1], dataContainer[5]);
+
+            $(this).parent().parent().remove();
+        });
+    });
+}
+
+let iniciateRemovematerialsOrden = () => {
+
+    $('#txtCantidadOrden').val(1);
+    $('#slctUnidadOrden').val("");
+    $('#txtMaterialOrden').val("");
+    $('#txtCatalogoOrden').val("");
+    $('#txtPrecioOrden').val("");
+    // $('#txtCatalogo').val("");
+
+    $('#tableMaterialsOrdenCompra tbody tr .removeMaterialOrden').each(function() {
+        $(this).click(function() {
+            $(this).parent().parent().remove();
+        });
+    });
+}
+
+$('#btnCalculateOrdenCompra').click(() => {
+
+    // $('#tableMaterialsOrdenCompra tbody tr #editMaterialOrden')
+    let table = document.getElementById('tableMaterialsOrdenCompra');
+    let dataTableOrden = document.getElementsByClassName('importe')
+
+    dataTableOrden.forEach((value, index) => {
+
+        console.log(value);
+    });
+});
+
+
+/**
+ * javascript comment
+ * @Author: Carlos Omar Anaya Barajas
+ * @Date: 2022-05-09 16:53:39
+ * @Desc: Calucale the importe of the data in the internal table
+ */
+
+$('#tableMaterialsOrdenCompra #txtCantidadOrden').keyup(function() {
+
+    calcularImporte($(this).val(), $('#txtPrecioOrden').val());
+});
+
+$('#tableMaterialsOrdenCompra #txtPrecioOrden').keyup(function() {
+
+    calcularImporte($('#txtCantidadOrden').val(), $(this).val());
+});
+
+let calcularImporte = (cantidad, precio) => {
+    let importe = cantidad * precio;
+
+    $('#tableMaterialsOrdenCompra tbody .importeOrden').text(importe);
+}

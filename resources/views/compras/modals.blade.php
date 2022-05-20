@@ -1,6 +1,6 @@
 <!-- In this space is deployed the modals required to the calendar plugin -->
   <!-- This modal is to save de event on the calendar -->
-  <div id="registrarRequisicion" class="modal fade modal-lg modalsSinciClass" tabindex="-1" role="dialog" aria-labelledby="registrarrequisicion" data-bs-backdrop="static" data-bs-keyboard="false" aria-hidden="true">
+  <div id="registrarRequisicion" class="modal fade modal-lg modalsSinciClass" tabindex="-1" role="dialog" aria-labelledby="registrarRequisicion" data-bs-backdrop="static" data-bs-keyboard="false" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -344,11 +344,10 @@
   </div>
   <!-- END -->
 
-
   <!-- This modals are requierd for the registration of the requisicion autorized and the ordenes de compra -->
    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false" id="modalCrearOrdenCompra" style="margin-top: 1rem;">
     <div class="modal-dialog modal-lg" style="max-width: 56rem;">
-      <div class="modal-content" style="height: 49rem; margin-top:-1rem;">
+      <div class="modal-content" style="height: 50rem; margin-top:-1rem;">
         <div class="modal-header">
         <h5 class="modal-title" id="">Crear ordenes de compra</h5>
         </div>
@@ -393,7 +392,7 @@
 
             <div class="row" style="margin-bottom: 1rem;">
                 <div class="col-md-12 tableDetailOrden" style="height: 13rem !important;">
-                    <table id="tableDetailOrdenCompra" class="table align-items-center mb-0">
+                    <table id="tableDetailCrearOrdenCompra" class="table align-items-center mb-0">
                     <thead>
                         <tr>
                         <th>Orden</th>
@@ -408,19 +407,15 @@
                     </table>
                 </div>
             </div>
-
+<hr>
             <div class="row">
                 <div class="col-md-3">
-
                     <button type="button" class="btn btn-secondary" id="btnActualizar">Actualizar</button>
-
                 </div>
 
                 <div class="col-md-9" style="text-align: right;">
-
                     <button type="button" class="btn btn-secondary" id="btnOrdenesAutomaticas">Ordenes automaticas</button>
                     <button type="button" class="btn btn-secondary" id="btnLimpiarOrdenes">Limpiar Ordenes</button>
-
                 </div>
             </div>
 
@@ -439,7 +434,7 @@
   <div class="modal fade modalsSinciClass" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false" id="modalEditarOrdenCompra" style="margin-top: -1rem !important;">
   <!-- <div id="registrarRequisicion" class="modal fade modal-lg modalsSinciClass" tabindex="-1" role="dialog" aria-labelledby="registrarrequisicion" data-bs-backdrop="static" data-bs-keyboard="false" aria-hidden="true"> -->
     <div class="modal-dialog" role="document">
-      <div class="modal-content" style="height: 56rem !important;">
+      <div class="modal-content" style="height: 54rem !important;">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Orden de compra</h5>
         </div>
@@ -483,7 +478,7 @@
                   <!-- <input type="text" class="form-control modalForm" id="moneda" name="moneda"> -->
                   <select class="form-select modalForm" id="moneda" name="moneda">
                       <option value="Pesos">Pesos</option>
-                      <option value="Dolar"></option>
+                      <option value="Dolar">Dollar</option>
                   </select>
                 </div>
               </div>
@@ -508,12 +503,12 @@
 
                 <div class="form-group body-modalsSinci">
                   <label for="recipient-name" class="col-form-label">RFC:</label>
-                  <input type="text" class="form-control datetimepicker compras modalForm" id="rfc" name="rfc">
+                  <input type="text" class="form-control datetimepicker compras modalForm" id="rfc" name="rfc" style="margin: 0.5rem 0 0.25rem 0;">
                 </div>
 
                 <div class="form-group body-modalsSinci">
                   <label for="recipient-name" class="col-form-label">Domicilio:</label>
-                  <input type="text" class="form-control datetimepicker compras modalForm" id="domicilio" name="domicilio">
+                  <input type="text" class="form-control datetimepicker compras modalForm" id="domicilio" name="domicilio" style="margin: 0.25rem 0 0.25rem 0;">
                 </div>
 
               </div>
@@ -521,7 +516,7 @@
                 <div class="col-md-6">
 
                     <label id="lblUsuario" for="recipient-name" class="col-form-label">Condiciones especiales:</label>
-                    <textarea class="form-control textAreaViewer" name="" id="condicionesE" style="height: 6.5rem;" name="condicionesE"></textarea>
+                    <textarea class="form-control textAreaViewer" name="" id="condicionesE" style="height: 7rem; margin-bottom: 0;" name="condicionesE"></textarea>
 
                 </div>
 
@@ -532,7 +527,7 @@
             <div class="row materialRequiredOrdenCompra" style="height: 16rem !important;">
               <div class="col-md-12">
                 <div class="form-group" style="height: 16rem !important;">
-                  <table id="tableMaterialsOrdenCompra" class="table align-items-center mb-0">
+                  <table id="tableMaterialsEditarOrdenCompra" class="table align-items-center mb-0">
                     <thead>
                       <tr>
                         <th>PDA</th>

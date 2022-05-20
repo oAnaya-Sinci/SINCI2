@@ -36,15 +36,21 @@
     font-size: 11px;
 }
 
-#tableDetailOrdenCompra thead tr th {
+#tableDetailOrdenCompra thead tr th,
+#tableMaterialsEditarOrdenCompra thead tr th,
+#tableDetailCrearOrdenCompra thead tr th {
     text-align: left;
     font-size: 12px !important;
-    padding: 0 0 0.5rem 0 !important;
+    /* padding: 0 0 0.5rem 0 !important; */
+    padding: 0.8rem 0.8rem 0.5rem 0;
 }
 
-#tableDetailOrdenCompra tbody tr td {
+#tableDetailOrdenCompra tbody tr td,
+#tableMaterialsEditarOrdenCompra tbody tr td,
+#tableDetailCrearOrdenCompra tbody tr td {
     text-align: left;
     font-size: 11px;
+    padding: 0.15rem 0.5rem;
 }
 
 #tableDetailOrdenCompra tbody tr.cleanOrders td {
@@ -93,7 +99,7 @@
 .modal .modal-content .modal-body textarea,
 .modal .modal-content .modal-body btn {
     font-size: .7rem;
-    line-height: .8rem;
+    line-height: .8rem !important;
 }
 
 .btn.dropdown-toggle {

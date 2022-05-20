@@ -36,7 +36,6 @@ $(document).ready(function() {
             clear: 'fa fa-trash',
             close: 'fa fa-times'
         },
-
     });
 
     // let date = new Date();
@@ -413,7 +412,8 @@ let iniciateEditMaterial = () => {
             let dataContainer = [];
 
             rowData.each(function(index, value) {
-                dataContainer.push($(this).data('mtrlvalue'));
+                // dataContainer.push($(this).data('mtrlvalue'));
+                dataContainer.push($(this).attr('mtrlvalue'));
             });
 
             $('#consecutivo').val(dataContainer[0]);
@@ -472,7 +472,8 @@ let obtainDataMaterials = async(update) => {
 
                 if (totTd < 8) {
 
-                    dataRow.push($(this).data('mtrlvalue'));
+                    // dataRow.push($(this).data('mtrlvalue'));
+                    dataRow.push($(this).attr('mtrlvalue'));
                 } else {
 
                     dataTable.push(dataRow);
@@ -860,22 +861,22 @@ $('#btnRegistraOrdenCompra').click(async function() {
 
         let dataDetails = dataOrdenCompra.detalleCompra;
 
-        $('#tableDetailOrdenCompra tbody').empty();
+        $('#tableDetailCrearOrdenCompra tbody').empty();
 
         let rows = "";
         $.each(dataDetails, function(index, value) {
 
             rows += "<tr style='padding: 0 !important;'>" +
-                "<td>" + value.CONSECUTIVO + "</td>" +
-                "<td>" + value.CANTIDAD + "</td>" +
-                "<td>" + value.UNIDAD + "</td>" +
-                "<td><p class='ajusteTextoTablasModal' style='font-size: 11px !important    ;'>" + value.MATERIAL + "</p></td>" +
-                "<td>" + value.PROVEEDOR + "</td>" +
+                "<td data-mtrlvalueOrden='" + value.CONSECUTIVO + "'>" + value.CONSECUTIVO + "</td>" +
+                "<td data-mtrlvalueOrden='" + value.CANTIDAD + "'>" + value.CANTIDAD + "</td>" +
+                "<td data-mtrlvalueOrden='" + value.UNIDAD + "'>" + value.UNIDAD + "</td>" +
+                "<td data-mtrlvalueOrden='" + value.MATERIAL + "'><p class='ajusteTextoTablasModal' style='font-size: 11px !important;'>" + value.MATERIAL + "</p></td>" +
+                "<td data-mtrlvalueOrden='" + value.PROVEEDOR + "'>" + value.PROVEEDOR + "</td>" +
                 "<td><select class='form-select slctOrdenCompraTable'></select></td>" +
                 "</tr>";
-        })
+        });
 
-        $('#tableDetailOrdenCompra tbody').append(rows);
+        $('#tableDetailCrearOrdenCompra tbody').append(rows);
 
         let optionsSelect = "";
         optionsSelect += "<option value=''>-</option>";
@@ -913,7 +914,16 @@ $('#btnRegistraOrdenCompra').click(async function() {
     $('#modalCrearOrdenCompra').modal('show');
 });
 
+/**
+ * javascript comment
+ * @Author: Carlos Omar Anaya Barajas
+ * @Date: 2022-05-20 18:07:06
+ * @Desc: This function obtain the data of the OC and the details of the OC
+ */
 $('#btnEditarOrdenCompra').click(function() {
+
+    let folio = $('#tableRequisicionesAuth tbody tr.rowSelected td.folio').text();
+    await fetch(urlData + "/obtainOrdenCompra?folio=" + folio).then(data => data.json()).then(dataOrdenCompra => {}).catch(() => { IsLogedIn(); });
 
     $('#modalEditarOrdenCompra').modal('show');
 });
@@ -932,20 +942,61 @@ $('#btnCrearOrdenCompra').click(async() => {
     dataOrdenCompra.push({ "Facturar": "SINCI GDL S. de R.L. de C.V." });
     dataOrdenCompra.push({ "RFC": "SGD 070919 8U3" });
     dataOrdenCompra.push({ "Domicilio_Compania": "Aurelio L Gallardo 615  Col Ladrón de Guevara   Guadalajara Jal  44600" });
+    dataOrdenCompra.push({ "proveedor": 126 });
+    dataOrdenCompra.push({ "year": moment().format('YYYY') });
 
-    await $.ajax({
-        type: "PUT",
-        url: urlData + "/saveDataOrdenCompra",
-        data: { "isLogedIn": dl, "data": dataOrdenCompra },
-        success: function(response) {
+    let dataTable = [];
+    let dataRow = [];
+    let totTd = 1;
+    // let firstRow = 1;
 
-        },
-        error: function(exception) {
+    $('#tableDetailCrearOrdenCompra tbody tr').each(function(index, tr) {
 
-            console.error(exception);
-            showMessage('danger', 'Error', exception.showMessage());
-        }
+        // if (firstRow != 1) {
+
+        $(tr).find('td').each(function(index, td) {
+
+            if (totTd < 7) {
+
+                if (totTd != 6)
+                    dataRow.push($(this).attr('data-mtrlvalueOrden'));
+                // dataRow.push($(this).data('mtrlvalueOrden'));
+
+                else
+                    dataRow.push($(this).find('.slctOrdenCompraTable').val());
+            } else {
+
+                dataTable.push(dataRow);
+                dataRow = [];
+                totTd = 0;
+            }
+
+            totTd++;
+        });
+        // }
+
+        // firstRow++;
     });
+
+    dataOrdenCompra.push({ "name": `Materials`, "value": JSON.stringify(dataTable) });
+
+    console.log(dataOrdenCompra);
+
+    updateOrdenCompra("/saveDataOrdenCompra", dataOrdenCompra);
+
+    // await $.ajax({
+    //     type: "PUT",
+    //     url: urlData + "/saveDataOrdenCompra",
+    //     data: { "isLogedIn": dl, "data": dataOrdenCompra },
+    //     success: function(response) {
+
+    //     },
+    //     error: function(exception) {
+
+    //         console.error(exception);
+    //         showMessage('danger', 'Error', exception.showMessage());
+    //     }
+    // });
 });
 
 $('#btnActualizarOrdenCompra').click(async() => {
@@ -957,7 +1008,7 @@ $('#btnActualizarOrdenCompra').click(async() => {
     let totTd = 1;
     let firstRow = 1;
 
-    $('#tableMaterialsOrdenCompra tbody tr').each(function(index, tr) {
+    $('#tableMaterialsEditarOrdenCompra tbody tr').each(function(index, tr) {
 
         if (firstRow != 1) {
 
@@ -965,7 +1016,8 @@ $('#btnActualizarOrdenCompra').click(async() => {
 
                 if (totTd < 8) {
 
-                    dataRow.push($(this).data('mtrlvalueOrden'));
+                    // dataRow.push($(this).data('mtrlvalueOrden'));
+                    dataRow.push($(this).attr('mtrlvalueOrden'));
                 } else {
 
                     dataTable.push(dataRow);
@@ -983,18 +1035,22 @@ $('#btnActualizarOrdenCompra').click(async() => {
     dataOrdenCompra.push({ "name": `Materials`, "value": JSON.stringify(dataTable) });
 
     console.log(dataOrdenCompra);
+
+    updateOrdenCompra("/updateDataOrdenCompra", dataOrdenCompra);
 });
 
-let updateOrdenCompra = () => {
+let updateOrdenCompra = (urlToUpdate, dataOrdenCompra) => {
 
-    let dataOrdenCompra = [];
+    // let dataOrdenCompra = [];
 
     let dl = dataLogin();
+    let folio = $('#tableRequisicionesAuth tbody tr.rowSelected td.folio').text();
 
     $.ajax({
         type: "PUT",
-        url: urlData + "/updateDataOrdenCompra",
-        data: { "isLogedIn": dl, "data": dataOrdenCompra },
+        // url: urlData + "/updateDataOrdenCompra",
+        url: urlData + urlToUpdate,
+        data: { "isLogedIn": dl, "data": dataOrdenCompra, "folio": folio },
         success: function(response) {
 
         },
@@ -1056,7 +1112,8 @@ let iniciateEditMaterialOrden = () => {
             let dataContainer = [];
 
             rowData.each(function(index, value) {
-                dataContainer.push($(this).data('mtrlvalueOrden'));
+                // dataContainer.push($(this).data('mtrlvalueOrden'));
+                dataContainer.push($(this).attr('mtrlvalueOrden'));
             });
 
             $('#consecutivo').val(dataContainer[0]);
@@ -1100,7 +1157,6 @@ $('#btnCalculateOrdenCompra').click(() => {
         console.log(value);
     });
 });
-
 
 /**
  * javascript comment

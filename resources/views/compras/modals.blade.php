@@ -497,8 +497,9 @@
               <div class="col-md-6" style="margin-top: 1.1rem;">
                 <div id="divUsuarios" class="form-group body-modalsSinci">
                   <label id="lblUsuario" for="recipient-name" class="col-form-label">Facturar_a:</label>
-                  <select class="selectpicker form-control" id="slctFacturarA" data-live-search="true" data-virtual-scroll="false" name="slctFacturarA">
-                  </select>
+                  <!-- <select class="selectpicker form-control" id="slctFacturarA" data-live-search="true" data-virtual-scroll="false" name="slctFacturarA"> -->
+                  <input type="text" class="form-control" id="slctFacturarA" name="slctFacturarA">
+                  </input>
                 </div>
 
                 <div class="form-group body-modalsSinci">
@@ -542,7 +543,7 @@
                     <tbody>
                       <!-- <tr id="materialsRequiredOrden"> </tr> -->
 
-                      <tr id="materialsRequiredOrden">
+                      <tr id="materialsRequiredOrdenCompra">
                           <td></td>
                           <td> <input type='text' class='form-material' id='txtCantidadOrden' value="1" style="text-align: center;"> </td>
                           <td> <select class='form-select' id='slctUnidadOrden'></select> </td>
@@ -621,7 +622,7 @@
 
                 <div class="col-md-6" style="text-align: end;">
                     <button id="btnActualizarOrdenCompra" type="button" class="btn btn-primary">Aceptar</button>
-                    <button type="button" class="btn btn-secondary btnCancelModal" id="btnCerrarModal" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-secondary btnCancelModal" id="btnCerrarModalOrdenCompra" data-dismiss="modal">Cancelar</button>
                 </div>
 
             </div>

@@ -129,7 +129,10 @@ async function modalComprasSinci() {
         processDataToSelect(dataAsignar, '#slctProveedorOrdenCompra', 'Sin proveedor');
     }).catch(() => { IsLogedIn(); });
 
-    await fetch(urlData + "/obtainDataUnidadesMedida?isLogedIn=" + dl).then(data => data.json()).then(dataAsignar => { processDataToSelect(dataAsignar, '#slctUnidad', "-"); }).catch(() => { IsLogedIn(); });
+    await fetch(urlData + "/obtainDataUnidadesMedida?isLogedIn=" + dl).then(data => data.json()).then(dataAsignar => {
+        processDataToSelect(dataAsignar, '#slctUnidad', "-");
+        processDataToSelect(dataAsignar, '#slctUnidadOrden', "-");
+    }).catch(() => { IsLogedIn(); });
     await fetch(urlData + "/obtainDataNotesCatalog?isLogedIn=" + dl).then(data => data.json()).then(dataAsignar => { processDataToModalNotes(dataAsignar); }).catch(() => { IsLogedIn(); });
 
     $('.selectpicker').selectpicker('refresh');
@@ -920,13 +923,65 @@ $('#btnRegistraOrdenCompra').click(async function() {
  * @Date: 2022-05-20 18:07:06
  * @Desc: This function obtain the data of the OC and the details of the OC
  */
-$('#btnEditarOrdenCompra').click(function() {
+
+$('#btnEditarOrdenCompra').click(async function() {
 
     let folio = $('#tableRequisicionesAuth tbody tr.rowSelected td.folio').text();
-    await fetch(urlData + "/obtainOrdenCompra?folio=" + folio).then(data => data.json()).then(dataOrdenCompra => {}).catch(() => { IsLogedIn(); });
+    await fetch(urlData + "/obtainOrdenCompra?folio=" + folio).then(data => data.json()).then(dataOrdenCompra => {
+
+        let OrdenCompra = dataOrdenCompra.compra[0];
+
+        $('#idOrdenCompra').val(OrdenCompra.ID_COMPRA);
+        $('#dateOrden').val(moment(OrdenCompra.FECHA).format("YYYY-MM-DD"));
+        $('#dateEntregar').val(moment(OrdenCompra.FECHA_PORENTREGA).format("YYYY-MM-DD"));
+        $('#condiciones').val(OrdenCompra.CONDICIONES_PAGO);
+        $('#moneda').val(OrdenCompra.MONEDA);
+        $('#slctProveedorOrdenCompra').val(OrdenCompra.ID_PROVEEDOR);
+        $('#slctFacturarA').val(OrdenCompra.FACTURAR);
+        $('#rfc').val(OrdenCompra.RFC);
+        $('#domicilio').val(OrdenCompra.DOMICILIO_COMPANIA);
+        $('#condicionesE').val(OrdenCompra.NOTAS_GENERALES);
+        $('#notaOrdenCompra').val(OrdenCompra.NOTAS_ORDENCOMPRA);
+
+        let dataDetails = dataOrdenCompra.detalleCompra;
+
+        cleaBodyOrdenCompra();
+        let row = "";
+        $.each(dataDetails, function(index, value) {
+
+            row += "<tr> <tr style='padding: 0 !important;'>" +
+                "<td data-mtrlvalueOrdenCompra='" + value.CONSECUTIVO + "'>" + value.CONSECUTIVO + "</td>" +
+                "<td data-mtrlvalueOrdenCompra='" + value.CANTIDAD + "'>" + value.CANTIDAD + "</td>" +
+                "<td data-mtrlvalueOrdenCompra='" + value.UNIDAD + "'>" + value.UNIDAD + "</td>" +
+                "<td data-mtrlvalueOrdenCompra='" + value.MATERIAL + "'><p class='ajusteTextoTablasModal' style='font-size: 11px !important;'>" + value.MATERIAL + "</p></td>" +
+                "<td data-mtrlvalueOrdenCompra='" + value.CATALOGO + "'>" + value.CATALOGO + "</td>" +
+                "<td data-mtrlvalueOrdenCompra='" + (value.PRECIO != null ? value.PRECIO : 0) + "'>" + (value.PRECIO != null ? value.PRECIO : 0) + "</td>" +
+                "<td data-mtrlvalueOrdenCompra='" + (value.CANTIDAD * (value.PRECIO != null ? value.PRECIO : 0)) + "'>" + (value.PRECIO != null ? value.PRECIO : 0) + "</td>" +
+                "<td> <i class='material-icons opacity-10' class='removeMaterialOrden'>clear</i> " +
+                "<i class='material-icons opacity-10' class='editMaterialOrden'>drive_file_rename_outline</i> </td> </tr>";
+        });
+
+        $('#materialsRequiredOrdenCompra').after(row);
+
+    }).catch(() => { IsLogedIn(); });
 
     $('#modalEditarOrdenCompra').modal('show');
 });
+
+let cleaBodyOrdenCompra = () => {
+
+    $('#tableMaterialsEditarOrdenCompra tbody tr:not(#materialsRequiredOrdenCompra)').remove();
+}
+
+// $('#btnActualizarOrdenCompra').click(function() {
+
+//     cleaBodyOrdenCompra();
+// });
+
+// $('#btnCerrarModalOrdenCompra').click(function() {
+
+//     cleaBodyOrdenCompra();
+// });
 
 /**
  * javascript comment
@@ -1016,8 +1071,7 @@ $('#btnActualizarOrdenCompra').click(async() => {
 
                 if (totTd < 8) {
 
-                    // dataRow.push($(this).data('mtrlvalueOrden'));
-                    dataRow.push($(this).attr('mtrlvalueOrden'));
+                    dataRow.push($(this).attr('data-mtrlvalueOrdenCompra'));
                 } else {
 
                     dataTable.push(dataRow);
@@ -1033,8 +1087,6 @@ $('#btnActualizarOrdenCompra').click(async() => {
     });
 
     dataOrdenCompra.push({ "name": `Materials`, "value": JSON.stringify(dataTable) });
-
-    console.log(dataOrdenCompra);
 
     updateOrdenCompra("/updateDataOrdenCompra", dataOrdenCompra);
 });

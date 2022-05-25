@@ -166,8 +166,14 @@ function processDataToSelect(data, select, firstOption = "") {
     if (firstOption == "")
         data.length > 1 ? options = "<option value=''>Seleccione una opción</option>" : null;
 
-    else
-        options = "<option value=''>" + firstOption + "</option>";
+    else {
+
+        if (firstOption == "Sin proveedor")
+            options = "<option value='0'>" + firstOption + "</option>";
+
+        else
+            options = "<option value=''>" + firstOption + "</option>";
+    }
 
     $.each(data, function(index, value) {
 
@@ -348,8 +354,8 @@ let showDataCompra = (dataCompra, datDetalleCompra) => {
             "<td class='proveedor' data-mtrlvalue='" + valor.ID_PROVEEDOR + "'>" + valor.PROVEEDOR + "</td>" +
             "<td class='marca' data-mtrlvalue='" + valor.MARCA + "'>" + valor.MARCA + "</td>" +
             "<td class='catalogo' data-mtrlvalue='" + valor.CATALOGO + "'>" + valor.CATALOGO + "</td>" +
-            "<td> <i class='material-icons opacity-10' class='removeMaterial'>clear</i> " +
-            "<i class='material-icons opacity-10' class='editMaterial'>drive_file_rename_outline</i> </td>" +
+            "<td> <i class='material-icons opacity-10 removeMaterial'>clear</i> " +
+            "<i class='material-icons opacity-10 editMaterial'>drive_file_rename_outline</i> </td>" +
             "</tr>";
     });
 
@@ -401,7 +407,13 @@ let iniciateRemovematerials = () => {
     $('#tableMaterials tbody tr .removeMaterial').each(function() {
         $(this).click(function() {
             $(this).parent().parent().remove();
-            // iniciateRemovematerials();
+
+            let newConsecutivo = $('#tableMaterials tbody tr').length - 1;
+            $('#tableMaterials tbody tr td.consecutivo').each(function() {
+                $(this).text(newConsecutivo);
+                $(this).attr('data-mtrlvalueorden', newConsecutivo);
+                newConsecutivo--;
+            });
         });
     });
 }
@@ -414,7 +426,7 @@ let iniciateEditMaterial = () => {
             let rowData = $(this).parent().parent().find('td');
             let dataContainer = [];
 
-            rowData.each(function(index, value) {
+            rowData.each(function() {
                 // dataContainer.push($(this).data('mtrlvalue'));
                 dataContainer.push($(this).attr('mtrlvalue'));
             });
@@ -471,7 +483,7 @@ let obtainDataMaterials = async(update) => {
 
         if (firstRow != 1) {
 
-            $(tr).find('td').each(function(index, td) {
+            $(tr).find('td').each(function() {
 
                 if (totTd < 8) {
 
@@ -931,12 +943,17 @@ $('#btnEditarOrdenCompra').click(async function() {
 
         let OrdenCompra = dataOrdenCompra.compra[0];
 
+        let fecha = OrdenCompra.FECHA != null ? moment(OrdenCompra.FECHA).format("YYYY-MM-DD") : "";
+        let fechaEntrega = OrdenCompra.FECHA_ENTREGA != null ? moment(OrdenCompra.FECHA_ENTREGA).format("YYYY-MM-DD") : "";
+        let moneda = OrdenCompra.MONEDA != null ? OrdenCompra.MONEDA : 'Pesos';
+        let proveedor = OrdenCompra.ID_PROVEEDOR != null ? OrdenCompra.ID_PROVEEDOR : 0;
+
         $('#idOrdenCompra').val(OrdenCompra.ID_COMPRA);
-        $('#dateOrden').val(moment(OrdenCompra.FECHA).format("YYYY-MM-DD"));
-        $('#dateEntregar').val(moment(OrdenCompra.FECHA_PORENTREGA).format("YYYY-MM-DD"));
+        $('#dateOrden').val(fecha);
+        $('#dateEntregar').val(fechaEntrega);
         $('#condiciones').val(OrdenCompra.CONDICIONES_PAGO);
-        $('#moneda').val(OrdenCompra.MONEDA);
-        $('#slctProveedorOrdenCompra').val(OrdenCompra.ID_PROVEEDOR);
+        $('#moneda').val(moneda);
+        $('#slctProveedorOrdenCompra').val(proveedor);
         $('#slctFacturarA').val(OrdenCompra.FACTURAR);
         $('#rfc').val(OrdenCompra.RFC);
         $('#domicilio').val(OrdenCompra.DOMICILIO_COMPANIA);
@@ -950,18 +967,21 @@ $('#btnEditarOrdenCompra').click(async function() {
         $.each(dataDetails, function(index, value) {
 
             row += "<tr> <tr style='padding: 0 !important;'>" +
-                "<td data-mtrlvalueOrdenCompra='" + value.CONSECUTIVO + "'>" + value.CONSECUTIVO + "</td>" +
-                "<td data-mtrlvalueOrdenCompra='" + value.CANTIDAD + "'>" + value.CANTIDAD + "</td>" +
-                "<td data-mtrlvalueOrdenCompra='" + value.UNIDAD + "'>" + value.UNIDAD + "</td>" +
-                "<td data-mtrlvalueOrdenCompra='" + value.MATERIAL + "'><p class='ajusteTextoTablasModal' style='font-size: 11px !important;'>" + value.MATERIAL + "</p></td>" +
-                "<td data-mtrlvalueOrdenCompra='" + value.CATALOGO + "'>" + value.CATALOGO + "</td>" +
-                "<td data-mtrlvalueOrdenCompra='" + (value.PRECIO != null ? value.PRECIO : 0) + "'>" + (value.PRECIO != null ? value.PRECIO : 0) + "</td>" +
-                "<td data-mtrlvalueOrdenCompra='" + (value.CANTIDAD * (value.PRECIO != null ? value.PRECIO : 0)) + "'>" + (value.PRECIO != null ? value.PRECIO : 0) + "</td>" +
-                "<td> <i class='material-icons opacity-10' class='removeMaterialOrden'>clear</i> " +
-                "<i class='material-icons opacity-10' class='editMaterialOrden'>drive_file_rename_outline</i> </td> </tr>";
+                "<td class='consecutivo' data-mtrlvalueOrdenCompra='" + value.CONSECUTIVO + "'>" + value.CONSECUTIVO + "</td>" +
+                "<td class='cantidad' data-mtrlvalueOrdenCompra='" + value.CANTIDAD + "'>" + value.CANTIDAD + "</td>" +
+                "<td class='unidad' data-mtrlvalueOrdenCompra='" + value.UNIDAD + "'>" + value.UNIDAD + "</td>" +
+                "<td class='material' data-mtrlvalueOrdenCompra='" + value.MATERIAL + "'><p class='ajusteTextoTablasModal' style='font-size: 11px !important;'>" + value.MATERIAL + "</p></td>" +
+                "<td class='catalogo' data-mtrlvalueOrdenCompra='" + value.CATALOGO + "'>" + value.CATALOGO + "</td>" +
+                "<td class='precio' data-mtrlvalueOrdenCompra='" + (value.PRECIO != null ? value.PRECIO : 0) + "'>" + (value.PRECIO != null ? value.PRECIO : 0) + "</td>" +
+                "<td class='importe' data-mtrlvalueOrdenCompra='" + (value.CANTIDAD * (value.PRECIO != null ? value.PRECIO : 0)) + "'>" + (value.CANTIDAD * (value.PRECIO != null ? value.PRECIO : 0)) + "</td>" +
+                "<td> <i class='material-icons opacity-10 removeMaterialOrden'>clear</i> " +
+                "<i class='material-icons opacity-10 editMaterialOrden'>drive_file_rename_outline</i> </td> </tr>";
         });
 
         $('#materialsRequiredOrdenCompra').after(row);
+
+        iniciateEditMaterialOrden();
+        iniciateRemovematerialsOrden();
 
     }).catch(() => { IsLogedIn(); });
 
@@ -1009,7 +1029,7 @@ $('#btnCrearOrdenCompra').click(async() => {
 
         // if (firstRow != 1) {
 
-        $(tr).find('td').each(function(index, td) {
+        $(tr).find('td').each(function() {
 
             if (totTd < 7) {
 
@@ -1067,7 +1087,7 @@ $('#btnActualizarOrdenCompra').click(async() => {
 
         if (firstRow != 1) {
 
-            $(tr).find('td').each(function(index, td) {
+            $(tr).find('td').each(function() {
 
                 if (totTd < 8) {
 
@@ -1120,30 +1140,29 @@ let updateOrdenCompra = (urlToUpdate, dataOrdenCompra) => {
  * @Date: 2022-05-09 13:51:44
  * @Desc:
  */
-$('#addMaterialOrden').click(function() {
+$('#addMaterialOrdenCompra').click(function() {
 
-    let cantidad = $('#txtCantidad').val();
-    let unidad = $('#slctUnidad option:selected').text();
-    let material = $('#txtMaterial').val();
-    let catalogo = $('#txtCatalogo').val();
-    let precio = $('#slctProveedor').val();
-    let importe = $('#txtMarca').val();
+    let cantidad = $('#txtCantidadOrden').val();
+    let unidad = $('#slctUnidadOrden option:selected').text();
+    let material = $('#txtMaterialOrden').val();
+    let catalogo = $('#txtCatalogoOrden').val();
+    let precio = $('#txtPrecioOrden').val();
 
-    let consecutivo = $('#tableMaterialsOrdenCompra tbody tr').length;
+    let consecutivo = $('#tableMaterialsEditarOrdenCompra tbody tr').length;
 
     let newRowMaterial = "<tr>" +
-        "<td class='consecutivo' data-mtrlvalueOrden='" + consecutivo + "'>" + consecutivo + "</td>" +
-        "<td class='cantidad' data-mtrlvalueOrden='" + cantidad + "'>" + cantidad + "</td>" +
-        "<td class='unidad' data-mtrlvalueOrden='" + unidad + "'>" + unidad + "</td>" +
-        "<td class='material' data-mtrlvalueOrden='" + material + "'>" + material + "</td>" +
-        "<td class='catalogo' data-mtrlvalueOrden='" + catalogo + "'>" + catalogo + "</td>" +
-        "<td class='precio' data-mtrlvalueOrden='" + precio + "'>" + precio + "</td>" +
-        "<td class='importe' data-mtrlvalueOrden='" + importe + "'>" + importe + "</td>" +
-        "<td> <i class='material-icons opacity-10' class='removeMaterialOrden'>clear</i> " +
-        "<i class='material-icons opacity-10' class='editMaterialOrden'>drive_file_rename_outline</i> </td>" +
+        "<td class='consecutivo' data-mtrlvalueOrdenCompra='" + consecutivo + "'>" + consecutivo + "</td>" +
+        "<td class='cantidad' data-mtrlvalueOrdenCompra='" + cantidad + "'>" + cantidad + "</td>" +
+        "<td class='unidad' data-mtrlvalueOrdenCompra='" + unidad + "'>" + unidad + "</td>" +
+        "<td class='material' data-mtrlvalueOrdenCompra='" + material + "'>" + material + "</td>" +
+        "<td class='catalogo' data-mtrlvalueOrdenCompra='" + catalogo + "'>" + catalogo + "</td>" +
+        "<td class='precio' data-mtrlvalueOrdenCompra='" + precio + "'>" + precio + "</td>" +
+        "<td class='importe' data-mtrlvalueOrdenCompra='" + (cantidad * precio) + "'>" + (cantidad * precio) + "</td>" +
+        "<td><i class='material-icons opacity-10 removeMaterialOrden'>clear</i> " +
+        "<i class='material-icons opacity-10 editMaterialOrden'>drive_file_rename_outline</i> </td>" +
         "</tr>";
 
-    $('#materialsRequiredOrden').after(newRowMaterial);
+    $('#materialsRequiredOrdenCompra').after(newRowMaterial);
 
     iniciateEditMaterialOrden();
     iniciateRemovematerialsOrden();
@@ -1157,15 +1176,15 @@ $('#addMaterialOrden').click(function() {
  */
 let iniciateEditMaterialOrden = () => {
 
-    $('#tableMaterialsOrdenCompra tbody tr .editMaterialOrden').each(function() {
+    $('#tableMaterialsEditarOrdenCompra tbody tr .editMaterialOrden').each(function() {
         $(this).click(function() {
 
             let rowData = $(this).parent().parent().find('td');
             let dataContainer = [];
 
-            rowData.each(function(index, value) {
+            rowData.each(function() {
                 // dataContainer.push($(this).data('mtrlvalueOrden'));
-                dataContainer.push($(this).attr('mtrlvalueOrden'));
+                dataContainer.push($(this).attr('data-mtrlvalueOrdenCompra'));
             });
 
             $('#consecutivo').val(dataContainer[0]);
@@ -1191,23 +1210,42 @@ let iniciateRemovematerialsOrden = () => {
     $('#txtPrecioOrden').val("");
     // $('#txtCatalogo').val("");
 
-    $('#tableMaterialsOrdenCompra tbody tr .removeMaterialOrden').each(function() {
+    $('#tableMaterialsEditarOrdenCompra tbody tr .removeMaterialOrden').each(function() {
+
         $(this).click(function() {
             $(this).parent().parent().remove();
+
+            let newConsecutivo = $('#tableMaterialsEditarOrdenCompra tbody tr').length - 1;
+            $('#tableMaterialsEditarOrdenCompra tbody tr td.consecutivo').each(function() {
+                $(this).text(newConsecutivo);
+                $(this).attr('data-mtrlvalueorden', newConsecutivo);
+                newConsecutivo--;
+            });
         });
     });
 }
 
 $('#btnCalculateOrdenCompra').click(() => {
 
-    // $('#tableMaterialsOrdenCompra tbody tr #editMaterialOrden')
-    let table = document.getElementById('tableMaterialsOrdenCompra');
-    let dataTableOrden = document.getElementsByClassName('importe')
+    let descuento = $('#descuentoPorcentaje').val();
 
-    dataTableOrden.forEach((value, index) => {
+    let importe = 0;
+    $('#tableMaterialsEditarOrdenCompra tbody tr td.importe').each(function() {
 
-        console.log(value);
+        importe += parseFloat($(this).attr('data-mtrlvalueordencompra'));
     });
+
+    let totDescuento = ((importe * descuento) / 100).toFixed(2);
+    $('#descuentoTotal').val(totDescuento);
+
+    let totImporte = (importe - totDescuento).toFixed(2);
+    $('#importe').val(totImporte);
+
+    let iva = (totImporte * .16).toFixed(2);
+    $('#iva').val(iva);
+
+    let total = (parseFloat(totImporte) + parseFloat(iva)).toFixed(2);
+    $('#total').val(total);
 });
 
 /**
@@ -1215,17 +1253,7 @@ $('#btnCalculateOrdenCompra').click(() => {
  * @Author: Carlos Omar Anaya Barajas
  * @Date: 2022-05-09 16:53:39
  * @Desc: Calucale the importe of the data in the internal table
- */
-
-$('#tableMaterialsOrdenCompra #txtCantidadOrden').keyup(function() {
-
-    calcularImporte($(this).val(), $('#txtPrecioOrden').val());
-});
-
-$('#tableMaterialsOrdenCompra #txtPrecioOrden').keyup(function() {
-
-    calcularImporte($('#txtCantidadOrden').val(), $(this).val());
-});
+//  */
 
 let calcularImporte = (cantidad, precio) => {
     let importe = cantidad * precio;

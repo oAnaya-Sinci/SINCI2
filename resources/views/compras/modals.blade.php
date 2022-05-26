@@ -538,12 +538,13 @@
                         <th>Catalogo</th>
                         <th>Precio</th>
                         <th>Importe</th>
+                        <th></th>
                       </tr>
                     </thead>
                     <tbody>
 
                       <tr id="materialsRequiredOrdenCompra">
-                          <td></td>
+                          <td class="consecutivoOrden"></td>
                           <td> <input type='text' class='form-material' id='txtCantidadOrden' value="1" style="text-align: center;"> </td>
                           <td> <select class='form-select' id='slctUnidadOrden'></select> </td>
                           <td> <input type='text' class='form-material' id='txtMaterialOrden'> </td>
@@ -582,23 +583,23 @@
 
                 <div class="form-group body-modalsSinci">
                   <label for="recipient-name" class="col-form-label">Descuento:</label>
-                  <input type="text" class="form-control numericTextAlign" id="descuentoPorcentaje" name="descuentoPorcentaje" style="margin-right: .5rem;" value="0">
-                  <input type="text" class="form-control numericTextAlign" id="descuentoTotal" name="descuentoTotal" value="0">
+                  <input type="text" class="form-control numericTextAlign" id="descuentoPorcentaje" name="descuentoPorcentaje" style="margin-right: .5rem;" value="0" placeholder="0.00%">
+                  <input type="text" class="form-control numericTextAlign" id="descuentoTotal" name="descuentoTotal" value="0" placeholder="0.00">
                 </div>
 
                 <div class="form-group body-modalsSinci">
                   <label for="recipient-name" class="col-form-label">Importe:</label>
-                  <input type="text" class="form-control numericTextAlign" id="importe" name="importe" value="0">
+                  <input type="text" class="form-control numericTextAlign" id="importe" name="importe" value="0"  placeholder="0.00">
                 </div>
 
                 <div class="form-group body-modalsSinci">
                   <label for="recipient-name" class="col-form-label">IVA:</label>
-                  <input type="text" class="form-control numericTextAlign" id="iva" name="iva" value="0">
+                  <input type="text" class="form-control numericTextAlign" id="iva" name="iva" value="0"  placeholder="0.00">
                 </div>
 
                 <div class="form-group body-modalsSinci">
                   <label for="recipient-name" class="col-form-label">Total:</label>
-                  <input type="text" class="form-control numericTextAlign" id="total" name="total" value="0">
+                  <input type="text" class="form-control numericTextAlign" id="total" name="total" value="0"  placeholder="0.00">
                 </div>
 
               </div>

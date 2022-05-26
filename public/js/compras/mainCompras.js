@@ -960,13 +960,19 @@ $('#btnEditarOrdenCompra').click(async function() {
         $('#condicionesE').val(OrdenCompra.NOTAS_GENERALES);
         $('#notaOrdenCompra').val(OrdenCompra.NOTAS_ORDENCOMPRA);
 
+        $('#descuentoPorcentaje').val(OrdenCompra.DESCUENTO_PORCENTAJE.toFixed(2));
+        $('#descuentoTotal').val(OrdenCompra.DESCUENTO_CANTIDAD.toFixed(2));
+        $('#importe').val(OrdenCompra.SUBTOTAL.toFixed(2));
+        $('#iva').val(OrdenCompra.IVA.toFixed(2));
+        $('#total').val(OrdenCompra.TOTAL.toFixed(2));
+
         let dataDetails = dataOrdenCompra.detalleCompra;
 
         cleaBodyOrdenCompra();
         let row = "";
         $.each(dataDetails, function(index, value) {
 
-            row += "<tr> <tr style='padding: 0 !important;'>" +
+            row += "<tr style='padding: 0 !important;'>" +
                 "<td class='consecutivo' data-mtrlvalueOrdenCompra='" + value.CONSECUTIVO + "'>" + value.CONSECUTIVO + "</td>" +
                 "<td class='cantidad' data-mtrlvalueOrdenCompra='" + value.CANTIDAD + "'>" + value.CANTIDAD + "</td>" +
                 "<td class='unidad' data-mtrlvalueOrdenCompra='" + value.UNIDAD + "'>" + value.UNIDAD + "</td>" +
@@ -974,7 +980,7 @@ $('#btnEditarOrdenCompra').click(async function() {
                 "<td class='catalogo' data-mtrlvalueOrdenCompra='" + value.CATALOGO + "'>" + value.CATALOGO + "</td>" +
                 "<td class='precio' data-mtrlvalueOrdenCompra='" + (value.PRECIO != null ? value.PRECIO : 0) + "'>" + (value.PRECIO != null ? value.PRECIO : 0) + "</td>" +
                 "<td class='importe' data-mtrlvalueOrdenCompra='" + (value.CANTIDAD * (value.PRECIO != null ? value.PRECIO : 0)) + "'>" + (value.CANTIDAD * (value.PRECIO != null ? value.PRECIO : 0)) + "</td>" +
-                "<td> <i class='material-icons opacity-10 removeMaterialOrden'>clear</i> " +
+                "<td class='actionsButtons'> <i class='material-icons opacity-10 removeMaterialOrden'>clear</i> " +
                 "<i class='material-icons opacity-10 editMaterialOrden'>drive_file_rename_outline</i> </td> </tr>";
         });
 
@@ -992,16 +998,6 @@ let cleaBodyOrdenCompra = () => {
 
     $('#tableMaterialsEditarOrdenCompra tbody tr:not(#materialsRequiredOrdenCompra)').remove();
 }
-
-// $('#btnActualizarOrdenCompra').click(function() {
-
-//     cleaBodyOrdenCompra();
-// });
-
-// $('#btnCerrarModalOrdenCompra').click(function() {
-
-//     cleaBodyOrdenCompra();
-// });
 
 /**
  * javascript comment
@@ -1023,11 +1019,8 @@ $('#btnCrearOrdenCompra').click(async() => {
     let dataTable = [];
     let dataRow = [];
     let totTd = 1;
-    // let firstRow = 1;
 
     $('#tableDetailCrearOrdenCompra tbody tr').each(function(index, tr) {
-
-        // if (firstRow != 1) {
 
         $(tr).find('td').each(function() {
 
@@ -1035,7 +1028,6 @@ $('#btnCrearOrdenCompra').click(async() => {
 
                 if (totTd != 6)
                     dataRow.push($(this).attr('data-mtrlvalueOrden'));
-                // dataRow.push($(this).data('mtrlvalueOrden'));
 
                 else
                     dataRow.push($(this).find('.slctOrdenCompraTable').val());
@@ -1048,9 +1040,6 @@ $('#btnCrearOrdenCompra').click(async() => {
 
             totTd++;
         });
-        // }
-
-        // firstRow++;
     });
 
     dataOrdenCompra.push({ "name": `Materials`, "value": JSON.stringify(dataTable) });
@@ -1058,20 +1047,6 @@ $('#btnCrearOrdenCompra').click(async() => {
     console.log(dataOrdenCompra);
 
     updateOrdenCompra("/saveDataOrdenCompra", dataOrdenCompra);
-
-    // await $.ajax({
-    //     type: "PUT",
-    //     url: urlData + "/saveDataOrdenCompra",
-    //     data: { "isLogedIn": dl, "data": dataOrdenCompra },
-    //     success: function(response) {
-
-    //     },
-    //     error: function(exception) {
-
-    //         console.error(exception);
-    //         showMessage('danger', 'Error', exception.showMessage());
-    //     }
-    // });
 });
 
 $('#btnActualizarOrdenCompra').click(async() => {
@@ -1113,18 +1088,18 @@ $('#btnActualizarOrdenCompra').click(async() => {
 
 let updateOrdenCompra = (urlToUpdate, dataOrdenCompra) => {
 
-    // let dataOrdenCompra = [];
+    inLoader();
 
     let dl = dataLogin();
     let folio = $('#tableRequisicionesAuth tbody tr.rowSelected td.folio').text();
 
     $.ajax({
         type: "PUT",
-        // url: urlData + "/updateDataOrdenCompra",
         url: urlData + urlToUpdate,
         data: { "isLogedIn": dl, "data": dataOrdenCompra, "folio": folio },
         success: function(response) {
 
+            outLoader();
         },
         error: function(exception) {
 
@@ -1148,7 +1123,10 @@ $('#addMaterialOrdenCompra').click(function() {
     let catalogo = $('#txtCatalogoOrden').val();
     let precio = $('#txtPrecioOrden').val();
 
-    let consecutivo = $('#tableMaterialsEditarOrdenCompra tbody tr').length;
+    let consecutivo = $('.consecutivoOrden').text();
+
+    if (consecutivo == "")
+        consecutivo = $('#tableMaterialsEditarOrdenCompra tbody tr').length;
 
     let newRowMaterial = "<tr>" +
         "<td class='consecutivo' data-mtrlvalueOrdenCompra='" + consecutivo + "'>" + consecutivo + "</td>" +
@@ -1158,11 +1136,16 @@ $('#addMaterialOrdenCompra').click(function() {
         "<td class='catalogo' data-mtrlvalueOrdenCompra='" + catalogo + "'>" + catalogo + "</td>" +
         "<td class='precio' data-mtrlvalueOrdenCompra='" + precio + "'>" + precio + "</td>" +
         "<td class='importe' data-mtrlvalueOrdenCompra='" + (cantidad * precio) + "'>" + (cantidad * precio) + "</td>" +
-        "<td><i class='material-icons opacity-10 removeMaterialOrden'>clear</i> " +
+        "<td class='actionsButtons'><i class='material-icons opacity-10 removeMaterialOrden'>clear</i> " +
         "<i class='material-icons opacity-10 editMaterialOrden'>drive_file_rename_outline</i> </td>" +
         "</tr>";
 
     $('#materialsRequiredOrdenCompra').after(newRowMaterial);
+
+    $('.consecutivoOrden').text('');
+    $('.importeOrden').text('');
+
+    $('.actionsButtons').removeClass('noVisible');
 
     iniciateEditMaterialOrden();
     iniciateRemovematerialsOrden();
@@ -1183,20 +1166,20 @@ let iniciateEditMaterialOrden = () => {
             let dataContainer = [];
 
             rowData.each(function() {
-                // dataContainer.push($(this).data('mtrlvalueOrden'));
                 dataContainer.push($(this).attr('data-mtrlvalueOrdenCompra'));
             });
 
-            $('#consecutivo').val(dataContainer[0]);
+            $('.consecutivoOrden').text(dataContainer[0]);
             $('#txtCantidadOrden').val(dataContainer[1]);
             $('#slctUnidadOrden').val(dataContainer[2]);
             $('#txtMaterialOrden').val(dataContainer[3])
-            $('#txtCatalogoOrden').val(dataContainer[4]);;
+            $('#txtCatalogoOrden').val(dataContainer[4]);
             $('#txtPrecioOrden').val(dataContainer[5]);
-
-            calcularImporte(dataContainer[1], dataContainer[5]);
+            $('.importeOrden').text(dataContainer[6]);
 
             $(this).parent().parent().remove();
+
+            $('.actionsButtons').addClass('noVisible');
         });
     });
 }
@@ -1208,7 +1191,6 @@ let iniciateRemovematerialsOrden = () => {
     $('#txtMaterialOrden').val("");
     $('#txtCatalogoOrden').val("");
     $('#txtPrecioOrden').val("");
-    // $('#txtCatalogo').val("");
 
     $('#tableMaterialsEditarOrdenCompra tbody tr .removeMaterialOrden').each(function() {
 
@@ -1218,7 +1200,7 @@ let iniciateRemovematerialsOrden = () => {
             let newConsecutivo = $('#tableMaterialsEditarOrdenCompra tbody tr').length - 1;
             $('#tableMaterialsEditarOrdenCompra tbody tr td.consecutivo').each(function() {
                 $(this).text(newConsecutivo);
-                $(this).attr('data-mtrlvalueorden', newConsecutivo);
+                $(this).attr('data-mtrlvalueOrdenCompra', newConsecutivo);
                 newConsecutivo--;
             });
         });
@@ -1240,6 +1222,7 @@ $('#btnCalculateOrdenCompra').click(() => {
 
     let totImporte = (importe - totDescuento).toFixed(2);
     $('#importe').val(totImporte);
+    // $('#importe').val(importe);
 
     let iva = (totImporte * .16).toFixed(2);
     $('#iva').val(iva);
@@ -1253,7 +1236,7 @@ $('#btnCalculateOrdenCompra').click(() => {
  * @Author: Carlos Omar Anaya Barajas
  * @Date: 2022-05-09 16:53:39
  * @Desc: Calucale the importe of the data in the internal table
-//  */
+ */
 
 let calcularImporte = (cantidad, precio) => {
     let importe = cantidad * precio;

@@ -355,3 +355,7 @@ select:focus {
 .numericTextAlign {
     text-align: right;
 }
+
+.actionsButtons.noVisible {
+    display: none;
+}

@@ -253,7 +253,7 @@
         </div>
         <div class="modal-body"></div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" id="modal-btn-cerrar">Salir</button>
+          <button type="button" class="btn btn-secondary" id="modal-btn-cerrar">Ok</button>
         </div>
       </div>
     </div>

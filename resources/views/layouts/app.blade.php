@@ -94,6 +94,9 @@
     <!-- <script src='../js/login.js' type="text/javascript"></script> -->
     <script src='../js/main.js' type="text/javascript"></script>
 
+    <!-- Html2Pdf -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.8.1/html2pdf.bundle.min.js" integrity="sha512vDKWohFHe2vkVWXHp3tKvIxxXg0pJxeid5eo+UjdjME3DBFBn2F8yWOE0XmiFcFbXxrEOR1JriWEno5Ckpn15A==" crossorigin="anonymous"></script> -->
+
     @yield('jsSection')
 
 </body>

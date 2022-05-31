@@ -221,6 +221,10 @@ table tbody tr td {
     display: none;
 }
 
+.notDisplayMenu {
+    display: none !important;
+}
+
 #tableDetailMaterial thead th {
     padding: 0 !important;
 }
@@ -358,4 +362,61 @@ select:focus {
 
 .actionsButtons.noVisible {
     display: none;
+}
+
+
+/* CSS styles for the menu of Ordenes Compras */
+
+.menuOrdenesCompras {
+    display: flex;
+    gap: 1em;
+}
+
+.menuOrdenesCompras .form-group {
+    display: grid;
+    justify-items: start;
+}
+
+.menuOrdenesCompras .form-group .inlineElements {
+    display: inline-flex;
+    align-items: center;
+}
+
+.menuOrdenesCompras .form-group .inlineElements label {
+    margin-top: .5rem;
+}
+
+.menuOrdenesCompras .form-group.bigIcons .material-icons {
+    font-size: 2.5rem;
+}
+
+.menuOrdenesCompras .form-group.bigIcons {
+    display: grid;
+    align-content: center;
+    justify-items: center;
+}
+
+hr.menuSeparator {
+    height: 9vh;
+    width: .1vw;
+    border-width: 0;
+    color: #000;
+    background-color: #000;
+    margin: 0 !important;
+    /* margin: -17px 0 0px 0 !important; */
+}
+
+.menuOrdenesCompras .form-group i,
+.menuOrdenesCompras .form-group.bigIcons label,
+.menuOrdenesCompras .form-group i label {
+    cursor: pointer;
+}
+
+.nav.nav-tabs {
+    margin-top: 1rem;
+}
+
+.dataTables_wrapper .dt-buttons {
+    display: contents !important;
+    visibility: hidden;
 }

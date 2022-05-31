@@ -20,9 +20,9 @@
 
               <div id='wrap'>
 
-                <div class="detallerequisicionOrden">
+                    <div class="detallerequisicionOrden">
 
-                    <button id="btnRegistraRequisicion" class="btn btn-success">Registrar Requisición</button>
+                    <!-- <button id="btnRegistraRequisicion" class="btn btn-success">Registrar Requisición</button>
                     <button id="btnEditarRequisicion" class="btn btn-primary">Editar Requisición</button>
                     <button id="btnVerDetalle" class="btn btn-secondary">Ver detalle</button>
                     <button id="btnAutorizar" class="btn btn-success">Autorizar</button>
@@ -32,20 +32,150 @@
                     <button id="btnRegistraOrdenCompra" class="btn btn-success">Registrar Orden Compra</button>
                     <button id="btnEditarOrdenCompra" class="btn btn-secondary">Editar Orden Compra</button>
 
+                    </div> -->
+
+<!-- <hr style="margin-bottom: 0; width: 51.11%;"> -->
+
+                    <div class="menuOrdenesCompras requisiciones">
+
+                        <div class="form-group bigIcons" id="btnRegistraRequisicion">
+                            <i class='material-icons opacity-10'>loupe</i>
+                            <label  style="text-align: center;">Nueva <br> Requisición</label>
+                        </div>
+
+                        <div class="form-group">
+                            <i class='material-icons opacity-10 inlineElements btnEditarRequisicion'>mode<label class="btnEditarRequisicion">Editar</label></i>
+                            <i class='material-icons opacity-10 inlineElements btnEliminar'>clear<label class="btnEliminar">Eliminar</label></i>
+                        </div>
+
+                        <!-- <div class="form-group bigIcons">
+                            <i class='material-icons opacity-10'>mail</i>
+                            <label >Enviar por correo</label>
+                        </div>
+
+                        <hr class="menuSeparator">
+
+                        <div class="form-group">
+                            <i class='material-icons opacity-10 inlineElements'>check_circle_outline<label >Autorizar</label></i>
+                            <i class='material-icons opacity-10 inlineElements'>highlight_off<label >Cancelar</label></i>
+                        </div>
+
+                        <hr class="menuSeparator">
+
+                        <div class="form-group bigIcons">
+                            <i class='material-icons opacity-10'>e_mobiledata</i>
+                            <label >Desde Excel...</label>
+                        </div> -->
+
+                        <hr class="menuSeparator">
+
+                        <div class="form-group">
+                            <i class='material-icons opacity-10 inlineElements'>list_alt<label class="btnVerDetalle" >Ver detalle</label></i>
+                            <i class='material-icons opacity-10 inlineElements'>print<label class="printData"><del>Imprimir</del></label></i>
+                        </div>
+
+                        <div class="form-group">
+                            <i class='material-icons opacity-10 inlineElements'>file_download<label class="dataToExcel">Exporta a excel</label></i>
+                            <i class='material-icons opacity-10 inlineElements '>autorenew<label class="btnActualizarTabla">Actualizar</label></i>
+                        </div>
+
                     </div>
 
-                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <!-- <div class="menuOrdenesCompras requisicionesAutorizadas">
+
+                        <div class="form-group bigIcons">
+                            <i class='material-icons opacity-10'>loupe</i>
+                            <label  style="text-align: center;">Crear Ordenes <br> de Compra</label>
+                        </div>
+
+                        <div class="form-group">
+                            <i class='material-icons opacity-10 inlineElements'>mode<label >Editar</label></i>
+                            <i class='material-icons opacity-10 inlineElements'>file_download<label >Cerrar</label></i>
+                        </div>
+
+                        <div class="form-group">
+                            <i class='material-icons opacity-10 inlineElements'>clear<label >Cancelar</label></i>
+                            <i class='material-icons opacity-10 inlineElements'>settings<label >Opciones</label></i>
+                        </div>
+
+                        <hr class="menuSeparator">
+
+                        <div class="form-group">
+                            <i class='material-icons opacity-10 inlineElements'>list_alt<label >Ver detalle</label></i>
+                            <i class='material-icons opacity-10 inlineElements'>print<label >Imprimir</label></i>
+                        </div>
+
+                        <div class="form-group">
+                            <i class='material-icons opacity-10 inlineElements'>file_download<label >Exporta a excel</label></i>
+                            <i class='material-icons opacity-10 inlineElements'>autorenew<label >Actualizar</label></i>
+                        </div>
+
+                    </div> -->
+
+                    <!-- <hr>
+
+                    <div class="menuOrdenesCompras ordenesCompras">
+
+                        <div class="form-group bigIcons">
+                            <i class='material-icons opacity-10'>loupe</i>
+                            <label >Status...</label>
+                        </div>
+
+                        <div class="form-group">
+                            <i class='material-icons opacity-10 inlineElements'>mode<label >Editar</label></i>
+                            <i class='material-icons opacity-10 inlineElements'>file_download<label >Bitacora</label></i>
+                        </div>
+
+                        <div class="form-group">
+
+                            <select name="" id="yearOrdenCompra" class="form-select" style="width: 135%; height: 30%; margin: 3.2rem 1rem 0 0; font-size: 11px; padding: 0 0 0 1rem;">
+                                <option value="">2022</option>
+                            </select>
+                        </div>
+
+                        <hr class="menuSeparator" style="margin-left: 1rem !important;">
+
+                        <div class="form-group">
+                            <i class='material-icons opacity-10 inlineElements'>list_alt<label >Ver detalle</label></i>
+                            <i class='material-icons opacity-10 inlineElements'>print<label >Imprimir</label></i>
+                        </div>
+
+                        <div class="form-group">
+                            <i class='material-icons opacity-10 inlineElements'>file_download<label >Exporta a excel</label></i>
+                            <i class='material-icons opacity-10 inlineElements'>autorenew<label >Actualizar</label></i>
+                        </div>
+
+                    </div> -->
+
+                    <div class="menuOrdenesCompras ordenesCanceladas notDisplayMenu">
+
+                        <div class="form-group">
+                            <i class='material-icons opacity-10 inlineElements btnVerDetalle' style="margin: .5rem 0 1.2rem 0;">list_alt<label class="btnVerDetalle" >Ver detalle</label></i>
+                            <i class='material-icons opacity-10 inlineElements' style="margin-bottom: 0.5rem;">print<label ><del>Imprimir</del></label></i>
+                        </div>
+
+                        <div class="form-group">
+                            <i class='material-icons opacity-10 inlineElements' style="margin: .5rem 0 1.2rem 0;">file_download<label class="dataToExcel">Exporta a excel</label></i>
+                            <!-- <i class='material-icons opacity-10 inlineElements'>autorenew<label >Actualizar</label></i> -->
+                            <i class='material-icons opacity-10 inlineElements btnActualizarTabla' style="margin-bottom: 0.5rem;">autorenew<label class="btnActualizarTabla">Actualizar</label></i>
+                        </div>
+
+                    </div>
+
+                    <hr style="margin-top: 0;">
+
+                    <ul class="nav nav-tabs" id="myTabsCompras" role="tablist" >
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="requisicion-tab" data-bs-toggle="tab" data-bs-target="#requisicion" type="button" role="tab" aria-controls="requisicion" aria-selected="true">Requisiciones</button>
+                            <button class="nav-link active requisicion" id="requisicion-tab" data-bs-toggle="tab" data-bs-target="#requisicion" type="button" role="tab" aria-controls="requisicion" aria-selected="true">Requisiciones</button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="requisicionAuth-tab" data-bs-toggle="tab" data-bs-target="#requisicionAuth" type="button" role="tab" aria-controls="requisicionAuth" aria-selected="false">Requisiciones Autorizadas</button>
+                            <button class="nav-link notRequisicion" id="requisicionAuth-tab" data-bs-toggle="tab" data-bs-target="#requisicionAuth" type="button" role="tab" aria-controls="requisicionAuth" aria-selected="false">Requisiciones Autorizadas</button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="ordenCompra-tab" data-bs-toggle="tab" data-bs-target="#ordenCompra" type="button" role="tab" aria-controls="ordenCompra" aria-selected="false">Ordenes Compra</button>
+                            <button class="nav-link notRequisicion" id="ordenCompra-tab" data-bs-toggle="tab" data-bs-target="#ordenCompra" type="button" role="tab" aria-controls="ordenCompra" aria-selected="false">Ordenes Compra</button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="canceladas-tab" data-bs-toggle="tab" data-bs-target="#canceladas" type="button" role="tab" aria-controls="canceladas" aria-selected="false">Canceladas</button>
+                            <button class="nav-link notRequisicion" id="canceladas-tab" data-bs-toggle="tab" data-bs-target="#canceladas" type="button" role="tab" aria-controls="canceladas" aria-selected="false">Canceladas</button>
                         </li>
                     </ul>
 
@@ -225,9 +355,69 @@
                             </div>
                         </div>
                         <!-- END -->
-
-                    <!-- END of tabulation  -->
                     </div>
+                    <!-- END of tabulation  -->
+
+                    <!-- Tabla para descarga en PDF -->
+                    <!-- <div class="row" id="apartadoPDF" style="color: #000 !important; font-size: 11px; z-index: 9999;">
+
+                        <div class="col-md-12">
+
+                            <div style="display: flex; gap: 25em;">
+                                <img src="/img/logo-sinci.png" alt="logoImage" width="8%">
+                                <h4 style="margin-top: 2rem;">Requisición de Compra</h4>
+                            </div>
+
+                            <hr>
+
+                            <div class="content__requisicion__PDF">
+                                <div class="row">
+                                    <div class="col-md-3 folio__PDF"></div>
+                                    <div class="col-md-4 fecha__solicitud__PDF"></div>
+                                    <div class="col-md-4 fecha__requerida__PDF"></div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12 proyecto__PDF"></div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12 solicitado__PDF"></div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12 compannia__PDF"></div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12 ciudad__PDF"></div>
+                                </div>
+
+                            </div>
+
+                            <table class="table" id="tablaDetallePDF">
+                                <thead>
+                                    <tr>
+                                        <th>PDA</th>
+                                        <th>CANT.</th>
+                                        <th>UNIDAD</th>
+                                        <th>MATERIAL</th>
+                                        <th>MARCA</th>
+                                        <th>CATALOGO</th>
+                                        <th>PROVEEDOR</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+
+                            <hr>
+
+                            <div id="consideracionesEspc__PDF"></div>
+                        </div>
+
+                    </div> -->
+                    <!-- END -->
+
               </div>
 
             </div>
@@ -254,6 +444,17 @@
 
     <!-- <script src="../js/dataTable/dataTable-1.11.5.js"></script> -->
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
+
+    <!-- Html2Pdf -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.8.1/html2pdf.bundle.min.js" integrity="sha512vDKWohFHe2vkVWXHp3tKvIxxXg0pJxeid5eo+UjdjME3DBFBn2F8yWOE0XmiFcFbXxrEOR1JriWEno5Ckpn15A==" crossorigin="anonymous"></script>
+
     <script src="../js/compras/dataTablesCompras.js"></script>
     <script src="../js/compras/mainCompras.js"></script>
 

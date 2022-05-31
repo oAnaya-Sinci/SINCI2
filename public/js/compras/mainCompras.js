@@ -47,8 +47,6 @@ $(document).ready(function() {
 
     iniciateTablesDT();
     modalComprasSinci();
-
-    // $('#modalEditarOrdenCompra').modal('show');
 });
 
 $('#btnCerrarModal').click(function() {
@@ -183,49 +181,40 @@ function processDataToSelect(data, select, firstOption = "") {
     $(select).append(options);
 }
 
-let displayDetailsDataModal = (dataDetails) => {
+let displayDetailsDataModal = (dataDetails, tableId) => {
 
-    // let folio = "<strong>Folio: </strong>" + $('#tableRequisiciones tbody tr.rowSelected td.folio').text();
-    // $("#modalDetalleOrden .modal-body .content__requisicion .folio").html(folio);
-
-    // let proyecto = "<strong>Proyecto: </strong>" + $('#tableRequisiciones tbody tr.rowSelected td.proyetoReqs').text();
-    // $("#modalDetalleOrden .modal-body .content__requisicion .proyecto").html(proyecto);
-
-    // let fechaSolicitud = "<strong>Fecha Solicitud: </strong>" + $('#tableRequisiciones tbody tr.rowSelected td.fechaSolicitud').text();
-    // $("#modalDetalleOrden .modal-body .content__requisicion .fecha__solicitud").html(fechaSolicitud);
-
-    // let fechaRequerida = "<strong>Fecha requerida: </strong>" + $('#tableRequisiciones tbody tr.rowSelected td.fechaRequerida').text();
-    // $("#modalDetalleOrden .modal-body .content__requisicion .fecha__requerida").html(fechaRequerida);
-
-    // let solcitado = "<strong>Solicitdo por: </strong>" + $('#tableRequisiciones tbody tr.rowSelected td.solicitado').text();
-    // $("#modalDetalleOrden .modal-body .content__requisicion .solicitado").html(solcitado);
-
-    // let compannia = "<strong>Compañia: </strong>" + $('#tableRequisiciones tbody tr.rowSelected td.compania').text();
-    // $("#modalDetalleOrden .modal-body .content__requisicion .compannia").html(compannia);
-
-    // let ciudad = "<strong>Ciudad: </strong>" + $('#tableRequisiciones tbody tr.rowSelected td.ciudad').text();
-    // $("#modalDetalleOrden .modal-body .content__requisicion .ciudad").html(ciudad);
-
-    $('#tableDetailMaterial tbody').empty();
+    $(tableId + ' tbody').empty();
 
     dataDetails = JSON.parse(dataDetails);
 
     let rows = "";
     $.each(dataDetails, function(index, value) {
 
-        rows += "<tr>" +
-            "<td></td>" +
-            "<td>" + value.CANTIDAD + "</td>" +
-            "<td>" + value.UNIDAD + "</td>" +
-            "<td>" + value.MATERIAL + "</td>" +
-            "<td>" + value.MARCA + "</td>" +
-            "<td>" + value.CATALOGO + "</td>" +
-            "</tr>";
+        if (tableId != "#tablaDetallePDF") {
+
+            rows += "<tr>" +
+                "<td></td>" +
+                "<td>" + value.CANTIDAD + "</td>" +
+                "<td>" + value.UNIDAD + "</td>" +
+                "<td>" + value.MATERIAL + "</td>" +
+                "<td>" + value.MARCA + "</td>" +
+                "<td>" + value.CATALOGO + "</td>" +
+                "</tr>";
+        } else {
+
+            rows += "<tr>" +
+                "<td></td>" +
+                "<td>" + value.CANTIDAD + "</td>" +
+                "<td>" + value.UNIDAD + "</td>" +
+                "<td>" + value.MATERIAL + "</td>" +
+                "<td>" + value.MARCA + "</td>" +
+                "<td>" + value.CATALOGO + "</td>" +
+                "<td>" + value.RAZON_SOCIAL + "</td>" +
+                "</tr>";
+        }
     })
 
-    $('#tableDetailMaterial tbody').append(rows);
-
-    $('#modalDetalleOrden').modal('show');
+    $(tableId + ' tbody').append(rows);
 }
 
 /**
@@ -589,7 +578,8 @@ $('.btnCancelModal').click(function() {
  * @Desc: This event show the details of a row selected from a table
  */
 
-$('#btnVerDetalle').click(async() => {
+// $('#btnVerDetalle').click(async() => {
+$('.btnVerDetalle').click(async() => {
 
     let dl = dataLogin();
     let idCompra;
@@ -599,8 +589,8 @@ $('#btnVerDetalle').click(async() => {
         idCompra = $('.dataTables_wrapper tbody tr.rowSelected td.folio')[0].innerText;
     } catch (error) {
 
-        $("#mi-modal-message .modal-header h4").text("Mensaje:");
-        $("#mi-modal-message .modal-body").html("<p>primero se debe de elegir una fila de la tabla para mostrar el detalle</p>");
+        $("#mi-modal-message .modal-header h5").text("Mensaje:");
+        $("#mi-modal-message .modal-body").html("<p>Primero se debe de elegir una fila de la tabla para mostrar el detalle</p>");
         $("#mi-modal-message").modal('show');
 
         return false;
@@ -612,7 +602,8 @@ $('#btnVerDetalle').click(async() => {
         data: { "isLogedIn": dl, "idCompra": idCompra },
         success: function(response) {
 
-            displayDetailsDataModal(response);
+            displayDetailsDataModal(response, '#tableDetailMaterial');
+            $('#modalDetalleOrden').modal('show');
         },
         error: function(exception) {
 
@@ -620,8 +611,8 @@ $('#btnVerDetalle').click(async() => {
             showMessage('danger', 'Error', exception.showMessage());
         }
     });
-
 });
+
 
 /**
  * javascript comment
@@ -662,7 +653,7 @@ $('#btnAutorizar').click(function() {
  * @Date: 2022-04-26 13:52:05
  * @Desc:
  */
-$('#btnEditarRequisicion').click(async() => {
+$('.btnEditarRequisicion').click(async() => {
 
     $('#btnSaveEvent').addClass('displayButton');
     $('#btnEditEvent').removeClass('displayButton');
@@ -675,7 +666,7 @@ $('#btnEditarRequisicion').click(async() => {
         folio = $('.dataTables_wrapper tbody tr.rowSelected td.folio')[0].innerText;
     } catch (error) {
 
-        $("#mi-modal-message .modal-header h4").text("Mensaje:");
+        $("#mi-modal-message .modal-header h5").text("Mensaje:");
         $("#mi-modal-message .modal-body").html("<p>primero se debe de elegir una fila de la tabla para modificar el registro</p>");
         $("#mi-modal-message").modal('show');
 
@@ -726,14 +717,14 @@ $('#btnCancelar').click(() => {
         folio = $('.dataTables_wrapper tbody tr.rowSelected td.folio')[0].innerText;
     } catch (error) {
 
-        $("#mi-modal-message .modal-header h4").text("Mensaje:");
+        $("#mi-modal-message .modal-header h5").text("Mensaje:");
         $("#mi-modal-message .modal-body").html("<p>primero se debe de elegir una fila de la tabla para cancelar el registro</p>");
         $("#mi-modal-message").modal('show');
 
         return false;
     }
 
-    $("#mi-modal .modal-header h4").text("Confirmar Cancelación");
+    $("#mi-modal .modal-header h5").text("Confirmar Cancelación");
     $("#mi-modal .modal-body").html("<p>Está a punto de cancelar este registro.</p><p>¿Desea continuar con la cancelación?</p>");
     $("#mi-modal").modal('show');
 
@@ -772,7 +763,7 @@ $('#btnCancelar').click(() => {
  * @Desc: This event show the details of a row selected from a table
  */
 
-$('#btnEliminar').click(() => {
+$('.btnEliminar').click(() => {
 
     let dl = dataLogin();
     let folio;
@@ -782,14 +773,14 @@ $('#btnEliminar').click(() => {
         folio = $('.dataTables_wrapper tbody tr.rowSelected td.folio')[0].innerText;
     } catch (error) {
 
-        $("#mi-modal-message .modal-header h4").text("Mensaje:");
+        $("#mi-modal-message .modal-header h5").text("Mensaje:");
         $("#mi-modal-message .modal-body").html("<p>primero se debe de elegir una fila de la tabla para eliminar el registro</p>");
         $("#mi-modal-message").modal('show');
 
         return false;
     }
 
-    $("#mi-modal .modal-header h4").text("Confirmar Eliminación");
+    $("#mi-modal .modal-header h5").text("Confirmar Eliminación");
     $("#mi-modal .modal-body").html("<p>Está a punto de eliminar este registro, al hacerlo la información se perderá y no podrá ser recuperada.</p><p>¿Desea continuar con la eliminación?</p>");
     $("#mi-modal").modal('show');
 
@@ -834,6 +825,115 @@ var modalConfirmRequisicion = function(callback) {
         $("#mi-modal").modal('hide');
     });
 };
+
+/**
+ * javascript comment
+ * @Author: Carlos Omar Anaya Barajas
+ * @Date: 2022-05-30 13:17:41
+ * @Desc:
+ */
+
+$('.btnActualizarTabla').click(() => {
+
+    $('.dataTables_wrapper table').DataTable().ajax.reload();
+});
+
+$('.dataToExcel').click(function() {
+
+    $('.tab-pane.fade.show.active .dataTables_wrapper .dt-buttons .dt-button.buttons-excel').click();
+});
+
+$('.printData').click(async function() {
+
+    return false;
+
+    let folio = "<strong>Folio: </strong>" + $('#tableRequisiciones tbody tr.rowSelected td.folio').text();
+    $(".content__requisicion__PDF .folio__PDF").html(folio);
+
+    let proyecto = "<strong>Proyecto: </strong>" + $('#tableRequisiciones tbody tr.rowSelected td.proyetoReqs').text();
+    $(".content__requisicion__PDF .proyecto__PDF").html(proyecto);
+
+    let fechaSolicitud = "<strong>Fecha Solicitud: </strong>" + $('#tableRequisiciones tbody tr.rowSelected td.fechaSolicitud').text();
+    $(".content__requisicion__PDF .fecha__solicitud__PDF").html(fechaSolicitud);
+
+    let fechaRequerida = "<strong>Fecha requerida: </strong>" + $('#tableRequisiciones tbody tr.rowSelected td.fechaRequerida').text();
+    $(".content__requisicion__PDF .fecha__requerida__PDF").html(fechaRequerida);
+
+    let solcitado = "<strong>Solicitdo por: </strong>" + $('#tableRequisiciones tbody tr.rowSelected td.solicitado').text();
+    $(".content__requisicion__PDF .solicitado__PDF").html(solcitado);
+
+    let compannia = "<strong>Compañia: </strong>" + $('#tableRequisiciones tbody tr.rowSelected td.compania').text();
+    $(".content__requisicion__PDF .compannia__PDF").html(compannia);
+
+    let ciudad = "<strong>Ciudad: </strong>" + $('#tableRequisiciones tbody tr.rowSelected td.ciudad').text();
+    $(".content__requisicion__PDF .ciudad__PDF").html(ciudad);
+
+    $('#consideracionesEspc__PDF').text($('#notesRequisicion').val());
+    // $('#consideracionesEspc__PDF').val($('#notesRequisicion').val());
+
+    // await obtainDetalleRequisicion('#tablaDetallePDF');
+
+    let dl = dataLogin();
+    let idCompra;
+
+    try {
+
+        idCompra = $('.dataTables_wrapper tbody tr.rowSelected td.folio')[0].innerText;
+    } catch (error) {
+
+        $("#mi-modal-message .modal-header h5").text("Mensaje:");
+        $("#mi-modal-message .modal-body").html("<p>Primero se debe de elegir una fila de la tabla para mostrar el detalle</p>");
+        $("#mi-modal-message").modal('show');
+
+        return false;
+    }
+
+    await $.ajax({
+        type: "GET",
+        url: urlData + "/obtainDataDetalleRequisicionOrden",
+        data: { "isLogedIn": dl, "idCompra": idCompra },
+        success: function(response) {
+
+            displayDetailsDataModal(response, '#tablaDetallePDF');
+        },
+        error: function(exception) {
+
+            console.error(exception);
+            showMessage('danger', 'Error', exception.showMessage());
+        }
+    });
+
+    let elementHTML = $('#apartadoPDF').html();
+
+    var opt = {
+        margin: .5,
+        filename: 'myfile.pdf',
+        // image: { type: 'jpeg', quality: 0.98 },
+        // html2canvas: { scale: 2 },
+        jsPDF: { unit: 'cm', format: 'a3', orientation: 'landscape' }
+    };
+
+    html2pdf(elementHTML, opt);
+});
+
+/**
+ * javascript comment
+ * @Author: Carlos Omar Anaya Barajas
+ * @Date: 2022-05-30 13:38:25
+ * @Desc:
+ */
+
+$('#myTabsCompras .requisicion').click(() => {
+
+    $('.requisiciones').removeClass('notDisplayMenu');
+    $('.ordenesCanceladas').addClass('notDisplayMenu');
+});
+
+$('#myTabsCompras .notRequisicion').click(() => {
+
+    $('.requisiciones').addClass('notDisplayMenu');
+    $('.ordenesCanceladas').removeClass('notDisplayMenu');
+});
 
 /**
  * javascript comment

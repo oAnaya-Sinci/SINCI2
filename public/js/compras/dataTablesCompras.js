@@ -38,6 +38,10 @@ let tableRequisicion = async(dl, pageLength, searching /* , tableScrollX, tableS
     await $('#tableRequisiciones').DataTable({
         dom: 'Bfrtip',
 
+        buttons: [
+            'excel'
+        ],
+
         language: {
             url: "../plugins/dataTable/lang/ES-MX.json"
         },
@@ -148,6 +152,10 @@ let tableRequisicionAuth = async(dl, pageLength, searching /* , tableScrollX, ta
     await $('#tableRequisicionesAuth').DataTable({
         dom: 'Bfrtip',
 
+        buttons: [
+            'excel'
+        ],
+
         language: {
             url: "../plugins/dataTable/lang/ES-MX.json"
         },
@@ -254,6 +262,10 @@ let tableOrdenCompra = async(dl, pageLength, searching /* , tableScrollX, tableS
     await $('#tableOrdenesCompra').DataTable({
         dom: 'Bfrtip',
 
+        buttons: [
+            'excel'
+        ],
+
         language: {
             url: "../plugins/dataTable/lang/ES-MX.json"
         },
@@ -272,7 +284,7 @@ let tableOrdenCompra = async(dl, pageLength, searching /* , tableScrollX, tableS
 
                 console.time('tableOrdenesCompra');
 
-                inLoader();
+                // inLoader();
             },
             complete: () => {
 
@@ -280,7 +292,7 @@ let tableOrdenCompra = async(dl, pageLength, searching /* , tableScrollX, tableS
 
                 ordenCompraInciatePagesTables();
 
-                outLoader();
+                // outLoader();
             }
         },
 
@@ -390,6 +402,10 @@ let tableCanceladas = async(dl, pageLength, searching /* , tableScrollX, tableSc
 
     await $('#tableCanceladas').DataTable({
         dom: 'Bfrtip',
+
+        buttons: [
+            'excel'
+        ],
 
         language: {
             url: "../plugins/dataTable/lang/ES-MX.json"

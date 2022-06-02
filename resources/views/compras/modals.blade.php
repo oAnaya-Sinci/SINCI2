@@ -150,7 +150,8 @@
           <button id="btnSaveEvent" type="button" class="btn btn-primary">Guardar</button>
           <button id="btnEditEvent" type="button" class="btn btn-primary displayButton">Editar</button>
           <!-- <button id="btnDeleteEvent" type="button" class="btn btn-danger btnDeleteNone">Guardar y enviar correo</button> --> <!-- Este boton queda pendiente hasta verificar la opcion de guardar y enviar por correo -->
-          <button type="button" class="btn btn-secondary btnCancelModal" id="btnCerrarModal" data-dismiss="modal">Cancelar</button>
+          <!-- <button type="button" class="btn btn-secondary btnCancelModal" id="btnCerrarModal" data-dismiss="modal">Cancelar</button> -->
+          <button type="button" class="btn btn-secondary btnCancelModal" id="btnCerrarModal" data-dismiss="registrarRequisicion">Cancelar</button>
 
         </div>
       </div>

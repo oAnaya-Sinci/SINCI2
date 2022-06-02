@@ -49,10 +49,10 @@ $(document).ready(function() {
     modalComprasSinci();
 });
 
-$('#btnCerrarModal').click(function() {
+// $('#btnCerrarModal').click(function() {
 
-    $('#registrarRequisicion').modal('hide');
-});
+//     $('#registrarRequisicion').modal('hide');
+// });
 
 /**
  * javascript comment

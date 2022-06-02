@@ -3,15 +3,15 @@
 // HTTP
 // var urlData = "http://10.10.100.34:1880"; // PRODUCTION SERVER WITHOUT SECURE PROTOCOL 80
 
-// var URL to my Local UBUTBU Server for the update
-// var urlData = "https://192.168.0.102:1880";
-var urlData = "http://localhost:1880";
-// var urlData = "https://10.10.100.34:1880";
-
 var currenUrl = window.location.href.split("/")[2];
 currenUrl = currenUrl.split(":");
 
-// var urlData = "https://" + currenUrl[0] + ":1880";
+var urlData = "https://" + currenUrl[0] + ":1880";
+
+// var URL to my Local UBUTBU Server for the update
+// var urlData = "https://192.168.0.102:1880";
+// var urlData = "http://localhost:1880";
+// var urlData = "https://10.10.100.34:1880";
 
 var timeOut;
 

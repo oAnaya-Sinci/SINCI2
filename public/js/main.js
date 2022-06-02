@@ -19,7 +19,7 @@ var timeOut;
  * javascript comment
  * @Author: Carlos Omar Anaya Barajas
  * @Date: 2022-03-03 12:23:26
- * @Desc: Here inciate some of the elements required for a good work of the proyect
+ * @Desc: Here iniciate some of the elements required for a good work of the proyect
  */
 $(document).ready(function() {
 

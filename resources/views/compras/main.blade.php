@@ -359,63 +359,63 @@
                     <!-- END of tabulation  -->
 
                     <!-- Tabla para descarga en PDF -->
-                    <!-- <div class="row" id="apartadoPDF" style="color: #000 !important; font-size: 11px; z-index: 9999;">
+                    <div class="row" id="apartadoPDF" style="color: #000 !important; font-size: 11px; z-index: 9999; display: none;">
 
-                        <div class="col-md-12">
+                    <div class="col-md-12">
 
-                            <div style="display: flex; gap: 25em;">
-                                <img src="/img/logo-sinci.png" alt="logoImage" width="8%">
-                                <h4 style="margin-top: 2rem;">Requisición de Compra</h4>
-                            </div>
-
-                            <hr>
-
-                            <div class="content__requisicion__PDF">
-                                <div class="row">
-                                    <div class="col-md-3 folio__PDF"></div>
-                                    <div class="col-md-4 fecha__solicitud__PDF"></div>
-                                    <div class="col-md-4 fecha__requerida__PDF"></div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-12 proyecto__PDF"></div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-12 solicitado__PDF"></div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-12 compannia__PDF"></div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-12 ciudad__PDF"></div>
-                                </div>
-
-                            </div>
-
-                            <table class="table" id="tablaDetallePDF">
-                                <thead>
-                                    <tr>
-                                        <th>PDA</th>
-                                        <th>CANT.</th>
-                                        <th>UNIDAD</th>
-                                        <th>MATERIAL</th>
-                                        <th>MARCA</th>
-                                        <th>CATALOGO</th>
-                                        <th>PROVEEDOR</th>
-                                    </tr>
-                                </thead>
-                                <tbody></tbody>
-                            </table>
-
-                            <hr>
-
-                            <div id="consideracionesEspc__PDF"></div>
+                        <div style="display: flex; gap: 33em;">
+                            <img src="/img/logo-sinci.png" alt="logoImage" width="7%">
+                            <h3 style="margin-top: 2rem; color: #000 !important;">Requisición de Compra</h3>
                         </div>
 
-                    </div> -->
+                        <hr>
+
+                        <div class="content__requisicion__PDF" style="margin-bottom: 0.5rem;">
+                            <div class="row">
+                                <div class="col-md-3 folio__PDF"></div>
+                                <div class="col-md-4 fecha__solicitud__PDF"></div>
+                                <div class="col-md-4 fecha__requerida__PDF"></div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12 proyecto__PDF"></div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12 solicitado__PDF"></div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12 compannia__PDF"></div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12 ciudad__PDF"></div>
+                            </div>
+
+                        </div>
+
+                        <table class="table" id="tablaDetallePDF">
+                            <thead>
+                                <tr>
+                                    <th>PDA</th>
+                                    <th>CANT.</th>
+                                    <th>UNIDAD</th>
+                                    <th>MATERIAL</th>
+                                    <th>MARCA</th>
+                                    <th>CATALOGO</th>
+                                    <th>PROVEEDOR</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+
+                        <hr>
+
+                        <p id="consideracionesEspc__PDF" style="margin-top: 0.5rem;"></p>
+                    </div>
+
+                    </div>
                     <!-- END -->
 
               </div>

@@ -845,7 +845,7 @@ $('.dataToExcel').click(function() {
 
 $('.printData').click(async function() {
 
-    return false;
+    // return false;
 
     let folio = "<strong>Folio: </strong>" + $('#tableRequisiciones tbody tr.rowSelected td.folio').text();
     $(".content__requisicion__PDF .folio__PDF").html(folio);
@@ -870,8 +870,6 @@ $('.printData').click(async function() {
 
     $('#consideracionesEspc__PDF').text($('#notesRequisicion').val());
     // $('#consideracionesEspc__PDF').val($('#notesRequisicion').val());
-
-    // await obtainDetalleRequisicion('#tablaDetallePDF');
 
     let dl = dataLogin();
     let idCompra;
@@ -908,8 +906,8 @@ $('.printData').click(async function() {
     var opt = {
         margin: .5,
         filename: 'myfile.pdf',
-        // image: { type: 'jpeg', quality: 0.98 },
-        // html2canvas: { scale: 2 },
+        image: { type: 'jpeg', quality: 1 },
+        html2canvas: { scale: 4 },
         jsPDF: { unit: 'cm', format: 'a3', orientation: 'landscape' }
     };
 

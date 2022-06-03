@@ -320,7 +320,8 @@ let showDataCompra = (dataCompra, datDetalleCompra) => {
     cleanModalrequisicion();
 
     $('#dateRequired').val(moment(dataCompra[0].FECHA_SOLICITUD).format('YYYY-MM-DD'));
-    $('#endDate').val(moment(dataCompra[0].FECHA_REQUISICION).format('YYYY-MM-DD'));
+    // $('#endDate').val(moment(dataCompra[0].FECHA_REQUISICION).format('YYYY-MM-DD'));
+    $('#endDate').val(moment(dataCompra[0].FECHA_PORENTREGA).format('YYYY-MM-DD'));
     $('#prioridad').val(dataCompra[0].Prioridad);
     $('#slctProyecto').val(dataCompra[0].ID_PROYECTO);
     $('#entregarEn').val(dataCompra[0].ENTREGAR_EN);
@@ -332,6 +333,7 @@ let showDataCompra = (dataCompra, datDetalleCompra) => {
 
     $('.selectpicker').selectpicker('refresh');
 
+    $('#tableMaterials tbody tr:not(#materialsRequired)').remove();
     let RowsMaterial = "";
     datDetalleCompra.forEach(function(valor, indice) {
 
@@ -477,7 +479,7 @@ let obtainDataMaterials = async(update) => {
                 if (totTd < 8) {
 
                     // dataRow.push($(this).data('mtrlvalue'));
-                    dataRow.push($(this).attr('mtrlvalue'));
+                    dataRow.push($(this).attr('data-mtrlvalue'));
                 } else {
 
                     dataTable.push(dataRow);
@@ -501,6 +503,8 @@ let obtainDataMaterials = async(update) => {
     });
 
     requisicionData.push({ "name": `Materials`, "value": JSON.stringify(dataTable) });
+
+    console.log(requisicionData);
 
     registroRequisicion(requisicionData, update);
 }
@@ -1066,7 +1070,8 @@ $('#btnEditarOrdenCompra').click(async function() {
 
         let dataDetails = dataOrdenCompra.detalleCompra;
 
-        cleaBodyOrdenCompra();
+        // cleaBodyOrdenCompra();
+        $('#tableMaterialsEditarOrdenCompra tbody tr:not(#materialsRequiredOrdenCompra)').remove();
         let row = "";
         $.each(dataDetails, function(index, value) {
 
@@ -1092,10 +1097,10 @@ $('#btnEditarOrdenCompra').click(async function() {
     $('#modalEditarOrdenCompra').modal('show');
 });
 
-let cleaBodyOrdenCompra = () => {
+// let cleaBodyOrdenCompra = () => {
 
-    $('#tableMaterialsEditarOrdenCompra tbody tr:not(#materialsRequiredOrdenCompra)').remove();
-}
+//     $('#tableMaterialsEditarOrdenCompra tbody tr:not(#materialsRequiredOrdenCompra)').remove();
+// }
 
 /**
  * javascript comment

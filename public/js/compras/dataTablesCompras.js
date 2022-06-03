@@ -130,7 +130,7 @@ let tableRequisicion = async(dl, pageLength, searching /* , tableScrollX, tableS
         }],
 
         order: [
-            [1, 'desc']
+            [0, 'desc']
         ],
 
         "pageLength": pageLength,
@@ -240,7 +240,7 @@ let tableRequisicionAuth = async(dl, pageLength, searching /* , tableScrollX, ta
         ],
 
         order: [
-            [3, 'desc']
+            [11, 'desc']
         ],
 
         "pageLength": pageLength,
@@ -381,7 +381,7 @@ let tableOrdenCompra = async(dl, pageLength, searching /* , tableScrollX, tableS
         ],
 
         order: [
-            [4, 'desc']
+            [12, 'desc']
         ],
 
         "pageLength": pageLength,
@@ -475,7 +475,7 @@ let tableCanceladas = async(dl, pageLength, searching /* , tableScrollX, tableSc
         }],
 
         order: [
-            [1, 'desc']
+            [0, 'desc']
         ],
 
         "pageLength": pageLength,

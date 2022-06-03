@@ -75,6 +75,7 @@ $('#mi-modal-message #modal-btn-cerrar').click(function() {
 
 $('#btnRegistraRequisicion').click(function() {
 
+    $('#tableMaterials tbody tr:not(#materialsRequired)').remove();
     $('#registrarRequisicion').modal('show');
 });
 
@@ -297,8 +298,8 @@ $('#addMaterial').click(function() {
         "<td class='proveedor' data-mtrlvalue='" + proveedorId + "'>" + proveedor + "</td>" +
         "<td class='marca' data-mtrlvalue='" + marca + "'>" + marca + "</td>" +
         "<td class='catalogo' data-mtrlvalue='" + catalogo + "'>" + catalogo + "</td>" +
-        "<td> <i class='material-icons opacity-10' class='removeMaterial'>clear</i> " +
-        "<i class='material-icons opacity-10' class='editMaterial'>drive_file_rename_outline</i> </td>" +
+        "<td> <i class='material-icons opacity-10 removeMaterial'>clear</i> " +
+        "<i class='material-icons opacity-10 editMaterial'>drive_file_rename_outline</i> </td>" +
         "</tr>";
 
     // $('#materialsRequired').before(newRowMaterial);
@@ -396,15 +397,10 @@ let iniciateRemovematerials = () => {
     $('#txtCatalogo').val("");
 
     $('#tableMaterials tbody tr .removeMaterial').each(function() {
+
         $(this).click(function() {
             $(this).parent().parent().remove();
-
-            let newConsecutivo = $('#tableMaterials tbody tr').length - 1;
-            $('#tableMaterials tbody tr td.consecutivo').each(function() {
-                $(this).text(newConsecutivo);
-                $(this).attr('data-mtrlvalueorden', newConsecutivo);
-                newConsecutivo--;
-            });
+            editConsecutivo();
         });
     });
 }
@@ -412,6 +408,7 @@ let iniciateRemovematerials = () => {
 let iniciateEditMaterial = () => {
 
     $('#tableMaterials tbody tr .editMaterial').each(function() {
+
         $(this).click(function() {
 
             let rowData = $(this).parent().parent().find('td');
@@ -419,7 +416,7 @@ let iniciateEditMaterial = () => {
 
             rowData.each(function() {
                 // dataContainer.push($(this).data('mtrlvalue'));
-                dataContainer.push($(this).attr('mtrlvalue'));
+                dataContainer.push($(this).attr('data-mtrlvalue'));
             });
 
             $('#consecutivo').val(dataContainer[0]);
@@ -431,12 +428,23 @@ let iniciateEditMaterial = () => {
             $('#txtCatalogo').val(dataContainer[6]);
 
             $(this).parent().parent().remove();
+            editConsecutivo();
             // iniciateEditMaterial();
             // iniciateRemovematerials();
         });
     });
 }
 
+let editConsecutivo = () => {
+
+    let newConsecutivo = $('#tableMaterials tbody tr').length - 1;
+
+    $('#tableMaterials tbody tr td.consecutivo').each(function() {
+        $(this).text(newConsecutivo);
+        $(this).attr('data-mtrlvalueorden', newConsecutivo);
+        newConsecutivo--;
+    });
+}
 
 /**
  * javascript comment

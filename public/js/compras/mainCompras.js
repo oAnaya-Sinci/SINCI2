@@ -796,10 +796,11 @@ $('.btnEliminar').click(() => {
     $("#mi-modal .modal-body").html("<p>Está a punto de eliminar este registro, al hacerlo la información se perderá y no podrá ser recuperada.</p><p>¿Desea continuar con la eliminación?</p>");
     $("#mi-modal").modal('show');
 
-    modalConfirmRequisicion(async function(confirm) {
+    modalConfirmRequisicion(function(confirm) {
+
         if (confirm) {
 
-            await $.ajax({
+            $.ajax({
                 type: "DELETE",
                 url: urlData + "/deleteData",
                 data: { "isLogedIn": dl, "folio": folio },
@@ -827,12 +828,12 @@ $('.btnEliminar').click(() => {
 
 var modalConfirmRequisicion = function(callback) {
 
-    $("#modal-btn-si").on("click", function() {
+    $("#mi-modal #modal-btn-si").on("click", function() {
         callback(true);
         $("#mi-modal").modal('hide');
     });
 
-    $("#modal-btn-no").on("click", function() {
+    $("#mi-modal #modal-btn-no").on("click", function() {
         callback(false);
         $("#mi-modal").modal('hide');
     });

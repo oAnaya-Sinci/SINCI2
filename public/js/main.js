@@ -100,7 +100,6 @@ async function IsLogedIn() {
             response = JSON.parse(response)[0];
 
             if (response.sessionAuth != 'false') {
-
                 set_TimeOut();
                 window.localStorage.setItem('sasIsLogedIn', response.sessionAuth);
             } else {

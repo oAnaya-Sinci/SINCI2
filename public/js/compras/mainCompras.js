@@ -49,29 +49,11 @@ $(document).ready(function() {
     modalComprasSinci();
 });
 
-// $('#btnCerrarModal').click(function() {
-
-//     $('#registrarRequisicion').modal('hide');
-// });
-
-/**
- * javascript comment
- * @Author: Carlos Omar Anaya Barajas
- * @Date: 2022-04-27 14:07:32
- * @Desc:
- */
 
 $('#mi-modal-message #modal-btn-cerrar').click(function() {
 
     $('#mi-modal-message').modal('hide');
 });
-
-/**
- * javascript comment
- * @Author: Carlos Omar Anaya Barajas
- * @Date: 2022-04-25 10:22:45
- * @Desc:
- */
 
 $('#btnRegistraRequisicion').click(function() {
 
@@ -108,7 +90,7 @@ let selectYears = (totYears) => {
  * javascript comment
  * @Author: Carlos Omar Anaya Barajas
  * @Date: 2022-03-21 15:42:55
- * @Desc: This function iniciate the select in the sales apart
+ * @Desc: This function obtain all the data fro
  */
 
 async function modalComprasSinci() {

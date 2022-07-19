@@ -1,422 +1,418 @@
-#modalEditarOrdenCompra.modalsSinciClass,
-#registrarRequisicion.modalsSinciClass {
-    margin-top: 2rem;
-    width: 105%;
-}
+    #modalEditarOrdenCompra.modalsSinciClass,
+    #registrarRequisicion.modalsSinciClass {
+        margin-top: 2rem;
+        width: 105%;
+    }
 
-#modalEditarOrdenCompra .btn,
-#registrarRequisicion .btn {
-    margin-bottom: 0 !important
-}
+    #modalEditarOrdenCompra .btn,
+    #registrarRequisicion .btn {
+        margin-bottom: 0 !important
+    }
 
-#modalDetalleOrden .modal-dialog,
-#modalEditarOrdenCompra.modalsSinciClass .modal-dialog,
-#registrarRequisicion.modalsSinciClass .modal-dialog {
-    max-width: 84rem;
-}
+    #modalDetalleOrden .modal-dialog,
+    #modalEditarOrdenCompra.modalsSinciClass .modal-dialog,
+    #registrarRequisicion.modalsSinciClass .modal-dialog {
+        max-width: 84rem;
+    }
 
-#modalEditarOrdenCompra.modalsSinciClass .modal-content,
-#registrarRequisicion.modalsSinciClass .modal-content {
-    height: 51rem;
-}
+    #modalEditarOrdenCompra.modalsSinciClass .modal-content,
+    #registrarRequisicion.modalsSinciClass .modal-content {
+        height: 51rem;
+    }
 
-.materialRequiredOrdenCompra,
-.materialRequired {
-    height: 18rem;
-}
+    .materialRequiredOrdenCompra,
+    .materialRequired {
+        height: 18rem;
+    }
 
-#tableMaterialsOrdenCompra thead tr th,
-#tableMaterials thead tr th {
-    font-size: 12px !important;
-}
+    #tableMaterialsOrdenCompra thead tr th,
+    #tableMaterials thead tr th {
+        font-size: 12px !important;
+    }
 
-#tableMaterialsOrdenCompra tbody tr td,
-#tableMaterials tbody tr td {
-    text-align: left;
-    font-size: 11px;
-}
+    #tableMaterialsOrdenCompra tbody tr td,
+    #tableMaterials tbody tr td {
+        text-align: left;
+        font-size: 11px;
+    }
 
-#tableDetailOrdenCompra thead tr th,
-#tableMaterialsEditarOrdenCompra thead tr th,
-#tableDetailCrearOrdenCompra thead tr th {
-    text-align: left;
-    font-size: 12px !important;
-    /* padding: 0 0 0.5rem 0 !important; */
-    padding: 0.8rem 0.8rem 0.5rem 0;
-}
+    #tableDetailOrdenCompra thead tr th,
+    #tableMaterialsEditarOrdenCompra thead tr th,
+    #tableDetailCrearOrdenCompra thead tr th {
+        text-align: left;
+        font-size: 12px !important;
+        /* padding: 0 0 0.5rem 0 !important; */
+        padding: 0.8rem 0.8rem 0.5rem 0;
+    }
 
-#tableDetailOrdenCompra tbody tr td,
-#tableMaterialsEditarOrdenCompra tbody tr td,
-#tableDetailCrearOrdenCompra tbody tr td {
-    text-align: left;
-    font-size: 11px;
-    padding: 0.15rem 0.5rem;
-}
+    #tableDetailOrdenCompra tbody tr td,
+    #tableMaterialsEditarOrdenCompra tbody tr td,
+    #tableDetailCrearOrdenCompra tbody tr td {
+        text-align: left;
+        font-size: 11px;
+        padding: 0.15rem 0.5rem;
+    }
 
-#tableDetailOrdenCompra tbody tr.cleanOrders td {
-    color: red;
-}
+    #tableDetailOrdenCompra tbody tr.cleanOrders td {
+        color: red;
+    }
 
-.dataTables_wrapper thead {
-    font-size: 12px !important;
-    padding: 0 !important;
-    text-align: left;
-}
+    .dataTables_wrapper thead {
+        font-size: 12px !important;
+        padding: 0 !important;
+        text-align: left;
+    }
 
-.dataTables_wrapper tbody,
-.dataTables_wrapper tbody p {
-    text-align: left;
-    font-size: 11px;
-    margin: 0 !important;
-    padding: 0 !important;
-}
+    .dataTables_wrapper tbody,
+    .dataTables_wrapper tbody p {
+        text-align: left;
+        font-size: 11px;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
 
-#tableMaterialsOrdenCompra tbody tr td input,
-#tableMaterials tbody tr td input {
-    font-size: 11px;
-    line-height: 0rem;
-}
+    #tableMaterialsOrdenCompra tbody tr td input,
+    #tableMaterials tbody tr td input {
+        font-size: 11px;
+        line-height: 0rem;
+    }
 
-#tableMaterialsOrdenCompra tbody tr td select,
-#tableMaterials tbody tr td select {
-    font-size: .7rem;
-    line-height: .8rem;
-}
+    #tableMaterialsOrdenCompra tbody tr td select,
+    #tableMaterials tbody tr td select {
+        font-size: .7rem;
+        line-height: .8rem;
+    }
 
-#tableMaterialsOrdenCompra tbody .material-icons,
-#tableMaterials tbody .material-icons {
-    cursor: pointer;
-}
+    #tableMaterialsOrdenCompra tbody .material-icons,
+    #tableMaterials tbody .material-icons {
+        cursor: pointer;
+    }
 
-#tableDetailOrdenCompra tbody tr td select {
-    font-size: .7rem;
-    line-height: .8rem;
-}
+    #tableDetailOrdenCompra tbody tr td select {
+        font-size: .7rem;
+        line-height: .8rem;
+    }
 
-.modal .modal-content .modal-body input,
-.modal .modal-content .modal-body select,
-.modal .modal-content .modal-body label,
-.modal .modal-content .modal-body textarea,
-.modal .modal-content .modal-body btn {
-    font-size: .7rem;
-    line-height: .8rem !important;
-}
+    .modal .modal-content .modal-body input,
+    .modal .modal-content .modal-body select,
+    .modal .modal-content .modal-body label,
+    .modal .modal-content .modal-body textarea,
+    .modal .modal-content .modal-body btn {
+        font-size: .7rem;
+        line-height: .8rem !important;
+    }
 
-.btn.dropdown-toggle {
-    height: 2rem !important;
-}
+    .btn.dropdown-toggle {
+        height: 2rem !important;
+    }
 
-.btn.dropdown-toggle .filter-option-inner-inner {
-    font-size: 10px !important;
-}
-
-
-/**
+    .btn.dropdown-toggle .filter-option-inner-inner {
+        font-size: 10px !important;
+    }
+    /**
 * @Author: Carlos Omar Anaya Barajas
 * @Date: 2022-03-22 14:03:43
 * @Desc: This block of code is for the scroll in the table to add materials
 */
 
-.materialRequiredOrdenCompra .form-group,
-.materialRequired .form-group {
-    overflow-y: scroll;
-    height: 18rem;
-    width: 100%;
-    padding-right: 0.5rem;
-}
+    .materialRequiredOrdenCompra .form-group,
+    .materialRequired .form-group {
+        overflow-y: scroll;
+        height: 18rem;
+        width: 100%;
+        padding-right: 0.5rem;
+    }
 
-.materialsRequiredOrden .form-group #tableMaterialsOrdenCompra,
-.materialRequired .form-group #tableMaterials {
-    width: auto;
-}
-
-
-/**
+    .materialsRequiredOrden .form-group #tableMaterialsOrdenCompra,
+    .materialRequired .form-group #tableMaterials {
+        width: auto;
+    }
+    /**
 * @Author: Carlos Omar Anaya Barajas
 * @Date: 2022-03-24 13:25:00
 * @Desc: This block of code is for the scroll in the table to materials details
 */
 
-.modal-body div.tableDetailOrden,
-.modal-body div.tableDetail {
-    overflow-y: scroll;
-    height: 17rem;
-    width: 100%;
-    padding-right: 0.5rem;
-}
+    .modal-body div.tableDetailOrden,
+    .modal-body div.tableDetail {
+        /* overflow-y: scroll; */
+        height: 23rem;
+        width: 100%;
+        padding-right: 0.5rem;
+        margin-top: -1.5rem !important;
+    }
 
-#modalDetalleOrden .modal-body div #tableDetailMaterial {
-    width: 100%;
-}
-
-
-/**
+    #modalDetalleOrden .modal-body div #tableDetailMaterial {
+        width: 100%;
+    }
+    /**
 * @Author: Carlos Omar Anaya Barajas
 * @Date: 2022-03-22 16:50:04
 * @Desc: This styles are for the modal of notes
 */
 
-#notesDB {
-    height: 580px;
-    overflow-y: auto;
-}
+    #notesDB {
+        height: 580px;
+        overflow-y: auto;
+    }
 
-#notesDB hr,
-#notesDB p {
-    margin: 0 !important;
-}
+    #notesDB hr,
+    #notesDB p {
+        margin: 0 !important;
+    }
 
-#notesDB p {
-    padding: .5rem 0 !important;
-}
+    #notesDB p {
+        padding: .5rem 0 !important;
+    }
 
-.noteCatalog.active {
-    background-color: #E7E5E5;
-}
+    .noteCatalog.active {
+        background-color: #E7E5E5;
+    }
 
-.textAreaViewer {
-    border: 1px solid #000;
-    resize: none;
-    height: 10rem;
-    margin-bottom: 1rem;
-}
+    .textAreaViewer {
+        border: 1px solid #000;
+        resize: none;
+        height: 10rem;
+        margin-bottom: 1rem;
+    }
 
-table tbody tr td {
-    cursor: pointer;
-}
+    table tbody tr td {
+        cursor: pointer;
+    }
 
-.rowSelected {
-    /* background-color: #D9531E !important; */
-    background-color: rgb(217, 83, 30, .85) !important;
-    color: #fff !important;
-}
+    .rowSelected {
+        /* background-color: #D9531E !important; */
+        background-color: rgb(217, 83, 30, .85) !important;
+        color: #fff !important;
+    }
 
-.headTable {
-    background-color: rgb( 138, 31, 3, .75);
-    color: #fff;
-}
+    .headTable {
+        background-color: rgb( 138, 31, 3, .75);
+        color: #fff;
+    }
 
-.tabContents {
-    margin-top: 2rem;
-    overflow-x: scroll;
-    width: 100%;
-    padding-right: 0.5rem;
-}
+    #myTabContent .tabContents {
+        margin-top: 0.5rem;
+        overflow-x: scroll;
+        width: 100%;
+        padding-right: 0.5rem;
+    }
 
-.dataTables_wrapper {
-    margin-bottom: 2rem;
-}
+    #myTabDetalleContent .tabContents {
+        margin-top: 0.5rem;
+        width: 100%;
+        margin-left: 0.5rem !important;
+        margin-right: 0.5rem;
+    }
 
-.nav.nav-tabs .nav-link.active {
-    color: #D9531E !important;
-    background-color: #fff;
-    border-color: #dee2e6 #dee2e6 #fff;
-}
+    .dataTables_wrapper {
+        margin-bottom: 2rem;
+    }
 
-.nav.nav-tabs .nav-link {
-    color: #495057 !important;
-}
+    .nav.nav-tabs .nav-link.active {
+        color: #D9531E !important;
+        background-color: #fff;
+        border-color: #dee2e6 #dee2e6 #fff;
+    }
 
-.displayButton {
-    display: none;
-}
+    .nav.nav-tabs .nav-link {
+        color: #495057 !important;
+    }
 
-.notDisplayMenu {
-    display: none !important;
-}
+    .displayButton {
+        display: none;
+    }
 
-#tableDetailMaterial thead th {
-    padding: 0 !important;
-}
+    .notDisplayMenu {
+        display: none !important;
+    }
 
-#tableDetailOrdenCompra tbody tr td {
-    padding: 0.1rem !important;
-}
+    #tableDetailMaterial thead th {
+        padding: 0 !important;
+    }
 
-.dataTables_wrapper table {
-    width: auto !important;
-}
+    #tableDetailOrdenCompra tbody tr td {
+        padding: 0.1rem !important;
+    }
 
-.dataTables_wrapper table thead th {
-    border: 1px solid #fff !important;
-}
+    .dataTables_wrapper table {
+        width: auto !important;
+    }
 
-.dataTables_wrapper table.dataTable th,
-.dataTables_wrapper table.dataTable td {
-    box-sizing: border-box;
-    width: 0px !important;
-}
+    .dataTables_wrapper table thead th {
+        border: 1px solid #fff !important;
+    }
 
-.content__requisicion .row div {
-    padding: 0.2rem .5rem;
-}
+    .dataTables_wrapper table.dataTable th,
+    .dataTables_wrapper table.dataTable td {
+        box-sizing: border-box;
+        width: 0px !important;
+    }
 
-#tableRequisiciones_paginate,
-tableRequisiciones_filter label,
-#tableRequisiciones_info {
-    font-size: 14px;
-}
+    .content__requisicion .row div {
+        padding: 0.2rem .5rem;
+    }
 
-
-/**
+    #tableRequisiciones_paginate,
+    tableRequisiciones_filter label,
+    #tableRequisiciones_info {
+        font-size: 14px;
+    }
+    /**
 * @author: Carlos Omar Anaya Barajas
 * @date: 2022-04-29 10:55:34
 * @desc: this classes make the text in the cell small
 */
+    /* .dataTables_wrapper table.dataTable thead .recortartexto, */
 
+    .dataTables_wrapper table.dataTable tbody .recortartexto {
+        width: 180px !important;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
 
-/* .dataTables_wrapper table.dataTable thead .recortartexto, */
+    .dataTables_wrapper table.dataTable tbody .recortartextoCompania {
+        width: 150px !important;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
 
-.dataTables_wrapper table.dataTable tbody .recortartexto {
-    width: 180px !important;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-}
+    .dataTables_wrapper table.dataTable tbody .recortartextoRequisicion {
+        width: 250px !important;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
 
-.dataTables_wrapper table.dataTable tbody .recortartextoCompania {
-    width: 150px !important;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-}
+    .dataTables_wrapper table.dataTable tbody .recortartextoCanceladas {
+        width: 380px !important;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
 
-.dataTables_wrapper table.dataTable tbody .recortartextoRequisicion {
-    width: 250px !important;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-}
+    .dataTables_wrapper table.dataTable tbody .ajustarTextoSeleccionado {
+        white-space: normal !important;
+    }
 
-.dataTables_wrapper table.dataTable tbody .recortartextoCanceladas {
-    width: 380px !important;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-}
+    #tableRequisicionesAuth_wrapper table tbody tr td:nth-child(7),
+    #tableOrdenesCompra_wrapper table tbody tr td:nth-child(9) {
+        text-align: right;
+    }
 
-.dataTables_wrapper table.dataTable tbody .ajustarTextoSeleccionado {
-    white-space: normal !important;
-}
+    textarea:focus,
+    input:focus,
+    select:focus {
+        outline: none;
+    }
 
-#tableRequisicionesAuth_wrapper table tbody tr td:nth-child(7),
-#tableOrdenesCompra_wrapper table tbody tr td:nth-child(9) {
-    text-align: right;
-}
+    .form-material {
+        display: block;
+        width: 100%;
+        padding: 0.5rem 0;
+        font-size: 0.875rem;
+        font-weight: 400;
+        line-height: 1.5rem;
+        color: #495057;
+        background-color: transparent;
+        background-clip: padding-box;
+        border: 1px solid #d2d6da;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        border-radius: 0.375rem;
+        -webkit-transition: 0.2s ease;
+        transition: 0.2s ease;
+        padding: 0.5rem;
+        color: #000 !important;
+    }
 
-textarea:focus,
-input:focus,
-select:focus {
-    outline: none;
-}
+    .modal-body,
+    .modal-body p {
+        font-size: 14px;
+    }
 
-.form-material {
-    display: block;
-    width: 100%;
-    padding: 0.5rem 0;
-    font-size: 0.875rem;
-    font-weight: 400;
-    line-height: 1.5rem;
-    color: #495057;
-    background-color: transparent;
-    background-clip: padding-box;
-    border: 1px solid #d2d6da;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    border-radius: 0.375rem;
-    -webkit-transition: 0.2s ease;
-    transition: 0.2s ease;
-    padding: 0.5rem;
-    color: #000 !important;
-}
+    .ajusteTextoTablasModal {
+        white-space: normal !important;
+        font-size: 11px;
+    }
 
-.modal-body,
-.modal-body p {
-    font-size: 14px;
-}
+    .modal-body {
+        padding: 1rem 1.3rem 1rem 1.3rem !important;
+    }
 
-.ajusteTextoTablasModal {
-    white-space: normal !important;
-    font-size: 11px;
-}
+    .modal .modal-body button,
+    .modal .modal-footer button {
+        font-size: 11px;
+        padding: 0.5rem 1rem;
+        margin: 0.1rem 0.25rem;
+    }
 
-.modal-body {
-    padding: 1rem 1.3rem 1rem 1.3rem !important;
-}
+    .modal .modal-body table tbody tr td p {
+        margin: 0.1rem 0 0 0;
+    }
 
-.modal .modal-body button,
-.modal .modal-footer button {
-    font-size: 11px;
-    padding: 0.5rem 1rem;
-    margin: 0.1rem 0.25rem;
-}
+    .numericTextAlign {
+        text-align: right;
+    }
 
-.modal .modal-body table tbody tr td p {
-    margin: 0.1rem 0 0 0;
-}
+    .actionsButtons.noVisible {
+        display: none;
+    }
+    /* CSS styles for the menu of Ordenes Compras */
 
-.numericTextAlign {
-    text-align: right;
-}
+    .menuOrdenesCompras {
+        display: flex;
+        gap: 1em;
+    }
 
-.actionsButtons.noVisible {
-    display: none;
-}
+    .menuOrdenesCompras .form-group {
+        display: grid;
+        justify-items: start;
+    }
 
+    .menuOrdenesCompras .form-group .inlineElements {
+        display: inline-flex;
+        align-items: center;
+    }
 
-/* CSS styles for the menu of Ordenes Compras */
+    .menuOrdenesCompras .form-group .inlineElements label {
+        margin-top: .5rem;
+    }
 
-.menuOrdenesCompras {
-    display: flex;
-    gap: 1em;
-}
+    .menuOrdenesCompras .form-group.bigIcons .material-icons {
+        font-size: 2.5rem;
+    }
 
-.menuOrdenesCompras .form-group {
-    display: grid;
-    justify-items: start;
-}
+    .menuOrdenesCompras .form-group.bigIcons {
+        display: grid;
+        align-content: center;
+        justify-items: center;
+    }
 
-.menuOrdenesCompras .form-group .inlineElements {
-    display: inline-flex;
-    align-items: center;
-}
+    hr.menuSeparator {
+        height: 9vh;
+        width: .1vw;
+        border-width: 0;
+        color: #000;
+        background-color: #000;
+        margin: 0 !important;
+        /* margin: -17px 0 0px 0 !important; */
+    }
 
-.menuOrdenesCompras .form-group .inlineElements label {
-    margin-top: .5rem;
-}
+    .menuOrdenesCompras .form-group i,
+    .menuOrdenesCompras .form-group.bigIcons label,
+    .menuOrdenesCompras .form-group i label {
+        cursor: pointer;
+    }
 
-.menuOrdenesCompras .form-group.bigIcons .material-icons {
-    font-size: 2.5rem;
-}
+    .nav.nav-tabs {
+        margin-top: 1rem;
+    }
 
-.menuOrdenesCompras .form-group.bigIcons {
-    display: grid;
-    align-content: center;
-    justify-items: center;
-}
-
-hr.menuSeparator {
-    height: 9vh;
-    width: .1vw;
-    border-width: 0;
-    color: #000;
-    background-color: #000;
-    margin: 0 !important;
-    /* margin: -17px 0 0px 0 !important; */
-}
-
-.menuOrdenesCompras .form-group i,
-.menuOrdenesCompras .form-group.bigIcons label,
-.menuOrdenesCompras .form-group i label {
-    cursor: pointer;
-}
-
-.nav.nav-tabs {
-    margin-top: 1rem;
-}
-
-.dataTables_wrapper .dt-buttons {
-    display: contents !important;
-    visibility: hidden;
-}
+    .dataTables_wrapper .dt-buttons {
+        display: contents !important;
+        visibility: hidden;
+    }

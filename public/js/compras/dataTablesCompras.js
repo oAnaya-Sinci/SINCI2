@@ -15,7 +15,7 @@ let iniciateTablesDT = () => {
     });
 
     let pageLength = 15;
-    let searching = true;
+    let searching = false;
     // let tableScrollX = false;
     // let tableScrollY = 700;
 
@@ -37,6 +37,9 @@ let tableRequisicion = async(dl, pageLength, searching /* , tableScrollX, tableS
 
     await $('#tableRequisiciones').DataTable({
         dom: 'Bfrtip',
+
+        "pageLength": pageLength,
+        "searching": searching,
 
         buttons: [
             'excel'
@@ -131,12 +134,6 @@ let tableRequisicion = async(dl, pageLength, searching /* , tableScrollX, tableS
 
         order: [
             [0, 'desc']
-        ],
-
-        "pageLength": pageLength,
-        "searching": searching,
-        buttons: [
-            'excel'
         ]
     });
 };
@@ -151,6 +148,9 @@ let tableRequisicionAuth = async(dl, pageLength, searching /* , tableScrollX, ta
 
     await $('#tableRequisicionesAuth').DataTable({
         dom: 'Bfrtip',
+
+        "pageLength": pageLength,
+        "searching": searching,
 
         buttons: [
             'excel'
@@ -241,12 +241,6 @@ let tableRequisicionAuth = async(dl, pageLength, searching /* , tableScrollX, ta
 
         order: [
             [11, 'desc']
-        ],
-
-        "pageLength": pageLength,
-        "searching": searching,
-        buttons: [
-            'excel'
         ]
     });
 };
@@ -261,6 +255,9 @@ let tableOrdenCompra = async(dl, pageLength, searching /* , tableScrollX, tableS
 
     await $('#tableOrdenesCompra').DataTable({
         dom: 'Bfrtip',
+
+        "pageLength": pageLength,
+        "searching": searching,
 
         buttons: [
             'excel'
@@ -382,12 +379,6 @@ let tableOrdenCompra = async(dl, pageLength, searching /* , tableScrollX, tableS
 
         order: [
             [12, 'desc']
-        ],
-
-        "pageLength": pageLength,
-        "searching": searching,
-        buttons: [
-            'excel'
         ]
     });
 };
@@ -402,6 +393,9 @@ let tableCanceladas = async(dl, pageLength, searching /* , tableScrollX, tableSc
 
     await $('#tableCanceladas').DataTable({
         dom: 'Bfrtip',
+
+        "pageLength": pageLength,
+        "searching": searching,
 
         buttons: [
             'excel'
@@ -476,14 +470,7 @@ let tableCanceladas = async(dl, pageLength, searching /* , tableScrollX, tableSc
 
         order: [
             [0, 'desc']
-        ],
-
-        "pageLength": pageLength,
-        "searching": searching,
-        buttons: [
-            'excel'
         ]
-
     });
 };
 

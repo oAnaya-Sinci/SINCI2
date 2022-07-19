@@ -34,8 +34,6 @@
 
                     </div> -->
 
-<!-- <hr style="margin-bottom: 0; width: 51.11%;"> -->
-
                     <div class="menuOrdenesCompras requisiciones">
 
                         <div class="form-group bigIcons" id="btnRegistraRequisicion">
@@ -45,7 +43,9 @@
 
                         <div class="form-group">
                             <i class='material-icons opacity-10 inlineElements btnEditarRequisicion'>mode<label class="btnEditarRequisicion">Editar</label></i>
-                            <i class='material-icons opacity-10 inlineElements btnEliminar'>clear<label class="btnEliminar">Eliminar</label></i>
+
+                            <i class='material-icons opacity-10 inlineElements btnEliminar'>clear<label>Eliminar</label></i>
+
                         </div>
 
                         <!-- <div class="form-group bigIcons">

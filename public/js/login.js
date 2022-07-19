@@ -11,7 +11,7 @@
 var currenUrl = window.location.href.split("/")[2];
 currenUrl = currenUrl.split(":");
 
-var urlData = "https://" + currenUrl[0] + ":1880";
+var urlData = "http://" + currenUrl[0] + ":1880";
 
 var timeOut;
 
@@ -149,14 +149,6 @@ async function IsLogedIn() {
         }
     });
 }
-
-var modalConfirm = function(callback) {
-
-    $("#modal-btn-no").on("click", function() {
-        callback(false);
-        $("#noAccessModal").modal('hide');
-    });
-};
 
 var inLoader = () => {
     $(".loader").fadeIn("slow");

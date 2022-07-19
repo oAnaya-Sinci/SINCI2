@@ -184,6 +184,7 @@ body .nav-link.text-white {
 
 .body-modalsSinci label {
     margin-right: .5rem;
+    white-space: nowrap;
 }
 
 .fc-header .fc-header-center span h5 {

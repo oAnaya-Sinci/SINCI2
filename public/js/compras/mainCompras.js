@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function () {
 
     $('.datetimepicker.compras').datetimepicker({
         // follow MomentJS docs: https://momentjs.com/docs/#/displaying/format/
@@ -50,12 +50,12 @@ $(document).ready(function() {
 });
 
 
-$('#mi-modal-message #modal-btn-cerrar').click(function() {
+$('#mi-modal-message #modal-btn-cerrar').click(function () {
 
     $('#mi-modal-message').modal('hide');
 });
 
-$('#btnRegistraRequisicion').click(function() {
+$('#btnRegistraRequisicion').click(function () {
 
     $('#tableMaterials tbody tr:not(#materialsRequired)').remove();
     $('#registrarRequisicion').modal('show');
@@ -80,7 +80,7 @@ let selectYears = (totYears) => {
 
     $('#slctYearOrdenCompra').append(options);
 
-    $('#slctYearOrdenCompra').change(function() {
+    $('#slctYearOrdenCompra').change(function () {
 
         $('#tableOrdenesCompra').DataTable().ajax.reload();
     });
@@ -99,22 +99,50 @@ async function modalComprasSinci() {
 
     console.time("Selects In Modal");
 
-    await fetch(urlData + "/obtainDataProyecto?isLogedIn=" + dl).then(data => data.json()).then(dataAsignar => { processDataToSelect(dataAsignar, '#slctProyecto'); }).catch(() => { IsLogedIn(); });
-    await fetch(urlData + "/obtainDataUser?isLogedIn=" + dl).then(data => data.json()).then(dataAsignar => { processDataToSelect(dataAsignar, '#slctUsuario'); }).catch(() => { IsLogedIn(); });
-    await fetch(urlData + "/obtainDataAsignar?isLogedIn=" + dl).then(data => data.json()).then(dataAsignar => { processDataToSelect(dataAsignar, '#slctAsignar'); }).catch(() => { IsLogedIn(); });
-    await fetch(urlData + "/obtainDataCiudades?isLogedIn=" + dl).then(data => data.json()).then(dataAsignar => { processDataToSelect(dataAsignar, '#slctCiudades'); }).catch(() => { IsLogedIn(); });
-    await fetch(urlData + "/obtainDataCompannia?isLogedIn=" + dl).then(data => data.json()).then(dataAsignar => { processDataToSelect(dataAsignar, '#slctCompannia'); }).catch(() => { IsLogedIn(); });
+    await fetch(urlData + "/obtainDataProyecto?isLogedIn=" + dl).then(data => data.json()).then(dataAsignar => {
+        processDataToSelect(dataAsignar, '#slctProyecto');
+    }).catch(() => {
+        IsLogedIn();
+    });
+    await fetch(urlData + "/obtainDataUser?isLogedIn=" + dl).then(data => data.json()).then(dataAsignar => {
+        processDataToSelect(dataAsignar, '#slctUsuario');
+    }).catch(() => {
+        IsLogedIn();
+    });
+    await fetch(urlData + "/obtainDataAsignar?isLogedIn=" + dl).then(data => data.json()).then(dataAsignar => {
+        processDataToSelect(dataAsignar, '#slctAsignar');
+    }).catch(() => {
+        IsLogedIn();
+    });
+    await fetch(urlData + "/obtainDataCiudades?isLogedIn=" + dl).then(data => data.json()).then(dataAsignar => {
+        processDataToSelect(dataAsignar, '#slctCiudades');
+    }).catch(() => {
+        IsLogedIn();
+    });
+    await fetch(urlData + "/obtainDataCompannia?isLogedIn=" + dl).then(data => data.json()).then(dataAsignar => {
+        processDataToSelect(dataAsignar, '#slctCompannia');
+    }).catch(() => {
+        IsLogedIn();
+    });
 
     await fetch(urlData + "/obtainDataProveedores?isLogedIn=" + dl).then(data => data.json()).then(dataAsignar => {
         processDataToSelect(dataAsignar, '#slctProveedor', 'Sin proveedor');
         processDataToSelect(dataAsignar, '#slctProveedorOrdenCompra', 'Sin proveedor');
-    }).catch(() => { IsLogedIn(); });
+    }).catch(() => {
+        IsLogedIn();
+    });
 
     await fetch(urlData + "/obtainDataUnidadesMedida?isLogedIn=" + dl).then(data => data.json()).then(dataAsignar => {
         processDataToSelect(dataAsignar, '#slctUnidad', "-");
         processDataToSelect(dataAsignar, '#slctUnidadOrden', "-");
-    }).catch(() => { IsLogedIn(); });
-    await fetch(urlData + "/obtainDataNotesCatalog?isLogedIn=" + dl).then(data => data.json()).then(dataAsignar => { processDataToModalNotes(dataAsignar); }).catch(() => { IsLogedIn(); });
+    }).catch(() => {
+        IsLogedIn();
+    });
+    await fetch(urlData + "/obtainDataNotesCatalog?isLogedIn=" + dl).then(data => data.json()).then(dataAsignar => {
+        processDataToModalNotes(dataAsignar);
+    }).catch(() => {
+        IsLogedIn();
+    });
 
     $('.selectpicker').selectpicker('refresh');
 
@@ -136,11 +164,13 @@ function processDataToSelect(data, select, firstOption = "") {
 
     let options = "";
 
-    if (data.length == 1) {
-        $('#slctUsuario').remove();
-        let select = '<label id="lblUsuario" for="recipient-name" class="col-form-label">Usuario:</label> <select class="form-select" name="slctUsuario" id="slctUsuario">';
-        $('#divUsuarios').html(select);
-    }
+    // if (data.length == 1) {
+        // $('#slctUsuario').remove();
+        // let select = '<label id="lblUsuario" for="recipient-name" class="col-form-label">Solicitado_por:</label> <select class="form-select requisicionValue" name="slctUsuario"| id="slctUsuario">';
+        // $('#divUsuarios').html(select);
+
+        // $('#slctUsuario').removeClass('selectpicker');
+    // }
 
     $(select).empty();
 
@@ -156,7 +186,7 @@ function processDataToSelect(data, select, firstOption = "") {
             options = "<option value=''>" + firstOption + "</option>";
     }
 
-    $.each(data, function(index, value) {
+    $.each(data, function (index, value) {
 
         options += '<option value="' + value.VALUE_SELECT + '">' + value.OPTION_SELECT + '</option>';
     });
@@ -171,7 +201,7 @@ let displayDetailsDataModal = (dataDetails, tableId) => {
     dataDetails = JSON.parse(dataDetails);
 
     let rows = "";
-    $.each(dataDetails, function(index, value) {
+    $.each(dataDetails, function (index, value) {
 
         if (tableId != "#tablaDetallePDF") {
 
@@ -204,18 +234,18 @@ let displayDetailsDataModal = (dataDetails, tableId) => {
  * javascript comment
  * @Author: Carlos Omar Anaya Barajas
  * @Date: 2022-03-22 16:08:10
- * @Desc: This events call and cancel the modal with the catalog of noted fro the DB
+ * @Desc: This events call and cancel the modal with the catalog of noted from the DB
  */
 
-$('#btnCancelDetalle').click(function() {
+$('#btnCancelDetalle').click(function () {
     $('#modalDetalleOrden').modal('hide');
 });
 
-$('#btnCancelNotes').click(function() {
+$('#btnCancelNotes').click(function () {
     $('#modalNotesCatalog').modal('hide');
 });
 
-$('#btnNotesCatalog').click(function() {
+$('#btnNotesCatalog').click(function () {
 
     $('#modalNotesCatalog').modal('show');
 });
@@ -230,21 +260,21 @@ $('#btnNotesCatalog').click(function() {
 let processDataToModalNotes = (dataNotes) => {
 
     let notesDB = "";
-    $.each(dataNotes, function(index, value) {
+    $.each(dataNotes, function (index, value) {
 
         notesDB += "<p class='noteCatalog'>" + value.OPTION_SELECT + "</p><hr>";
     });
 
     $('#modalNotesCatalog .modal-body #notesDB').append(notesDB);
 
-    $('#modalNotesCatalog .modal-body #notesDB .noteCatalog').click(function() {
+    $('#modalNotesCatalog .modal-body #notesDB .noteCatalog').click(function () {
 
         $('#notesDB .noteCatalog').removeClass('active');
         $(this).addClass('active');
     });
 }
 
-$('#modalAddNote').click(function() {
+$('#modalAddNote').click(function () {
 
     let note = $('#modalNotesCatalog .modal-body #notesDB .noteCatalog.active').text();
 
@@ -259,7 +289,7 @@ $('#modalAddNote').click(function() {
  * @Date: 2022-03-22 15:57:23
  * @Desc: this event display the info registerd for the user in the materials required and added to the table
  */
-$('#addMaterial').click(function() {
+$('#addMaterial').click(function () {
 
     let cantidad = $('#txtCantidad').val();
     // let unidadId = $('#slctUnidad').val();
@@ -318,7 +348,7 @@ let showDataCompra = (dataCompra, datDetalleCompra) => {
 
     $('#tableMaterials tbody tr:not(#materialsRequired)').remove();
     let RowsMaterial = "";
-    datDetalleCompra.forEach(function(valor, indice) {
+    datDetalleCompra.forEach(function (valor, indice) {
 
         RowsMaterial += "<tr>" +
             "<td class='consecutivo' data-mtrlvalue='" + valor.CONSECUTIVO + "'>" + valor.CONSECUTIVO + "</td>" +
@@ -358,7 +388,7 @@ let cleanModalrequisicion = () => {
 
     $('.selectpicker').selectpicker('refresh');
 
-    $('#tableMaterials tbody tr .removeMaterial').each(function() {
+    $('#tableMaterials tbody tr .removeMaterial').each(function () {
         $(this).click();
     });
 }
@@ -378,9 +408,9 @@ let iniciateRemovematerials = () => {
     $('#txtMarca').val("");
     $('#txtCatalogo').val("");
 
-    $('#tableMaterials tbody tr .removeMaterial').each(function() {
+    $('#tableMaterials tbody tr .removeMaterial').each(function () {
 
-        $(this).click(function() {
+        $(this).click(function () {
             $(this).parent().parent().remove();
             editConsecutivo();
         });
@@ -389,14 +419,14 @@ let iniciateRemovematerials = () => {
 
 let iniciateEditMaterial = () => {
 
-    $('#tableMaterials tbody tr .editMaterial').each(function() {
+    $('#tableMaterials tbody tr .editMaterial').each(function () {
 
-        $(this).click(function() {
+        $(this).click(function () {
 
             let rowData = $(this).parent().parent().find('td');
             let dataContainer = [];
 
-            rowData.each(function() {
+            rowData.each(function () {
                 // dataContainer.push($(this).data('mtrlvalue'));
                 dataContainer.push($(this).attr('data-mtrlvalue'));
             });
@@ -421,7 +451,7 @@ let editConsecutivo = () => {
 
     let newConsecutivo = $('#tableMaterials tbody tr').length - 1;
 
-    $('#tableMaterials tbody tr td.consecutivo').each(function() {
+    $('#tableMaterials tbody tr td.consecutivo').each(function () {
         $(this).text(newConsecutivo);
         $(this).attr('data-mtrlvalueorden', newConsecutivo);
         newConsecutivo--;
@@ -434,13 +464,15 @@ let editConsecutivo = () => {
  * @Date: 2022-03-23 11:03:17
  * @Desc:
  */
-$('#btnSaveEvent').click(function() {
+$('#btnSaveEvent').click(function () {
 
+    $('.btnActionReq').attr('disabled', true);
     obtainDataMaterials(false);
 });
 
-$('#btnEditEvent').click(function() {
+$('#btnEditEvent').click(function () {
 
+    $('.btnActionReq').attr('disabled', true);
     obtainDataMaterials(true);
 })
 
@@ -451,7 +483,7 @@ $('#btnEditEvent').click(function() {
  * @Desc:
  */
 
-let obtainDataMaterials = async(update) => {
+let obtainDataMaterials = async (update) => {
 
     let requisicionData = $('#dataRequisiciones').serializeArray();
 
@@ -460,11 +492,11 @@ let obtainDataMaterials = async(update) => {
     let totTd = 1;
     let firstRow = 1;
 
-    $('#tableMaterials tbody tr').each(function(index, tr) {
+    $('#tableMaterials tbody tr').each(function (index, tr) {
 
         if (firstRow != 1) {
 
-            $(tr).find('td').each(function() {
+            $(tr).find('td').each(function () {
 
                 if (totTd < 8) {
 
@@ -489,14 +521,51 @@ let obtainDataMaterials = async(update) => {
 
     requisicionData.push({
         "name": `folio`,
-        "value": await fetch(urlData + "/obtainFolios?isLogedIn=" + dl + "&tipoFolio=" + tipoFolio).then(data => data.json()).then(folio => { return folio.data[0].TIPO_FOLIO }).catch(() => { IsLogedIn(); })
+        "value": await fetch(urlData + "/obtainFolios?isLogedIn=" + dl + "&tipoFolio=" + tipoFolio).then(data => data.json()).then(folio => {
+            return folio.data[0].TIPO_FOLIO
+        }).catch(() => {
+            IsLogedIn();
+        })
     });
 
-    requisicionData.push({ "name": `Materials`, "value": JSON.stringify(dataTable) });
+    requisicionData.push({
+        "name": `Materials`,
+        "value": JSON.stringify(dataTable)
+    });
 
     console.log(requisicionData);
 
-    registroRequisicion(requisicionData, update);
+    let haveNullData = requisicionData.filter(data => {
+        return data.value == ""
+    });
+
+    console.log(haveNullData);
+
+    let saveData = haveNullData.length > 0 ? false : true;
+
+    if (saveData)
+        registroRequisicion(requisicionData, update);
+
+    else {
+
+        $('#dataRequisiciones .requisicionValue').each(function (index, value) {
+
+            if (value.value == null || value.value == "" || value.value == undefined) {
+                value.classList.add('requiredNull');
+
+                setTimeout(() => {
+                    // $('#dataRequisiciones .requiredNull').classList.remove('requiredNull');
+                    value.classList.remove('requiredNull');
+                }, 5000);
+            }
+        });
+
+        showMessage('danger', 'Error', "Llenar los campos faltantes para registrar la requisicion");
+    }
+
+    setTimeout(() => {
+        $('.btnActionReq').attr('disabled', false);
+    }, 7000);
 }
 
 /**
@@ -506,8 +575,6 @@ let obtainDataMaterials = async(update) => {
  * @Desc:
  */
 let registroRequisicion = (requisicionData, update) => {
-
-    console.log(requisicionData);
 
     let url, type, folio = null;
 
@@ -525,12 +592,16 @@ let registroRequisicion = (requisicionData, update) => {
     $.ajax({
         type: type,
         url: urlData + url,
-        data: { isLogedIn: dataLogin(), data: requisicionData, folio: folio },
-        beforeSend: function() {
+        data: {
+            isLogedIn: dataLogin(),
+            data: requisicionData,
+            folio: folio
+        },
+        beforeSend: function () {
 
             inLoader();
         },
-        success: function(response) {
+        success: function (response) {
 
             $('#tableRequisiciones').DataTable().ajax.reload();
             // $('#tableRequisicionesAuth').DataTable().ajax.reload();
@@ -541,7 +612,7 @@ let registroRequisicion = (requisicionData, update) => {
 
             outLoader();
         },
-        error: function(exception) {
+        error: function (exception) {
 
             outLoader();
             showMessage('danger', 'Error', exception.messageText());
@@ -557,7 +628,7 @@ let registroRequisicion = (requisicionData, update) => {
  * @Desc:
  */
 
-$('.btnCancelModal').click(function() {
+$('.btnCancelModal').click(function () {
 
     cleanModalrequisicion();
 
@@ -573,7 +644,7 @@ $('.btnCancelModal').click(function() {
  */
 
 // $('#btnVerDetalle').click(async() => {
-$('.btnVerDetalle').click(async() => {
+$('.btnVerDetalle').click(async () => {
 
     let dl = dataLogin();
     let idCompra;
@@ -593,13 +664,16 @@ $('.btnVerDetalle').click(async() => {
     await $.ajax({
         type: "GET",
         url: urlData + "/obtainDataDetalleRequisicionOrden",
-        data: { "isLogedIn": dl, "idCompra": idCompra },
-        success: function(response) {
+        data: {
+            "isLogedIn": dl,
+            "idCompra": idCompra
+        },
+        success: function (response) {
 
             displayDetailsDataModal(response, '#tableDetailMaterial');
             $('#modalDetalleOrden').modal('show');
         },
-        error: function(exception) {
+        error: function (exception) {
 
             console.error(exception);
             showMessage('danger', 'Error', exception.showMessage());
@@ -615,7 +689,7 @@ $('.btnVerDetalle').click(async() => {
  * @Desc:
  */
 
-$('#btnAutorizar').click(function() {
+$('#btnAutorizar').click(function () {
 
     let folio = "<strong>Folio: </strong>" + $('#tableRequisiciones tbody tr.rowSelected td.folio').text();
     $("#autorizarRequisicion .modal-body .content__requisicion .folio").html(folio);
@@ -647,7 +721,7 @@ $('#btnAutorizar').click(function() {
  * @Date: 2022-04-26 13:52:05
  * @Desc:
  */
-$('.btnEditarRequisicion').click(async() => {
+$('.btnEditarRequisicion').click(async () => {
 
     $('#btnSaveEvent').addClass('displayButton');
     $('#btnEditEvent').removeClass('displayButton');
@@ -670,12 +744,15 @@ $('.btnEditarRequisicion').click(async() => {
     await $.ajax({
         type: "GET",
         url: urlData + "/editDataRequisicion",
-        data: { "isLogedIn": dl, "folio": folio },
-        beforeSend: function() {
+        data: {
+            "isLogedIn": dl,
+            "folio": folio
+        },
+        beforeSend: function () {
 
             inLoader();
         },
-        success: function(response) {
+        success: function (response) {
 
             let dataCompra = JSON.parse(response).compra;
             let datDetalleCompra = JSON.parse(response).detalleCompra;
@@ -684,7 +761,7 @@ $('.btnEditarRequisicion').click(async() => {
 
             outLoader();
         },
-        error: function(exception) {
+        error: function (exception) {
 
             console.error(exception);
             showMessage('danger', 'Error', exception.showMessage());
@@ -722,14 +799,17 @@ $('#btnCancelar').click(() => {
     $("#mi-modal .modal-body").html("<p>Está a punto de cancelar este registro.</p><p>¿Desea continuar con la cancelación?</p>");
     $("#mi-modal").modal('show');
 
-    modalConfirmRequisicion(async function(confirm) {
+    modalConfirmRequisicion(async function (confirm) {
         if (confirm) {
 
             await $.ajax({
                 type: "PUT",
                 url: urlData + "/cancelData",
-                data: { "isLogedIn": dl, "folio": folio },
-                success: function(response) {
+                data: {
+                    "isLogedIn": dl,
+                    "folio": folio
+                },
+                success: function (response) {
 
                     showMessage('success', 'Exito', 'Información cancelada');
 
@@ -738,7 +818,7 @@ $('#btnCancelar').click(() => {
                     // $('#tableOrdenesCompra').DataTable().ajax.reload();
                     // $('#tableCanceladas').DataTable().ajax.reload();
                 },
-                error: function(exception) {
+                error: function (exception) {
 
                     console.error(exception);
                     showMessage('danger', 'Error', exception.showMessage());
@@ -757,8 +837,10 @@ $('#btnCancelar').click(() => {
  * @Desc: This event show the details of a row selected from a table
  */
 
-$('.btnEliminar').click(() => {
+$('.btnEliminar').click(function () {
 
+    return false;
+    
     let dl = dataLogin();
     let folio;
 
@@ -774,52 +856,83 @@ $('.btnEliminar').click(() => {
         return false;
     }
 
-    $("#mi-modal .modal-header h5").text("Confirmar Eliminación");
-    $("#mi-modal .modal-body").html("<p>Está a punto de eliminar este registro, al hacerlo la información se perderá y no podrá ser recuperada.</p><p>¿Desea continuar con la eliminación?</p>");
-    $("#mi-modal").modal('show');
+    // $("#mi-modal .modal-header h5").text("Confirmar Eliminación");
+    // $("#mi-modal .modal-body").html("<p>Está a punto de eliminar este registro, al hacerlo la información se perderá y no podrá ser recuperada.</p><p>¿Desea continuar con la eliminación?</p>");
+    // $("#mi-modal").modal('show');
 
-    modalConfirmRequisicion(function(confirm) {
+    let response = confirm('¿Desea continuar con la eliminación?');
 
-        if (confirm) {
+    if (response) {
 
-            $.ajax({
-                type: "DELETE",
-                url: urlData + "/deleteData",
-                data: { "isLogedIn": dl, "folio": folio },
-                success: function(response) {
+        $.ajax({
+            type: "DELETE",
+            url: urlData + "/deleteData",
+            data: {
+                "isLogedIn": dl,
+                "folio": folio
+            },
+            success: function () {
 
-                    showMessage('success', 'Exito', 'Información borrada');
+                showMessage('success', 'Exito', 'Información borrada'); +
+                $('#tableRequisiciones').DataTable().ajax.reload();
+                // $('#tableRequisicionesAuth').DataTable().ajax.reload();
+                // $('#tableOrdenesCompra').DataTable().ajax.reload();
+                // $('#tableCanceladas').DataTable().ajax.reload();
+            },
+            error: function (exception) {
 
-                    $('#tableRequisiciones').DataTable().ajax.reload();
-                    // $('#tableRequisicionesAuth').DataTable().ajax.reload();
-                    // $('#tableOrdenesCompra').DataTable().ajax.reload();
-                    // $('#tableCanceladas').DataTable().ajax.reload();
-                },
-                error: function(exception) {
+                console.error(exception);
+                showMessage('danger', 'Error', exception.showMessage());
+            }
+        });
+    }
 
-                    console.error(exception);
-                    showMessage('danger', 'Error', exception.showMessage());
-                }
-            });
-        } else {
-            console.log(confirm);
-        }
+    //     modalConfirmRequisicion(function (confirm) {
 
-    });
+    //         if (confirm) {
+
+    //             $.ajax({
+    //                 type: "DELETE",
+    //                 url: urlData + "/deleteData",
+    //                 data: {
+    //                     "isLogedIn": dl,
+    //                     "folio": folio
+    //                 },
+    //                 success: function () {
+
+    //                     showMessage('success', 'Exito', 'Información borrada');
+    // +
+    //                     $('#tableRequisiciones').DataTable().ajax.reload();
+    //                     // $('#tableRequisicionesAuth').DataTable().ajax.reload();
+    //                     // $('#tableOrdenesCompra').DataTable().ajax.reload();
+    //                     // $('#tableCanceladas').DataTable().ajax.reload();
+    //                 },
+    //                 error: function (exception) {
+
+    //                     console.error(exception);
+    //                     showMessage('danger', 'Error', exception.showMessage());
+    //                 }
+    //             });
+    //         } else {
+    //             console.log(confirm);
+    //         }
+
+    // });
 });
 
-var modalConfirmRequisicion = function(callback) {
+// var modalConfirmRequisicion = function (callback) {
 
-    $("#mi-modal #modal-btn-si").on("click", function() {
-        callback(true);
-        $("#mi-modal").modal('hide');
-    });
+//     $("#mi-modal #modal-btn-si").on("click", function () {
+//         callback(true);
+//         $("#mi-modal").modal('hide');
+//     });
 
-    $("#mi-modal #modal-btn-no").on("click", function() {
-        callback(false);
-        $("#mi-modal").modal('hide');
-    });
-};
+//     $("#mi-modal #modal-btn-no").on("click", function () {
+//         console.log('no');
+//         callback(false);
+//         $("#mi-modal").modal('hide');
+//     });
+// };
 
 /**
  * javascript comment
@@ -833,12 +946,12 @@ $('.btnActualizarTabla').click(() => {
     $('.dataTables_wrapper table').DataTable().ajax.reload();
 });
 
-$('.dataToExcel').click(function() {
+$('.dataToExcel').click(function () {
 
     $('.tab-pane.fade.show.active .dataTables_wrapper .dt-buttons .dt-button.buttons-excel').click();
 });
 
-$('.printData').click(async function() {
+$('.printData').click(async function () {
 
     // return false;
 
@@ -884,12 +997,15 @@ $('.printData').click(async function() {
     await $.ajax({
         type: "GET",
         url: urlData + "/obtainDataDetalleRequisicionOrden",
-        data: { "isLogedIn": dl, "idCompra": idCompra },
-        success: function(response) {
+        data: {
+            "isLogedIn": dl,
+            "idCompra": idCompra
+        },
+        success: function (response) {
 
             displayDetailsDataModal(response, '#tablaDetallePDF');
         },
-        error: function(exception) {
+        error: function (exception) {
 
             console.error(exception);
             showMessage('danger', 'Error', exception.showMessage());
@@ -901,9 +1017,18 @@ $('.printData').click(async function() {
     var opt = {
         margin: .5,
         filename: 'myfile.pdf',
-        image: { type: 'jpeg', quality: 1 },
-        html2canvas: { scale: 4 },
-        jsPDF: { unit: 'cm', format: 'a3', orientation: 'landscape' }
+        image: {
+            type: 'jpeg',
+            quality: 1
+        },
+        html2canvas: {
+            scale: 4
+        },
+        jsPDF: {
+            unit: 'cm',
+            format: 'a3',
+            orientation: 'landscape'
+        }
     };
 
     html2pdf(elementHTML, opt);
@@ -935,7 +1060,7 @@ $('#myTabsCompras .notRequisicion').click(() => {
  * @Desc: Apartado ordenes de compra
  */
 
-$('#btnRegistraOrdenCompra').click(async function() {
+$('#btnRegistraOrdenCompra').click(async function () {
 
     let dl = dataLogin();
     let folio = $('#tableRequisicionesAuth tbody tr.rowSelected td.folio').text();
@@ -972,7 +1097,7 @@ $('#btnRegistraOrdenCompra').click(async function() {
         $('#tableDetailCrearOrdenCompra tbody').empty();
 
         let rows = "";
-        $.each(dataDetails, function(index, value) {
+        $.each(dataDetails, function (index, value) {
 
             rows += "<tr style='padding: 0 !important;'>" +
                 "<td data-mtrlvalueOrden='" + value.CONSECUTIVO + "'>" + value.CONSECUTIVO + "</td>" +
@@ -997,23 +1122,25 @@ $('#btnRegistraOrdenCompra').click(async function() {
 
         $('.slctOrdenCompraTable').val("1");
 
-    }).catch(() => { IsLogedIn(); });
+    }).catch(() => {
+        IsLogedIn();
+    });
 
-    $('#btnOrdenesAutomaticas').click(function() {
+    $('#btnOrdenesAutomaticas').click(function () {
 
         $('.slctOrdenCompraTable').val("1");
 
-        $('#tableDetailOrdenCompra tbody tr').each(function() {
+        $('#tableDetailOrdenCompra tbody tr').each(function () {
 
             $(this).removeClass('cleanOrders');
         });
     });
 
-    $('#btnLimpiarOrdenes').click(function() {
+    $('#btnLimpiarOrdenes').click(function () {
 
         $('.slctOrdenCompraTable').val("");
 
-        $('#tableDetailOrdenCompra tbody tr').each(function() {
+        $('#tableDetailOrdenCompra tbody tr').each(function () {
 
             $(this).addClass('cleanOrders');
         });
@@ -1029,7 +1156,7 @@ $('#btnRegistraOrdenCompra').click(async function() {
  * @Desc: This function obtain the data of the OC and the details of the OC
  */
 
-$('#btnEditarOrdenCompra').click(async function() {
+$('#btnEditarOrdenCompra').click(async function () {
 
     let folio = $('#tableRequisicionesAuth tbody tr.rowSelected td.folio').text();
     await fetch(urlData + "/obtainOrdenCompra?folio=" + folio).then(data => data.json()).then(dataOrdenCompra => {
@@ -1064,7 +1191,7 @@ $('#btnEditarOrdenCompra').click(async function() {
         // cleaBodyOrdenCompra();
         $('#tableMaterialsEditarOrdenCompra tbody tr:not(#materialsRequiredOrdenCompra)').remove();
         let row = "";
-        $.each(dataDetails, function(index, value) {
+        $.each(dataDetails, function (index, value) {
 
             row += "<tr style='padding: 0 !important;'>" +
                 "<td class='consecutivo' data-mtrlvalueOrdenCompra='" + value.CONSECUTIVO + "'>" + value.CONSECUTIVO + "</td>" +
@@ -1083,7 +1210,9 @@ $('#btnEditarOrdenCompra').click(async function() {
         iniciateEditMaterialOrden();
         iniciateRemovematerialsOrden();
 
-    }).catch(() => { IsLogedIn(); });
+    }).catch(() => {
+        IsLogedIn();
+    });
 
     $('#modalEditarOrdenCompra').modal('show');
 });
@@ -1100,23 +1229,33 @@ $('#btnEditarOrdenCompra').click(async function() {
  * @Desc: Buttons to save and update the information of the "ordenes de compra"
  */
 
-$('#btnCrearOrdenCompra').click(async() => {
+$('#btnCrearOrdenCompra').click(async () => {
 
     let dataOrdenCompra = [];
 
-    dataOrdenCompra.push({ "Facturar": "SINCI GDL S. de R.L. de C.V." });
-    dataOrdenCompra.push({ "RFC": "SGD 070919 8U3" });
-    dataOrdenCompra.push({ "Domicilio_Compania": "Aurelio L Gallardo 615  Col Ladrón de Guevara   Guadalajara Jal  44600" });
-    dataOrdenCompra.push({ "proveedor": 126 });
-    dataOrdenCompra.push({ "year": moment().format('YYYY') });
+    dataOrdenCompra.push({
+        "Facturar": "SINCI GDL S. de R.L. de C.V."
+    });
+    dataOrdenCompra.push({
+        "RFC": "SGD 070919 8U3"
+    });
+    dataOrdenCompra.push({
+        "Domicilio_Compania": "Aurelio L Gallardo 615  Col Ladrón de Guevara   Guadalajara Jal  44600"
+    });
+    dataOrdenCompra.push({
+        "proveedor": 126
+    });
+    dataOrdenCompra.push({
+        "year": moment().format('YYYY')
+    });
 
     let dataTable = [];
     let dataRow = [];
     let totTd = 1;
 
-    $('#tableDetailCrearOrdenCompra tbody tr').each(function(index, tr) {
+    $('#tableDetailCrearOrdenCompra tbody tr').each(function (index, tr) {
 
-        $(tr).find('td').each(function() {
+        $(tr).find('td').each(function () {
 
             if (totTd < 7) {
 
@@ -1136,14 +1275,17 @@ $('#btnCrearOrdenCompra').click(async() => {
         });
     });
 
-    dataOrdenCompra.push({ "name": `Materials`, "value": JSON.stringify(dataTable) });
+    dataOrdenCompra.push({
+        "name": `Materials`,
+        "value": JSON.stringify(dataTable)
+    });
 
     console.log(dataOrdenCompra);
 
     updateOrdenCompra("/saveDataOrdenCompra", dataOrdenCompra);
 });
 
-$('#btnActualizarOrdenCompra').click(async() => {
+$('#btnActualizarOrdenCompra').click(async () => {
 
     dataOrdenCompra = $('#dataEditOrdenCompra').serializeArray();
 
@@ -1152,11 +1294,11 @@ $('#btnActualizarOrdenCompra').click(async() => {
     let totTd = 1;
     let firstRow = 1;
 
-    $('#tableMaterialsEditarOrdenCompra tbody tr').each(function(index, tr) {
+    $('#tableMaterialsEditarOrdenCompra tbody tr').each(function (index, tr) {
 
         if (firstRow != 1) {
 
-            $(tr).find('td').each(function() {
+            $(tr).find('td').each(function () {
 
                 if (totTd < 8) {
 
@@ -1175,7 +1317,10 @@ $('#btnActualizarOrdenCompra').click(async() => {
         firstRow++;
     });
 
-    dataOrdenCompra.push({ "name": `Materials`, "value": JSON.stringify(dataTable) });
+    dataOrdenCompra.push({
+        "name": `Materials`,
+        "value": JSON.stringify(dataTable)
+    });
 
     updateOrdenCompra("/updateDataOrdenCompra", dataOrdenCompra);
 });
@@ -1190,12 +1335,16 @@ let updateOrdenCompra = (urlToUpdate, dataOrdenCompra) => {
     $.ajax({
         type: "PUT",
         url: urlData + urlToUpdate,
-        data: { "isLogedIn": dl, "data": dataOrdenCompra, "folio": folio },
-        success: function(response) {
+        data: {
+            "isLogedIn": dl,
+            "data": dataOrdenCompra,
+            "folio": folio
+        },
+        success: function (response) {
 
             outLoader();
         },
-        error: function(exception) {
+        error: function (exception) {
 
             console.error(exception);
             showMessage('danger', 'Error', exception.showMessage());
@@ -1209,7 +1358,7 @@ let updateOrdenCompra = (urlToUpdate, dataOrdenCompra) => {
  * @Date: 2022-05-09 13:51:44
  * @Desc:
  */
-$('#addMaterialOrdenCompra').click(function() {
+$('#addMaterialOrdenCompra').click(function () {
 
     let cantidad = $('#txtCantidadOrden').val();
     let unidad = $('#slctUnidadOrden option:selected').text();
@@ -1253,13 +1402,13 @@ $('#addMaterialOrdenCompra').click(function() {
  */
 let iniciateEditMaterialOrden = () => {
 
-    $('#tableMaterialsEditarOrdenCompra tbody tr .editMaterialOrden').each(function() {
-        $(this).click(function() {
+    $('#tableMaterialsEditarOrdenCompra tbody tr .editMaterialOrden').each(function () {
+        $(this).click(function () {
 
             let rowData = $(this).parent().parent().find('td');
             let dataContainer = [];
 
-            rowData.each(function() {
+            rowData.each(function () {
                 dataContainer.push($(this).attr('data-mtrlvalueOrdenCompra'));
             });
 
@@ -1286,13 +1435,13 @@ let iniciateRemovematerialsOrden = () => {
     $('#txtCatalogoOrden').val("");
     $('#txtPrecioOrden').val("");
 
-    $('#tableMaterialsEditarOrdenCompra tbody tr .removeMaterialOrden').each(function() {
+    $('#tableMaterialsEditarOrdenCompra tbody tr .removeMaterialOrden').each(function () {
 
-        $(this).click(function() {
+        $(this).click(function () {
             $(this).parent().parent().remove();
 
             let newConsecutivo = $('#tableMaterialsEditarOrdenCompra tbody tr').length - 1;
-            $('#tableMaterialsEditarOrdenCompra tbody tr td.consecutivo').each(function() {
+            $('#tableMaterialsEditarOrdenCompra tbody tr td.consecutivo').each(function () {
                 $(this).text(newConsecutivo);
                 $(this).attr('data-mtrlvalueOrdenCompra', newConsecutivo);
                 newConsecutivo--;
@@ -1306,7 +1455,7 @@ $('#btnCalculateOrdenCompra').click(() => {
     let descuento = $('#descuentoPorcentaje').val();
 
     let importe = 0;
-    $('#tableMaterialsEditarOrdenCompra tbody tr td.importe').each(function() {
+    $('#tableMaterialsEditarOrdenCompra tbody tr td.importe').each(function () {
 
         importe += parseFloat($(this).attr('data-mtrlvalueordencompra'));
     });

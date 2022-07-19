@@ -12,22 +12,22 @@
             <div class="row">
               <div class="col-md-6">
                 <div class="form-group body-modalsSinci">
-                  <label for="recipient-name" class="col-form-label">Fecha_solicitud:*</label>
-                  <input type="text" class="form-control datetimepicker compras modalForm" id="dateRequired" name="dateRequired">
+                  <label for="recipient-name" class="col-form-label">Fecha solicitud:</label>
+                  <input type="text" class="form-control datetimepicker compras modalForm requisicionValue" id="dateRequired" name="dateRequired">
                 </div>
               </div>
 
               <div class="col-md-4">
                 <div class="form-group body-modalsSinci">
-                  <label for="recipient-name" class="col-form-label">Requerida:*</label>
-                  <input type="text" class="form-control datetimepicker compras modalForm" id="endDate" name="endDate">
+                  <label for="recipient-name" class="col-form-label">Requerida:</label>
+                  <input type="text" class="form-control datetimepicker compras modalForm requisicionValue" id="endDate" name="endDate">
                 </div>
               </div>
 
               <div class="col-md-2">
                 <div class="form-group body-modalsSinci">
                   <label for="recipient-name" class="col-form-label">Prioridad:</label>
-                  <select class="form-select" name="prioridad" id="prioridad">
+                  <select class="form-select requisicionValue" name="prioridad" id="prioridad">
                     <option value="1">1</option>
                     <option value="2" selected>2</option>
                   </select>
@@ -38,8 +38,8 @@
             <div class="row">
               <div class="col-md-6">
                 <div class="form-group body-modalsSinci">
-                  <label for="recipient-name" class="col-form-label">Proyecto:*</label>
-                  <select class="selectpicker form-control" id="slctProyecto" data-live-search="true" data-virtual-scroll="false" name="slctProyecto">
+                  <label for="recipient-name" class="col-form-label">Proyecto:</label>
+                  <select class="selectpicker form-control requisicionValue" id="slctProyecto" data-live-search="true" data-virtual-scroll="false" name="slctProyecto">
                     <option value="">NAN</option>
                   </select>
                 </div>
@@ -47,8 +47,8 @@
 
               <div class="col-md-6">
                 <div class="form-group body-modalsSinci">
-                  <label for="message-text" class="col-form-label">Entregar_en:*</label>
-                  <input type="text" id="entregarEn" class="form-control" name="entregarEn">
+                  <label for="message-text" class="col-form-label">Entregar en:</label>
+                  <input type="text" id="entregarEn" class="form-control requisicionValue" name="entregarEn">
                 </div>
               </div>
             </div>
@@ -56,16 +56,16 @@
             <div class="row">
               <div class="col-md-6">
                 <div id="divUsuarios" class="form-group body-modalsSinci">
-                  <label id="lblUsuario" for="recipient-name" class="col-form-label">Solicitado_por:*</label>
-                  <select class="selectpicker form-control" id="slctUsuario" data-live-search="true" data-virtual-scroll="false" name="slctUsuario">
+                  <label id="lblUsuario" for="recipient-name" class="col-form-label">Solicitado por:</label>
+                  <select class="selectpicker form-control requisicionValue" id="slctUsuario" data-live-search="true" data-virtual-scroll="false" name="slctUsuario">
                   </select>
                 </div>
               </div>
 
               <div class="col-md-6">
-                <div id="divUsuarios" class="form-group body-modalsSinci">
-                  <label id="lblUsuario" for="recipient-name" class="col-form-label">Ciudad:*</label>
-                  <select class="selectpicker form-control" id="slctCiudades" data-live-search="true" data-virtual-scroll="false" name="slctCiudades">
+                <div id="" class="form-group body-modalsSinci">
+                  <label id="" for="recipient-name" class="col-form-label">Ciudad:</label>
+                  <select class="selectpicker form-control requisicionValue" id="slctCiudades" data-live-search="true" data-virtual-scroll="false" name="slctCiudades">
                   </select>
                 </div>
               </div>
@@ -74,8 +74,8 @@
             <div class="row">
               <div class="col-md-6">
                 <div class="form-group body-modalsSinci">
-                  <label for="recipient-name" class="col-form-label">Compañia:*</label>
-                  <select class="form-select" id="slctCompannia" data-live-search="true" data-virtual-scroll="false" name="slctCompannia">
+                  <label for="recipient-name" class="col-form-label">Compañia:</label>
+                  <select class="form-select requisicionValue" id="slctCompannia" data-live-search="true" data-virtual-scroll="false" name="slctCompannia">
                     <option value="">NAN</option>
                   </select>
                 </div>
@@ -83,8 +83,8 @@
 
               <div class="col-md-6">
                 <div class="form-group body-modalsSinci asignar_a">
-                  <label for="recipient-name" class="col-form-label">Aplica_a:*</label>
-                  <select class="selectpicker form-control" id="slctAsignar" data-live-search="true" data-virtual-scroll="false" name="slctAsignar">
+                  <label for="recipient-name" class="col-form-label">Aplica a:</label>
+                  <select class="selectpicker form-control requisicionValue" id="slctAsignar" data-live-search="true" data-virtual-scroll="false" name="slctAsignar">
                     <option value="">NAN</option>
                   </select>
                 </div>
@@ -134,7 +134,7 @@
               <div class="col-md-10">
                 <!-- <div class="form-group body-modalsSinci"> -->
                   <label for="recipient-name" class="col-form-label">Notas:</label>
-                  <input type="text" class="form-control" id="notasRequisicion" name="notasRequisicion" style="line-height: 4rem !important">
+                  <input type="text" class="form-control requisicionValue" id="notasRequisicion" name="notasRequisicion" style="line-height: 4rem !important">
                 <!-- </div> -->
               </div>
 
@@ -147,8 +147,8 @@
         </div>
         <div class="modal-footer">
 
-          <button id="btnSaveEvent" type="button" class="btn btn-primary">Guardar</button>
-          <button id="btnEditEvent" type="button" class="btn btn-primary displayButton">Editar</button>
+          <button id="btnSaveEvent" type="button" class="btn btn-primary btnActionReq">Guardar</button>
+          <button id="btnEditEvent" type="button" class="btn btn-primary btnActionReq displayButton">Editar</button>
           <!-- <button id="btnDeleteEvent" type="button" class="btn btn-danger btnDeleteNone">Guardar y enviar correo</button> --> <!-- Este boton queda pendiente hasta verificar la opcion de guardar y enviar por correo -->
           <!-- <button type="button" class="btn btn-secondary btnCancelModal" id="btnCerrarModal" data-dismiss="modal">Cancelar</button> -->
           <button type="button" class="btn btn-secondary btnCancelModal" id="btnCerrarModal" data-dismiss="registrarRequisicion">Cancelar</button>
@@ -290,53 +290,60 @@
         <div class="modal-body">
           <div>
 
-            <!-- <hr>
-
-            <div class="content__requisicion">
-                <div class="row">
-                    <div class="col-md-3 folio"></div>
-                    <div class="col-md-4 fecha__solicitud"></div>
-                    <div class="col-md-4 fecha__requerida"></div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-12 proyecto"></div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-12 solicitado"></div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-12 compannia"></div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-12 ciudad"></div>
-                </div>
-            </div>
-
-            <hr> -->
-
-            <div class="row">
+            <div class="row" style="overflow-y: scroll;">
                 <div class="col-md-12 tableDetail">
-                    <table id="tableDetailMaterial" class="table align-items-center mb-0">
-                    <thead>
-                        <tr>
-                        <th>PDA</th>
-                        <th>Cantidad</th>
-                        <th>Unidad</th>
-                        <th>Material</th>
-                        <th>Marca</th>
-                        <th>Catalogo</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                    </table>
+
+                    <ul class="nav nav-tabs" id="myTabDetalle" role="tablist" >
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active detalle" id="detalle-tab" data-bs-toggle="tab" data-bs-target="#detalle" type="button" role="tab" aria-controls="detalle" aria-selected="true">Detalle</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link historico" id="historico-tab" data-bs-toggle="tab" data-bs-target="#historico" type="button" role="tab" aria-controls="historico" aria-selected="false">Historico</button>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content" id="myTabDetalleContent">
+
+                        <!-- Apartado para ver el detalle de la requisicion -->
+                        <div class="tab-pane fade show active" id="detalle" role="tabpanel" aria-labelledby="detalle-tab">
+                            <div class="requisiciones tabContents">
+
+                                <table id="tableDetailMaterial" class="table align-items-center mb-0">
+                                    <thead>
+                                        <tr>
+                                        <th>PDA</th>
+                                        <th>Cantidad</th>
+                                        <th>Unidad</th>
+                                        <th>Material</th>
+                                        <th>Marca</th>
+                                        <th>Catalogo</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                        <!-- END -->
+
+                        <!-- Apartado para ver el historico de la requisicion -->
+                        <div class="tab-pane fade show" id="historico" role="tabpanel" aria-labelledby="hisortico-tab">
+                            <div class="requisiciones tabContents">
+
+                               <p>Aqui va el Historico</p>
+
+                            </div>
+                        </div>
+                        <!-- END -->
+
+                    </div>
+
                 </div>
             </div>
-          </div>
-        </div>
+
+          </div> <!-- end row -->
+        </div> <!-- END modal-body -->
+
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnCancelDetalle">Cerrar</button>
         </div>

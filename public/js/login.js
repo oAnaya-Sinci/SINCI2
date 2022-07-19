@@ -11,7 +11,7 @@
 var currenUrl = window.location.href.split("/")[2];
 currenUrl = currenUrl.split(":");
 
-var urlData = "http://" + currenUrl[0] + ":1880";
+var urlData = "https://" + currenUrl[0] + ":1880";
 
 var timeOut;
 

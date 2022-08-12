@@ -151,7 +151,7 @@
 
                         <div class="form-group">
                             <i class='material-icons opacity-10 inlineElements btnVerDetalle' style="margin: .5rem 0 1.2rem 0;">list_alt<label class="btnVerDetalle" >Ver detalle</label></i>
-                            <i class='material-icons opacity-10 inlineElements' style="margin-bottom: 0.5rem;">print<label ><del>Imprimir</del></label></i>
+                            <i class='material-icons opacity-10 inlineElements' style="margin-bottom: 0.5rem;">print<label >Imprimir</label></i>
                         </div>
 
                         <div class="form-group">

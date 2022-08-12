@@ -364,8 +364,8 @@
                         <div class="col-md-12">
 
                             <div style="display: flex; gap: 12em;">
-                                <img src="/img/logo-sinci.png" alt="logoImage" style="width: 7rem; height:6rem">
-                                <h3 style="margin-top: 1rem; color: #000000 !important; font-size:2.5rem">Requisición de Compra</h3>
+                                <img src="/img/logo-sinci.png" alt="logoImage" style="width: 6.5rem; height:5.5rem">
+                                <h3 style="margin-top: 1rem; color: #000000 !important; font-size:2.1rem">Requisición de Compra</h3>
                             </div>
 
                             <hr>
@@ -396,7 +396,7 @@
                             </div>
 
                             <table class="table" id="tablaDetallePDF" style="width: 100%; padding: 0.5rem">
-                                <thead>
+                                <thead style="text-align: left;">
                                     <tr>
                                         <th>PDA</th>
                                         <th>CANT.</th>
@@ -407,7 +407,7 @@
                                         <th>PROVEEDOR</th>
                                     </tr>
                                 </thead>
-                                <tbody style="text-align: center;"></tbody>
+                                <tbody style="text-align: left;"></tbody>
                             </table>
 
                             <hr>
@@ -418,11 +418,22 @@
 
                         </div>
 
-                        <script>
-                            
-                            document.getElementById('btnImprimir').addEventListener('click', function() {
+                        <style>
 
-                                document.getElementById('btnImprimir').style = "display: none;";
+                            @media print {
+                                #btnImprimir {
+                                    display: none
+                                }
+                                .folio__PDF{
+                                    margin-left: -4px !important;
+                                }
+                            }
+
+                        </style>
+
+                        <script>
+
+                            document.getElementById('btnImprimir').addEventListener('click', function() {
                                 window.print();
                             });
                         </script>

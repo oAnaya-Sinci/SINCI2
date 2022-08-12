@@ -57,6 +57,7 @@ $('#mi-modal-message #modal-btn-cerrar').click(function () {
 
 $('#btnRegistraRequisicion').click(function () {
 
+    cleanModalrequisicion();
     $('#tableMaterials tbody tr:not(#materialsRequired)').remove();
     $('#registrarRequisicion').modal('show');
 });
@@ -179,10 +180,10 @@ function processDataToSelect(data, select, firstOption = "") {
 
     else {
 
-        if (firstOption == "Sin proveedor")
-            options = "<option value='0'>" + firstOption + "</option>";
+        // if (firstOption == "Sin proveedor")
+        //     options = "<option value=''>" + firstOption + "</option>";
 
-        else
+        // else
             options = "<option value=''>" + firstOption + "</option>";
     }
 
@@ -289,7 +290,34 @@ $('#modalAddNote').click(function () {
  * @Date: 2022-03-22 15:57:23
  * @Desc: this event display the info registerd for the user in the materials required and added to the table
  */
+
+let chechRowEditSaveMaterial = () => {
+
+    let blankRow = false;
+
+    $('.materialRow').each(function(){
+
+        if($(this).val() == ""){
+            $(this).addClass('requiredNull');
+
+            setTimeout(() => {
+                $(this).removeClass('requiredNull');
+            }, 5000);
+
+            blankRow = true;
+        }
+    });
+
+    return blankRow;
+}
+
 $('#addMaterial').click(function () {
+
+    if(chechRowEditSaveMaterial()){
+
+        showMessage('danger', 'Error', "Llenar los campos faltantes para registrar el material");
+        return;
+    }
 
     let cantidad = $('#txtCantidad').val();
     // let unidadId = $('#slctUnidad').val();
@@ -302,7 +330,7 @@ $('#addMaterial').click(function () {
 
     let consecutivo = $('#tableMaterials tbody tr').length;
 
-    let newRowMaterial = "<tr>" +
+    let newRowMaterial = "<tr class='materialAdded'>" +
         "<td class='consecutivo' data-mtrlvalue='" + consecutivo + "'>" + consecutivo + "</td>" +
         "<td class='cantidad' data-mtrlvalue='" + cantidad + "'>" + cantidad + "</td>" +
         "<td class='unidad' data-mtrlvalue='" + unidad + "'>" + unidad + "</td>" +
@@ -310,15 +338,15 @@ $('#addMaterial').click(function () {
         "<td class='proveedor' data-mtrlvalue='" + proveedorId + "'>" + proveedor + "</td>" +
         "<td class='marca' data-mtrlvalue='" + marca + "'>" + marca + "</td>" +
         "<td class='catalogo' data-mtrlvalue='" + catalogo + "'>" + catalogo + "</td>" +
-        "<td> <i class='material-icons opacity-10 removeMaterial'>clear</i> " +
-        "<i class='material-icons opacity-10 editMaterial'>drive_file_rename_outline</i> </td>" +
+        "<td></td>" +
         "</tr>";
 
     // $('#materialsRequired').before(newRowMaterial);
     $('#materialsRequired').after(newRowMaterial);
 
-    iniciateEditMaterial();
-    iniciateRemovematerials();
+    removeButtonsMaterial();
+    iniciateEditMaterial(false);
+    iniciateRemovematerials(false);
 });
 
 /**
@@ -347,10 +375,10 @@ let showDataCompra = (dataCompra, datDetalleCompra) => {
     $('.selectpicker').selectpicker('refresh');
 
     $('#tableMaterials tbody tr:not(#materialsRequired)').remove();
-    let RowsMaterial = "";
+    let rowsMaterial = "";
     datDetalleCompra.forEach(function (valor, indice) {
 
-        RowsMaterial += "<tr>" +
+        rowsMaterial += "<tr class='materialAdded'>" +
             "<td class='consecutivo' data-mtrlvalue='" + valor.CONSECUTIVO + "'>" + valor.CONSECUTIVO + "</td>" +
             "<td class='cantidad' data-mtrlvalue='" + valor.CANTIDAD + "'>" + valor.CANTIDAD + "</td>" +
             "<td class='unidad' data-mtrlvalue='" + valor.UNIDAD + "'>" + valor.UNIDAD + "</td>" +
@@ -363,10 +391,10 @@ let showDataCompra = (dataCompra, datDetalleCompra) => {
             "</tr>";
     });
 
-    $('#materialsRequired').after(RowsMaterial);
+    $('#materialsRequired').after(rowsMaterial);
 
-    iniciateEditMaterial();
-    iniciateRemovematerials();
+    iniciateEditMaterial(true);
+    iniciateRemovematerials(true);
 
     $('#registrarRequisicion').modal('show');
 
@@ -388,9 +416,9 @@ let cleanModalrequisicion = () => {
 
     $('.selectpicker').selectpicker('refresh');
 
-    $('#tableMaterials tbody tr .removeMaterial').each(function () {
-        $(this).click();
-    });
+    // $('#tableMaterials tbody tr .removeMaterial').each(function () {
+    //     $(this).click();
+    // });
 }
 
 /**
@@ -399,29 +427,56 @@ let cleanModalrequisicion = () => {
  * @Date: 2022-03-22 15:58:27
  * @Desc: This function enable the function to remove the materials registered in the table
  */
-let iniciateRemovematerials = () => {
 
-    $('#txtCantidad').val(1);
+let removeButtonsMaterial = () =>{
+    $('#tableMaterials tbody tr.materialAdded td:last-child').each(function () {
+
+        $(this).empty();
+        $(this).html( "<i class='material-icons opacity-10 removeMaterial'>clear</i><i class='material-icons opacity-10 editMaterial'>drive_file_rename_outline</i>" );
+    });
+}
+
+let iniciateRemovematerials = (allData) => {
+
+    $('#tableMaterials tbody tr .removeMaterial').each(function () {
+
+        $(this).click(function () {
+
+            let isEdit = editingMaterial();
+
+            if(isEdit){
+                showMessage('warning', 'Advertencia', "No se puede eliminar el material ya que existe un material en edición o registro");
+                return;
+            }
+
+            $(this).parent().parent().remove();
+            editConsecutivo();
+        });
+
+        if(!allData)
+            return;
+    });
+
+    $('#txtCantidad').val("");
     $('#slctUnidad').val("");
     $('#txtMaterial').val("");
     $('#slctProveedor').val("");
     $('#txtMarca').val("");
     $('#txtCatalogo').val("");
-
-    $('#tableMaterials tbody tr .removeMaterial').each(function () {
-
-        $(this).click(function () {
-            $(this).parent().parent().remove();
-            editConsecutivo();
-        });
-    });
 }
 
-let iniciateEditMaterial = () => {
+let iniciateEditMaterial = (allData) => {
 
     $('#tableMaterials tbody tr .editMaterial').each(function () {
 
         $(this).click(function () {
+
+            let isEdit = editingMaterial();
+
+            if(isEdit){
+                showMessage('warning', 'Advertencia', "No se puede editar el material ya que existe un material en edición o registro");
+                return;
+            }
 
             let rowData = $(this).parent().parent().find('td');
             let dataContainer = [];
@@ -441,21 +496,37 @@ let iniciateEditMaterial = () => {
 
             $(this).parent().parent().remove();
             editConsecutivo();
-            // iniciateEditMaterial();
-            // iniciateRemovematerials();
         });
+
+        if(!allData)
+            return;
     });
 }
 
 let editConsecutivo = () => {
 
-    let newConsecutivo = $('#tableMaterials tbody tr').length - 1;
+    let newConsecutivo = $('#tableMaterials tbody tr.materialAdded').length;
 
-    $('#tableMaterials tbody tr td.consecutivo').each(function () {
+    $('#tableMaterials tbody tr.materialAdded td:first-child').each(function () {
+
         $(this).text(newConsecutivo);
         $(this).attr('data-mtrlvalueorden', newConsecutivo);
+
         newConsecutivo--;
     });
+}
+
+let editingMaterial = () => {
+
+    let edit = false;
+
+    $('.materialRow').each(function(){
+
+        if($(this).val() != "")
+            edit = true;
+    });
+
+    return edit;
 }
 
 /**
@@ -466,11 +537,25 @@ let editConsecutivo = () => {
  */
 $('#btnSaveEvent').click(function () {
 
+    let isEdit = editingMaterial();
+
+    if(isEdit){
+        showMessage('warning', 'Advertencia', "No se puede guardar la información ya que hay un material en edición o registro");
+        return;
+    }
+
     $('.btnActionReq').attr('disabled', true);
     obtainDataMaterials(false);
 });
 
 $('#btnEditEvent').click(function () {
+
+    let isEdit = editingMaterial();
+
+    if(isEdit){
+        showMessage('warning', 'Advertencia', "No se puede guardar la información ya que hay un material en edición o registro");
+        return;
+    }
 
     $('.btnActionReq').attr('disabled', true);
     obtainDataMaterials(true);
@@ -533,13 +618,13 @@ let obtainDataMaterials = async (update) => {
         "value": JSON.stringify(dataTable)
     });
 
-    console.log(requisicionData);
+    // console.log(requisicionData);
 
     let haveNullData = requisicionData.filter(data => {
-        return data.value == ""
+        return data.value == "" || data.value == "[]";
     });
 
-    console.log(haveNullData);
+    // console.log(haveNullData);
 
     let saveData = haveNullData.length > 0 ? false : true;
 
@@ -550,13 +635,29 @@ let obtainDataMaterials = async (update) => {
 
         $('#dataRequisiciones .requisicionValue').each(function (index, value) {
 
-            if (value.value == null || value.value == "" || value.value == undefined) {
-                value.classList.add('requiredNull');
+            if( $(value).attr('class') != "dropdown bootstrap-select form-control requisicionValue"){
 
-                setTimeout(() => {
-                    // $('#dataRequisiciones .requiredNull').classList.remove('requiredNull');
-                    value.classList.remove('requiredNull');
-                }, 5000);
+                if ($(value).val() == null || $(value).val() == "" /* || $(value).val() == undefined */) {
+                    if($(value).attr('class') == 'selectpicker form-control requisicionValue'){
+
+                        $(value).parent().addClass('requiredNull');
+                    }else{
+                        value.classList.add('requiredNull');
+                    }
+
+                    setTimeout(() => {
+                        $('#dataRequisiciones .requisicionValue').removeClass('requiredNull');
+                    }, 5000);
+
+                }else if($('#tableMaterials tbody tr').length == 1){
+
+                    let materials = $('.materialsRequ');
+                    materials.addClass('requiredNull');
+
+                    setTimeout(() => {
+                        materials.removeClass('requiredNull');
+                    }, 5000);
+                }
             }
         });
 
@@ -630,10 +731,12 @@ let registroRequisicion = (requisicionData, update) => {
 
 $('.btnCancelModal').click(function () {
 
-    cleanModalrequisicion();
-
     $('#btnSaveEvent').removeClass('displayButton');
     $('#btnEditEvent').addClass('displayButton');
+
+    setTimeout(() => {
+        cleanModalrequisicion();
+    }, 200);
 });
 
 /**
@@ -840,7 +943,7 @@ $('#btnCancelar').click(() => {
 $('.btnEliminar').click(function () {
 
     return false;
-    
+
     let dl = dataLogin();
     let folio;
 
@@ -1014,15 +1117,19 @@ $('.printData').click(async function () {
 
     let elementHTML = $('#apartadoPDF').html();
 
+    window.open().document.write(elementHTML);
+
+    return;
+
     var opt = {
         margin: .5,
         filename: 'myfile.pdf',
         image: {
             type: 'jpeg',
-            quality: 1
+            quality: 10
         },
         html2canvas: {
-            scale: 4
+            scale: 1
         },
         jsPDF: {
             unit: 'cm',
@@ -1429,7 +1536,7 @@ let iniciateEditMaterialOrden = () => {
 
 let iniciateRemovematerialsOrden = () => {
 
-    $('#txtCantidadOrden').val(1);
+    $('#txtCantidadOrden').val("");
     $('#slctUnidadOrden').val("");
     $('#txtMaterialOrden').val("");
     $('#txtCatalogoOrden').val("");

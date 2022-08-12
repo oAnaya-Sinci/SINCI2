@@ -33,7 +33,8 @@ let iniciateTablesDT = () => {
  * @Date: 2022-04-04 15:30:37
  * @Desc: this function inciate the dataTable for the "Requisicion Data" table;
  */
-let tableRequisicion = async(dl, pageLength, searching /* , tableScrollX, tableScrollY */ ) => {
+let tableRequisicion = async (dl, pageLength, searching /* , tableScrollX, tableScrollY */ ) => {
+
 
     await $('#tableRequisiciones').DataTable({
         dom: 'Bfrtip',
@@ -62,35 +63,70 @@ let tableRequisicion = async(dl, pageLength, searching /* , tableScrollX, tableS
             //         "fechainicio": $('#i_dia').val() == "" ? moment().add(1, 'days').format("YYYY-MM-DD") : $('#i_dia').val()
             //     });
             // },
-            complete: function(response) {
+            complete: function () {
 
                 console.timeEnd('tableRequisiciones');
 
                 requisicionesInciatePagesTables();
+            },
+            error: () => {
+                $(body).click();
+                location.reload();
+                // $('#tableRequisiciones').DataTable().ajax.reload();
             }
         },
 
         // scrollX: tableScrollX,
         // scrollY: tableScrollY,
 
-        columns: [
-            { data: "FOLIO", className: "folio" },
-            { data: "FECHA_SOLICITUD", className: "fechaSolicitud" },
-            { data: "FECHA_REQUISICION", className: "fechaRequerida" },
-            { data: "FECHA_PORENTREGA" },
-            { data: "PROYECTO", className: "proyetoReqs" },
-            { data: "OFICINA_Texto" },
-            { data: "PEDIDOPOR", className: "solicitado" },
-            { data: "COMPANIA", className: "compania" },
-            { data: "CIUDAD", className: "ciudad" },
-            { data: "Area" },
-            { data: "AplicaV2" },
-            { data: "Prioridad" }
+        columns: [{
+                data: "FOLIO",
+                className: "folio"
+            },
+            {
+                data: "FECHA_SOLICITUD",
+                className: "fechaSolicitud"
+            },
+            {
+                data: "FECHA_REQUISICION",
+                className: "fechaRequerida"
+            },
+            {
+                data: "FECHA_PORENTREGA"
+            },
+            {
+                data: "PROYECTO",
+                className: "proyetoReqs"
+            },
+            {
+                data: "OFICINA_Texto"
+            },
+            {
+                data: "PEDIDOPOR",
+                className: "solicitado"
+            },
+            {
+                data: "COMPANIA",
+                className: "compania"
+            },
+            {
+                data: "CIUDAD",
+                className: "ciudad"
+            },
+            {
+                data: "Area"
+            },
+            {
+                data: "AplicaV2"
+            },
+            {
+                data: "Prioridad"
+            }
         ],
 
         columnDefs: [{
             targets: [1, 2, 3],
-            render: function(value) {
+            render: function (value) {
 
                 if (value != null) {
 
@@ -104,7 +140,7 @@ let tableRequisicion = async(dl, pageLength, searching /* , tableScrollX, tableS
             }
         }, {
             targets: [4, 8, 10],
-            render: function(value) {
+            render: function (value) {
 
                 let auxValue = "";
 
@@ -118,7 +154,7 @@ let tableRequisicion = async(dl, pageLength, searching /* , tableScrollX, tableS
             }
         }, {
             targets: [7],
-            render: function(value) {
+            render: function (value) {
 
                 let auxValue = "";
 
@@ -136,6 +172,7 @@ let tableRequisicion = async(dl, pageLength, searching /* , tableScrollX, tableS
             [0, 'desc']
         ]
     });
+
 };
 
 /**
@@ -144,7 +181,8 @@ let tableRequisicion = async(dl, pageLength, searching /* , tableScrollX, tableS
  * @Date: 2022-04-04 15:30:41
  * @Desc:this function inciate the dataTable for the "Requisiscion authorizadas" table
  */
-let tableRequisicionAuth = async(dl, pageLength, searching /* , tableScrollX, tableScrollY */ ) => {
+let tableRequisicionAuth = async (dl, pageLength, searching /* , tableScrollX, tableScrollY */ ) => {
+
 
     await $('#tableRequisicionesAuth').DataTable({
         dom: 'Bfrtip',
@@ -173,35 +211,76 @@ let tableRequisicionAuth = async(dl, pageLength, searching /* , tableScrollX, ta
                 console.timeEnd('tableRequisicionesAuth');
 
                 requisicionesAuthInciatePagesTables();
+            },
+            error: () => {
+                $(body).click();
+                location.reload();
+                // $('#tableRequisicionesAuth').DataTable().ajax.reload();
             }
         },
 
         // scrollX: tableScrollX,
         // scrollY: tableScrollY,
 
-        columns: [
-            { data: "STATUS" },
-            { data: "FOLIO_ORDENCOMPRA" },
-            { data: "PROVEEDOR" },
-            { data: "FECHA_ORDENCOMPRA" },
-            { data: "FECHA_PORENTREGA" },
-            { data: "MONEDA" },
-            { data: "TOTAL" },
-            { data: "CONDICIONES_PAGO" },
-            { data: "AplicaV2" },
-            { data: "Prioridad" },
-            { data: "OFICINA_Texto" },
-            { data: "FOLIO", className: "folio" },
-            { data: "CODIGO" },
-            { data: "FECHA_SOLICITUD" },
-            { data: "SOLICITADOPOR" },
-            { data: "AUTORIZADOPOR" },
-            { data: "FECHA_AUTORIZACION" },
-            { data: "ORDENCOMPRAPOR" },
+        columns: [{
+                data: "STATUS"
+            },
+            {
+                data: "FOLIO_ORDENCOMPRA"
+            },
+            {
+                data: "PROVEEDOR"
+            },
+            {
+                data: "FECHA_ORDENCOMPRA"
+            },
+            {
+                data: "FECHA_PORENTREGA"
+            },
+            {
+                data: "MONEDA"
+            },
+            {
+                data: "TOTAL"
+            },
+            {
+                data: "CONDICIONES_PAGO"
+            },
+            {
+                data: "AplicaV2"
+            },
+            {
+                data: "Prioridad"
+            },
+            {
+                data: "OFICINA_Texto"
+            },
+            {
+                data: "FOLIO",
+                className: "folio"
+            },
+            {
+                data: "CODIGO"
+            },
+            {
+                data: "FECHA_SOLICITUD"
+            },
+            {
+                data: "SOLICITADOPOR"
+            },
+            {
+                data: "AUTORIZADOPOR"
+            },
+            {
+                data: "FECHA_AUTORIZACION"
+            },
+            {
+                data: "ORDENCOMPRAPOR"
+            },
         ],
         columnDefs: [{
                 targets: [3, 4, 13, 16],
-                render: function(value) {
+                render: function (value) {
 
                     if (value != null) {
 
@@ -215,7 +294,7 @@ let tableRequisicionAuth = async(dl, pageLength, searching /* , tableScrollX, ta
             },
             {
                 targets: 6,
-                render: function(numero) {
+                render: function (numero) {
 
                     if (numero == null)
                         numero = 0;
@@ -224,7 +303,7 @@ let tableRequisicionAuth = async(dl, pageLength, searching /* , tableScrollX, ta
                 }
             }, {
                 targets: [2, 8, 12],
-                render: function(value) {
+                render: function (value) {
 
                     let auxValue = "";
 
@@ -243,6 +322,7 @@ let tableRequisicionAuth = async(dl, pageLength, searching /* , tableScrollX, ta
             [11, 'desc']
         ]
     });
+
 };
 
 /**
@@ -251,7 +331,8 @@ let tableRequisicionAuth = async(dl, pageLength, searching /* , tableScrollX, ta
  * @Date: 2022-04-04 15:30:44
  * @Desc: this function inciate the datatable for the "Orden de Compra" table
  */
-let tableOrdenCompra = async(dl, pageLength, searching /* , tableScrollX, tableScrollY */ ) => {
+let tableOrdenCompra = async (dl, pageLength, searching /* , tableScrollX, tableScrollY */ ) => {
+
 
     await $('#tableOrdenesCompra').DataTable({
         dom: 'Bfrtip',
@@ -270,7 +351,7 @@ let tableOrdenCompra = async(dl, pageLength, searching /* , tableScrollX, tableS
         ajax: {
             url: urlData + "/obtainDataOrdenesCompra",
             type: "GET",
-            data: function(d) {
+            data: function (d) {
                 return $.extend({}, d, {
                     "isLogedIn": dl,
                     "yearSearch": $('#slctYearOrdenCompra').val() == undefined ? moment().format("YYYY") : $('#slctYearOrdenCompra').val()
@@ -290,41 +371,86 @@ let tableOrdenCompra = async(dl, pageLength, searching /* , tableScrollX, tableS
                 ordenCompraInciatePagesTables();
 
                 // outLoader();
+            },
+            error: () => {
+                $(body).click();
+                location.reload();
+                // $('#tableOrdenesCompra').DataTable().ajax.reload();
             }
         },
 
         // scrollX: tableScrollX,
         // scrollY: tableScrollY,
 
-        columns: [
-            { data: "CODIGO" },
-            { data: "RECEPCION" },
-            { data: "FOLIO_ORDENCOMPRA" },
-            { data: "FECHA_ORDENCOMPRA" },
-            { data: "FECHA_CIERRE" },
-            { data: "FECHA_PORENTREGA" },
-            { data: "MONEDA" },
-            { data: "CONDICIONES_PAGO" },
-            { data: "TOTAL" },
+        columns: [{
+                data: "CODIGO"
+            },
+            {
+                data: "RECEPCION"
+            },
+            {
+                data: "FOLIO_ORDENCOMPRA"
+            },
+            {
+                data: "FECHA_ORDENCOMPRA"
+            },
+            {
+                data: "FECHA_CIERRE"
+            },
+            {
+                data: "FECHA_PORENTREGA"
+            },
+            {
+                data: "MONEDA"
+            },
+            {
+                data: "CONDICIONES_PAGO"
+            },
+            {
+                data: "TOTAL"
+            },
             // { data: "APLICA" },
-            { data: "AplicaV2" },
-            { data: "Prioridad" },
-            { data: "OFICINA_Texto" },
-            { data: "FOLIO", className: "folio" },
-            { data: "FECHA_SOLICITUD" },
-            { data: "SOLICITADOPOR" },
-            { data: "AUTORIZADOPOR" },
-            { data: "ORDENCOMPRAPOR" },
-            { data: "FECHA_AUTORIZACION" },
-            { data: "FECHA_REQUISICION" },
-            { data: "CERRO" },
+            {
+                data: "AplicaV2"
+            },
+            {
+                data: "Prioridad"
+            },
+            {
+                data: "OFICINA_Texto"
+            },
+            {
+                data: "FOLIO",
+                className: "folio"
+            },
+            {
+                data: "FECHA_SOLICITUD"
+            },
+            {
+                data: "SOLICITADOPOR"
+            },
+            {
+                data: "AUTORIZADOPOR"
+            },
+            {
+                data: "ORDENCOMPRAPOR"
+            },
+            {
+                data: "FECHA_AUTORIZACION"
+            },
+            {
+                data: "FECHA_REQUISICION"
+            },
+            {
+                data: "CERRO"
+            },
             // { data: "NOTAS_ORDENCOMPRA", visible: false, className: "notaOrdenCompraOC" },
             // { data: "NOTAS_REQUISICION", visible: false, className: "notaRequisicionOC" },
         ],
 
         columnDefs: [{
                 targets: [3, 5, 13, 18],
-                render: function(value) {
+                render: function (value) {
 
                     if (value != null) {
 
@@ -338,7 +464,7 @@ let tableOrdenCompra = async(dl, pageLength, searching /* , tableScrollX, tableS
             },
             {
                 targets: [4, 17],
-                render: function(value) {
+                render: function (value) {
 
                     if (value != null) {
 
@@ -352,7 +478,7 @@ let tableOrdenCompra = async(dl, pageLength, searching /* , tableScrollX, tableS
             },
             {
                 targets: 8,
-                render: function(numero) {
+                render: function (numero) {
 
                     if (numero == null)
                         numero = 0;
@@ -362,7 +488,7 @@ let tableOrdenCompra = async(dl, pageLength, searching /* , tableScrollX, tableS
                 }
             }, {
                 targets: [9],
-                render: function(value) {
+                render: function (value) {
 
                     let auxValue = "";
 
@@ -381,6 +507,7 @@ let tableOrdenCompra = async(dl, pageLength, searching /* , tableScrollX, tableS
             [12, 'desc']
         ]
     });
+
 };
 
 /**
@@ -389,7 +516,7 @@ let tableOrdenCompra = async(dl, pageLength, searching /* , tableScrollX, tableS
  * @Date: 2022-04-04 15:30:47
  * @Desc: this function iniciate the dataTable of the "Canceladas" Table
  */
-let tableCanceladas = async(dl, pageLength, searching /* , tableScrollX, tableScrollY */ ) => {
+let tableCanceladas = async (dl, pageLength, searching /* , tableScrollX, tableScrollY */ ) => {
 
     await $('#tableCanceladas').DataTable({
         dom: 'Bfrtip',
@@ -418,30 +545,59 @@ let tableCanceladas = async(dl, pageLength, searching /* , tableScrollX, tableSc
                 console.timeEnd('tableCanceladas');
 
                 canceladasInciatePagesTables();
+            },
+            error: () => {
+                $(body).click();
+                location.reload();
+                // $('#tableCanceladas').DataTable().ajax.reload();
             }
         },
 
         // scrollX: tableScrollX,
         // scrollY: tableScrollY,
 
-        columns: [
-            { data: "FOLIO", className: "folio" },
-            { data: "FECHA_SOLICITUD" },
-            { data: "PROYECTO" },
-            { data: "SOLICITADOPOR" },
-            { data: "AUTORIZADOPOR" },
-            { data: "ORDENCOMPRAPOR" },
-            { data: "FOLIO_ORDENCOMPRA" },
-            { data: "FECHA_ORDENCOMPRA" },
-            { data: "FECHA_PORENTREGA" },
-            { data: "FECHA_CIERRE" },
-            { data: "AplicaV2" },
-            { data: "OFICINA_Texto" }
+        columns: [{
+                data: "FOLIO",
+                className: "folio"
+            },
+            {
+                data: "FECHA_SOLICITUD"
+            },
+            {
+                data: "PROYECTO"
+            },
+            {
+                data: "SOLICITADOPOR"
+            },
+            {
+                data: "AUTORIZADOPOR"
+            },
+            {
+                data: "ORDENCOMPRAPOR"
+            },
+            {
+                data: "FOLIO_ORDENCOMPRA"
+            },
+            {
+                data: "FECHA_ORDENCOMPRA"
+            },
+            {
+                data: "FECHA_PORENTREGA"
+            },
+            {
+                data: "FECHA_CIERRE"
+            },
+            {
+                data: "AplicaV2"
+            },
+            {
+                data: "OFICINA_Texto"
+            }
         ],
 
         columnDefs: [{
             targets: [1, 7, 8, 9],
-            render: function(value) {
+            render: function (value) {
 
                 if (value != null) {
 
@@ -454,7 +610,7 @@ let tableCanceladas = async(dl, pageLength, searching /* , tableScrollX, tableSc
             }
         }, {
             targets: [2],
-            render: function(value) {
+            render: function (value) {
 
                 let auxValue = "";
 
@@ -472,6 +628,7 @@ let tableCanceladas = async(dl, pageLength, searching /* , tableScrollX, tableSc
             [0, 'desc']
         ]
     });
+
 };
 
 /**
@@ -509,11 +666,11 @@ let requisicionesInciatePagesTables = () => {
     $('.dataTables_wrapper tbody tr').removeClass("rowSelected");
     $('.textAreaViewer').val('');
 
-    $('#tableRequisiciones_wrapper tbody tr td').each(function() {
+    $('#tableRequisiciones_wrapper tbody tr td').each(function () {
 
         $(this).find('p.recortartextoRequisicion').removeClass('ajustarTextoSeleccionado');
 
-        $(this).click(function() {
+        $(this).click(function () {
 
             $('.dataTables_wrapper tbody tr').removeClass("rowSelected");
             $('.dataTables_wrapper tbody tr td p').removeClass('ajustarTextoSeleccionado');
@@ -527,7 +684,9 @@ let requisicionesInciatePagesTables = () => {
             fetch(urlData + "/obtainNotasRequisicion?folio=" + folio).then(data => data.json()).then(nota => {
                 nota = nota.data;
                 $('#notesRequisicion').val(nota[0].NOTAS_REQUISICION);
-            }).catch(() => { IsLogedIn(); });
+            }).catch(() => {
+                IsLogedIn();
+            });
         });
     });
 
@@ -535,15 +694,15 @@ let requisicionesInciatePagesTables = () => {
         requisicionesInciatePagesTables();
     });
 
-    $('#tableRequisiciones_wrapper thead .sorting').click(function() {
+    $('#tableRequisiciones_wrapper thead .sorting').click(function () {
         requisicionesInciatePagesTables();
     });
 
-    $('#tableRequisiciones_wrapper [type="search"]').keyup(function() {
+    $('#tableRequisiciones_wrapper [type="search"]').keyup(function () {
         requisicionesInciatePagesTables();
     });
 
-    $('#tableRequisiciones_wrapper tbody tr').each(function() {
+    $('#tableRequisiciones_wrapper tbody tr').each(function () {
 
         let textContent = $(this).find('td')[11].textContent;
 
@@ -564,7 +723,7 @@ let requisicionesAuthInciatePagesTables = () => {
     $('.dataTables_wrapper tbody tr').removeClass("rowSelected");
     $('.textAreaViewer').val('');
 
-    $('#tableRequisicionesAuth_wrapper tbody tr td').each(function() {
+    $('#tableRequisicionesAuth_wrapper tbody tr td').each(function () {
 
         $(this).click(() => {
 
@@ -582,7 +741,9 @@ let requisicionesAuthInciatePagesTables = () => {
             fetch(urlData + "/obtainNotasRequisicionAuth?folio=" + folio + "&slctTipo=" + tipo).then(data => data.json()).then(nota => {
                 nota = nota.data;
                 $('#notesRequisicionAuth').val(nota[0].RESPONSE);
-            }).catch(() => { IsLogedIn(); });
+            }).catch(() => {
+                IsLogedIn();
+            });
         });
     });
 
@@ -590,15 +751,15 @@ let requisicionesAuthInciatePagesTables = () => {
         requisicionesAuthInciatePagesTables();
     });
 
-    $('#tableRequisicionesAuth_wrapper thead .sorting').click(function() {
+    $('#tableRequisicionesAuth_wrapper thead .sorting').click(function () {
         requisicionesAuthInciatePagesTables();
     });
 
-    $('#tableRequisicionesAuth_wrapper [type="search"]').keyup(function() {
+    $('#tableRequisicionesAuth_wrapper [type="search"]').keyup(function () {
         requisicionesAuthInciatePagesTables();
     });
 
-    $('#tableRequisicionesAuth_wrapper tbody tr').each(function() {
+    $('#tableRequisicionesAuth_wrapper tbody tr').each(function () {
 
         let textContent = $(this).find('td')[9].textContent;
 
@@ -619,7 +780,7 @@ let ordenCompraInciatePagesTables = () => {
     $('.dataTables_wrapper tbody tr').removeClass("rowSelected");
     $('.textAreaViewer').val('');
 
-    $('#tableOrdenesCompra_wrapper tbody tr td').each(function() {
+    $('#tableOrdenesCompra_wrapper tbody tr td').each(function () {
 
         $(this).click(() => {
 
@@ -637,7 +798,9 @@ let ordenCompraInciatePagesTables = () => {
             fetch(urlData + "/obtainNotasOrdenCompra?folio=" + folio + "&slctTipo=" + tipo).then(data => data.json()).then(nota => {
                 nota = nota.data;
                 $('#notesOrdenesCompra').val(nota[0].RESPONSE);
-            }).catch(() => { IsLogedIn(); });
+            }).catch(() => {
+                IsLogedIn();
+            });
         });
     });
 
@@ -645,15 +808,15 @@ let ordenCompraInciatePagesTables = () => {
         ordenCompraInciatePagesTables();
     });
 
-    $('#tableOrdenesCompra_wrapper thead .sorting').click(function() {
+    $('#tableOrdenesCompra_wrapper thead .sorting').click(function () {
         ordenCompraInciatePagesTables();
     });
 
-    $('#tableOrdenesCompra_wrapper [type="search"]').keyup(function() {
+    $('#tableOrdenesCompra_wrapper [type="search"]').keyup(function () {
         ordenCompraInciatePagesTables();
     });
 
-    $('#tableOrdenesCompra_wrapper tbody tr').each(function() {
+    $('#tableOrdenesCompra_wrapper tbody tr').each(function () {
 
         let textContent = $(this).find('td')[10].textContent;
 
@@ -673,7 +836,7 @@ let canceladasInciatePagesTables = () => {
 
     $('.dataTables_wrapper tbody tr').removeClass("rowSelected");
 
-    $('#tableCanceladas_wrapper tbody tr td').each(function() {
+    $('#tableCanceladas_wrapper tbody tr td').each(function () {
 
         $(this).click(() => {
 
@@ -688,15 +851,15 @@ let canceladasInciatePagesTables = () => {
         });
     });
 
-    $('.paginate_button').click(function() {
+    $('.paginate_button').click(function () {
         canceladasInciatePagesTables();
     });
 
-    $('#tableCanceladas_wrapper thead .sorting').click(function() {
+    $('#tableCanceladas_wrapper thead .sorting').click(function () {
         canceladasInciatePagesTables();
     });
 
-    $('#tableCanceladas_wrapper [type="search"]').keyup(function() {
+    $('#tableCanceladas_wrapper [type="search"]').keyup(function () {
         canceladasInciatePagesTables();
     });
 }
@@ -708,24 +871,32 @@ let canceladasInciatePagesTables = () => {
  * @Desc:
  */
 
-$('#slctRequisicionAuth').change(function() {
+$('#slctRequisicionAuth').change(function () {
 
     $('.textAreaViewer').val('');
 
     let folio = $('#tableRequisicionesAuth_wrapper tbody tr.rowSelected td.folio')[0].innerText;
     let tipo = $(this).val();
 
-    fetch(urlData + "/obtainNotasRequisicionAuth?folio=" + folio + "&slctTipo=" + tipo).then(data => data.json()).then(nota => { $('#notesRequisicionAuth').val(nota.data[0].RESPONSE) }).catch(() => { IsLogedIn(); });
+    fetch(urlData + "/obtainNotasRequisicionAuth?folio=" + folio + "&slctTipo=" + tipo).then(data => data.json()).then(nota => {
+        $('#notesRequisicionAuth').val(nota.data[0].RESPONSE)
+    }).catch(() => {
+        IsLogedIn();
+    });
 });
 
-$('#slctOrdenCompra').change(function() {
+$('#slctOrdenCompra').change(function () {
 
     $('.textAreaViewer').val('');
 
     let folio = $('#tableOrdenesCompra_wrapper tbody tr.rowSelected td.folio')[0].innerText;
     let tipo = $(this).val();
 
-    fetch(urlData + "/obtainNotasOrdenCompra?folio=" + folio + "&slctTipo=" + tipo).then(data => data.json()).then(nota => { $('#notesOrdenesCompra').val(nota.data[0].RESPONSE) }).catch(() => { IsLogedIn(); });
+    fetch(urlData + "/obtainNotasOrdenCompra?folio=" + folio + "&slctTipo=" + tipo).then(data => data.json()).then(nota => {
+        $('#notesOrdenesCompra').val(nota.data[0].RESPONSE)
+    }).catch(() => {
+        IsLogedIn();
+    });
 });
 
 /**

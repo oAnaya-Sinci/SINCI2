@@ -236,7 +236,9 @@
     }
 
     .dataTables_wrapper table {
-        width: auto !important;
+        /* width: auto !important; */
+        width: 100% !important;
+        margin: 0 !important;
     }
 
     .dataTables_wrapper table thead th {
@@ -254,7 +256,7 @@
     }
 
     #tableRequisiciones_paginate,
-    tableRequisiciones_filter label,
+    /* tableRequisiciones_filter label, */
     #tableRequisiciones_info {
         font-size: 14px;
     }
@@ -415,4 +417,34 @@
     .dataTables_wrapper .dt-buttons {
         display: contents !important;
         visibility: hidden;
+    }
+
+
+    /**
+    * @author: Carlos Omar Anaya Barajas
+    * @date: 2022-07-29 17:17:45
+    * @param:
+    * @return:
+    * @desc:
+    */
+
+    @media screen and (max-height: 700px) and (orientation:landscape) {
+        #registrarRequisicion{
+            margin-top: -1rem !important;
+            width: 92% !important;
+            margin-left: 3rem !important;
+        }
+
+        .bootstrap-select .btn.dropdown-toggle {
+            width: 30vw !important;
+        }
+    }
+
+    @media screen and (max-width: 900px) and (orientation: portrait) {
+
+        #registrarRequisicion{
+            margin-top: -1rem;
+            width: 92%;
+            margin-left: 3rem;
+        }
     }

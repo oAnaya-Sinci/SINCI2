@@ -42,7 +42,7 @@
                         </div>
 
                         <div class="form-group">
-                            <i class='material-icons opacity-10 inlineElements btnEditarRequisicion'>mode<label class="btnEditarRequisicion">Editar</label></i>
+                            <i class='material-icons opacity-10 inlineElements btnEditarRequisicion'>mode<label>Editar</label></i>
 
                             <i class='material-icons opacity-10 inlineElements btnEliminar'>clear<label>Eliminar</label></i>
 
@@ -359,62 +359,73 @@
                     <!-- END of tabulation  -->
 
                     <!-- Tabla para descarga en PDF -->
-                    <div class="row" id="apartadoPDF" style="color: #000 !important; font-size: 11px; z-index: 9999; display: none;">
+                    <div class="row" id="apartadoPDF" style="color: #000000 !important; font-size: 11px; z-index: 9999; display: none;">
 
-                    <div class="col-md-12">
+                        <div class="col-md-12">
 
-                        <div style="display: flex; gap: 33em;">
-                            <img src="/img/logo-sinci.png" alt="logoImage" width="7%">
-                            <h3 style="margin-top: 2rem; color: #000 !important;">Requisición de Compra</h3>
+                            <div style="display: flex; gap: 12em;">
+                                <img src="/img/logo-sinci.png" alt="logoImage" style="width: 7rem; height:6rem">
+                                <h3 style="margin-top: 1rem; color: #000000 !important; font-size:2.5rem">Requisición de Compra</h3>
+                            </div>
+
+                            <hr>
+
+                            <div class="content__requisicion__PDF" style="margin-bottom: 0.1rem;">
+                                <div class="row" style="display: flex; justify-content: space-between; padding: 0.5rem">
+                                    <div class="col-md-3 folio__PDF"></div>
+                                    <div class="col-md-4 fecha__solicitud__PDF"></div>
+                                    <div class="col-md-4 fecha__requerida__PDF"></div>
+                                </div>
+
+                                <div class="row" style="padding: 0.2rem">
+                                    <div class="col-md-12 proyecto__PDF"></div>
+                                </div>
+
+                                <div class="row" style="padding: 0.2rem">
+                                    <div class="col-md-12 solicitado__PDF"></div>
+                                </div>
+
+                                <div class="row" style="padding: 0.2rem">
+                                    <div class="col-md-12 compannia__PDF"></div>
+                                </div>
+
+                                <div class="row" style="padding: 0.2rem">
+                                    <div class="col-md-12 ciudad__PDF"></div>
+                                </div>
+
+                            </div>
+
+                            <table class="table" id="tablaDetallePDF" style="width: 100%; padding: 0.5rem">
+                                <thead>
+                                    <tr>
+                                        <th>PDA</th>
+                                        <th>CANT.</th>
+                                        <th>UNIDAD</th>
+                                        <th>MATERIAL</th>
+                                        <th>MARCA</th>
+                                        <th>CATALOGO</th>
+                                        <th>PROVEEDOR</th>
+                                    </tr>
+                                </thead>
+                                <tbody style="text-align: center;"></tbody>
+                            </table>
+
+                            <hr>
+
+                            <p id="consideracionesEspc__PDF" style="margin-top: 1rem;"></p>
+
+                            <button id="btnImprimir">Imprimir documento</button>
+
                         </div>
 
-                        <hr>
+                        <script>
+                            
+                            document.getElementById('btnImprimir').addEventListener('click', function() {
 
-                        <div class="content__requisicion__PDF" style="margin-bottom: 0.5rem;">
-                            <div class="row">
-                                <div class="col-md-3 folio__PDF"></div>
-                                <div class="col-md-4 fecha__solicitud__PDF"></div>
-                                <div class="col-md-4 fecha__requerida__PDF"></div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-12 proyecto__PDF"></div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-12 solicitado__PDF"></div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-12 compannia__PDF"></div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-12 ciudad__PDF"></div>
-                            </div>
-
-                        </div>
-
-                        <table class="table" id="tablaDetallePDF">
-                            <thead>
-                                <tr>
-                                    <th>PDA</th>
-                                    <th>CANT.</th>
-                                    <th>UNIDAD</th>
-                                    <th>MATERIAL</th>
-                                    <th>MARCA</th>
-                                    <th>CATALOGO</th>
-                                    <th>PROVEEDOR</th>
-                                </tr>
-                            </thead>
-                            <tbody></tbody>
-                        </table>
-
-                        <hr>
-
-                        <p id="consideracionesEspc__PDF" style="margin-top: 0.5rem;"></p>
-                    </div>
-
+                                document.getElementById('btnImprimir').style = "display: none;";
+                                window.print();
+                            });
+                        </script>
                     </div>
                     <!-- END -->
 

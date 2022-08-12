@@ -341,7 +341,7 @@ h5 {
  * @Desc: Resposive Desing to the proyect adapting to the smart devices
  */
 
-@media screen and (max-width: 700px) and (orientation: portrait) {
+@media screen and (max-width: 900px) and (orientation: portrait) {
     .modalsSinciClass {
         margin-top: 0;
     }
@@ -400,6 +400,9 @@ h5 {
         /* width: 18.5rem; */
         width: 70vw !important;
     }
+    .asignar_a .bootstrap-select .btn.dropdown-toggle {
+        width: 30vw !important;
+    }
     .dropdown-menu {
         width: inherit;
     }
@@ -437,7 +440,7 @@ h5 {
     }
 }
 
-@media screen and (max-height: 700px) and (orientation:landscape) {
+@media screen and (max-height: 900px) and (orientation:landscape) {
     .modalsSinciClass {
         margin-top: 0;
     }
@@ -494,6 +497,9 @@ h5 {
     .btn.dropdown-toggle {
         /* width: 18.5rem; */
         width: 70vw !important;
+    }
+    .asignar_a .bootstrap-select .btn.dropdown-toggle {
+        width: 30vw !important;
     }
     .dropdown-menu {
         width: inherit;

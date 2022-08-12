@@ -95,7 +95,7 @@
 
             <div class="row materialRequired">
               <div class="col-md-12">
-                <div class="form-group">
+                <div class="form-group materialsRequ">
                   <table id="tableMaterials" class="table align-items-center mb-0">
                     <thead>
                       <tr>
@@ -112,12 +112,12 @@
                     <tbody>
                       <tr id="materialsRequired">
                           <td>--</td>
-                          <td> <input type='text' class='form-material' id='txtCantidad' value="1" style="text-align: center;"> </td>
-                          <td> <select class='form-select' id='slctUnidad'></select> </td>
-                          <td> <input type='text' class='form-material' id='txtMaterial'> </td>
-                          <td> <select class='form-select' id='slctProveedor'></select> </td>
-                          <td> <input type='text' class='form-material' id='txtMarca'> </td>
-                          <td> <input type='text' class='form-material' id='txtCatalogo'> </td>
+                          <td> <input type='text' class='form-material materialRow' id='txtCantidad' style="text-align: center;"> </td>
+                          <td> <select class='form-select materialRow' id='slctUnidad'></select> </td>
+                          <td> <input type='text' class='form-material materialRow' id='txtMaterial'> </td>
+                          <td> <select class='form-select materialRow' id='slctProveedor'></select> </td>
+                          <td> <input type='text' class='form-material materialRow' id='txtMarca'> </td>
+                          <td> <input type='text' class='form-material materialRow' id='txtCatalogo'> </td>
                           <td style="text-align: center; cursor: pointer;">
                             <i class="material-icons opacity-10" id="addMaterial">check</i>
                           </td>
@@ -151,7 +151,9 @@
           <button id="btnEditEvent" type="button" class="btn btn-primary btnActionReq displayButton">Editar</button>
           <!-- <button id="btnDeleteEvent" type="button" class="btn btn-danger btnDeleteNone">Guardar y enviar correo</button> --> <!-- Este boton queda pendiente hasta verificar la opcion de guardar y enviar por correo -->
           <!-- <button type="button" class="btn btn-secondary btnCancelModal" id="btnCerrarModal" data-dismiss="modal">Cancelar</button> -->
-          <button type="button" class="btn btn-secondary btnCancelModal" id="btnCerrarModal" data-dismiss="registrarRequisicion">Cancelar</button>
+
+          <!-- <button type="button" class="btn btn-secondary btnCancelModal" id="btnCerrarModal" data-dismiss="registrarRequisicion">Cancelar</button> -->
+          <button type="button" class="btn btn-secondary btnCancelModal" id="btnCerrarModal">Cancelar</button>
 
         </div>
       </div>
@@ -440,7 +442,6 @@
   <!-- END -->
 
   <div class="modal fade modalsSinciClass" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false" id="modalEditarOrdenCompra" style="margin-top: -1rem !important;">
-  <!-- <div id="registrarRequisicion" class="modal fade modal-lg modalsSinciClass" tabindex="-1" role="dialog" aria-labelledby="registrarrequisicion" data-bs-backdrop="static" data-bs-keyboard="false" aria-hidden="true"> -->
     <div class="modal-dialog" role="document">
       <div class="modal-content" style="height: 54rem !important;">
         <div class="modal-header">
@@ -553,7 +554,7 @@
 
                       <tr id="materialsRequiredOrdenCompra">
                           <td class="consecutivoOrden"></td>
-                          <td> <input type='text' class='form-material' id='txtCantidadOrden' value="1" style="text-align: center;"> </td>
+                          <td> <input type='text' class='form-material' id='txtCantidadOrden' style="text-align: center;"> </td>
                           <td> <select class='form-select' id='slctUnidadOrden'></select> </td>
                           <td> <input type='text' class='form-material' id='txtMaterialOrden'> </td>
                           <td> <input type='text' class='form-material' id='txtCatalogoOrden'> </td>

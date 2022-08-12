@@ -105,7 +105,7 @@ async function IsLogedIn() {
             } else {
                 window.localStorage.setItem('sasIsLogedIn', 'false');
                 console.timeEnd('Session');
-                alert('Ya se cerro la sesión');
+
                 window.location.href = "/";
             }
         },

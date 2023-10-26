@@ -1,7 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\Api\ApiEmailController;
+use App\Exports\UsersExport;
 // use App\Http\Controllers\HomeController AS home;
 // use App\Http\Controllers\Auth\logoutController AS logout;
 // use Illuminate\Support\Facades\Auth;
@@ -56,6 +59,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function(){ return view('authenticate/loginUser'); });
 
+
 Route::get('/dashboard', function(){ $titulo = "DASHBOARD"; return view('dashboard/main', compact('titulo')); });
 
 /**
@@ -70,5 +74,22 @@ Route::get('/bitacoras/main', function(){ $titulo = "REGISTRO DE BITÁCORAS"; re
  * @Date: 2022-03-14 13:48:53
  * @Desc: Ruta para el modulo de Compras en WEBSAS
  */
-Route::get('/compras/main', function(){ $titulo = "COMPRAS"; return view('compras/main', compact('titulo')); });
-Route::get('/compras/plantillaPDF', function(){ $titulo = "PLANTILLA PDF"; return view('compras/plantillaPDF', compact('titulo')); });
+// Route::get('/compras/main', function(){ $titulo = "COMPRAS"; return view('compras/main', compact('titulo')); });
+// Route::get('/compras/plantillaPDF', function(){ $titulo = "PLANTILLA PDF"; return view('compras/plantillaPDF', compact('titulo')); });
+
+
+//Routes users
+Route::get('/users', [UserController::class, 'index'])->name('users');
+Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
+Route::post('/users', [UserController::class, 'store'])->name('users.store');
+Route::get('/users/edit/{user}', [UserController::class, 'edit'])->name('users.edit');
+Route::post('/users/{user}', [UserController::class, 'update'])->name('users.update');
+Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+
+//Routes reports
+Route::get('/reports', [ReportController::class, 'index'])->name('reports');
+
+Route::any('/', function () {
+    [ReportController::class, 'filter'];
+    return (new UsersExport)->department(request('department'))->download('users.xlsx');
+})->name('reports.filter');

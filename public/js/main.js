@@ -25,6 +25,12 @@ $(document).ready(function() {
 
     console.time('Session');
 
+    let isAdmin = Number(window.localStorage.getItem('isAdmin'));
+
+    if(!isAdmin){
+        document.querySelectorAll('.nav-links .onlyAdmin').forEach((elem) => { elem.classList.add('inactive') });
+    }
+
     timeOut = setTimeout(() => { return false }, 1000);
 
     set_TimeOut();

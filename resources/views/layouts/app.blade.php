@@ -29,7 +29,7 @@
     <link href='../css/datepicker.min.css' rel='stylesheet' media='print' />
     <link href="/css/bootstrap-select.css" rel="stylesheet" />
     <link href="/css/sinciStyles.css" rel="stylesheet" />
-    <link rel="stylesheet" href="dropdown-scroll.css">
+    <!-- <link rel="stylesheet" href="dropdown-scroll.css"> -->
     <!-- Boxiocns CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
@@ -298,6 +298,10 @@
   }
 }
 
+.onlyAdmin.inactive{
+    display: none;
+}
+
 </style>
 <body>
   <div class="wrapper">
@@ -316,7 +320,7 @@
             <li><a class="link_name" href="/bitacoras/main">Bitacora</a></li>
           </ul>
         </li>
-        <li>
+        <li class="onlyAdmin">
           <a href="/users">
             <i class='bx bx-user'></i>
             <span class="link_name">Usuarios</span>
@@ -325,7 +329,7 @@
             <li><a class="link_name" href="/users">Usuarios</a></li>
           </ul>
         </li>
-        <li>
+        <li  class="onlyAdmin">
           <a href="/reports">
             <i class='bx bx-line-chart'></i>
             <span class="link_name">Reportes</span>
@@ -337,7 +341,7 @@
         <li>
           <div class="profile-details">
             <div class="profile-content">
-              
+
             </div>
             <div class="name-job">
               <div class="profile_name">Cerrar sesión</div>
@@ -423,24 +427,24 @@
     console.log(sidebarBtn);
 
     $(function () {
- 
-      
+
+
       resizeScreen();
       $(window).resize(function(){
         resizeScreen();
       });
       $('.bx-menu').click(function(){
 
-     
+
         if(document.body.clientWidth > 400){
           $('.sidebar').toggleClass('close');
         }else{
           $('.sidebar').toggleClass('small-screen');
         }
       });
-      
+
       function resizeScreen() {
-     
+
         if(document.body.clientWidth < 400){
           $('.sidebar').addClass('close');
         }else{

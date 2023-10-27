@@ -71,6 +71,7 @@ $('#btnLogin').click(async function() {
                 });
             } else if (response.sessionAuth != 'false') {
                 window.localStorage.setItem('sasIsLogedIn', response.sessionAuth);
+                window.localStorage.setItem('isAdmin', response.isAdmin);
                 // window.location.href = "/dashboard";
                 window.location.href = "/bitacoras/main";
             } else {

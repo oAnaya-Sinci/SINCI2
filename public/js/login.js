@@ -73,10 +73,10 @@ $('#btnLogin').click(async function() {
                 window.localStorage.setItem('sasIsLogedIn', response.sessionAuth);
 
                 let email = document.getElementById('loginEmail').value;
-                let response = fetch(`${urlData}/checkisadmin?user_email=${email}@sinci.com`).then(json => json.json()).then(data => data);
-
+                let res = fetch(`${urlData}/checkisadmin?user_email=${email}@sinci.com`).then(json => json.json()).then(data => data);
+console.log(res);
                 if(isAdmin)
-                    window.localStorage.setItem('isAdmin', response.isAdmin);
+                    window.localStorage.setItem('isAdmin', res.isAdmin);
 
                 window.location.href = "/bitacoras/main";
             } else {

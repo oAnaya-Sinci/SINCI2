@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\Api\ApiEmailController;
 use App\Exports\UsersExport;
 // use App\Http\Controllers\HomeController AS home;
@@ -88,6 +89,11 @@ Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.
 
 //Routes reports
 Route::get('/reports', [ReportController::class, 'index'])->name('reports');
+
+//Routes settings
+Route::get('/settings', [SettingController::class, 'index'])->name('settings');
+Route::get('/settings/edit/{setting}', [SettingController::class, 'edit'])->name('settings.edit');
+Route::post('/settings/{setting}', [SettingController::class, 'update'])->name('settings.update');
 
 Route::any('/', function () {
     [ReportController::class, 'filter'];

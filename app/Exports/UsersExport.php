@@ -26,6 +26,5 @@ class UsersExport implements FromQuery
                 $query->where('id',  $this->department);
             });
             
-            
         }
 }

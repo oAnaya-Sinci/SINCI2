@@ -72,7 +72,7 @@ $('#btnLogin').click(async function() {
             } else if (response.sessionAuth != 'false') {
                 window.localStorage.setItem('sasIsLogedIn', response.sessionAuth);
 
-                let email = document.getElementById('loginEmail').ariaValueMax;
+                let email = document.getElementById('loginEmail').value;
                 let isAdmin = fetch(`/checkisadmin?user_email=${email}`).then(json = json.json).then(data => data);
 
                 if(isAdmin)

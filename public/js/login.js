@@ -71,8 +71,12 @@ $('#btnLogin').click(async function() {
                 });
             } else if (response.sessionAuth != 'false') {
                 window.localStorage.setItem('sasIsLogedIn', response.sessionAuth);
-                window.localStorage.setItem('isAdmin', response.isAdmin);
-                // window.location.href = "/dashboard";
+
+                let isAdmin = fetch(`/checkisadmin?user_email=${userData.usuario}`).then(json = json.json).then(data => data);
+
+                if(isAdmin)
+                    window.localStorage.setItem('isAdmin', isAdmin);
+
                 window.location.href = "/bitacoras/main";
             } else {
                 // window.localStorage.setItem('sasIsLogedIn', false);

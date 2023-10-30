@@ -73,7 +73,7 @@ $('#btnLogin').click(async function() {
                 window.localStorage.setItem('sasIsLogedIn', response.sessionAuth);
 
                 let email = document.getElementById('loginEmail').value;
-                let isAdmin = fetch(`${urlData}/checkisadmin?user_email=${email}@sinci.com`).then(json = json.json).then(data => data);
+                let isAdmin = fetch(`${urlData}/checkisadmin?user_email=${email}@sinci.com`).then(json => json.json()).then(data => data);
 
                 if(isAdmin)
                     window.localStorage.setItem('isAdmin', isAdmin);

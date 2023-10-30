@@ -52,7 +52,7 @@ $('#btnLogin').click(async function() {
         type: "POST",
         url: urlData + "/authenticate/login",
         data: userData,
-        success: async function(response) {
+        success: function(response) {
 
             response = JSON.parse(response)[0];
             // response = response[0];
@@ -72,10 +72,9 @@ $('#btnLogin').click(async function() {
             } else if (response.sessionAuth != 'false') {
                 window.localStorage.setItem('sasIsLogedIn', response.sessionAuth);
 
-                let email = document.getElementById('loginEmail').value;
-                let res = await fetch(`${urlData}/checkisadmin?user_email=${email}@sinci.com`).then(json => json.json()).then(data => data);
-console.log(res);
-                if(isAdmin)
+                let res = checkIsAdmin();
+
+                if(res.isAdmin)
                     window.localStorage.setItem('isAdmin', res.isAdmin);
 
                 window.location.href = "/bitacoras/main";
@@ -105,6 +104,11 @@ console.log(res);
         }
     });
 });
+
+async function checkIsAdmin(){
+    let email = document.getElementById('loginEmail').value;
+    return await fetch(`${urlData}/checkisadmin?user_email=${email}@sinci.com`).then(json => json.json()).then(data => data);
+}
 
 function checkInputs() {
 

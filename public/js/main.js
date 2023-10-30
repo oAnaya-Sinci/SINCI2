@@ -6,53 +6,61 @@
 var currenUrl = window.location.href.split("/")[2];
 currenUrl = currenUrl.split(":");
 
-var urlData = "https://" + currenUrl[0] + ":1880";
+var urlData = "https://websas.sinci.com:1880";
+
+// var URL to my Local UBUTBU Server for the update
+// var urlData = "https://192.168.0.102:1880";
+// var urlData = "http://localhost:1880";
+// var urlData = "https://10.10.100.34:1880";
 
 var timeOut;
 
-/** 
- * javascript comment 
- * @Author: flydreame 
- * @Date: 2022-03-03 12:23:26 
- * @Desc: Here inciate some of the elements required for a good work of the proyect 
+/**
+ * javascript comment
+ * @Author: Carlos Omar Anaya Barajas
+ * @Date: 2022-03-03 12:23:26
+ * @Desc: Here iniciate some of the elements required for a good work of the proyect
  */
 $(document).ready(function() {
 
-    timeOut = setTimeout(() => { return false }, 100);
+    console.time('Session');
+
+    let isAdmin = Number(window.localStorage.getItem('isAdmin'));
+
+    if(!isAdmin){
+        document.querySelectorAll('.nav-links .onlyAdmin').forEach((elem) => { elem.classList.add('inactive') });
+    }
+
+    timeOut = setTimeout(() => { return false }, 1000);
 
     set_TimeOut();
-    // IsLogedIn();
 
-    $('.datetimepicker').datetimepicker({
-        // follow MomentJS docs: https://momentjs.com/docs/#/displaying/format/
-        format: 'YYYY-MM-DD HH:mm',
-
-        // Your Icons
-        // as Bootstrap 4 is not using Glyphicons anymore
-        icons: {
-            time: 'fa fa-clock-o',
-            date: 'fa fa-calendar',
-            up: 'fa fa-chevron-up',
-            down: 'fa fa-chevron-down',
-            previous: 'fa fa-chevron-left',
-            next: 'fa fa-chevron-right',
-            today: 'fa fa-check',
-            clear: 'fa fa-trash',
-            close: 'fa fa-times'
-        },
-
+    moment.updateLocale('en', {
+        months: [
+            "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Augosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+        ]
     });
+
+    moment.updateLocale('en', {
+        monthsShort: [
+            "Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"
+        ]
+    });
+
+    // $('body').addClass('g-sidenav-pinned');
 });
 
-/** 
- * javascript comment 
- * @Author: flydreame 
- * @Date: 2022-03-03 12:24:43 
- * @Desc: This function set a timer, to close the proyect if the  
+/**
+ * javascript comment
+ * @Author: Carlos Omar Anaya Barajas
+ * @Date: 2022-03-03 12:24:43
+ * @Desc: This function set a timer, to close the proyect if the time is over
  */
 function set_TimeOut() {
 
-    let timeSession = 300000;
+    // let timeSession = 300000; // 5 minutes
+    // let timeSession = 600000; // 10 minutes
+    let timeSession = 6000000; // 100 minutes
 
     clearTimeout(timeOut);
 
@@ -61,22 +69,24 @@ function set_TimeOut() {
     }, timeSession);
 }
 
-/** 
- * javascript comment 
- * @Author: flydreame 
- * @Date: 2022-03-03 12:22:39 
+/**
+ * javascript comment
+ * @Author: Carlos Omar Anaya Barajas
+ * @Date: 2022-03-03 12:22:39
  * @Desc:  This function let the user login to the proyect using the enter key
  */
 
 $(document).click(function() {
     IsLogedIn();
+
+    $('.g-sidenav-pinned #sidenav-main').removeClass('bg-white');
 });
 
-/** 
- * javascript comment 
- * @Author: flydreame 
- * @Date: 2022-03-03 12:22:11 
- * @Desc: This function close the session of the user in the proyect 
+/**
+ * javascript comment
+ * @Author: Carlos Omar Anaya Barajas
+ * @Date: 2022-03-03 12:22:11
+ * @Desc: This function close the session of the user in the proyect
  */
 
 $('#logout').click(function() {
@@ -96,27 +106,28 @@ async function IsLogedIn() {
             response = JSON.parse(response)[0];
 
             if (response.sessionAuth != 'false') {
-
                 set_TimeOut();
                 window.localStorage.setItem('sasIsLogedIn', response.sessionAuth);
             } else {
                 window.localStorage.setItem('sasIsLogedIn', 'false');
+                console.timeEnd('Session');
+
                 window.location.href = "/";
             }
         },
         error: function(exception) {
 
-            console.log(exception.statusText, exception.statusText);
+            console.error(exception);
             showMessage("danger", "error", exception)
-            window.location.href = "/";
+                // window.location.href = "/";
         }
     });
 }
 
-/** 
- * javascript comment 
- * @Author: flydreame 
- * @Date: 2022-02-04 22:08:25 
+/**
+ * javascript comment
+ * @Author: Carlos Omar Anaya Barajas
+ * @Date: 2022-02-04 22:08:25
  * @Desc: this function show the messaes in the system abouts the tasks
  */
 
@@ -150,15 +161,6 @@ function showMessage(type, header = "Mensaje del sistema", message = "") {
     }
 }
 
-/**
- * This function close the modals
- */
-
-$(".modal .modal-dialog .modal-header .close").click(function() {
-
-    $('.modal').modal('hide');
-});
-
 $('.btnCancelModal').click(function() {
 
     $('.modal').modal('hide');
@@ -182,11 +184,11 @@ var modalConfirm = function(callback) {
     });
 };
 
-/** 
- * javascript comment 
- * @Author: flydreame 
- * @Date: 2022-03-04 10:58:32 
- * @Desc: This block of code is for the load page waiter 
+/**
+ * javascript comment
+ * @Author: Carlos Omar Anaya Barajas
+ * @Date: 2022-03-04 10:58:32
+ * @Desc: This block of code is for the load page waiter
  */
 
 var inLoader = () => {
@@ -197,11 +199,45 @@ var outLoader = () => {
     $(".loader").fadeOut("slow");
 }
 
-/** 
- * javascript comment 
- * @Author: flydreame 
- * @Date: 2022-03-15 15:58:13 
- * @Desc:  
- */
+var dataLogin = () => {
 
-$('a[href = "/compras/main"]').remove();
+    let keyLogin = window.localStorage.getItem('sasIsLogedIn').split("/");
+
+    let newStr = "";
+    let x = 0;
+    $.each(keyLogin, function(index, value) {
+
+        if (x < keyLogin.length - 1)
+            newStr += value + "-";
+        else
+            newStr += value;
+
+        x++;
+    });
+    keyLogin = newStr;
+
+    keyLogin = keyLogin.split("+");
+
+    newStr = "";
+    x = 0;
+    $.each(keyLogin, function(index, value) {
+
+        if (x < keyLogin.length - 1)
+            newStr += value + "_";
+        else
+            newStr += value;
+
+        x++;
+    });
+    keyLogin = newStr;
+
+    return keyLogin;
+}
+
+
+/**
+ * javascript comment
+ * @Author: Carlos Omar Anaya Barajas
+ * @Date: 2022-03-31 09:03:25
+ * @Desc: Github Copilot
+ */

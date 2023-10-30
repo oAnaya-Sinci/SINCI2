@@ -1,7 +1,7 @@
-/** 
- * @Author: Carlos Omar Anaya Barajas 
- * @Date: 2022-03-04 10:57:25 
- * @Desc: this block of css is for the load page waiter 
+/**
+ * @Author: Carlos Omar Anaya Barajas
+ * @Date: 2022-03-04 10:57:25
+ * @Desc: this block of css is for the load page waiter
  */
 
 .removeEvent {
@@ -20,10 +20,10 @@
 }
 
 
-/** 
- * @Author: Carlos Omar Anaya Barajas 
- * @Date: 2022-02-18 16:02:35 
- * @Desc: File with the styles of the project 
+/**
+ * @Author: Carlos Omar Anaya Barajas
+ * @Date: 2022-02-18 16:02:35
+ * @Desc: File with the styles of the project
  */
 
 .ps__rail-x {
@@ -44,6 +44,11 @@ body .btn {
     font-weight: 600 !important;
 }
 
+.form-control,
+.form-select {
+    padding: 0.5rem;
+}
+
 body,
 body .btn,
 body label,
@@ -60,17 +65,54 @@ body h5,
     letter-spacing: normal;
 }
 
+body .modal label,
+body .modal table thead {
+    font-size: 15px !important;
+}
+
 body .nav-link.text-white {
-    font-size: 15px;
+    font-size: 14px;
     /* font-weight: 600; */
 }
 
 
-/** 
- * @Author: Carlos Omar Anaya Barajas 
- * @Date: 2022-01-14 10:16:31 
+/**
+ * @Author: Carlos Omar Anaya Barajas
+ * @Date: 2022-01-14 10:16:31
  * @Desc: This is the styles of the calendar to changue accordig the requires of the proyect
  */
+
+
+/* .fc-slot0 .fc-widget-content,
+.fc-slot1 .fc-widget-content,
+.fc-slot2 .fc-widget-content,
+.fc-slot3 .fc-widget-content,
+.fc-slot4 .fc-widget-content,
+.fc-slot5 .fc-widget-content,
+.fc-slot6 .fc-widget-content,
+.fc-slot7 .fc-widget-content,
+.fc-slot8 .fc-widget-content,
+.fc-slot9 .fc-widget-content,
+.fc-slot10 .fc-widget-content,
+.fc-slot11 .fc-widget-content,
+.fc-slot12 .fc-widget-content,
+.fc-slot13 .fc-widget-content,
+.fc-slot14 .fc-widget-content,
+.fc-slot15 .fc-widget-content,
+.fc-slot16 .fc-widget-content,
+.fc-slot37 .fc-widget-content,
+.fc-slot38 .fc-widget-content,
+.fc-slot39 .fc-widget-content,
+.fc-slot40 .fc-widget-content,
+.fc-slot41 .fc-widget-content,
+.fc-slot42 .fc-widget-content,
+.fc-slot43 .fc-widget-content,
+.fc-slot44 .fc-widget-content,
+.fc-slot45 .fc-widget-content,
+.fc-slot46 .fc-widget-content,
+.fc-slot47 .fc-widget-content {
+    background-color: #F1F1F1;
+} */
 
 .fc-slot17 .fc-widget-content,
 .fc-slot18 .fc-widget-content,
@@ -108,7 +150,7 @@ body .nav-link.text-white {
     margin-top: 10rem;
 }
 
-#createEventCalendar {
+.modalsSinciClass {
     margin-top: 4rem;
 }
 
@@ -123,25 +165,26 @@ body .nav-link.text-white {
     height: 15rem;
 }
 
-#createEventCalendar.modal-lg {
+.modalsSinciClass.modal-lg {
     max-width: none !important;
 }
 
-#createEventCalendar .modal-dialog {
+.modalsSinciClass .modal-dialog {
     max-width: 63rem;
 }
 
-#createEventCalendar .modal-content {
+.modalsSinciClass .modal-content {
     height: 45.3rem;
 }
 
-.body-bitacora {
+.body-modalsSinci {
     display: flex;
-    margin: .5rem 0 .5rem 0;
+    margin: .25rem 0 .25rem 0;
 }
 
-.body-bitacora label {
+.body-modalsSinci label {
     margin-right: .5rem;
+    white-space: nowrap;
 }
 
 .fc-header .fc-header-center span h5 {
@@ -190,8 +233,12 @@ body .nav-link.text-white {
     color: #fff !important;
 }
 
-#navbarBlur #navbar ul li a {
+#navbarBlur #navbar .navbar-nav .nav-item .nav-link {
     color: #fff !important;
+}
+
+#navbarBlur .navbar-nav .nav-item .nav-link .sidenav-toggler-line {
+    background: #FFF !important;
 }
 
 h5 {
@@ -203,7 +250,7 @@ h5 {
 }
 
 #sidenav-collapse-main {
-    height: 87%;
+    height: 89%;
 }
 
 .mc-calendar {
@@ -281,15 +328,21 @@ h5 {
     font-weight: bold;
 }
 
+.bg-white {}
 
-/** 
- * @Author: Carlos Omar Anaya Barajas 
- * @Date: 2022-02-15 17:31:46 
+.navbar-vertical.bg-white {
+    box-shadow: none;
+}
+
+
+/**
+ * @Author: Carlos Omar Anaya Barajas
+ * @Date: 2022-02-15 17:31:46
  * @Desc: Resposive Desing to the proyect adapting to the smart devices
  */
 
-@media screen and (max-width: 700px) and (orientation: portrait) {
-    #createEventCalendar {
+@media screen and (max-width: 900px) and (orientation: portrait) {
+    .modalsSinciClass {
         margin-top: 0;
     }
     .weekNumber {
@@ -343,9 +396,8 @@ h5 {
     .modal-footer button {
         padding: 0.5rem;
     }
-    .btn.dropdown-toggle {
-        /* width: 18.5rem; */
-        width: 70vw !important;
+    .asignar_a .bootstrap-select .btn.dropdown-toggle {
+        width: 30vw !important;
     }
     .dropdown-menu {
         width: inherit;
@@ -384,8 +436,8 @@ h5 {
     }
 }
 
-@media screen and (max-height: 700px) and (orientation:landscape) {
-    #createEventCalendar {
+@media screen and (max-height: 900px) and (orientation:landscape) {
+    .modalsSinciClass {
         margin-top: 0;
     }
     .weekNumber {
@@ -438,10 +490,6 @@ h5 {
     .modal-footer button {
         padding: 0.5rem;
     }
-    .btn.dropdown-toggle {
-        /* width: 18.5rem; */
-        width: 70vw !important;
-    }
     .dropdown-menu {
         width: inherit;
     }
@@ -480,9 +528,9 @@ h5 {
 }
 
 
-/** 
-     * @Author: Carlos Omar Anaya 
-     * @Date: 2022-02-18 11:59:56 
+/**
+     * @Author: Carlos Omar Anaya
+     * @Date: 2022-02-18 11:59:56
      * @Desc:  Styles to devices with a less resolution in the screen
      */
 
@@ -495,5 +543,49 @@ h5 {
 @media screen and (max-width: 400px) and (orientation:landscape) {
     .btn.dropdown-toggle {
         width: 60vw !important;
+    }
+}
+
+
+/**
+* @author: Carlos Omar Anaya Barajas
+* @date: 2022-04-28 10:21:29
+* @param:
+* @return:
+* @desc:
+*/
+
+@media screen and (max-width: 1919px) and (orientation: portrait) {
+    .sidenav.fixed-start+.main-content {
+        margin-left: 0;
+    }
+    .g-sidenav-show:not(.rtl) .sidenav {
+        -webkit-transform: translateX(-17.125rem);
+        transform: translateX(-17.125rem);
+    }
+    .g-sidenav-show.g-sidenav-pinned .sidenav {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+    }
+    #navbarBlurLogo {
+        background-color: #fff;
+    }
+}
+
+@media screen and (max-height: 965px) and (orientation: landscape) {
+    .sidenav.fixed-start+.main-content {
+        /* margin-left: 0; */
+        margin: 0 .5rem;
+    }
+    .g-sidenav-show:not(.rtl) .sidenav {
+        -webkit-transform: translateX(-17.125rem);
+        transform: translateX(-17.125rem);
+    }
+    .g-sidenav-show.g-sidenav-pinned .sidenav {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+    }
+    #navbarBlurLogo {
+        background-color: #fff;
     }
 }

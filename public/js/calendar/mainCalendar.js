@@ -1,17 +1,35 @@
 var updateEvent = false;
 var idEventUpdate;
 
-var dataLogin;
-
 let calendar;
 
-/** 
- * javascript comment 
- * @Author: Carlos Omar Anaya Barajas 
- * @Date: 2022-03-03 13:53:19 
+/**
+ * javascript comment
+ * @Author: Carlos Omar Anaya Barajas
+ * @Date: 2022-03-03 13:53:19
  * @Desc: Here the date inputs was bloqueck to not use the keyborad
  */
 $(document).ready(function() {
+
+    $('.datetimepicker').datetimepicker({
+        // follow MomentJS docs: https://momentjs.com/docs/#/displaying/format/
+        format: 'YYYY-MM-DD HH:mm',
+
+        // Your Icons
+        // as Bootstrap 4 is not using Glyphicons anymore
+        icons: {
+            time: 'fa fa-clock-o',
+            date: 'fa fa-calendar',
+            up: 'fa fa-chevron-up',
+            down: 'fa fa-chevron-down',
+            previous: 'fa fa-chevron-left',
+            next: 'fa fa-chevron-right',
+            today: 'fa fa-check',
+            clear: 'fa fa-trash',
+            close: 'fa fa-times'
+        },
+
+    });
 
     document.getElementById("startDate").addEventListener("keyup", preventDef, false);
     document.getElementById("startDate").addEventListener("keydown", preventDef, false);
@@ -26,50 +44,20 @@ function preventDef(event) {
     event.preventDefault();
 }
 
-/** 
- * javascript comment 
- * @Author: Carlos Omar Anaya Barajas 
- * @Date: 2022-03-03 13:54:38 
+/**
+ * javascript comment
+ * @Author: Carlos Omar Anaya Barajas
+ * @Date: 2022-03-03 13:54:38
  * @Desc: This function inciate the calendar in the proyect and show all the data to the users
  */
 async function calendarSinci() {
 
-    dataLogin = window.localStorage.getItem('sasIsLogedIn').split("/");
-
-    let newStr = "";
-    let x = 0;
-    $.each(dataLogin, function(index, value) {
-
-        if (x < dataLogin.length - 1)
-            newStr += value + "-";
-        else
-            newStr += value;
-
-        x++;
-    });
-    dataLogin = newStr;
-
-    dataLogin = dataLogin.split("+");
-
-    newStr = "";
-    x = 0;
-    $.each(dataLogin, function(index, value) {
-
-        if (x < dataLogin.length - 1)
-            newStr += value + "_";
-        else
-            newStr += value;
-
-        x++;
-    });
-    dataLogin = newStr;
-
-    let dataEvents = [];
-
     /**
      * This Fetch petition obtain the calendar events registerd for the login user
      */
-    let dataDB = await fetch(urlData + "/obtainEventsCalendar?isLogedIn=" + dataLogin).then(data => data.json()).then(data => { return data; }).catch(() => { IsLogedIn(); });
+    let dataEvents = [];
+
+    let dataDB = await fetch(urlData + "/obtainEventsCalendar?isLogedIn=" + dataLogin()).then(data => data.json()).then(data => { return data; }).catch(() => { IsLogedIn(); });
     dataEvents = eventsCalendar(dataDB);
 
     /*  className colors
@@ -191,18 +179,18 @@ async function calendarSinci() {
     modalCalendarSinci();
     iniciateModalUpdate();
     outLoader();
+
+    $('#calendar .fc-content table thead .fc-col' + moment().day() + '.fc-widget-header').addClass('resaltarDia');
 }
 
-/** 
- * javascript comment 
- * @Author: Carlos Omar Anaya Barajas 
- * @Date: 2022-03-15 10:36:04 
- * @Desc:  
+/**
+ * javascript comment
+ * @Author: Carlos Omar Anaya Barajas
+ * @Date: 2022-03-15 10:36:04
+ * @Desc:
  */
 
 let eventsCalendar = (dataDB) => {
-
-    console.log(dataDB);
 
     let eventsToSend = [];
 
@@ -278,22 +266,28 @@ let eventsCalendar = (dataDB) => {
     return eventsToSend;
 }
 
-/** 
- * javascript comment 
- * @Author: Carlos Omar Anaya Barajas 
- * @Date: 2022-03-03 13:55:50 
+/**
+ * javascript comment
+ * @Author: Carlos Omar Anaya Barajas
+ * @Date: 2022-03-03 13:55:50
  * @Desc: Here the selects was inciated with the information required to dd the registers
  */
 
 async function modalCalendarSinci() {
 
-    let dataProyecto = await fetch(urlData + "/obtainDataProyecto?isLogedIn=" + dataLogin).then(data => data.json()).then(data => { return data; }).catch(() => { IsLogedIn(); });
-    processDataToSelect(dataProyecto, '#slctProyecto');
+    let dl = dataLogin();
 
-    let dataUsuario = await fetch(urlData + "/obtainDataUser?isLogedIn=" + dataLogin).then(data => data.json()).then(data => { return data; }).catch(() => { IsLogedIn(); });
+    // await fetch(urlData + "/obtainDataProyecto?isLogedIn=" + dl).then(data => data.json()).then(dataProyecto => { processDataToSelect(dataProyecto, '#slctProyecto'); }).catch(() => { IsLogedIn(); });
+    // await fetch(urlData + "/obtainDataUser?isLogedIn=" + dl).then(data => data.json()).then(dataUsuario => { processDataToSelect(dataUsuario, '#slctUsuario'); }).catch(() => { IsLogedIn(); });
+    // await fetch(urlData + "/obtainDataAsignar?isLogedIn=" + dl).then(data => data.json()).then(dataAsignar => { processDataToSelect(dataAsignar, '#slctAsignar'); }).catch(() => { IsLogedIn(); });
+
+    let dataUsuario = await fetch(urlData + "/obtainDataUser?isLogedIn=" + dl).then(data => data.json()).then(dataUsuario => { return dataUsuario }).catch(() => { IsLogedIn(); });
     processDataToSelect(dataUsuario, '#slctUsuario');
 
-    let dataAsignar = await fetch(urlData + "/obtainDataAsignar?isLogedIn=" + dataLogin).then(data => data.json()).then(data => { return data; }).catch(() => { IsLogedIn(); });
+    let dataProyecto = await fetch(urlData + "/obtainDataProyecto?isLogedIn=" + dl).then(data => data.json()).then(dataProyecto => { return dataProyecto }).catch(() => { IsLogedIn(); });
+    processDataToSelect(dataProyecto, '#slctProyecto');
+
+    let dataAsignar = await fetch(urlData + "/obtainDataAsignar?isLogedIn=" + dl).then(data => data.json()).then(dataAsignar => { return dataAsignar }).catch(() => { IsLogedIn(); });
     processDataToSelect(dataAsignar, '#slctAsignar');
 
     $('.selectpicker').selectpicker('refresh');
@@ -319,10 +313,10 @@ function processDataToSelect(data, select) {
     $(select).append(options);
 }
 
-/** 
- * javascript comment 
- * @Author: Carlos Omar Anaya Barajas 
- * @Date: 2022-02-22 11:11:51 
+/**
+ * javascript comment
+ * @Author: Carlos Omar Anaya Barajas
+ * @Date: 2022-02-22 11:11:51
  * @Desc: This function obtain the week number
  */
 function getWeekNumber(d) {
@@ -340,10 +334,10 @@ function getWeekNumber(d) {
     return weekNo;
 }
 
-/** 
- * javascript comment 
- * @Author: Carlos Omar Anaya Barajas 
- * @Date: 2022-02-22 11:11:18 
+/**
+ * javascript comment
+ * @Author: Carlos Omar Anaya Barajas
+ * @Date: 2022-02-22 11:11:18
  * @Desc:  This unction display the week number in the calendar
  */
 
@@ -431,34 +425,26 @@ function buttonsNav(defaultView) {
 
         } catch (error) {
 
-            // console.log("---------------------------------------------------------------------------------------------------------------------------------------------------");
             day = $('#calendar .fc-content .fc-view-agendaDay table .fc-first .fc-widget-header').text().split(' ')[1].replace(/\s+/g, '');
-            // console.log(day);
+
             dayDate = new Date(year + "-" + monthNum + "-" + day);
-            // console.log(dayDate);
             dayDate = day >= 10 ? new Date(dayDate.setDate(dayDate.getDate() + 1)) : dayDate;
-            // console.log(dayDate);
             dayNum = dayDate.getDay();
-            // console.log(dayNum);
-            // console.log(new Date(dayDate.setDate(dayDate.getDate() - dayNum)));
             let newDate = new Date(dayDate.setDate(dayDate.getDate() - dayNum));
-            // console.log(newDate);
             isDay = true;
 
             date = year + "-" + (newDate.getMonth() + 1) + "-" + newDate.getDate();
         }
-
-        // console.log(date);
     }
 
     let weekNumber = getWeekNumber(new Date(date));
     showWeeksNumbers(weekNumber, isWeek, isDay, dayNum);
 }
 
-/** 
- * javascript comment 
- * @Author: Carlos Omar Anaya Barajas 
- * @Date: 2022-01-12 17:31:20 
+/**
+ * javascript comment
+ * @Author: Carlos Omar Anaya Barajas
+ * @Date: 2022-01-12 17:31:20
  * @Desc:  This funciton iniciate the modal to update the data in the calendar
  */
 
@@ -475,7 +461,7 @@ function iniciateModalUpdate() {
         $.ajax({
             type: "GET",
             url: urlData + "/obtainEventsCalendarById",
-            data: { "idEvent": idEventUpdate, "isLogedIn": dataLogin },
+            data: { "idEvent": idEventUpdate, "isLogedIn": dataLogin() },
             success: function(response) {
 
                 response = JSON.parse(response)[0];
@@ -576,7 +562,7 @@ $('#btnSaveEvent').click(function() {
     event.push({ name: "usuarioNombre", value: $("#slctUsuario option:selected").text() });
     event.push({ name: "totalHoras", value: calculeTotalTime(event[3].value, event[4].value) });
     event.push({ name: "idEvent", value: idEventUpdate });
-    event.push({ name: "isLogedIn", value: dataLogin });
+    event.push({ name: "isLogedIn", value: dataLogin() });
 
     let message = "";
     if (updateEvent) {
@@ -643,24 +629,20 @@ $('#btnSaveEvent').click(function() {
 
             outLoader();
 
-            let messageError = "Ocurrió un error, la pagina se reiniciará para actualizarse.";
+            let messageError = "Ocurrió un error al momento de guardar el registro, intente de nuevo a guardar la información";
 
             idEventUpdate = null;
             updateEvent = false;
 
             showMessage('danger', 'Error', messageError);
-
-            setTimeout(() => {
-                resetcalendar();
-            }, 2000);
         }
     });
 });
 
-/** 
- * javascript comment 
- * @Author: Carlos Omar Anaya Barajas 
- * @Date: 2022-02-04 23:44:05 
+/**
+ * javascript comment
+ * @Author: Carlos Omar Anaya Barajas
+ * @Date: 2022-02-04 23:44:05
  * @Desc:  Delete Information from the database
  */
 
@@ -678,7 +660,7 @@ $('#btnDeleteEvent').click(function() {
             $.ajax({
                 type: "POST",
                 url: urlData + "/deleteInformation",
-                data: { idEvent: idEventUpdate, "isLogedIn": dataLogin },
+                data: { idEvent: idEventUpdate, "isLogedIn": dataLogin() },
                 success: function(response) {
 
                     response = JSON.parse(response)[0];
@@ -706,7 +688,7 @@ $('#btnDeleteEvent').click(function() {
 
                     setTimeout(() => {
                         resetcalendar();
-                    }, 2000);
+                    }, 2500);
                 }
             });
         } else {
@@ -716,11 +698,11 @@ $('#btnDeleteEvent').click(function() {
     });
 });
 
-/** 
- * Function to validatre the dates of the proyect 
- * @Author: Carlos Omar Anaya Barajas 
- * @Date: 2022-02-04 18:07:05 
- * @Desc:  
+/**
+ * Function to validatre the dates of the proyect
+ * @Author: Carlos Omar Anaya Barajas
+ * @Date: 2022-02-04 18:07:05
+ * @Desc:
  */
 
 function checkDateToSave(start, end) {
@@ -752,10 +734,10 @@ function checkDateToSave(start, end) {
     return [isValidate, message];
 }
 
-/** 
- * Funtion to obtain the hours between 2 dates 
- * @Author: Anaya Barajas Carlos Omar 
- * @Date: 2022-01-12 10:46:05 
+/**
+ * Funtion to obtain the hours between 2 dates
+ * @Author: Anaya Barajas Carlos Omar
+ * @Date: 2022-01-12 10:46:05
  * @Desc: NA
  */ //
 

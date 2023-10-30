@@ -3,10 +3,15 @@
 // HTTP
 // var urlData = "http://10.10.100.34:1880"; // PRODUCTION SERVER WITHOUT SECURE PROTOCOL 80
 
+// var URL to my Local UBUTBU Server for the update
+// var urlData = "https://192.168.0.102:1880";
+// var urlData = "http://localhost:1880";
+// var urlData = "https://10.10.100.34:1880";
+
 var currenUrl = window.location.href.split("/")[2];
 currenUrl = currenUrl.split(":");
 
-var urlData = "https://" + currenUrl[0] + ":1880";
+var urlData = "https://websas.sinci.com:1880";
 
 var timeOut;
 
@@ -66,6 +71,7 @@ $('#btnLogin').click(async function() {
                 });
             } else if (response.sessionAuth != 'false') {
                 window.localStorage.setItem('sasIsLogedIn', response.sessionAuth);
+                window.localStorage.setItem('isAdmin', response.isAdmin);
                 // window.location.href = "/dashboard";
                 window.location.href = "/bitacoras/main";
             } else {
@@ -145,14 +151,6 @@ async function IsLogedIn() {
     });
 }
 
-var modalConfirm = function(callback) {
-
-    $("#modal-btn-no").on("click", function() {
-        callback(false);
-        $("#noAccessModal").modal('hide');
-    });
-};
-
 var inLoader = () => {
     $(".loader").fadeIn("slow");
 }
@@ -161,10 +159,10 @@ var outLoader = () => {
     $(".loader").fadeOut("slow");
 }
 
-/** 
- * javascript comment 
- * @Author: flydreame 
- * @Date: 2022-02-04 22:08:25 
+/**
+ * javascript comment
+ * @Author: flydreame
+ * @Date: 2022-02-04 22:08:25
  * @Desc: this function show the messaes in the system abouts the tasks
  */
 

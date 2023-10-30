@@ -52,7 +52,7 @@ $('#btnLogin').click(async function() {
         type: "POST",
         url: urlData + "/authenticate/login",
         data: userData,
-        success: async function(response) {
+        success: function(response) {
 
             response = JSON.parse(response)[0];
             // response = response[0];

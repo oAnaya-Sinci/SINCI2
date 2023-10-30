@@ -73,7 +73,7 @@ $('#btnLogin').click(async function() {
                 window.localStorage.setItem('sasIsLogedIn', response.sessionAuth);
 
                 let res = checkIsAdmin();
-
+console.log( res )
                 if(res.isAdmin)
                     window.localStorage.setItem('isAdmin', res.isAdmin);
 

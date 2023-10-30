@@ -52,7 +52,7 @@ $('#btnLogin').click(async function() {
         type: "POST",
         url: urlData + "/authenticate/login",
         data: userData,
-        success: function(response) {
+        success: async function(response) {
 
             response = JSON.parse(response)[0];
             // response = response[0];
@@ -73,7 +73,7 @@ $('#btnLogin').click(async function() {
                 window.localStorage.setItem('sasIsLogedIn', response.sessionAuth);
 
                 let email = document.getElementById('loginEmail').value;
-                let res = fetch(`${urlData}/checkisadmin?user_email=${email}@sinci.com`).then(json => json.json()).then(data => data);
+                let res = await fetch(`${urlData}/checkisadmin?user_email=${email}@sinci.com`).then(json => json.json()).then(data => data);
 console.log(res);
                 if(isAdmin)
                     window.localStorage.setItem('isAdmin', res.isAdmin);

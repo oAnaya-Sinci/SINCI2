@@ -329,6 +329,15 @@
             <li><a class="link_name" href="/users">Usuarios</a></li>
           </ul>
         </li>
+        <li class="onlyAdmin">
+          <a href="/settings">
+            <i class='bx bx-file'></i>
+            <span class="link_name">Configuración</span>
+          </a>
+          <ul class="sub-menu blank">
+            <li><a class="link_name" href="/settings">Configuración</a></li>
+          </ul>
+        </li>
         <li  class="onlyAdmin">
           <a href="/reports">
             <i class='bx bx-line-chart'></i>

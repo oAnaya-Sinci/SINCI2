@@ -71,12 +71,8 @@ $('#btnLogin').click(async function() {
                 });
             } else if (response.sessionAuth != 'false') {
                 window.localStorage.setItem('sasIsLogedIn', response.sessionAuth);
-
-                let res = checkIsAdmin();
-console.log( res )
-                if(res.isAdmin)
-                    window.localStorage.setItem('isAdmin', res.isAdmin);
-
+                window.localStorage.setItem('isAdmin', response.isAdmin);
+                // window.location.href = "/dashboard";
                 window.location.href = "/bitacoras/main";
             } else {
                 // window.localStorage.setItem('sasIsLogedIn', false);
@@ -104,11 +100,6 @@ console.log( res )
         }
     });
 });
-
-async function checkIsAdmin(){
-    let email = document.getElementById('loginEmail').value;
-    return await fetch(`${urlData}/checkisadmin?user_email=${email}@sinci.com`).then(json => json.json()).then(data => data);
-}
 
 function checkInputs() {
 

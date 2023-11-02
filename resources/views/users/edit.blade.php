@@ -1,3 +1,7 @@
+@php
+use Carbon\Carbon;
+@endphp
+
 @extends('layouts.app')
 
 @section('cssSection')
@@ -82,6 +86,14 @@
                                         </option>
                                         @endforeach
                                     </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pt-5">
+                            <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                                <div class="input-group input-group-outline">
+                                    <label class="form-label">Fecha de ingreso</label>
+                                    <input type="date" class="form-control" name="admission_date" value="{{ Carbon::parse($user->admission_date)->format('Y-m-d')}}">
                                 </div>
                             </div>
                         </div>

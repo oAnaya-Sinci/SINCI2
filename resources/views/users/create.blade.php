@@ -35,7 +35,7 @@
                             <div class="ms-md-auto pe-md-3 d-flex align-items-center">
                                 <div class="input-group input-group-outline">
                                     <label class="form-label">Codigo de Telegram</label>
-                                    <input type="text" class="form-control" name="chat_id" required>
+                                    <input type="text" class="form-control" name="chat_id" >
                                 </div>
                             </div>
                         </div>
@@ -81,6 +81,14 @@
                                         </option>
                                         @endforeach
                                     </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pt-5">
+                            <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                                <div class="input-group input-group-outline">
+                                    <label class="form-label">Fecha de ingreso</label>
+                                    <input type="date" class="form-control" name="admission_date" required>
                                 </div>
                             </div>
                         </div>

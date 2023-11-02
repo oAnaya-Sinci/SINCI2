@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Mail;
+use Carbon\Carbon;
 
 class ApiEmailController extends Controller
 {
@@ -15,25 +17,28 @@ class ApiEmailController extends Controller
      */
     public function index(Request $request)
     {
+
         $template_path = 'email';
         $email = $request->email;
         $body = $request->body;
         $level = $request->level;
         $copy = explode(",", $request->copy);
-        
+        $date = User::where('email', $email)->value('admission_date');
+        $admission_date = Carbon::parse($date)->format('d-m-y');
+
         if($level == 1){
-            Mail::send($template_path, ['body' => $body], function($message) use ($template_path, $email) {
-                $message->to($email)->subject('Notificación de bitácoras');
-                $message->from('snla@sinci.com','Notificación de bitácoras');
+            Mail::send($template_path, ['body' => $body, 'admission_date' => $admission_date], function($message) use ($template_path, $email) {
+                $message->to($email)->subject('SNL | Notificación por falta de registro en bitácora');
+                $message->from('snla@sinci.com','SNL | Notificación por falta de registro en bitácora');
             });
         }else{
-            Mail::send($template_path, ['body' => $body], function($message) use ($template_path, $email, $copy) {
-                $message->to($email)->subject('Notificación de bitácoras')->cc($copy);
-                $message->from('snla@sinci.com','Notificación de bitácoras');
+            Mail::send($template_path, ['body' => $body, 'admission_date' => $admission_date], function($message) use ($template_path, $email, $copy) {
+                $message->to($email)->subject('SNL | Notificación por falta de registro en bitácora')->cc($copy);
+                $message->from('snla@sinci.com','SNL | Notificación por falta de registro en bitácora');
             }); 
         }
 
-        return view('email', compact('body'));
+        return view('email', compact('body', 'admission_date'));
     }
 
     /**

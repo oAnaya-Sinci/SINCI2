@@ -41,6 +41,7 @@ class UserController extends Controller
             'name' => $request->input('name'),
             'email' => $request->input('email'),
             'chat_id' => $request->input('chat_id'),
+            'admission_date' => $request->input('admission_date'),
             'email_notifi' => $request->input('email_notifi') ?? 'off',
             'telegram_notifi' => $request->input('telegram_notifi') ?? 'off',
         ]);
@@ -61,8 +62,9 @@ class UserController extends Controller
         $officeId = $user->offices->pluck('id');
         $positionId = $user->positions->pluck('id');
         $departmentId = $user->departments->pluck('id');
+        $titulo = 'EDITAR USUARIO';
 
-        return view('users.edit', compact('user', 'offices', 'positions', 'departments', 'officeId', 'positionId', 'departmentId'));
+        return view('users.edit', compact('user', 'offices', 'positions', 'departments', 'officeId', 'positionId', 'departmentId', 'titulo'));
     }
 
     public function update(Request $request, User $user)
@@ -71,6 +73,7 @@ class UserController extends Controller
             'name' => $request->input('name'),
             'email' => $request->input('email'),
             'chatId' => $request->input('chatId'),
+            'admission_date' => $request->input('admission_date'),
             'email_notifi' => $request->input('email_notifi'),
             'telegram_notifi' => $request->input('telegram_notifi'),
         ]);

@@ -26,6 +26,7 @@ class User extends Authenticatable
         'email_notifi',
         'telegram_notifi',
         'chat_id',
+        'admission_date',
         'password',
     ];
 

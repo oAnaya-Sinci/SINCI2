@@ -28,6 +28,7 @@ class User extends Authenticatable
         'chat_id',
         'admission_date',
         'password',
+        'is_admin',
     ];
 
     /**

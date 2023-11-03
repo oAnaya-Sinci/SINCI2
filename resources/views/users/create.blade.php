@@ -13,8 +13,8 @@
             <div class="card">
                 <div class="card-header p-3 pt-2">
                     <form method="POST" action="{{ route('users.store') }}">
-                    @csrf
-                    @method('POST')
+                        @csrf
+                        @method('POST')
                         <div class="pt-4">
                             <div class="ms-md-auto pe-md-3 d-flex align-items-center">
                                 <div class="input-group input-group-outline">
@@ -35,7 +35,7 @@
                             <div class="ms-md-auto pe-md-3 d-flex align-items-center">
                                 <div class="input-group input-group-outline">
                                     <label class="form-label">Codigo de Telegram</label>
-                                    <input type="text" class="form-control" name="chat_id" >
+                                    <input type="text" class="form-control" name="chat_id">
                                 </div>
                             </div>
                         </div>
@@ -97,19 +97,28 @@
                                 <div class="input-group input-group-outline pt-2">
                                     <label class="form-label">Canales de notificacion</label>
                                     <div class="form-check d-flex align-items-center mb-3">
-                                        <input class="form-check-input" type="checkbox" id="email_notifi" name="email_notifi">
+                                        <input class="form-check-input" type="checkbox" id="email_notifi"
+                                            name="email_notifi">
                                         <label class="form-check-label mb-0 ms-2" for="email">Correo electronico</label>
                                     </div>
                                     <div class="form-check d-flex align-items-center mb-3">
-                                        <input class="form-check-input" type="checkbox" id="telegram_notifi" name="telegram_notifi">
+                                        <input class="form-check-input" type="checkbox" id="telegram_notifi"
+                                            name="telegram_notifi">
                                         <label class="form-check-label mb-0 ms-2" for="telegram">Telegram</label>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="pt-3">
+                            <div class="form-check d-flex align-items-center mb-3">
+                                <input class="form-check-input" type="checkbox" id="is_admin"
+                                    name="is_admin" value="true">
+                                <label class="form-check-label mb-0 ms-2" for="admin">Agregar como administrador</label>
+                            </div>
+                        </div>
                         <div class="pt-2 modal-footer">
                             <button type="submit" class="btn btn-primary">Guardar</button>
-                            <a class="btn btn-secondary" href="{{ route('users') }}" >Cancelar</a>
+                            <a class="btn btn-secondary" href="{{ route('users') }}">Cancelar</a>
                         </div>
                     </form>
                 </div>

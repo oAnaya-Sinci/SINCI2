@@ -1,3 +1,7 @@
+@php
+use Carbon\Carbon;
+@endphp
+
 @extends('layouts.app')
 @section('pageContent')
 <div class="container-fluid py-4">
@@ -49,6 +53,9 @@
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Dias acumulados</th>
+                                    <th
+                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Fecha</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -80,6 +87,9 @@
                                     </td>
                                     <td class="align-middle text-center text-sm">
                                         <span class="text-xs text-secondary mb-0">0</span>
+                                    </td>
+                                    <td class="align-middle text-center text-sm">
+                                        <span class="text-xs text-secondary mb-0">{{ Carbon::parse($user->admission_date)->format('Y-m-d') ?? Carbon::parse($date)->format('Y-m-d') }}</span>
                                     </td>
                                 </tr>
                                 @empty

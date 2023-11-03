@@ -38,7 +38,7 @@ class ApiEmailController extends Controller
             }); 
         }
 
-        return view('email', compact('body', 'admission_date'));
+        return view('email');
     }
 
     /**

@@ -24,7 +24,7 @@ class UsersExport implements FromQuery
         {
             return User::query()->whereHas('departments', function ($query) {
                 $query->where('id',  $this->department);
-            });
+            })->whereRelation('positions', 'id', '=', 4);
             
         }
 }

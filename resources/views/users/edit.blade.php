@@ -50,7 +50,6 @@ use Carbon\Carbon;
                                     <select type="text" class="form-control" name="office" required>
                                         <option value="">{{__('Selecciona')}}</option>
                                         @foreach($offices as $id => $office)
-                                        {{var_dump($id)}}
                                         <option value="{{ $id }}" {{$id === $officeId[0] ? 'selected' : ''}}>
                                             {{ $office }}
                                         </option>

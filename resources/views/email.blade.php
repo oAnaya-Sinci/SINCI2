@@ -117,16 +117,11 @@
                                         <td class="content-block"
                                             style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;"
                                             valign="top">
-                                            NOTIFICACIÓN DE FALTA DE REGISTRO DE BITÁCORA.
-                                        </td>
-                                    </tr>
-                                    <tr
-                                        style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
-                                        <td class="content-block"
-                                            style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;"
-                                            valign="top">
-                                            Hemos observado <span style="color:red;font-weight:bold"> {{ $body }} </span> días de atraso en el cumplimiento del
-                                            llenado de bitácora. Esta situación es crucial para nuestros procesos. Por
+                                            Hemos observado <span style="color:red;font-weight:bold"> {{ $body }}
+                                            </span> días en total de falta de registro en el llenado de bitácora a
+                                            partir de la fecha: <span style="color:red;font-weight:bold"> {{  $admission_date }}
+                                            </span>
+                                            . Esta situación es crucial para nuestros procesos. Por
                                             favor, asegúrate de que se complete adecuadamente día con día.
                                         </td>
                                     </tr>

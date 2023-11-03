@@ -19,7 +19,7 @@
                             <div class="ms-md-auto pe-md-3 d-flex align-items-center">
                                 <div class="input-group input-group-outline">
                                     <label class="form-label">Nivel</label>
-                                    <input type="text" class="form-control" name="level" value="{{ $setting->level }}">
+                                    <input type="text" class="form-control" name="level" value="{{ $setting->level }}" disabled>
                                 </div>
                             </div>
                         </div>

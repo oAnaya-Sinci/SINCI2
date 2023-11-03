@@ -94,6 +94,10 @@ Route::get('/reports', [ReportController::class, 'index'])->name('reports');
 Route::get('/settings', [SettingController::class, 'index'])->name('settings');
 Route::get('/settings/edit/{setting}', [SettingController::class, 'edit'])->name('settings.edit');
 Route::post('/settings/{setting}', [SettingController::class, 'update'])->name('settings.update');
+Route::get('/settings/date/create', [SettingController::class, 'dateCreate'])->name('settings.date.create');
+Route::post('/settings', [SettingController::class, 'dateStore'])->name('settings.date.store');
+Route::get('/settings/date/edit/{date}', [SettingController::class, 'dateEdit'])->name('settings.date.edit');
+Route::post('/settings/date/{date}', [SettingController::class, 'dateUpdate'])->name('settings.date.update');
 
 Route::any('/', function () {
     [ReportController::class, 'filter'];

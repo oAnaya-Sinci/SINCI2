@@ -32,8 +32,6 @@ class ReportController extends Controller
 
         $users = User::whereHas('departments', function ($query) use ($request) {
             $query->where('id', $request->input('department'));
-        })->whereHas('position_user', function($query) {
-            $query->where('position_id','=', 4);
         })->get();
       
  

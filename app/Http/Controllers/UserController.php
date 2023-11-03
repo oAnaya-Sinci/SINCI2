@@ -37,6 +37,7 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
+       
         $user = User::create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
@@ -44,6 +45,7 @@ class UserController extends Controller
             'admission_date' => $request->input('admission_date'),
             'email_notifi' => $request->input('email_notifi') ?? 'off',
             'telegram_notifi' => $request->input('telegram_notifi') ?? 'off',
+            'is_admin' => $request->input('is_admin') ?? false,
         ]);
 
         $user->save();
@@ -76,6 +78,7 @@ class UserController extends Controller
             'admission_date' => $request->input('admission_date'),
             'email_notifi' => $request->input('email_notifi'),
             'telegram_notifi' => $request->input('telegram_notifi'),
+            'is_admin' => $request->input('is_admin') ?? false,
         ]);
 
         $user->offices()->sync($request->input('office'));

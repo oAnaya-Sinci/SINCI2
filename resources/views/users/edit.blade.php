@@ -92,7 +92,7 @@ use Carbon\Carbon;
                             <div class="ms-md-auto pe-md-3 d-flex align-items-center">
                                 <div class="input-group input-group-outline">
                                     <label class="form-label">Fecha de ingreso</label>
-                                    <input type="date" class="form-control" name="admission_date" value="{{ Carbon::parse($user->admission_date)->format('Y-m-d')}}">
+                                    <input type="date" class="form-control" name="admission_date" value="{{ Carbon::parse($user->admission_date)->format('Y-m-d') }}">
                                 </div>
                             </div>
                         </div>
@@ -109,6 +109,13 @@ use Carbon\Carbon;
                                         <label class="form-check-label mb-0 ms-2" for="telegram">Telegram</label>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="pt-3">
+                            <div class="form-check d-flex align-items-center mb-3">
+                                <input class="form-check-input" type="checkbox" id="is_admin"
+                                    name="is_admin" value="1" {{ $user->is_admin == '1' ? 'checked' : '' }}>
+                                <label class="form-check-label mb-0 ms-2" for="admin">Agregar como administrador</label>
                             </div>
                         </div>
                         <div class="pt-2 modal-footer">

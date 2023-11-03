@@ -41,7 +41,7 @@ use Carbon\Carbon;
 @section('jsSection')
 <script>
     $('.navbar-nav li a').removeClass('bg-gradient-primary');
-    $('a[href = "/users"]').addClass('bg-gradient-primary');
+    $('a[href = "/settings"]').addClass('bg-gradient-primary');
     // $('a[href = "/bitacoras/main"]').addClass('active').removeClass('bg-gradient-primary');
 </script>
 @endsection

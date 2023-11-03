@@ -86,7 +86,7 @@ use Carbon\Carbon;
                                         @endforeach
                                     </td>
                                     <td class="align-middle text-center text-sm">
-                                        <span class="text-xs text-secondary mb-0">0</span>
+                                        <span class="text-xs text-secondary mb-0">{{ $user->days ?? 0 }}</span>
                                     </td>
                                     <td class="align-middle text-center text-sm">
                                         <span class="text-xs text-secondary mb-0">{{ Carbon::parse($user->admission_date)->format('Y-m-d') ?? Carbon::parse($date)->format('Y-m-d') }}</span>

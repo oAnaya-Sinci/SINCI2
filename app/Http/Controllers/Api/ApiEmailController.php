@@ -30,13 +30,13 @@ class ApiEmailController extends Controller
 
         if($level == 1){
             Mail::send($template_path, ['body' => $body, 'admission_date' => $admission_date, 'minimal_days' => $minimal_days], function($message) use ($template_path, $email) {
-                $message->to($email)->subject('SNL | Notificación por falta de registro en bitácora | ' . explode('@', $email)[0]);
-                $message->from('snla@sinci.com','SNL | Notificación por falta de registro en bitácora | ' . explode('@', $email)[0]);
+                $message->to($email)->subject('SNL | '. explode('@', $email)[0] .' | Notificación por falta de registro en bitácora');
+                $message->from('snla@sinci.com','SNL | '. explode('@', $email)[0] .' | Notificación por falta de registro en bitácora');
             });
         }else{
             Mail::send($template_path, ['body' => $body, 'admission_date' => $admission_date, 'minimal_days' => $minimal_days], function($message) use ($template_path, $email, $copy) {
-                $message->to($email)->subject('SNL | Notificación por falta de registro en bitácora | ' . explode('@', $email)[0])->cc($copy);
-                $message->from('snla@sinci.com','SNL | Notificación por falta de registro en bitácora | ' . explode('@', $email)[0]);
+                $message->to($email)->subject('SNL | '. explode('@', $email)[0] .' | Notificación por falta de registro en bitácora')->cc($copy);
+                $message->from('snla@sinci.com','SNL | '. explode('@', $email)[0] .' | Notificación por falta de registro en bitácora');
             });
         }
 

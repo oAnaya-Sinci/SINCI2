@@ -26,7 +26,7 @@ class ApiEmailController extends Controller
         $copy = explode(",", $request->copy);
         $date = User::where('email', $email)->value('admission_date');
         $admission_date = Carbon::parse($date)->format('d-m-y');
-        $minimal_days = Setting::where('id', 1)->value('days');
+        $minimal_days = Setting::where('id', '=', 1)->value('days');
 
         if($level == 1){
             Mail::send($template_path, ['body' => $body, 'admission_date' => $admission_date], function($message) use ($template_path, $email) {

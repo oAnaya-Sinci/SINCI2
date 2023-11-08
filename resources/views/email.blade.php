@@ -144,13 +144,12 @@
                                             Apreciamos tu compromiso y esfuerzo en este asunto.
                                         </td>
                                     </tr>
-                                    <br>
                                     <tr
                                         style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
                                         <td class="content-block"
                                             style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;"
                                             valign="top">
-                                            <p><strong>Nota:</strong>Recuerda que la cantidad minima de dias sin registro son {{ $body }}</p>
+                                            <p><strong>Nota:</strong> Recuerda que la cantidad minima de dias sin registro son {{ $minimal_days }}</p>
                                         </td>
                                     </tr>
                                 </table>

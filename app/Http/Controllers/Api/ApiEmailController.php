@@ -25,7 +25,7 @@ class ApiEmailController extends Controller
         $level = $request->level;
         $copy = explode(",", $request->copy);
         $date = User::where('email', $email)->value('admission_date');
-        $admission_date = Carbon::parse($date)->format('d-m-y');
+        $admission_date = Carbon::parse($date)->format('d-m-Y');
         $minimal_days = Setting::where('id', 1)->value('days');
 
         if($level == 1){

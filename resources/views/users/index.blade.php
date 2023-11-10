@@ -22,6 +22,11 @@
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Departamento</th>
+
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Fecha Ingreso</th>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Notificacion Email</th>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Notificacion Telegram</th>
+
                                         <th class="text-secondary opacity-7"></th>
                                         <th class="text-secondary opacity-7"></th>
                                     </tr>
@@ -54,6 +59,19 @@
                                             <span class="text-xs text-secondary mb-0">{{ $department->name }}</span>
                                         @endforeach
                                         </td>
+
+                                        <td class="align-middle text-center text-sm">
+                                            <span class="text-xs text-secondary mb-0">{{ $user->admission_date }}</span>
+                                        </td>
+
+                                        <td class="align-middle text-center text-sm">
+                                            <span class="text-xs text-secondary mb-0">{{ $user->email_notifi }}</span>
+                                        </td>
+
+                                        <td class="align-middle text-center text-sm">
+                                            <span class="text-xs text-secondary mb-0">{{ $user->telegram_notifi }}</span>
+                                        </td>
+
                                         <td class="align-middle text-center text-sm">
                                             <a  href="{{ route('users.edit', $user) }}" class="text-info font-weight-normal text-md"
                                                 data-toggle="tooltip" data-original-title="Edit user">

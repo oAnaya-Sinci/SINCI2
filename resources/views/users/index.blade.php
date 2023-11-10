@@ -61,7 +61,7 @@
                                         </td>
 
                                         <td class="align-middle text-center text-sm">
-                                            <span class="text-xs text-secondary mb-0">{{ date_format($user->admission_date, 'd-M-Y') }}</span>
+                                            <span class="text-xs text-secondary mb-0">{{ date_format(date_create($user->admission_date), 'd-M-Y') }}</span>
                                         </td>
 
                                         <td class="align-middle text-center text-sm">

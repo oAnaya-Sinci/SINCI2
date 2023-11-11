@@ -94,7 +94,7 @@
             style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
             <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0;"
                 valign="top"></td>
-            <td class="container" width="600"
+            <td class="container" width="800"
                 style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; display: block !important; max-width: 600px !important; clear: both !important; margin: 0 auto;"
                 valign="top">
                 <div class="content"
@@ -153,7 +153,7 @@
                                             <ol>
                                                 <li>Recuerda que la cantidad máxima de días sin registro son <span style="color:red;font-weight:bold">{{$minimal_days}}</span></li>
                                                 <li>Los días tomados en consideración son solo los dias habiles (L-V)</span></li>
-                                                <li>Todos los dias habiles deben de ser registrado aun estos no se hayan laborado por los siguientes motivos:</li>
+                                                <li>Todos los dias habiles deben de ser registrados aun estos no se hayan laborado por los siguientes motivos:</li>
                                                 <ul>
                                                     <li>Días de vacaciones</li>
                                                     <li>Días festivos</li>

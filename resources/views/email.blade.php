@@ -149,7 +149,17 @@
                                         <td class="content-block"
                                             style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;"
                                             valign="top">
-                                            <p><strong>Nota:</strong> Recuerda que la cantidad máxima de días sin registro son <span style="color:red;font-weight:bold">{{$minimal_days}}</span></p>
+                                            <p><strong>Nota:</strong> Favor de tomar en cuenta las siguientes consideraciones:</p>
+                                            <ol>
+                                                <li>Recuerda que la cantidad máxima de días sin registro son <span style="color:red;font-weight:bold">{{$minimal_days}}</span></li>
+                                                <li>Los días tomados en consideración son solo los dias habiles (L-V)</span></li>
+                                                <li>Todos los dias habiles deben de ser registrado aun estos no se hayan laborado por los siguientes motivos:</li>
+                                                <ul>
+                                                    <li>Días de vacaciones</li>
+                                                    <li>Días festivos</li>
+                                                    <li>Ausencias laborales por enfermedad o temas personales</li>
+                                                </ul>
+                                            </ol>
                                         </td>
                                     </tr>
                                 </table>

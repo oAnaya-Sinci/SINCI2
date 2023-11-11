@@ -24,8 +24,8 @@
                                             Departamento</th>
 
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Fecha Ingreso</th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Notificacion Email</th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Notificacion Telegram</th>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Notificación Email</th>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Notificación Telegram</th>
 
                                         <th class="text-secondary opacity-7"></th>
                                         <th class="text-secondary opacity-7"></th>
@@ -65,11 +65,19 @@
                                         </td>
 
                                         <td class="align-middle text-center text-sm">
-                                            <span class="text-xs text-secondary mb-0">{{ $user->email_notifi }}</span>
+                                            @if( $user->email_notifi == "on" )
+                                                <span class="text-xs text-secondary mb-0">Activo</span>
+                                            @else
+                                                <span class="text-xs text-secondary mb-0">Inactivo</span>
+                                            @endif
                                         </td>
 
                                         <td class="align-middle text-center text-sm">
-                                            <span class="text-xs text-secondary mb-0">{{ $user->telegram_notifi }}</span>
+                                            @if( $user->telegram_notifi == "on" )
+                                                <span class="text-xs text-secondary mb-0">Activo</span>
+                                            @else
+                                                <span class="text-xs text-secondary mb-0">Inactivo</span>
+                                            @endif
                                         </td>
 
                                         <td class="align-middle text-center text-sm">

@@ -12,8 +12,8 @@ use Carbon\Carbon;
                     <div class="pt-1">
                         <form method="POST" action="{{ route('reports.filter') }}">
                             <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group body-modalsSinci">
+                                <div class="col-md-4">
+                                    <div class="form-group body-modalsSinci" style="flex-direction: column;">
                                         <label for="recipient-name" class="col-form-label">Departamento:</label>
                                         @csrf
                                         @method('POST')
@@ -27,9 +27,29 @@ use Carbon\Carbon;
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-6 pt-1">
+
+                                <!-- <div class="col-md-4">
+                                    <div class="form-group body-modalsSinci" style="flex-direction: column;">
+                                        <label for="recipient-name" class="col-form-label">Oficina:</label>
+                                        @csrf
+                                        @method('POST')
+                                        <select class="form-select modalForm" name="office">
+                                            <option value="">{{__('Selecciona')}}</option>
+                                            @foreach($offices as $id => $office)
+                                            <option value="{{ $id }}" @selected(old($id))>
+                                                {{ $office }}
+                                            </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div> -->
+
+                                <div class="col-md-8 pt-1" style="margin-top: 2.6rem; display: flex; justify-content: space-between;">
+                                    <!-- <label for="recipient-name" class="col-form-label">Acciones:</label> -->
                                     <button type="submit" class="btn btn-success">Descargar</button>
+                                    <button type="button" class="btn btn-info refresh">Refrescar</button>
                                 </div>
+                                <hr>
                             </div>
                         </form>
                     </div>
@@ -55,7 +75,7 @@ use Carbon\Carbon;
                                         Dias acumulados</th>
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Fecha</th>
+                                        Fecha Ingreso</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -114,5 +134,16 @@ use Carbon\Carbon;
     $('.navbar-nav li a').removeClass('bg-gradient-primary');
     $('a[href = "/reports"]').addClass('bg-gradient-primary');
     // $('a[href = "/bitacoras/main"]').addClass('active').removeClass('bg-gradient-primary');
+
+
+    document.querySelector('.refresh').addEventListener('click', async () => {
+
+        await fetch('https://websas.sinci.com:1880/updateDaysNoDataUsers');
+
+        setTimeout(() => {
+            window.location.reload();
+        }, 1000);
+    });
+
 </script>
 @endsection

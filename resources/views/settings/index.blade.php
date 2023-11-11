@@ -62,10 +62,10 @@ use Carbon\Carbon;
         <div class="col-xl-12 col-sm-12 mb-xl-0 mb-2">
             <div class="card">
                 <div class="card-header p-3 pt-2">
-                    <div class="pt-1">
+                    <!-- <div class="pt-1">
                         <a href="{{ route('settings.date.create') }}"
                             class="m-4 ml-6 mt-3 mb-2 text-md">{{__('Agregar')}}</a>
-                    </div>
+                    </div> -->
                     <div class="pt-3">
                         <div class="table-responsive">
                             <table class="table align-items-center mb-0">

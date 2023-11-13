@@ -782,7 +782,7 @@
                     var prevButton;
                     $.each(this.split(','), function(j, buttonName) {
                         if (buttonName == 'title') {
-                            e.append("<span class='fc-header-title'><h2>&nbsp;</h2></span>");
+                            e.append("<span class='fc-header-title'><h4>&nbsp;</h4></span>");
                             if (prevButton) {
                                 prevButton.addClass(tm + '-corner-right');
                             }
@@ -856,7 +856,8 @@
 
 
         function updateTitle(html) {
-            element.find('h2')
+            // element.find('h2')
+            element.find('h4')
                 .html(html);
         }
 
@@ -876,6 +877,8 @@
         function disableButton(buttonName) {
             element.find('span.fc-button-' + buttonName)
                 .addClass(tm + '-state-disabled');
+
+                $('#calendar .fc-content table thead .fc-col' + moment().day() + '.fc-widget-header').addClass('resaltarDia');
         }
 
 
@@ -1652,7 +1655,7 @@
 
 
     /* thanks jQuery UI (https://github.com/jquery/jquery-ui/blob/master/ui/jquery.ui.datepicker.js)
-     * 
+     *
      * Set as calculateWeek to determine the week of the year based on the ISO 8601 definition.
      * `date` - the date to get the week for
      * `number` - the number of the week within the year that contains this date
@@ -2760,7 +2763,7 @@
         dragOpacity: {
             agenda: .5
         },
-        minTime: 0,
+        minTime: 6,
         maxTime: 24,
         slotEventOverlap: true
     });
@@ -2987,7 +2990,10 @@
                 "<table class='fc-agenda-slots' style='width:100%' cellspacing='0'>" +
                 "<tbody>";
             d = zeroDate();
+            // d = new Date( d.setHours( d.getHours() + 5 ) );
             maxd = addMinutes(cloneDate(d), maxMinute);
+            // minMinute = 300;
+            // maxMinute = 1140;
             addMinutes(d, minMinute);
             slotCnt = 0;
             for (i = 0; d < maxd; i++) {
@@ -3576,7 +3582,7 @@
                         var d2 = realCellToDate(cell);
                         dates = [
                             d1,
-                            addMinutes(cloneDate(d1), snapMinutes), // calculate minutes depending on selection slot minutes 
+                            addMinutes(cloneDate(d1), snapMinutes), // calculate minutes depending on selection slot minutes
                             d2,
                             addMinutes(cloneDate(d2), snapMinutes)
                         ].sort(dateCompare);
@@ -6103,3 +6109,4 @@
     ;;
 
 })(jQuery);
+

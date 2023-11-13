@@ -120,8 +120,7 @@
                                             Hemos observado <span style="color:red;font-weight:bold"> {{ $body }}
                                             </span> días en total de falta de registro en el llenado de bitácora a
                                             partir de la fecha: <span style="color:red;font-weight:bold"> {{  $admission_date }}
-                                            </span>
-                                            . Esta situación es crucial para nuestros procesos. Por
+                                            </span>. Esta situación es crucial para nuestros procesos. Por
                                             favor, asegúrate de que se complete adecuadamente día con día.
                                         </td>
                                     </tr>

@@ -179,8 +179,6 @@ async function calendarSinci() {
     modalCalendarSinci();
     iniciateModalUpdate();
     outLoader();
-
-    $('#calendar .fc-content table thead .fc-col' + moment().day() + '.fc-widget-header').addClass('resaltarDia');
 }
 
 /**
@@ -375,9 +373,9 @@ function showWeeksNumbers(weekNumber, isWeek, isDay, dayNum = 0) {
         $('#calendar .fc-content .fc-agenda-days .fc-first .fc-agenda-axis').css("text-align", "center")
     } else {
 
-        isWeek ? $('#calendar .fc-header .fc-header-center').html("<h4 style='color: #344767;'>Semana " + (weekNumber < 52 ? (weekNumber + 1) : 1) + "</h4>") : null;
-        // isDay ? $('#calendar .fc-header .fc-header-center').html("<h4 style='color: #344767;'>Semana " + (weekNumber < 52 ? ((dayNum == 0 || dayNum == 1) ? weekNumber + 1 : weekNumber) : 1) + "</h4>") : null;
-        isDay ? $('#calendar .fc-header .fc-header-center').html("<h4 style='color: #344767;'>Semana " + (weekNumber < 52 ? (weekNumber + 1) : 1) + "</h4>") : null;
+        isWeek ? $('#calendar .fc-header .fc-header-center').html("<p style='font-size: 21px; font-weight: 500; margin:-5px 0 0 0; color: #344767;'>Semana " + (weekNumber < 52 ? (weekNumber + 1) : 1) + "</p>") : null;
+        // isDay ? $('#calendar .fc-header .fc-header-center').html("<p style='font-size: 21px; font-weight: 500; margin:-5px 0 0 0; color: #344767;'>Semana " + (weekNumber < 52 ? ((dayNum == 0 || dayNum == 1) ? weekNumber + 1 : weekNumber) : 1) + "</p>") : null;
+        isDay ? $('#calendar .fc-header .fc-header-center').html("<p style='font-size: 21px; font-weight: 500; margin:-5px 0 0 0; color: #344767;'>Semana " + (weekNumber < 52 ? (weekNumber + 1) : 1) + "</p>") : null;
     }
 }
 
@@ -839,3 +837,8 @@ let resetcalendar = () => {
     $('#calendar').empty();
     calendarSinci();
 }
+
+
+// $('#calendar .fc-content table thead .fc-col' + moment().day() + '.fc-widget-header').addClass('resaltarDia');
+
+document.querySelector('fc-button fc-button-today fc-state-default fc-corner-left fc-corner-right fc-state-disabled')

@@ -368,7 +368,7 @@
         {{ $titulo ?? '' }}
         <br />
       </div>
-      <div class="container-fluid py-4">
+      <div class="container-fluid">
       @yield('pageContent')
       </div>
     </section>

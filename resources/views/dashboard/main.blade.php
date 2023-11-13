@@ -14,7 +14,7 @@
           <div class="card-header p-3 pt-2">
 
             <h3>This is the dashboard view</h3>
-            
+
           </div>
 
         </div>

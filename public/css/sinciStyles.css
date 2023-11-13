@@ -82,39 +82,7 @@ body .nav-link.text-white {
  * @Desc: This is the styles of the calendar to changue accordig the requires of the proyect
  */
 
-
-/* .fc-slot0 .fc-widget-content,
-.fc-slot1 .fc-widget-content,
-.fc-slot2 .fc-widget-content,
-.fc-slot3 .fc-widget-content,
-.fc-slot4 .fc-widget-content,
-.fc-slot5 .fc-widget-content,
-.fc-slot6 .fc-widget-content,
-.fc-slot7 .fc-widget-content,
-.fc-slot8 .fc-widget-content,
-.fc-slot9 .fc-widget-content,
-.fc-slot10 .fc-widget-content,
-.fc-slot11 .fc-widget-content,
-.fc-slot12 .fc-widget-content,
-.fc-slot13 .fc-widget-content,
-.fc-slot14 .fc-widget-content,
-.fc-slot15 .fc-widget-content,
-.fc-slot16 .fc-widget-content,
-.fc-slot37 .fc-widget-content,
-.fc-slot38 .fc-widget-content,
-.fc-slot39 .fc-widget-content,
-.fc-slot40 .fc-widget-content,
-.fc-slot41 .fc-widget-content,
-.fc-slot42 .fc-widget-content,
-.fc-slot43 .fc-widget-content,
-.fc-slot44 .fc-widget-content,
-.fc-slot45 .fc-widget-content,
-.fc-slot46 .fc-widget-content,
-.fc-slot47 .fc-widget-content {
-    background-color: #F1F1F1;
-} */
-
-.fc-slot17 .fc-widget-content,
+/* .fc-slot17 .fc-widget-content,
 .fc-slot18 .fc-widget-content,
 .fc-slot19 .fc-widget-content,
 .fc-slot20 .fc-widget-content,
@@ -134,6 +102,29 @@ body .nav-link.text-white {
 .fc-slot34 .fc-widget-content,
 .fc-slot35 .fc-widget-content,
 .fc-slot36 .fc-widget-content {
+    background-color: #F1F1F1;
+} */
+
+.fc-slot5 .fc-widget-content,
+.fc-slot6 .fc-widget-content,
+.fc-slot7 .fc-widget-content,
+.fc-slot8 .fc-widget-content,
+.fc-slot9 .fc-widget-content,
+.fc-slot10 .fc-widget-content,
+.fc-slot11 .fc-widget-content,
+.fc-slot12 .fc-widget-content,
+.fc-slot13 .fc-widget-content,
+.fc-slot14 .fc-widget-content,
+.fc-slot15 .fc-widget-content,
+.fc-slot16 .fc-widget-content,
+.fc-slot17 .fc-widget-content,
+.fc-slot18 .fc-widget-content,
+.fc-slot19 .fc-widget-content,
+.fc-slot20 .fc-widget-content,
+.fc-slot21 .fc-widget-content,
+.fc-slot22 .fc-widget-content,
+.fc-slot23 .fc-widget-content,
+.fc-slot24 .fc-widget-content {
     background-color: #F1F1F1;
 }
 
@@ -334,6 +325,10 @@ h5 {
     box-shadow: none;
 }
 
+
+.fc-event-container .fc-event .fc-event-inner .fc-event-title{
+    font-size: 10.5px;
+}
 
 /**
  * @Author: Carlos Omar Anaya Barajas

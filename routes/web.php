@@ -75,10 +75,8 @@ Route::get('/bitacoras/main', function(){ $titulo = "REGISTRO DE BITÁCORAS"; re
  * @Date: 2022-03-14 13:48:53
  * @Desc: Ruta para el modulo de Compras en WEBSAS
  */
-
-// Route::get('/compras/main', function(){ $titulo = "COMPRAS"; return view('compras/main', compact('titulo')); });
-// Route::get('/compras/plantillaPDF', function(){ $titulo = "PLANTILLA PDF"; return view('compras/plantillaPDF', compact('titulo')); });
-
+Route::get('/compras/main', function(){ $titulo = "COMPRAS"; return view('compras/main', compact('titulo')); });
+Route::get('/compras/plantillaPDF', function(){ $titulo = "PLANTILLA PDF"; return view('compras/plantillaPDF', compact('titulo')); });
 
 //Routes users
 Route::get('/users', [UserController::class, 'index'])->name('users');

@@ -47,7 +47,7 @@ use Carbon\Carbon;
                                 <div class="col-md-8 pt-1" style="margin-top: 2.6rem; display: flex; justify-content: space-between;">
                                     <!-- <label for="recipient-name" class="col-form-label">Acciones:</label> -->
                                     <button type="submit" class="btn btn-success">Descargar</button>
-                                    <button type="button" class="btn btn-info refresh">Refrescar</button>
+                                    <button type="button" class="btn btn-info refresh">Actualizar</button>
                                 </div>
                                 <hr>
                             </div>

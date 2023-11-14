@@ -71,7 +71,7 @@ let tableRequisicion = async (dl, pageLength, searching /* , tableScrollX, table
             },
             error: () => {
                 $(body).click();
-                location.reload();
+                // location.reload();
                 // $('#tableRequisiciones').DataTable().ajax.reload();
             }
         },
@@ -213,8 +213,8 @@ let tableRequisicionAuth = async (dl, pageLength, searching /* , tableScrollX, t
                 requisicionesAuthInciatePagesTables();
             },
             error: () => {
-                $(body).click();
-                location.reload();
+                // $(body).click();
+                // location.reload();
                 // $('#tableRequisicionesAuth').DataTable().ajax.reload();
             }
         },
@@ -374,7 +374,7 @@ let tableOrdenCompra = async (dl, pageLength, searching /* , tableScrollX, table
             },
             error: () => {
                 $(body).click();
-                location.reload();
+                // location.reload();
                 // $('#tableOrdenesCompra').DataTable().ajax.reload();
             }
         },
@@ -548,7 +548,7 @@ let tableCanceladas = async (dl, pageLength, searching /* , tableScrollX, tableS
             },
             error: () => {
                 $(body).click();
-                location.reload();
+                // location.reload();
                 // $('#tableCanceladas').DataTable().ajax.reload();
             }
         },

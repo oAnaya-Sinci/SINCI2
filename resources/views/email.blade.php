@@ -150,13 +150,13 @@
                                             valign="top">
                                             <p><strong>Nota:</strong> Favor de tomar en cuenta las siguientes consideraciones:</p>
                                             <ol>
-                                                <li>Recuerda que la cantidad máxima de días sin registrar en la bitácora son <span style="color:red;font-weight:bold">{{$minimal_days}}</span> días</li>
-                                                <li>Los días tomados en consideración son solo los dias habiles (L-V)</span></li>
-                                                <li>Todos los dias habiles deben de ser registrados aun estos no se hayan laborado por los siguientes motivos:</li>
+                                                <li>Recuerda que la cantidad máxima de días sin registrar en la bitácora son <span style="color:red;font-weight:bold">{{$minimal_days}}</span> días.</li>
+                                                <li>Los días tomados en consideración son solo los días hábiles (lunes a viernes).</span></li>
+                                                <li>Todos los días hábiles deben de ser registrados aun estos no se hayan laborado por los siguientes motivos:</li>
                                                 <ul>
-                                                    <li>Días de vacaciones</li>
-                                                    <li>Días festivos</li>
-                                                    <li>Ausencias laborales por enfermedad o temas personales</li>
+                                                    <li>Días de vacaciones.</li>
+                                                    <li>Días festivos.</li>
+                                                    <li>Ausencias laborales por enfermedad o temas personales.</li>
                                                 </ul>
                                             </ol>
                                         </td>

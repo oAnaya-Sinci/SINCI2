@@ -67,11 +67,11 @@ body h5,
 
 body .modal label,
 body .modal table thead {
-    font-size: 15px !important;
+    font-size: 14px !important;
 }
 
 body .nav-link.text-white {
-    font-size: 14px;
+    font-size: 13px;
     /* font-weight: 600; */
 }
 
@@ -165,12 +165,12 @@ body .nav-link.text-white {
 }
 
 .modalsSinciClass .modal-content {
-    height: 45.3rem;
+    height: 42.5rem;
 }
 
 .body-modalsSinci {
     display: flex;
-    margin: .25rem 0 .25rem 0;
+    /* margin: .25rem 0 .25rem 0; */
 }
 
 .body-modalsSinci label {

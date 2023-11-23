@@ -36,12 +36,12 @@
               <strong>Faltan elementos para guardar el registro</strong>
             </span> -->
                     <div class="form-group">
-                        <label for="message-text" class="col-form-label">Resumen de la bitácora:</label>
+                        <label for="message-text" class="col-form-label" style="font-size: 18px !important;">Resumen de la bitácora</label>
                         <textarea class="form-control" id="message-text" name="resumen" required></textarea>
                     </div>
 
                     <div class="form-group body-modalsSinci pt-3">
-                        <label for="recipient-name" class="col-form-label">Proyecto:</label>
+                        <label for="recipient-name" class="col-form-label">Proyecto</label>
                         <!-- <input type="search" class="form-control" id="recipient-name" name="slctProyecto" list="listaProyectos">
               <datalist id="listaProyectos"></datalist> -->
                         <!-- <select class="form-select modalForm" name="slctProyecto" id="slctProyecto" required>
@@ -54,7 +54,7 @@
                         <!-- <select class="selectpicker form-control" id="number" data-live-search="true" title="Select a number" data-hide-disabled="true"></select> -->
                     </div>
                     <div id="divUsuarios" class="form-group body-modalsSinci pt-3">
-                        <label id="lblUsuario" for="recipient-name" class="col-form-label">Usuario:</label>
+                        <label id="lblUsuario" for="recipient-name" class="col-form-label">Usuario</label>
                         <!-- <input type="text" class="form-control" id="recipient-name" name="usuario"> -->
                         <!-- <select class="form-select modalForm" name="slctUsuario" id="slctUsuario" required> -->
                         <select class="selectpicker form-control" name="slctUsuario" id="slctUsuario"
@@ -65,14 +65,14 @@
                     <div class="row pt-3">
                         <div class="col-md-6">
                             <div class="form-group body-modalsSinci">
-                                <label for="recipient-name" class="col-form-label">Inicio:</label>
+                                <label for="recipient-name" class="col-form-label">Inicio</label>
                                 <input type="text" class="form-control datetimepicker modalForm" id="startDate"
                                     name="inicio" required>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group body-modalsSinci">
-                                <label for="recipient-name" class="col-form-label">Fin:</label>
+                                <label for="recipient-name" class="col-form-label">Fin</label>
                                 <input type="text" class="form-control datetimepicker modalForm" id="endDate" name="fin"
                                     required>
                             </div>
@@ -81,7 +81,7 @@
                     <div class="row pt-3">
                         <div class="col-md-6">
                             <div class="form-group body-modalsSinci">
-                                <label for="recipient-name" class="col-form-label">Tipo:</label>
+                                <label for="recipient-name" class="col-form-label">Tipo</label>
                                 <select class="form-select modalForm" name="slctTipo" id="slctTipo" required>
                                     <option value="-1">Seleccione una opción</option>
                                     <option value="0">Horas desarrollo</option>
@@ -93,7 +93,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group body-modalsSinci asignar_a">
-                                <label for="recipient-name" class="col-form-label">Asignar_a:</label>
+                                <label for="recipient-name" class="col-form-label">Asignar a</label>
                                 <select class="selectpicker form-control" name="slctAsignar" id="slctAsignar"
                                     data-live-search="true" data-virtual-scroll="false">
                                     <option value="">NAN</option>

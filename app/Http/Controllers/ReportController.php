@@ -13,9 +13,7 @@ class ReportController extends Controller
 {
     public function index()
     {
-
-        $users = User::whereRelation('positions', 'id', '=', 4)
-        ->whereRelation('departments', 'id', '=', 1)->orderby('name')
+        $users = User::whereRelation('positions', 'id', '=', 4)->orderby('name')
         ->get();
         $departments = Department::all()->pluck('name', 'id');
         $offices = Office::all()->pluck('name', 'id');

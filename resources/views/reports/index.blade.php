@@ -4,6 +4,13 @@ use Carbon\Carbon;
 
 @extends('layouts.app')
 @section('pageContent')
+
+<style>
+    .dataFiltered {
+        display: none
+    }
+</style>
+
 <div class="container-fluid py-4">
     <div class="row">
         <div class="col-xl-12 col-sm-12 mb-xl-0 mb-2">
@@ -17,8 +24,8 @@ use Carbon\Carbon;
                                         <label for="recipient-name" class="col-form-label">Departamento:</label>
                                         @csrf
                                         @method('POST')
-                                        <select class="form-select modalForm" name="department">
-                                            <option value="">{{__('Selecciona')}}</option>
+                                        <select class="form-select modalForm department_slct" name="department">
+                                            <option value="todos">todos</option>
                                             @foreach($departments as $id => $department)
                                             <option value="{{ $id }}" @selected(old($id))>
                                                 {{ $department }}
@@ -28,13 +35,13 @@ use Carbon\Carbon;
                                     </div>
                                 </div>
 
-                                <!-- <div class="col-md-4">
+                                <div class="col-md-4">
                                     <div class="form-group body-modalsSinci" style="flex-direction: column;">
                                         <label for="recipient-name" class="col-form-label">Oficina:</label>
                                         @csrf
                                         @method('POST')
-                                        <select class="form-select modalForm" name="office">
-                                            <option value="">{{__('Selecciona')}}</option>
+                                        <select class="form-select modalForm office_slct" name="office">
+                                            <option value="todos">todos</option>
                                             @foreach($offices as $id => $office)
                                             <option value="{{ $id }}" @selected(old($id))>
                                                 {{ $office }}
@@ -42,10 +49,9 @@ use Carbon\Carbon;
                                             @endforeach
                                         </select>
                                     </div>
-                                </div> -->
+                                </div>
 
-                                <div class="col-md-8 pt-1" style="margin-top: 2.6rem; display: flex; justify-content: space-between;">
-                                    <!-- <label for="recipient-name" class="col-form-label">Acciones:</label> -->
+                                <div class="col-md-4 pt-1" style="margin-top: 2.6rem; display: flex; justify-content: space-between;">
                                     <button type="submit" class="btn btn-success">Descargar</button>
                                     <button type="button" class="btn btn-info refresh">Actualizar</button>
                                 </div>
@@ -59,22 +65,18 @@ use Carbon\Carbon;
                 </div> -->
                 <div class="pt-1">
                     <div class="table-responsive">
-                        <table class="table align-items-center mb-0">
+                        <table id="dataReport" class="table align-items-center mb-0">
                             <thead>
                                 <tr>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Nombre / Correo</th>
-                                    <th
-                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                         Puesto / Oficina</th>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Departamento</th>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Dias acumulados</th>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Fecha Ingreso</th>
                                 </tr>
                             </thead>
@@ -145,5 +147,61 @@ use Carbon\Carbon;
         }, 1000);
     });
 
+    // new DataTable('#dataReport');
+
+    let filterPerOffice = valueSelected => {
+
+        let deptoSelected = document.querySelector('.department_slct').selectedOptions[0].text;
+        (deptoSelected !== 'todos' && valueSelected !== 'todos') ? filterDatatable(1, valueSelected, deptoSelected) : filterDatatable(2, valueSelected, deptoSelected);
+    }
+
+    let filterPerDeparment = valueSelected => {
+
+        let officeSelected = document.querySelector('.office_slct').selectedOptions[0].text;
+        (officeSelected !== 'todos' && valueSelected !== 'todos') ? filterDatatable(1, officeSelected, valueSelected) : filterDatatable(3, officeSelected, valueSelected);
+    }
+
+    let filterDatatable = (wichWay, officeSelected = 'todos', deptoSelected = 'todos') => {
+
+        document.querySelectorAll('.dataFiltered').forEach(elem => { elem.classList.remove('dataFiltered'); });
+
+        if(officeSelected === 'todos' && deptoSelected === 'todos')
+            return false;
+
+        if (wichWay == 1) {
+            document.querySelectorAll('#dataReport tbody tr').forEach(elem => {
+
+                let office = elem.querySelectorAll('p')[2].innerText;
+                let department = elem.querySelector('span').innerText;
+
+                if (office !== officeSelected || department !== deptoSelected)
+                    elem.className = 'dataFiltered';
+            });
+        } else if (wichWay == 2) {
+            document.querySelectorAll('#dataReport tbody tr').forEach(elem => {
+
+                let office = elem.querySelectorAll('p')[2].innerText;
+
+                if (office !== officeSelected)
+                    elem.className = 'dataFiltered';
+            });
+        } else {
+            document.querySelectorAll('#dataReport tbody tr').forEach(elem => {
+
+                let department = elem.querySelector('span').innerText;
+
+                if (department !== deptoSelected)
+                    elem.className = 'dataFiltered';
+            });
+        }
+    }
+
+    document.querySelector('.department_slct').addEventListener('change', selection => {
+        filterPerDeparment(selection.target.selectedOptions[0].text)
+    });
+
+    document.querySelector('.office_slct').addEventListener('change', selection => {
+        filterPerOffice(selection.target.selectedOptions[0].text)
+    });
 </script>
 @endsection

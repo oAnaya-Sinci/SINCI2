@@ -33,20 +33,20 @@ class ReportController extends Controller
         // })->get();
 
         if($request->input('department') != 'todos' && $request->input('office') != "todos"){
-            $users = User::select('users.name, users.email, offices.name, departments.name, users.days, users.admission_date')
-            ->whereRelation('departments', 'id', '=', $request->input('department'))
+            // $users = User::select('users.name, users.email, offices.name, departments.name, users.days, users.admission_date')
+            $users = User::whereRelation('departments', 'id', '=', $request->input('department'))
             ->whereRelation('offices', 'id', '=', $request->input('office'))
             ->orderby('name')->get();
         } else if($request->input('department') != 'todos' && $request->input('office') == "todos"){
-            $users = User::select('users.name, users.email, offices.name, departments.name, users.days, users.admission_date')
-            ->whereRelation('departments', 'id', '=', $request->input('department'))
+            // $users = User::select('users.name, users.email, offices.name, departments.name, users.days, users.admission_date')
+            $users = User::whereRelation('departments', 'id', '=', $request->input('department'))
             ->orderby('name')->get();
         } else if($request->input('department') == 'todos' && $request->input('office') != "todos"){
-            $users = User::select('users.name, users.email, offices.name, departments.name, users.days, users.admission_date')
-            ->whereRelation('offices', 'id', '=', $request->input('office'))
+            // $users = User::select('users.name, users.email, offices.name, departments.name, users.days, users.admission_date')
+            $users = User::whereRelation('offices', 'id', '=', $request->input('office'))
             ->orderby('name')->get();
         } else {
-            $users = User::select('users.name, users.email, offices.name, departments.name, users.days, users.admission_date')->orderby('name')->get();
+            $users = User::orderby('name')->get();
         }
 
         // return view('reports.index', compact('users', 'departments', 'offices', 'titulo', 'date'));

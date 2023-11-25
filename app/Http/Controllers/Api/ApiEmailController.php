@@ -28,7 +28,7 @@ class ApiEmailController extends Controller
         $admission_date = date_format(date_create($request->date_user), 'd-m-Y');
         $minimal_days = Setting::where('id', 1)->value('days');
 
-        if($request->recordatorio != 1){
+        if($request->recordatorio == 0){
             if($level == 1){
                 Mail::send($template_path, ['body' => $body, 'admission_date' => $admission_date, 'minimal_days' => $minimal_days], function($message) use ($template_path, $email) {
                     $message->to($email)->subject('SNL | '. explode('@', $email)[0] .' | Notificación por falta de registro en bitácora');

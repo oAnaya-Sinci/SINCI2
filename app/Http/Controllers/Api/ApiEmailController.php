@@ -46,9 +46,10 @@ class ApiEmailController extends Controller
 
         else{
 
+            $template_path = 'email_recordatorio';
             $body = "Recuerda llenar tu bitacora.";
 
-            Mail::send($template_path, ['body' => $body, 'minimal_days' => $minimal_days], function($message) use ($template_path, $email) {
+            Mail::send($template_path, ['body' => $body, 'minimal_days' => $minimal_days], function($message) use ($email) {
                 $message->to($email)->subject('SNL | '. explode('@', $email)[0] .' | Notificación para registro en bitácora');
                 $message->from('snla@sinci.com','SNL | '. explode('@', $email)[0] .' | Notificación para registro en bitácora');
             });

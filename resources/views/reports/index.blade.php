@@ -152,18 +152,27 @@ use Carbon\Carbon;
     let filterPerOffice = valueSelected => {
 
         let deptoSelected = document.querySelector('.department_slct').selectedOptions[0].text;
-        (deptoSelected !== 'todos' && valueSelected !== 'todos') ? filterDatatable(1, valueSelected, deptoSelected) : filterDatatable(2, valueSelected, deptoSelected);
+        filterDatatable(valueSelected, deptoSelected);
     }
 
     let filterPerDeparment = valueSelected => {
 
         let officeSelected = document.querySelector('.office_slct').selectedOptions[0].text;
-        (officeSelected !== 'todos' && valueSelected !== 'todos') ? filterDatatable(1, officeSelected, valueSelected) : filterDatatable(3, officeSelected, valueSelected);
+        filterDatatable(officeSelected, valueSelected);
     }
 
-    let filterDatatable = (wichWay, officeSelected = 'todos', deptoSelected = 'todos') => {
+    let filterDatatable = (officeSelected = 'todos', deptoSelected = 'todos') => {
 
         document.querySelectorAll('.dataFiltered').forEach(elem => { elem.classList.remove('dataFiltered'); });
+
+        let wichWay = 0;
+        if(deptoSelected !== 'todos' && officeSelected !== 'todos'){
+            wichWay = 1;
+        } else if(deptoSelected === 'todos' && officeSelected !== 'todos'){
+            wichWay = 2;
+        } else if(deptoSelected !== 'todos' && officeSelected === 'todos'){
+            wichWay = 3;
+        }
 
         if(officeSelected === 'todos' && deptoSelected === 'todos')
             return false;

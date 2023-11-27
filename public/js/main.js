@@ -21,11 +21,11 @@ var timeOut;
  * @Date: 2022-03-03 12:23:26
  * @Desc: Here iniciate some of the elements required for a good work of the proyect
  */
-$(document).ready(async function() {
+$(document).ready(function() {
 
     console.time('Session');
 
-    await IsLogedIn();
+    IsLogedIn();
 
     let isAdmin = Number(window.localStorage.getItem('isAdmin'));
 
@@ -35,7 +35,7 @@ $(document).ready(async function() {
 
     timeOut = setTimeout(() => { return false }, 1000);
 
-    await set_TimeOut();
+    set_TimeOut();
 
     moment.updateLocale('en', {
         months: [

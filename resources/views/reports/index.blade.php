@@ -9,10 +9,6 @@ use Carbon\Carbon;
     .dataFiltered {
         display: none
     }
-
-    .dataFilteredXLSX {
-        display: none
-    }
 </style>
 
 <div class="container-fluid py-4">
@@ -56,8 +52,8 @@ use Carbon\Carbon;
                                 </div>
 
                                 <div class="col-md-4 pt-1" style="margin-top: 2.6rem; display: flex; justify-content: space-between;">
-                                    <!-- <button type="submit" class="btn btn-success">Descargar</button> -->
-                                    <button type="button" class="btn btn-success download">Descargar</button>
+                                    <button type="submit" class="btn btn-success">Descargar</button>
+                                    <!-- <button type="button" class="btn btn-success download">Descargar</button> -->
                                     <button type="button" class="btn btn-info refresh">Actualizar</button>
                                 </div>
                                 <hr>
@@ -128,57 +124,6 @@ use Carbon\Carbon;
                                 @endforelse
                             </tbody>
                         </table>
-
-
-                        <table id="dataReportXLSX" class="table align-items-center mb-0" style="display: none;">
-                            <thead>
-                                <tr>
-                                    <th>Nombre</th>
-                                    <th>Correo</th>
-                                    <th>Puesto</th>
-                                    <th>Oficina</th>
-                                    <th>Departamento</th>
-                                    <th>Dias acumulados</th>
-                                    <th>Fecha Ingreso</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @forelse($users as $user)
-                                <tr>
-                                    <td>{{ $user->name }}</td>
-                                    <td>{{$user->email}}</td>
-                                    <td>
-                                        @foreach($user->positions as $position)
-                                        {{ $position->name }}
-                                        @endforeach
-                                    </td>
-                                    <td>
-                                        @foreach($user->offices as $office)
-                                        {{ $office->name }}
-                                        @endforeach
-                                    </td>
-                                    <td>
-                                        @foreach($user->departments as $department)
-                                        {{ $department->name }}
-                                        @endforeach
-                                    </td>
-                                    <td>
-                                        {{ $user->days ?? 0 }}
-                                    </td>
-                                    <td>
-                                        {{ Carbon::parse($user->admission_date)->format('Y-m-d') ?? Carbon::parse($date)->format('Y-m-d') }}
-                                    </td>
-                                </tr>
-                                @empty
-                                <tr>
-                                    <td colspan="2" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                        {{ __('No se encontraron usuarios') }}
-                                    </td>
-                                </tr>
-                                @endforelse
-                            </tbody>
-                        </table>
-
                     </div>
                 </div>
             </div>
@@ -255,52 +200,6 @@ use Carbon\Carbon;
             });
         } else {
             document.querySelectorAll('#dataReport tbody tr').forEach(elem => {
-
-                let department = elem.querySelector('span').innerText;
-
-                if (department !== deptoSelected)
-                    elem.className = 'dataFiltered';
-            });
-        }
-    }
-
-    let filterDatatableXLSX = (officeSelected = 'todos', deptoSelected = 'todos') => {
-
-        document.querySelectorAll('.dataFilteredXLSX').forEach(elem => {
-            elem.classList.remove('dataFilteredXLSX');
-        });
-
-        let wichWay = 0;
-        if (deptoSelected !== 'todos' && officeSelected !== 'todos') {
-            wichWay = 1;
-        } else if (deptoSelected === 'todos' && officeSelected !== 'todos') {
-            wichWay = 2;
-        } else if (deptoSelected !== 'todos' && officeSelected === 'todos') {
-            wichWay = 3;
-        }
-
-        if (officeSelected === 'todos' && deptoSelected === 'todos')
-            return false;
-
-        if (wichWay == 1) {
-            document.querySelectorAll('#dataReportXLSX tbody tr').forEach(elem => {
-
-                let office = elem.querySelectorAll('p')[2].innerText;
-                let department = elem.querySelector('span').innerText;
-
-                if (office !== officeSelected || department !== deptoSelected)
-                    elem.className = 'dataFiltered';
-            });
-        } else if (wichWay == 2) {
-            document.querySelectorAll('#dataReportXLSX tbody tr').forEach(elem => {
-
-                let office = elem.querySelectorAll('p')[2].innerText;
-
-                if (office !== officeSelected)
-                    elem.className = 'dataFiltered';
-            });
-        } else {
-            document.querySelectorAll('#dataReportXLSX tbody tr').forEach(elem => {
 
                 let department = elem.querySelector('span').innerText;
 

@@ -38,8 +38,8 @@ use Carbon\Carbon;
                                 <div class="col-md-4">
                                     <div class="form-group body-modalsSinci" style="flex-direction: column;">
                                         <label for="recipient-name" class="col-form-label">Oficina:</label>
-                                        @csrf
-                                        @method('POST')
+                                        <!-- @csrf
+                                        @method('POST') -->
                                         <select class="form-select modalForm office_slct" name="office">
                                             <option value="todos">todos</option>
                                             @foreach($offices as $id => $office)
@@ -52,7 +52,8 @@ use Carbon\Carbon;
                                 </div>
 
                                 <div class="col-md-4 pt-1" style="margin-top: 2.6rem; display: flex; justify-content: space-between;">
-                                    <button type="submit" class="btn btn-success">Descargar</button>
+                                    <!-- <button type="submit" class="btn btn-success">Descargar</button> -->
+                                    <button type="button" class="btn btn-success download">Descargar</button>
                                     <button type="button" class="btn btn-info refresh">Actualizar</button>
                                 </div>
                                 <hr>
@@ -123,6 +124,57 @@ use Carbon\Carbon;
                                 @endforelse
                             </tbody>
                         </table>
+
+
+                        <table id="dataReportXLSX" class="table align-items-center mb-0" style="display: none;">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Correo</th>
+                                    <th>Puesto</th>
+                                    <th>Oficina</th>
+                                    <th>Departamento</th>
+                                    <th>Dias acumulados</th>
+                                    <th>Fecha Ingreso</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @forelse($users as $user)
+                                <tr>
+                                    <td>{{ $user->name }}</td>
+                                    <td>{{$user->email}}</td>
+                                    <td>
+                                        @foreach($user->positions as $position)
+                                            {{ $position->name }}
+                                        @endforeach
+                                    </td>
+                                    <td>
+                                        @foreach($user->offices as $office)
+                                            {{ $office->name }}
+                                        @endforeach
+                                    </td>
+                                    <td>
+                                        @foreach($user->departments as $department)
+                                            {{ $department->name }}
+                                        @endforeach
+                                    </td>
+                                    <td>
+                                        {{ $user->days ?? 0 }}
+                                    </td>
+                                    <td>
+                                        {{ Carbon::parse($user->admission_date)->format('Y-m-d') ?? Carbon::parse($date)->format('Y-m-d') }}
+                                    </td>
+                                </tr>
+                                @empty
+                                <tr>
+                                    <td colspan="2" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                        {{ __('No se encontraron usuarios') }}
+                                    </td>
+                                </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
+
                     </div>
                 </div>
             </div>
@@ -132,6 +184,7 @@ use Carbon\Carbon;
 </div>
 @endsection
 @section('jsSection')
+<script src="https://cdn.jsdelivr.net/gh/linways/table-to-excel@v1.0.4/dist/tableToExcel.js"></script>
 <script>
     $('.navbar-nav li a').removeClass('bg-gradient-primary');
     $('a[href = "/reports"]').addClass('bg-gradient-primary');
@@ -147,8 +200,6 @@ use Carbon\Carbon;
         }, 1000);
     });
 
-    // new DataTable('#dataReport');
-
     let filterPerOffice = valueSelected => {
 
         let deptoSelected = document.querySelector('.department_slct').selectedOptions[0].text;
@@ -163,18 +214,20 @@ use Carbon\Carbon;
 
     let filterDatatable = (officeSelected = 'todos', deptoSelected = 'todos') => {
 
-        document.querySelectorAll('.dataFiltered').forEach(elem => { elem.classList.remove('dataFiltered'); });
+        document.querySelectorAll('.dataFiltered').forEach(elem => {
+            elem.classList.remove('dataFiltered');
+        });
 
         let wichWay = 0;
-        if(deptoSelected !== 'todos' && officeSelected !== 'todos'){
+        if (deptoSelected !== 'todos' && officeSelected !== 'todos') {
             wichWay = 1;
-        } else if(deptoSelected === 'todos' && officeSelected !== 'todos'){
+        } else if (deptoSelected === 'todos' && officeSelected !== 'todos') {
             wichWay = 2;
-        } else if(deptoSelected !== 'todos' && officeSelected === 'todos'){
+        } else if (deptoSelected !== 'todos' && officeSelected === 'todos') {
             wichWay = 3;
         }
 
-        if(officeSelected === 'todos' && deptoSelected === 'todos')
+        if (officeSelected === 'todos' && deptoSelected === 'todos')
             return false;
 
         if (wichWay == 1) {
@@ -212,5 +265,19 @@ use Carbon\Carbon;
     document.querySelector('.office_slct').addEventListener('change', selection => {
         filterPerOffice(selection.target.selectedOptions[0].text)
     });
+
+    document.querySelector('.download').addEventListener('click', () => {
+        exportToExcel();
+    });
+
+    function exportToExcel() {
+        let table = document.getElementById("dataReportXLSX"); // you can use document.getElementById('tableId') as well by providing id to the table tag
+        TableToExcel.convert(table, { // html code may contain multiple tables so here we are refering to 1st table tag
+            name: `data_report.xlsx`, // fileName you could use any name
+            sheet: {
+                name: 'Sheet 1' // sheetName
+            }
+        });
+    }
 </script>
 @endsection

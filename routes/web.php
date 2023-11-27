@@ -101,5 +101,5 @@ Route::post('/settings/date/{date}', [SettingController::class, 'dateUpdate'])->
 
 Route::any('/', function () {
     [ReportController::class, 'filter'];
-    return (new UsersExport)->department(request('department'))->download('users.xlsx');
+    return (new UsersExport)->department(request('department'))->office(request('office'))->download('report_users.xlsx');
 })->name('reports.filter');

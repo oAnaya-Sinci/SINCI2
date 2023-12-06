@@ -3,11 +3,13 @@
 namespace App\Exports;
 
 use App\Models\User;
+use App\Models\Department;
 use Maatwebsite\Excel\Excel;
-use Maatwebsite\Excel\Concerns\FromQuery;
+use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\Exportable;
+use Illuminate\Contracts\View\View;
 
-class UsersExport implements FromQuery
+class UsersExport implements FromView
 {
     use Exportable;
 
@@ -28,16 +30,17 @@ class UsersExport implements FromQuery
         return $this;
     }
 
-    public function query()
+    public function view(): view
     {
-        // return User::query()->select('users.id', 'users.name', 'users.email', 'positions.name', 'departments.name', 'offices.name', 'users.days', 'users.admission_date')
-        return User::query()->select('users.id', 'users.name', 'users.email', 'users.days', 'users.admission_date')
-        ->whereRelation('positions', 'id', '=', 4)
-        ->whereHas('departments', function ($query) {
-            $query->where('id',  $this->department);
-        })
-        ->whereHas('offices', function ($query) {
-            $query->where('id',  $this->office);
-        });
-    }
+        return view('export.index',[
+            'users' => User::with(['offices', 'departments', 'positions'])
+                    ->whereRelation('positions', 'id', '=', 4)
+                    ->whereHas('departments', function ($query) {
+                        $query->where('id',  $this->department);
+                    })
+                    ->whereHas('offices', function ($query) {
+                        $query->where('id',  $this->office);
+                    })->get()
+            ]);
+    }    
 }

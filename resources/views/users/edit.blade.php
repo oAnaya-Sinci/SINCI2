@@ -117,6 +117,11 @@ use Carbon\Carbon;
                                     name="is_admin" value="1" {{ $user->is_admin == '1' ? 'checked' : '' }}>
                                 <label class="form-check-label mb-0 ms-2" for="admin">Agregar como administrador</label>
                             </div>
+                            <div class="form-check d-flex align-items-center mb-3">
+                                <input class="form-check-input" type="checkbox" id="reports"
+                                    name="reports" value="1" {{ $user->reports == '1' ? 'checked' : '' }}>
+                                <label class="form-check-label mb-0 ms-2" for="reports">Ver reportes</label>
+                            </div>
                         </div>
                         <div class="pt-2 modal-footer">
                             <button type="submit" class="btn btn-primary">Guardar</button>

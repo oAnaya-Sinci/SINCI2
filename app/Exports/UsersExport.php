@@ -40,7 +40,7 @@ class UsersExport implements FromView
                     })
                     ->whereHas('offices', function ($query) {
                         $query->where('id',  $this->office);
-                    })->get()
+                    })->orderBy('name')->get()
             ]);
     }    
 }

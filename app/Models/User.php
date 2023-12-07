@@ -29,6 +29,7 @@ class User extends Authenticatable
         'admission_date',
         'password',
         'is_admin',
+        'reports',
     ];
 
     /**

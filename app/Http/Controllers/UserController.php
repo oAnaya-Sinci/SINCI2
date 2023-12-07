@@ -46,6 +46,7 @@ class UserController extends Controller
             'email_notifi' => $request->input('email_notifi') ?? 'off',
             'telegram_notifi' => $request->input('telegram_notifi') ?? 'off',
             'is_admin' => $request->input('is_admin') ?? false,
+            'reports' => $request->input('reports') ?? false,
         ]);
 
         $user->save();
@@ -79,6 +80,7 @@ class UserController extends Controller
             'email_notifi' => $request->input('email_notifi'),
             'telegram_notifi' => $request->input('telegram_notifi'),
             'is_admin' => $request->input('is_admin') ?? false,
+            'reports' => $request->input('reports') ?? false,
         ]);
 
         $user->offices()->sync($request->input('office'));

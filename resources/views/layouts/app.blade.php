@@ -301,7 +301,7 @@
   }
 }
 
-.onlyAdmin.inactive{
+.inactive{
     display: none;
 }
 
@@ -314,7 +314,7 @@
         <span class="logo_name">WEB SASS</span>
       </div>
       <ul class="nav-links">
-        <li>
+        <li class="bitacora inactive">
           <a href="/bitacoras/main">
             <i class='bx bx-calendar'></i>
             <span class="link_name">Bitacora</span>
@@ -323,7 +323,7 @@
             <li><a class="link_name" href="/bitacoras/main">Bitacora</a></li>
           </ul>
         </li>
-        <li class="onlyAdmin">
+        <li class="onlyAdmin inactive">
           <a href="/users">
             <i class='bx bx-user'></i>
             <span class="link_name">Usuarios</span>
@@ -332,7 +332,7 @@
             <li><a class="link_name" href="/users">Usuarios</a></li>
           </ul>
         </li>
-        <li class="onlyAdmin">
+        <li class="onlyAdmin inactive">
           <a href="/settings">
             <i class='bx bx-file'></i>
             <span class="link_name">Configuración</span>
@@ -341,7 +341,7 @@
             <li><a class="link_name" href="/settings">Configuración</a></li>
           </ul>
         </li>
-        <li  class="onlyAdmin">
+        <li  class="onlyAdmin reports inactive">
           <a href="/reports">
             <i class='bx bx-line-chart'></i>
             <span class="link_name">Reportes</span>

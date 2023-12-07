@@ -28,9 +28,16 @@ $(document).ready(function() {
     IsLogedIn();
 
     let isAdmin = Number(window.localStorage.getItem('isAdmin'));
+    let seeReports = Number(window.localStorage.getItem('seeReports'));
 
-    if(!isAdmin){
-        document.querySelectorAll('.nav-links .onlyAdmin').forEach((elem) => { elem.classList.add('inactive') });
+    if(isAdmin){
+        // document.querySelectorAll('.nav-links .onlyAdmin').forEach((elem) => { elem.classList.add('inactive') });
+        document.querySelectorAll('.nav-links .onlyAdmin').forEach((elem) => { elem.classList.toggle('inactive') });
+        document.querySelectorAll('.nav-links .bitacora').forEach((elem) => { elem.classList.toggle('inactive') });
+    } else {
+        document.querySelectorAll('.nav-links .bitacora').forEach((elem) => { elem.classList.toggle('inactive') });
+        if(seeReports)
+            document.querySelectorAll('.nav-links .reports').forEach((elem) => { elem.classList.toggle('inactive') });
     }
 
     timeOut = setTimeout(() => { return false }, 1000);

@@ -5,7 +5,6 @@
         <th>Correo</th>
         <th>Oficina</th>
         <th>Departamento</th>
-        <th>Puesto</th>
         <th>Dias acumulados</th>
     </tr>
     </thead>
@@ -19,9 +18,6 @@
             @endforeach
             @foreach($user->departments as $department)
             <td>{{ $department->name }}</td>
-            @endforeach
-            @foreach($user->positions as $position)
-            <td>{{ $position->name }}</td>
             @endforeach
             <td>{{ $user->days }}</td>
         </tr>

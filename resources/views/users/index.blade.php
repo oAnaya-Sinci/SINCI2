@@ -26,6 +26,8 @@
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Fecha Ingreso</th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Notificación Email</th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Notificación Telegram</th>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Administrador</th>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ver Reportes</th>
 
                                         <th class="text-secondary opacity-7"></th>
                                         <th class="text-secondary opacity-7"></th>
@@ -77,6 +79,22 @@
                                                 <span class="text-xs text-secondary mb-0">Activo</span>
                                             @else
                                                 <span class="text-xs text-secondary mb-0">Inactivo</span>
+                                            @endif
+                                        </td>
+
+                                        <td class="align-middle text-center text-sm">
+                                            @if( $user->is_admin == 1 )
+                                                <span class="text-xs text-secondary mb-0">si</span>
+                                            @else
+                                                <span class="text-xs text-secondary mb-0">no</span>
+                                            @endif
+                                        </td>
+
+                                        <td class="align-middle text-center text-sm">
+                                            @if( $user->reports == 1 )
+                                                <span class="text-xs text-secondary mb-0">si</span>
+                                            @else
+                                                <span class="text-xs text-secondary mb-0">no</span>
                                             @endif
                                         </td>
 

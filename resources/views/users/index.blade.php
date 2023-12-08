@@ -81,7 +81,7 @@
                                         </td>
 
                                         <td class="align-middle text-center text-sm">
-                                            <a  href="{{ route('users.edit', $user) }}" class="text-info font-weight-normal text-md"
+                                            <a  href="{{ route('users.edit', $user) }}" class="btn btn-info"
                                                 data-toggle="tooltip" data-original-title="Edit user">
                                                 Editar
                                             </a>
@@ -90,10 +90,10 @@
                                         <form method="POST" action="{{ route('users.destroy', $user) }}">
                                                 @csrf
                                                 @method('DELETE')
-                                                <a type="submit" onclick="return confirm('Estas seguro?')" class="text-danger font-weight-normal text-md"
+                                            <button type="button" onclick="return confirm('Estas seguro?')" class="btn btn-danger"
                                                 data-toggle="tooltip" data-original-title="Delete user">
                                                 Eliminar
-                                            </a>
+                                            </button>
                                             </form>
                                         </td>
                                     </tr>

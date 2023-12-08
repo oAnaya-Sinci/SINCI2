@@ -32,22 +32,14 @@ class UsersExport implements FromView
 
     public function view(): view
     {
-            if(empty($this->office)){
-                $data =  User::with(['offices', 'departments', 'positions'])
-                    ->whereRelation('positions', 'id', '=', 4)
-                    ->whereHas('departments', function ($query) {
-                        $query->where('id',  $this->department);
-                    })
-                    ->whereHas('offices', function ($query) {
-                        $query->where('id',  $this->office);
-                    })->orderBy('name')->get();
-            }else{
-                $data =  User::with(['offices', 'departments', 'positions'])
-                    ->whereRelation('positions', 'id', '=', 4)
-                    ->whereHas('departments', function ($query) {
-                        $query->where('id',  $this->department);
-                    })->orderBy('name')->get();
-            }
+            $data =  User::with(['offices', 'departments', 'positions'])
+                ->whereRelation('positions', 'id', '=', 4)
+                ->whereHas('departments', function ($query) {
+                    $query->where('id',  isset($this->department) ? : '');
+                })
+                ->whereHas('offices', function ($query) {
+                    $query->where('id',  isset($this->office) ? : '');
+                })->orderBy('name')->get();
                 
         return view('export.index',[
                 'users' => $data

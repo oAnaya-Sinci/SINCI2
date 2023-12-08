@@ -26,6 +26,8 @@
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Fecha Ingreso</th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Notificación Email</th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Notificación Telegram</th>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Administrador</th>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ver Reportes</th>
 
                                         <th class="text-secondary opacity-7"></th>
                                         <th class="text-secondary opacity-7"></th>
@@ -81,7 +83,23 @@
                                         </td>
 
                                         <td class="align-middle text-center text-sm">
-                                            <a  href="{{ route('users.edit', $user) }}" class="text-info font-weight-normal text-md"
+                                            @if( $user->is_admin == 1 )
+                                                <span class="text-xs text-secondary mb-0">si</span>
+                                            @else
+                                                <span class="text-xs text-secondary mb-0">no</span>
+                                            @endif
+                                        </td>
+
+                                        <td class="align-middle text-center text-sm">
+                                            @if( $user->reports == 1 )
+                                                <span class="text-xs text-secondary mb-0">si</span>
+                                            @else
+                                                <span class="text-xs text-secondary mb-0">no</span>
+                                            @endif
+                                        </td>
+
+                                        <td class="align-middle text-center text-sm">
+                                            <a  href="{{ route('users.edit', $user) }}" class="btn btn-info"
                                                 data-toggle="tooltip" data-original-title="Edit user">
                                                 Editar
                                             </a>
@@ -90,10 +108,10 @@
                                         <form method="POST" action="{{ route('users.destroy', $user) }}">
                                                 @csrf
                                                 @method('DELETE')
-                                                <a type="submit" onclick="return confirm('Estas seguro?')" class="text-danger font-weight-normal text-md"
+                                            <button type="button" onclick="return confirm('Estas seguro?')" class="btn btn-danger"
                                                 data-toggle="tooltip" data-original-title="Delete user">
                                                 Eliminar
-                                            </a>
+                                            </button>
                                             </form>
                                         </td>
                                     </tr>

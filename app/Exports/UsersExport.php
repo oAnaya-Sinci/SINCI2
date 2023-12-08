@@ -50,8 +50,7 @@ class UsersExport implements FromView
             })->orderBy('name')->get();
         }
                 
-                
-        dd($data);
+            
         return view('export.index',[
                 'users' => $data
                 ]);

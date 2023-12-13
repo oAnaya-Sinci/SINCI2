@@ -4,12 +4,15 @@ namespace App\Exports;
 
 use App\Models\User;
 use App\Models\Department;
+use App\Models\Date;
 use Maatwebsite\Excel\Excel;
 use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Illuminate\Contracts\View\View;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use Carbon\Carbon;
 
-class UsersExport implements FromView
+class UsersExport implements FromView, ShouldAutoSize
 {
     use Exportable;
 
@@ -32,6 +35,9 @@ class UsersExport implements FromView
 
     public function view(): view
     {
+        $dates = Date::all();
+        $date_end = Carbon::now()->format('Y-m-d');
+        
         if($this->office == 'todos' && $this->department == 'todos'){
             $data = User::with(['offices', 'departments', 'positions'])
             ->whereRelation('positions', 'id', '=', 4)->orderBy('name')->get();
@@ -49,10 +55,11 @@ class UsersExport implements FromView
                 $query->where('id',  $this->department);
             })->orderBy('name')->get();
         }
-                
             
         return view('export.index',[
-                'users' => $data
+                'users' => $data,
+                'dates' => $dates,
+                'date_end' => $date_end,
                 ]);
 
     }    

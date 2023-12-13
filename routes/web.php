@@ -6,6 +6,7 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\Api\ApiEmailController;
 use App\Exports\UsersExport;
+use Carbon\Carbon;
 // use App\Http\Controllers\HomeController AS home;
 // use App\Http\Controllers\Auth\logoutController AS logout;
 // use Illuminate\Support\Facades\Auth;
@@ -99,7 +100,11 @@ Route::post('/settings', [SettingController::class, 'dateStore'])->name('setting
 Route::get('/settings/date/edit/{date}', [SettingController::class, 'dateEdit'])->name('settings.date.edit');
 Route::post('/settings/date/{date}', [SettingController::class, 'dateUpdate'])->name('settings.date.update');
 
+
+
 Route::any('/', function () {
+    $currentDate = Date::now()->format('Y-m-d');
+    $fileName = 'reporte_bitacoras_' . $currentDate . '.xlsx';
     [ReportController::class, 'filter'];
-    return (new UsersExport)->department(request('department'))->office(request('office'))->download('report_users.xlsx');
+    return (new UsersExport)->department(request('department'))->office(request('office'))->download($fileName);
 })->name('reports.filter');

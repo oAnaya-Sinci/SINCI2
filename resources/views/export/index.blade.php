@@ -1,6 +1,12 @@
 <table>
     <thead>
     <tr>
+        @foreach($dates as $date_start)
+        <th>Fecha inicio: {{ date_format(date_create($date_start->setting_date), 'Y-m-d') }}</th>
+        @endforeach
+        <th>Fecha fin: {{ $date_end }}</th>
+    </tr>
+    <tr>
         <th>Nombre</th>
         <th>Correo</th>
         <th>Oficina</th>

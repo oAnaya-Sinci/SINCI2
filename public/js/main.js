@@ -67,9 +67,10 @@ $(document).ready(function() {
  */
 function set_TimeOut() {
 
-    let timeSession = 300000; // 5 minutes
-    // let timeSession = 600000; // 10 minutes
-    // let timeSession = 6000000; // 100 minutes
+    // let timeSession = 305000; // 5 minutes
+    // let timeSession = 605000; // 10 minutes
+    let timeSession = 905000; // 15 minutes
+    // let timeSession = 6005000; // 100 minutes
 
     clearTimeout(timeOut);
 
@@ -242,7 +243,6 @@ var dataLogin = () => {
 
     return keyLogin;
 }
-
 
 /**
  * javascript comment

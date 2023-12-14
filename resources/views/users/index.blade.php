@@ -108,7 +108,7 @@
                                         <form method="POST" action="{{ route('users.destroy', $user) }}">
                                                 @csrf
                                                 @method('DELETE')
-                                            <button type="button" onclick="return confirm('Estas seguro?')" class="btn btn-danger"
+                                            <button type="submit" onclick="return confirm('Estas seguro?')" class="btn btn-danger"
                                                 data-toggle="tooltip" data-original-title="Delete user">
                                                 Eliminar
                                             </button>

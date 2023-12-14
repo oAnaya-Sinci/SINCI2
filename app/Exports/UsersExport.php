@@ -43,7 +43,7 @@ class UsersExport implements FromView, ShouldAutoSize
             ->whereRelation('positions', 'id', '=', 4)->orderBy('name')->get();
         }
         elseif($this->department == 'todos' && !empty($this->office)){
-        $data = User::with(['offices', 'departments', 'positions'])
+            $data = User::with(['offices', 'departments', 'positions'])
                 ->whereRelation('positions', 'id', '=', 4)
                 ->whereHas('offices', function ($query) {
                     $query->where('id',  $this->office);

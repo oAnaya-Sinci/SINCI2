@@ -53,7 +53,6 @@ use Carbon\Carbon;
 
                                 <div class="col-md-4 pt-1" style="margin-top: 2.6rem; display: flex; justify-content: space-between;">
                                     <button type="submit" class="btn btn-success">Descargar</button>
-                                    <!-- <button type="button" class="btn btn-success download">Descargar</button> -->
                                     <button type="button" class="btn btn-info refresh">Actualizar</button>
                                 </div>
                                 <hr>
@@ -70,15 +69,15 @@ use Carbon\Carbon;
                             <thead>
                                 <tr>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Nombre / Correo</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                        Puesto / Oficina</th>
+                                        Nombre / Correo <img src="/public/img/order_up.png" alt=""> </th>
+                                    <!-- <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Puesto / Oficina</th> -->
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Oficina <img src="/public/img/order_up.png" alt=""></th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Departamento</th>
+                                        Departamento <img src="/public/img/order_up.png" alt=""></th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Dias acumulados</th>
+                                        Dias acumulados <img src="/public/img/order_up.png" alt=""></th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Fecha Ingreso</th>
+                                        Fecha Ingreso <img src="/public/img/order_up.png" alt=""></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -96,9 +95,9 @@ use Carbon\Carbon;
                                         </div>
                                     </td>
                                     <td>
-                                        @foreach($user->positions as $position)
+                                        <!-- @foreach($user->positions as $position)
                                         <p class="text-xs font-weight-bold mb-0">{{ $position->name }}</p>
-                                        @endforeach
+                                        @endforeach -->
                                         @foreach($user->offices as $office)
                                         <p class="text-xs text-secondary mb-0">{{ $office->name }}</p>
                                         @endforeach
@@ -139,14 +138,23 @@ use Carbon\Carbon;
     $('a[href = "/reports"]').addClass('bg-gradient-primary');
     // $('a[href = "/bitacoras/main"]').addClass('active').removeClass('bg-gradient-primary');
 
+    document.addEventListener("DOMContentLoaded", function(event) {
+
+        let dataSearchSaved =  localStorage.setItem('searchData');
+
+        document.querySelector('.department_slct').value = dataSearchSaved.depto;
+        document.querySelector('.office_slct').value = dataSearchSaved.office;
+    });
 
     document.querySelector('.refresh').addEventListener('click', async () => {
+
+        localStorage.setItem('searchData', {'depto': document.querySelector('.department_slct').value, 'office': document.querySelector('.office_slct').value})
 
         await fetch('https://websas.sinci.com:1880/updateDaysNoDataUsers');
 
         setTimeout(() => {
             window.location.reload();
-        }, 1000);
+        }, 2000);
     });
 
     let filterPerOffice = valueSelected => {
@@ -217,18 +225,5 @@ use Carbon\Carbon;
         filterPerOffice(selection.target.selectedOptions[0].text)
     });
 
-    document.querySelector('.download').addEventListener('click', () => {
-        exportToExcel();
-    });
-
-    function exportToExcel() {
-        let table = document.getElementById("dataReportXLSX"); // you can use document.getElementById('tableId') as well by providing id to the table tag
-        TableToExcel.convert(table, { // html code may contain multiple tables so here we are refering to 1st table tag
-            name: `data_report.xlsx`, // fileName you could use any name
-            sheet: {
-                name: 'Sheet 1' // sheetName
-            }
-        });
-    }
 </script>
 @endsection

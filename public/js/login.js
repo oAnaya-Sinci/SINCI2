@@ -8,7 +8,7 @@
 // var urlData = "http://localhost:1880";
 // var urlData = "https://10.10.100.34:1880";
 
-var currenUrl = window.location.href.split("/")[2];
+var currenUrl = location.href.split("/")[2];
 currenUrl = currenUrl.split(":");
 
 var urlData = "https://websas.sinci.com:1880";
@@ -70,14 +70,14 @@ $('#btnLogin').click(async function() {
                     }
                 });
             } else if (response.sessionAuth != 'false') {
-                window.localStorage.setItem('sasIsLogedIn', response.sessionAuth);
-                window.localStorage.setItem('isAdmin', response.isAdmin);
-                window.localStorage.setItem('seeReports', response.seeReports);
-                // window.location.href = "/dashboard";
-                window.location.href = "/bitacoras/main";
+                localStorage.setItem('sasIsLogedIn', response.sessionAuth);
+                localStorage.setItem('isAdmin', response.isAdmin);
+                localStorage.setItem('seeReports', response.seeReports);                
+                // location.href = "/dashboard";
+                location.href = "/bitacoras/main";
             } else {
-                // window.localStorage.setItem('sasIsLogedIn', false);
-                window.localStorage.removeItem('sasIsLogedIn');
+                // localStorage.setItem('sasIsLogedIn', false);
+                localStorage.removeItem('sasIsLogedIn');
 
                 outLoader();
 
@@ -129,17 +129,17 @@ async function IsLogedIn() {
     await $.ajax({
         type: "POST",
         url: urlData + "/authenticate/isLogedIn",
-        data: { "isLogedIn": window.localStorage.getItem('sasIsLogedIn') },
+        data: { "isLogedIn": localStorage.getItem('sasIsLogedIn') },
         success: function(response) {
 
             response = JSON.parse(response)[0];
 
             if (response.sessionAuth != 'false') {
-                window.localStorage.setItem('sasIsLogedIn', response.sessionAuth);
-                // window.location.href = "/dashboard";
-                window.location.href = "/bitacoras/main";
+                localStorage.setItem('sasIsLogedIn', response.sessionAuth);
+                // location.href = "/dashboard";
+                location.href = "/bitacoras/main";
             } else {
-                window.localStorage.setItem('sasIsLogedIn', 'false');
+                localStorage.setItem('sasIsLogedIn', 'false');
             }
         },
         error: function(exception) {

@@ -142,5 +142,8 @@
     $('.navbar-nav li a').removeClass('bg-gradient-primary');
     $('a[href = "/bitacoras/main"]').addClass('bg-gradient-primary');
     // $('a[href = "/bitacoras/main"]').addClass('active').removeClass('bg-gradient-primary');
+
+    localStorage.setItem('searchDataDepto', 'todos');
+    localStorage.setItem('searchDataOffice', 'todos');
 </script>
 @endsection

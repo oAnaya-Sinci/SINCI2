@@ -37,6 +37,7 @@ $(document).ready(function() {
     document.getElementById("endDate").addEventListener("keyup", preventDef, false);
     document.getElementById("endDate").addEventListener("keydown", preventDef, false);
 
+    inLoader();
     calendarSinci();
 });
 

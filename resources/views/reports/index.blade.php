@@ -9,6 +9,14 @@ use Carbon\Carbon;
     .dataFiltered {
         display: none
     }
+
+    #dataReport thead tr th{
+        cursor: pointer;
+    }
+
+    #dataReport thead tr th img{
+        margin: -0.4rem 0.3rem 0 0;
+    }
 </style>
 
 <div class="container-fluid py-4">
@@ -68,16 +76,23 @@ use Carbon\Carbon;
                         <table id="dataReport" class="table align-items-center mb-0">
                             <thead>
                                 <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Nombre / Correo <img src="/public/img/order_up.png" alt=""> </th>
+                                    <!-- <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> -->
+                                    <!-- <span class="nombre"><img src="/img/order_down.png" alt="" width="15" height="15" name="order_down"> Nombre / Correo </span></th> -->
                                     <!-- <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Puesto / Oficina</th> -->
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Oficina <img src="/public/img/order_up.png" alt=""></th>
+                                    <!-- <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                    <span class="oficina"><img src="/img/order_down.png" alt="" width="15" height="15" name="order_down"> Oficina </span></th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Departamento <img src="/public/img/order_up.png" alt=""></th>
+                                    <span class="depto"><img src="/img/order_down.png" alt="" width="15" height="15" name="order_down"> Departamento </span></th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Dias acumulados <img src="/public/img/order_up.png" alt=""></th>
+                                    <span class="dias"><img src="/img/order_down.png" alt="" width="15" height="15" name="order_down"> Dias acumulados </span></th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Fecha Ingreso <img src="/public/img/order_up.png" alt=""></th>
+                                    <span class="fecha"><img src="/img/order_down.png" alt="" width="15" height="15" name="order_down"> Fecha Ingreso </span></th> -->
+
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nombre / Correo</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"> Oficina</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> Departamento</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> Dias acumulados</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> Fecha Ingreso</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -99,12 +114,12 @@ use Carbon\Carbon;
                                         <p class="text-xs font-weight-bold mb-0">{{ $position->name }}</p>
                                         @endforeach -->
                                         @foreach($user->offices as $office)
-                                        <p class="text-xs text-secondary mb-0">{{ $office->name }}</p>
+                                        <span class="text-xs text-secondary mb-0 office">{{ $office->name }}</span>
                                         @endforeach
                                     </td>
                                     <td class="align-middle text-center text-sm">
                                         @foreach($user->departments as $department)
-                                        <span class="text-xs text-secondary mb-0">{{ $department->name }}</span>
+                                        <span class="text-xs text-secondary mb-0 depto">{{ $department->name }}</span>
                                         @endforeach
                                     </td>
                                     <td class="align-middle text-center text-sm">
@@ -140,15 +155,110 @@ use Carbon\Carbon;
 
     document.addEventListener("DOMContentLoaded", function(event) {
 
-        let dataSearchSaved =  localStorage.setItem('searchData');
+        let dataSearchSaved_Depto =  localStorage.getItem('searchDataDepto');
+        let dataSearchSaved_Office =  localStorage.getItem('searchDataOffice');
 
-        document.querySelector('.department_slct').value = dataSearchSaved.depto;
-        document.querySelector('.office_slct').value = dataSearchSaved.office;
+        document.querySelector('.department_slct').value = dataSearchSaved_Depto;
+        document.querySelector('.office_slct').value = dataSearchSaved_Office;
+
+        let depto = document.querySelector('.department_slct').selectedOptions[0].text;
+
+        filterPerDeparment( depto );
     });
+
+//     document.querySelectorAll('#dataReport thead tr th').forEach( th => {
+        
+//         th.addEventListener('click', event => {
+            
+//             let span = th.querySelector('span');            
+//             let typeHead = span.classList.value;
+
+//             let checkImgOrder = elem => {
+
+//                 let previousValue = elem.querySelector('img').name;
+
+//                 elem.parentElement.parentElement.querySelectorAll('th span img').forEach( img => {
+//                     img.src = '/img/order_down.png';
+//                     img.name = 'order_down';
+//                 });
+
+//                 if(previousValue == 'order_up'){
+//                     elem.querySelector('img').src = '/img/order_down.png';
+//                     elem.querySelector('img').name = 'order_down';
+//                 } else {
+//                     elem.querySelector('img').src = '/img/order_up.png';
+//                     elem.querySelector('img').name = 'order_up';
+//                 }
+//             };
+
+//             let obtainDataTable = (keyId) => {
+
+//                 let dataTable = {};
+//                 document.querySelectorAll('#dataReport tbody tr').forEach( td => {
+            
+//                     if(keyId == 0){
+
+//                         let key = td.querySelectorAll('td')[0].querySelector('h6').innerText;
+
+//                         dataTable[key] = {
+//                             'name': key,
+//                             'office': td.querySelectorAll('td')[1].innerText,
+//                             'department': td.querySelectorAll('td')[2].innerText,
+//                             'days': td.querySelectorAll('td')[3].innerText,
+//                             'date': td.querySelectorAll('td')[4].innerText,
+//                         };
+//                     } else {
+//                         let key = td.querySelectorAll('td')[keyId].innerText;
+
+//                         dataTable[key] = {
+//                             'name': td.querySelectorAll('td')[0].querySelector('h6').innerText,
+//                             'office': td.querySelectorAll('td')[1].innerText,
+//                             'department': td.querySelectorAll('td')[2].innerText,
+//                             'days': td.querySelectorAll('td')[3].innerText,
+//                             'date': td.querySelectorAll('td')[4].innerText,
+//                         };
+//                     }
+//                 });
+// console.log(dataTable);
+//                 let keysObject = Object.keys( dataTable ).sort( function(a,b){ return a+b });
+
+//                 console.log(keysObject);
+//             };
+
+//             switch(typeHead){
+//                 case 'nombre':
+//                     obtainDataTable(0);
+//                     checkImgOrder(span);
+//                     break;
+                
+//                 case 'oficina':
+//                     obtainDataTable(1);
+//                     checkImgOrder(span);
+//                     break;
+                
+//                 case 'depto':
+//                     obtainDataTable(2);
+//                     checkImgOrder(span);
+//                     break;
+
+//                 case 'dias':
+//                     obtainDataTable(3);
+//                     checkImgOrder(span);
+//                     break;
+
+//                 case 'fecha':
+//                     obtainDataTable(4);
+//                     checkImgOrder(span);
+//                     break;
+//             }
+
+//         });
+//     });
 
     document.querySelector('.refresh').addEventListener('click', async () => {
 
-        localStorage.setItem('searchData', {'depto': document.querySelector('.department_slct').value, 'office': document.querySelector('.office_slct').value})
+        localStorage.setItem('searchDataDepto', document.querySelector('.department_slct').value);
+        localStorage.setItem('searchDataOffice', document.querySelector('.office_slct').value);
 
         await fetch('https://websas.sinci.com:1880/updateDaysNoDataUsers');
 
@@ -161,14 +271,12 @@ use Carbon\Carbon;
 
         let deptoSelected = document.querySelector('.department_slct').selectedOptions[0].text;
         filterDatatable(valueSelected, deptoSelected);
-        filterDatatableXLSX(valueSelected, deptoSelected);
     }
 
     let filterPerDeparment = valueSelected => {
 
         let officeSelected = document.querySelector('.office_slct').selectedOptions[0].text;
         filterDatatable(officeSelected, valueSelected);
-        filterDatatableXLSX(officeSelected, valueSelected);
     }
 
     let filterDatatable = (officeSelected = 'todos', deptoSelected = 'todos') => {
@@ -192,8 +300,8 @@ use Carbon\Carbon;
         if (wichWay == 1) {
             document.querySelectorAll('#dataReport tbody tr').forEach(elem => {
 
-                let office = elem.querySelectorAll('p')[2].innerText;
-                let department = elem.querySelector('span').innerText;
+                let office = elem.querySelector('span.office').innerText;
+                let department = elem.querySelector('span.depto').innerText;
 
                 if (office !== officeSelected || department !== deptoSelected)
                     elem.className = 'dataFiltered';
@@ -201,7 +309,7 @@ use Carbon\Carbon;
         } else if (wichWay == 2) {
             document.querySelectorAll('#dataReport tbody tr').forEach(elem => {
 
-                let office = elem.querySelectorAll('p')[2].innerText;
+                let office = elem.querySelector('span.office').innerText;
 
                 if (office !== officeSelected)
                     elem.className = 'dataFiltered';
@@ -209,7 +317,7 @@ use Carbon\Carbon;
         } else {
             document.querySelectorAll('#dataReport tbody tr').forEach(elem => {
 
-                let department = elem.querySelector('span').innerText;
+                let department = elem.querySelector('span.depto').innerText;
 
                 if (department !== deptoSelected)
                     elem.className = 'dataFiltered';

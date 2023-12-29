@@ -2763,8 +2763,8 @@
         dragOpacity: {
             agenda: .5
         },
-        minTime: 6,
-        maxTime: 24,
+        minTime: 7,
+        maxTime: 23,
         slotEventOverlap: true
     });
 

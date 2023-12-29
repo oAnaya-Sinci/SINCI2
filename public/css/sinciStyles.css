@@ -82,29 +82,8 @@ body .nav-link.text-white {
  * @Desc: This is the styles of the calendar to changue accordig the requires of the proyect
  */
 
-/* .fc-slot17 .fc-widget-content,
-.fc-slot18 .fc-widget-content,
-.fc-slot19 .fc-widget-content,
-.fc-slot20 .fc-widget-content,
-.fc-slot21 .fc-widget-content,
-.fc-slot22 .fc-widget-content,
-.fc-slot23 .fc-widget-content,
-.fc-slot24 .fc-widget-content,
-.fc-slot25 .fc-widget-content,
-.fc-slot26 .fc-widget-content,
-.fc-slot27 .fc-widget-content,
-.fc-slot28 .fc-widget-content,
-.fc-slot29 .fc-widget-content,
-.fc-slot30 .fc-widget-content,
-.fc-slot31 .fc-widget-content,
-.fc-slot32 .fc-widget-content,
-.fc-slot33 .fc-widget-content,
-.fc-slot34 .fc-widget-content,
-.fc-slot35 .fc-widget-content,
-.fc-slot36 .fc-widget-content {
-    background-color: #F1F1F1;
-} */
-
+.fc-slot3 .fc-widget-content,
+.fc-slot4 .fc-widget-content,
 .fc-slot5 .fc-widget-content,
 .fc-slot6 .fc-widget-content,
 .fc-slot7 .fc-widget-content,
@@ -122,9 +101,7 @@ body .nav-link.text-white {
 .fc-slot19 .fc-widget-content,
 .fc-slot20 .fc-widget-content,
 .fc-slot21 .fc-widget-content,
-.fc-slot22 .fc-widget-content,
-.fc-slot23 .fc-widget-content,
-.fc-slot24 .fc-widget-content {
+.fc-slot22 .fc-widget-content {
     background-color: #F1F1F1;
 }
 

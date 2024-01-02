@@ -14,11 +14,12 @@ class SettingController extends Controller
     {
 
         $settings_date = Date::all();
+        $settings_notifi = Date::all();
         $settings = Setting::all();
         $titulo = 'Configuracion de niveles';
 
 
-        return view('settings.index', compact('settings', 'titulo','settings_date'));
+        return view('settings.index', compact('settings', 'titulo','settings_date','settings_notifi'));
     }
 
     public function edit(Setting $setting)
@@ -65,6 +66,20 @@ class SettingController extends Controller
     {
         $date->update([
             'setting_date' => $request->input('setting_date'),
+        ]);
+
+        return redirect()->route('settings');
+    }
+
+    public function statusEdit(Date $status)
+    {
+        return view('settings.notifications.edit', compact('status'));
+    }
+
+    public function statusUpdate(Request $request, Date $status)
+    {
+        $status->update([
+            'status_notifi' => $request->input('status') ?? false,
         ]);
 
         return redirect()->route('settings');

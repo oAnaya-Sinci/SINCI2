@@ -16,5 +16,6 @@ class Date extends Model
      */
     protected $fillable = [
         'setting_date',
+        'status_notifi',
     ];
 }

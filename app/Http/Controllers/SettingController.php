@@ -78,8 +78,14 @@ class SettingController extends Controller
 
     public function statusUpdate(Request $request, Date $status)
     {
+        $flag = false;
+
+        if($request->input('status') == "true"){
+            $flag = true;
+        }
+
         $status->update([
-            'status_notifi' => $request->input('status') ?? false,
+            'status_notifi' => $flag,
         ]);
 
         return redirect()->route('settings');

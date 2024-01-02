@@ -16,6 +16,7 @@ class CreateDatesTable extends Migration
         Schema::create('dates', function (Blueprint $table) {
             $table->id();
             $table->dateTime('setting_date');
+            $table->string('status_notifi')->nullable();
             $table->timestamps();
         });
     }

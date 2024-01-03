@@ -149,9 +149,15 @@ use Carbon\Carbon;
 @section('jsSection')
 <script src="https://cdn.jsdelivr.net/gh/linways/table-to-excel@v1.0.4/dist/tableToExcel.js"></script>
 <script>
+
+    checkIsAdmin(true);
+
     $('.navbar-nav li a').removeClass('bg-gradient-primary');
     $('a[href = "/reports"]').addClass('bg-gradient-primary');
     // $('a[href = "/bitacoras/main"]').addClass('active').removeClass('bg-gradient-primary');
+
+    localStorage.setItem('searchDataDepto', 'todos');
+    localStorage.setItem('searchDataOffice', 'todos');
 
     document.addEventListener("DOMContentLoaded", function(event) {
 

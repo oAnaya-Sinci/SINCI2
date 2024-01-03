@@ -244,6 +244,32 @@ var dataLogin = () => {
     return keyLogin;
 }
 
+let checkIsAdmin = async (isReports = false) => {
+
+    let userEmail = localStorage.getItem('userEmail');
+
+    let response = await fetch(urlData + `/checkisadmin?user_email=${userEmail}`).then(json => json.json()).then(data => data);
+
+    localStorage.setItem('isAdmin', response.isAdmin);
+    localStorage.setItem('seeReports', response.seeReports);
+
+    if(!isReports){
+        if(localStorage.getItem('isAdmin') == 0){
+
+            document.querySelector('.container-fluid').remove();;
+
+            location.href = "/bitacoras/main";
+        }
+    } else {
+        if(localStorage.getItem('isAdmin') == 0 && localStorage.getItem('seeReports') == 0){
+
+            document.querySelector('.container-fluid').remove();;
+    
+            location.href = "/bitacoras/main";
+        }
+    }
+}
+
 /**
  * javascript comment
  * @Author: Carlos Omar Anaya Barajas

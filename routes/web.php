@@ -89,6 +89,7 @@ Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.
 
 //Routes reports
 Route::get('/reports', [ReportController::class, 'index'])->name('reports');
+Route::get('/filterDataReport/{fieldToFilter}', [ReportController::class, 'obtainDatFiltered'])->name('dataFiltered');
 
 //Routes settings
 Route::get('/settings', [SettingController::class, 'index'])->name('settings');

@@ -76,23 +76,23 @@ use Carbon\Carbon;
                         <table id="dataReport" class="table align-items-center mb-0">
                             <thead>
                                 <tr>
-                                    <!-- <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> -->
-                                    <!-- <span class="nombre"><img src="/img/order_down.png" alt="" width="15" height="15" name="order_down"> Nombre / Correo </span></th> -->
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    <span class="nombre"><img src="/img/order_down.png" alt="" width="15" height="15" name="order_down"> Nombre / Correo </span></th>
                                     <!-- <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Puesto / Oficina</th> -->
-                                    <!-- <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                     <span class="oficina"><img src="/img/order_down.png" alt="" width="15" height="15" name="order_down"> Oficina </span></th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                     <span class="depto"><img src="/img/order_down.png" alt="" width="15" height="15" name="order_down"> Departamento </span></th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                     <span class="dias"><img src="/img/order_down.png" alt="" width="15" height="15" name="order_down"> Dias acumulados </span></th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                    <span class="fecha"><img src="/img/order_down.png" alt="" width="15" height="15" name="order_down"> Fecha Ingreso </span></th> -->
+                                    <span class="fecha"><img src="/img/order_down.png" alt="" width="15" height="15" name="order_down"> Fecha Ingreso </span></th>
 
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nombre / Correo</th>
+                                    <!-- <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nombre / Correo</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"> Oficina</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> Departamento</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> Dias acumulados</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> Fecha Ingreso</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> Fecha Ingreso</th> -->
                                 </tr>
                             </thead>
                             <tbody>
@@ -109,7 +109,7 @@ use Carbon\Carbon;
                                             </div>
                                         </div>
                                     </td>
-                                    <td>
+                                    <td class="align-middle text-center text-sm">
                                         <!-- @foreach($user->positions as $position)
                                         <p class="text-xs font-weight-bold mb-0">{{ $position->name }}</p>
                                         @endforeach -->
@@ -172,94 +172,106 @@ use Carbon\Carbon;
         filterPerDeparment( depto );
     });
 
-//     document.querySelectorAll('#dataReport thead tr th').forEach( th => {
+    document.querySelectorAll('#dataReport thead tr th').forEach( th => {
         
-//         th.addEventListener('click', event => {
+        th.addEventListener('click', event => {
             
-//             let span = th.querySelector('span');            
-//             let typeHead = span.classList.value;
+            let span = th.querySelector('span');            
+            let typeHead = span.classList.value;
 
-//             let checkImgOrder = elem => {
+            let checkImgOrder = (elem, type) => {
 
-//                 let previousValue = elem.querySelector('img').name;
+                let previousValue = elem.querySelector('img').name;
 
-//                 elem.parentElement.parentElement.querySelectorAll('th span img').forEach( img => {
-//                     img.src = '/img/order_down.png';
-//                     img.name = 'order_down';
-//                 });
+                elem.parentElement.parentElement.querySelectorAll('th span img').forEach( img => {
+                    img.src = '/img/order_down.png';
+                    img.name = 'order_down';
+                });
 
-//                 if(previousValue == 'order_up'){
-//                     elem.querySelector('img').src = '/img/order_down.png';
-//                     elem.querySelector('img').name = 'order_down';
-//                 } else {
-//                     elem.querySelector('img').src = '/img/order_up.png';
-//                     elem.querySelector('img').name = 'order_up';
-//                 }
-//             };
+                if(previousValue == 'order_up'){
+                    elem.querySelector('img').src = '/img/order_down.png';
+                    elem.querySelector('img').name = 'order_down';
+                    orderDataTable(type, 'order_down');
+                } else {
+                    elem.querySelector('img').src = '/img/order_up.png';
+                    elem.querySelector('img').name = 'order_up';
+                    orderDataTable(type, 'order_up');
+                }
+            };
 
-//             let obtainDataTable = (keyId) => {
+            let orderDataTable = (type, order) => {
 
-//                 let dataTable = {};
-//                 document.querySelectorAll('#dataReport tbody tr').forEach( td => {
-            
-//                     if(keyId == 0){
+                let dataTable = [];
+                document.querySelectorAll('#dataReport tbody tr').forEach( td => {
 
-//                         let key = td.querySelectorAll('td')[0].querySelector('h6').innerText;
+                    let objDataRow = {
+                        'name': td.querySelectorAll('td')[0].querySelector('h6').innerText,
+                        'email': td.querySelectorAll('td')[0].querySelector('p').innerText,
+                        'office': td.querySelectorAll('td')[1].innerText,
+                        'department': td.querySelectorAll('td')[2].innerText,
+                        'days': td.querySelectorAll('td')[3].innerText,
+                        'date': td.querySelectorAll('td')[4].innerText,
+                        'filtered': td.classList.value 
+                    };
+                    dataTable.push(objDataRow);
+                });
 
-//                         dataTable[key] = {
-//                             'name': key,
-//                             'office': td.querySelectorAll('td')[1].innerText,
-//                             'department': td.querySelectorAll('td')[2].innerText,
-//                             'days': td.querySelectorAll('td')[3].innerText,
-//                             'date': td.querySelectorAll('td')[4].innerText,
-//                         };
-//                     } else {
-//                         let key = td.querySelectorAll('td')[keyId].innerText;
-
-//                         dataTable[key] = {
-//                             'name': td.querySelectorAll('td')[0].querySelector('h6').innerText,
-//                             'office': td.querySelectorAll('td')[1].innerText,
-//                             'department': td.querySelectorAll('td')[2].innerText,
-//                             'days': td.querySelectorAll('td')[3].innerText,
-//                             'date': td.querySelectorAll('td')[4].innerText,
-//                         };
-//                     }
-//                 });
-// console.log(dataTable);
-//                 let keysObject = Object.keys( dataTable ).sort( function(a,b){ return a+b });
-
-//                 console.log(keysObject);
-//             };
-
-//             switch(typeHead){
-//                 case 'nombre':
-//                     obtainDataTable(0);
-//                     checkImgOrder(span);
-//                     break;
+                let dataSorted;
+                if(type != 'days'){
+                    
+                    if(order == 'order_down')
+                        dataSorted = dataTable.sort( (a,b) => { return a[type] < b[type] ? 1 : -1 } );
+                    else
+                        dataSorted = dataTable.sort( (a,b) => { return a[type] > b[type] ? 1 : -1 } );
+                } else {
                 
-//                 case 'oficina':
-//                     obtainDataTable(1);
-//                     checkImgOrder(span);
-//                     break;
+                    if(order == 'order_down')
+                        dataSorted = dataTable.sort( (a,b) => a[type] - b[type] );
+                    else
+                        dataSorted = dataTable.sort( (a,b) => b[type] - a[type] );
+                }
+                console.log(dataSorted);
+
+                let orderBody = "";
                 
-//                 case 'depto':
-//                     obtainDataTable(2);
-//                     checkImgOrder(span);
-//                     break;
+                dataSorted.forEach( elem => {
+                    orderBody += `<tr class=${elem.filtered}>`
+                    orderBody += `<td><div class="d-flex px-2 py-1"> <div><img src="{{url('/img/user.png')}}" class="avatar avatar-sm me-3"></div> <div class="d-flex flex-column justify-content-center"> <h6 class="mb-0 text-xs">${elem.name}</h6> <p class="text-xs text-secondary mb-0">${elem.email}</p></div></div></td>`;
+                    orderBody += `<td class="align-middle text-center text-sm"> <span class="text-xs text-secondary mb-0 office">${elem.office}</span> </td>`;
+                    orderBody += `<td class="align-middle text-center text-sm"> <span class="text-xs text-secondary mb-0 depto">${elem.department}</span> </td>`;
+                    orderBody += `<td class="align-middle text-center text-sm"> <span class="text-xs text-secondary mb-0">${elem.days}</span> </td>`;
+                    orderBody += `<td class="align-middle text-center text-sm"> <span class="text-xs text-secondary mb-0">${elem.date}</span> </td>`;
+                    orderBody += '</tr>'
+                });
 
-//                 case 'dias':
-//                     obtainDataTable(3);
-//                     checkImgOrder(span);
-//                     break;
+                document.querySelectorAll('#dataReport tbody tr').forEach( elem => { elem.remove(); } );
+                document.querySelector('#dataReport tbody').innerHTML = orderBody;
+            };
 
-//                 case 'fecha':
-//                     obtainDataTable(4);
-//                     checkImgOrder(span);
-//                     break;
-//             }
+            switch(typeHead){
+                case 'nombre':
+                    checkImgOrder(span, 'name');
+                    break;
+                
+                case 'oficina':
+                    checkImgOrder(span, 'office');
+                    break;
+                
+                case 'depto':
+                    checkImgOrder(span, 'department');
+                    break;
 
-//         });
-//     });
+                case 'dias':
+                    checkImgOrder(span, 'days');
+                    break;
+
+                case 'fecha':
+                    checkImgOrder(span, 'date');
+                    break;
+            }
+
+        });
+    });
 
     document.querySelector('.refresh').addEventListener('click', async () => {
 

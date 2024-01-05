@@ -156,9 +156,6 @@ use Carbon\Carbon;
     $('a[href = "/reports"]').addClass('bg-gradient-primary');
     // $('a[href = "/bitacoras/main"]').addClass('active').removeClass('bg-gradient-primary');
 
-    localStorage.setItem('searchDataDepto', 'todos');
-    localStorage.setItem('searchDataOffice', 'todos');
-
     document.addEventListener("DOMContentLoaded", function(event) {
 
         let dataSearchSaved_Depto =  localStorage.getItem('searchDataDepto');
@@ -219,7 +216,7 @@ use Carbon\Carbon;
                 let dataSorted;
                 if(type != 'days'){
                     
-                    if(order == 'order_down')
+                    if(order == 'order_up')
                         dataSorted = dataTable.sort( (a,b) => { return a[type] < b[type] ? 1 : -1 } );
                     else
                         dataSorted = dataTable.sort( (a,b) => { return a[type] > b[type] ? 1 : -1 } );
@@ -230,7 +227,6 @@ use Carbon\Carbon;
                     else
                         dataSorted = dataTable.sort( (a,b) => b[type] - a[type] );
                 }
-                console.log(dataSorted);
 
                 let orderBody = "";
                 
@@ -269,7 +265,6 @@ use Carbon\Carbon;
                     checkImgOrder(span, 'date');
                     break;
             }
-
         });
     });
 
@@ -281,7 +276,7 @@ use Carbon\Carbon;
         await fetch('https://websas.sinci.com:1880/updateDaysNoDataUsers');
 
         setTimeout(() => {
-            window.location.reload();
+            location.reload();
         }, 2000);
     });
 

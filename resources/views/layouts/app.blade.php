@@ -113,6 +113,7 @@
 }
 .sidebar .nav-links li:hover{
   background: #D9531E;
+  opacity: 0.5;
 }
 .sidebar .nav-links li .icon-link{
   display: flex;

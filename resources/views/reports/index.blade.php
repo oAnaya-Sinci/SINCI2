@@ -167,6 +167,8 @@ use Carbon\Carbon;
         let depto = document.querySelector('.department_slct').selectedOptions[0].text;
 
         filterPerDeparment( depto );
+
+        outLoader();
     });
 
     document.querySelectorAll('#dataReport thead tr th').forEach( th => {

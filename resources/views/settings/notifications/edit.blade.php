@@ -46,6 +46,10 @@ use Carbon\Carbon;
 @endsection
 @section('jsSection')
 <script>
+
+document.addEventListener("DOMContentLoaded", function(event) {
+        outLoader();
+    });
     checkIsAdmin();
     
     $('.navbar-nav li a').removeClass('bg-gradient-primary');

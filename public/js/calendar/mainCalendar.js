@@ -37,7 +37,6 @@ $(document).ready(function() {
     document.getElementById("endDate").addEventListener("keyup", preventDef, false);
     document.getElementById("endDate").addEventListener("keydown", preventDef, false);
 
-    inLoader();
     calendarSinci();
 });
 
@@ -53,6 +52,7 @@ function preventDef(event) {
  */
 async function calendarSinci() {
 
+    inLoader();
     /**
      * This Fetch petition obtain the calendar events registerd for the login user
      */

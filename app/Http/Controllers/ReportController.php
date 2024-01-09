@@ -23,21 +23,6 @@ class ReportController extends Controller
         return view('reports.index', compact('users', 'departments', 'offices', 'titulo'));
     }
 
-    public function obtainDatFiltered($request){
-    
-        $users = DB::table('users')
-        ->select('users.name', 'users.email', 'offices.name', 'departments.name', 'users.days', 'users.admission_date')
-        ->join('department_user', 'department_user.user_id', 'users.id')
-        ->leftjoin('departments', 'department_user.department_id', 'departments.id')
-        ->join('position_user', 'position_user.user_id', 'users.id')
-        ->leftjoin('positions', 'position_user.position_id', 'positions.id')
-        ->join('office_user', 'office_user.user_id', 'users.id')
-        ->leftjoin('offices', 'office_user.office_id', 'offices.id')
-        ->get();
-
-        return $users;
-    }
-
     public function filter(Request $request)
     {
         $departments = Department::all()->pluck('name', 'id');

@@ -8,6 +8,7 @@ use App\Models\Setting;
 use Illuminate\Http\Request;
 use Mail;
 use Carbon\Carbon;
+use Dompdf\Dompdf;
 
 class ApiEmailController extends Controller
 {
@@ -101,5 +102,33 @@ class ApiEmailController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /* 
+        * Function para generar los repotes correspondientes en PDF para coordinadoes y supervisores
+     */
+
+    public function generatePDF(Request $request){
+
+        $nameReport = $request[1];
+
+        // instantiate and use the dompdf class
+        $dompdf = new Dompdf();
+        $dompdf->loadHtml($request[0]);
+
+        // (Optional) Setup the paper size and orientation
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        $output = $dompdf->output();
+        file_put_contents('reportsPDF/'.$nameReport.'.pdf', $output);
+
+        return $request;
+    }
+
+    public function sendPDFInEmail(){
+    
     }
 }

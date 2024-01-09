@@ -21,3 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::prefix('emails')->namespace('Api')->group(function () {
     Route::post('index', [ApiEmailController::class, 'index']);
 });
+
+Route::prefix('reports')->namespace('Api')->group(function () {
+    Route::post('generatePDF', [ApiEmailController::class, 'generatePDF']);
+});

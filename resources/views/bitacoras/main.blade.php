@@ -66,15 +66,15 @@
                         <div class="col-md-6">
                             <div class="form-group body-modalsSinci">
                                 <label for="recipient-name" class="col-form-label">Inicio</label>
-                                <input type="text" class="form-control datetimepicker modalForm" id="startDate"
-                                    name="inicio" required>
+                                <input type="text" class="form-control datetimepicker modalForm" id="startDate" name="inicio" required>
+                                <!-- <input type="datetime-local" class="form-control modalForm" id="startDate" name="inicio" required> -->
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group body-modalsSinci">
                                 <label for="recipient-name" class="col-form-label">Fin</label>
-                                <input type="text" class="form-control datetimepicker modalForm" id="endDate" name="fin"
-                                    required>
+                                <input type="text" class="form-control datetimepicker modalForm" id="endDate" name="fin" required>
+                                <!-- <input type="datetime-local" class="form-control modalForm" id="endDate" name="fin" required> -->
                             </div>
                         </div>
                     </div>

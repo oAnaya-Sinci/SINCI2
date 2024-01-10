@@ -40,20 +40,20 @@ class UsersExport implements FromView, ShouldAutoSize
         
         if($this->office == 'todos' && $this->department == 'todos'){
             $data = User::with(['offices', 'departments', 'positions'])
-            ->whereRelation('positions', 'id', '=', 4)->orderBy('name')->get();
+            ->whereRelation('positions', 'id', '=', 4)->orderByRaw('(users.days * 1) DESC')->get();
         }
         elseif($this->department == 'todos' && !empty($this->office)){
             $data = User::with(['offices', 'departments', 'positions'])
                 ->whereRelation('positions', 'id', '=', 4)
                 ->whereHas('offices', function ($query) {
                     $query->where('id',  $this->office);
-                })->orderBy('name')->get();
+                })->orderByRaw('(users.days * 1) DESC')->get();
         }elseif($this->office == 'todos' && !empty($this->department)){
             $data = User::with(['offices', 'departments', 'positions'])
             ->whereRelation('positions', 'id', '=', 4)
             ->whereHas('departments', function ($query) {
                 $query->where('id',  $this->department);
-            })->orderBy('name')->get();
+            })->orderByRaw('(users.days * 1) DESC')->get();
         }else{
             $data = User::with(['offices', 'departments', 'positions'])
             ->whereRelation('positions', 'id', '=', 4)
@@ -62,7 +62,7 @@ class UsersExport implements FromView, ShouldAutoSize
             })
             ->whereHas('departments', function ($query) {
                 $query->where('id',  $this->department);
-            })->orderBy('name')->get();
+            })->orderByRaw('(users.days * 1) DESC')->get();
         }
             
         return view('export.index',[

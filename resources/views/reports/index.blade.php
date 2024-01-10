@@ -126,7 +126,7 @@ use Carbon\Carbon;
                                         <span class="text-xs text-secondary mb-0">{{ $user->days ?? 0 }}</span>
                                     </td>
                                     <td class="align-middle text-center text-sm">
-                                        <span class="text-xs text-secondary mb-0">{{ Carbon::parse($user->admission_date)->format('Y-m-d') ?? Carbon::parse($date)->format('Y-m-d') }}</span>
+                                        <span class="text-xs text-secondary mb-0">{{ Carbon::parse($user->admission_date)->format('d-m-Y') }}</span>
                                     </td>
                                 </tr>
                                 @empty
@@ -198,6 +198,24 @@ use Carbon\Carbon;
                 }
             };
 
+            let dateFormater = (date, wichFormat) => {
+    
+                let dateToFormat = date.split(/[- /]/);
+
+                let newDate;
+                
+                switch(wichFormat){
+                    case 1:
+                        newDate = `${dateToFormat[0]}-${dateToFormat[1]}-${dateToFormat[2]}`;
+                        break;
+                    case 2:
+                        newDate = `${dateToFormat[2]}-${dateToFormat[1]}-${dateToFormat[0]}`;
+                        break;
+                }
+                
+                return newDate;
+            }
+
             let orderDataTable = (type, order) => {
 
                 let dataTable = [];
@@ -209,7 +227,7 @@ use Carbon\Carbon;
                         'office': td.querySelectorAll('td')[1].innerText,
                         'department': td.querySelectorAll('td')[2].innerText,
                         'days': td.querySelectorAll('td')[3].innerText,
-                        'date': td.querySelectorAll('td')[4].innerText,
+                        'date': dateFormater(td.querySelectorAll('td')[4].innerText, 2),
                         'filtered': td.classList.value 
                     };
                     dataTable.push(objDataRow);
@@ -224,7 +242,7 @@ use Carbon\Carbon;
                         dataSorted = dataTable.sort( (a,b) => { return a[type] > b[type] ? 1 : -1 } );
                 } else {
                 
-                    if(order == 'order_down')
+                    if(order == 'order_up')
                         dataSorted = dataTable.sort( (a,b) => a[type] - b[type] );
                     else
                         dataSorted = dataTable.sort( (a,b) => b[type] - a[type] );
@@ -238,7 +256,7 @@ use Carbon\Carbon;
                     orderBody += `<td class="align-middle text-center text-sm"> <span class="text-xs text-secondary mb-0 office">${elem.office}</span> </td>`;
                     orderBody += `<td class="align-middle text-center text-sm"> <span class="text-xs text-secondary mb-0 depto">${elem.department}</span> </td>`;
                     orderBody += `<td class="align-middle text-center text-sm"> <span class="text-xs text-secondary mb-0">${elem.days}</span> </td>`;
-                    orderBody += `<td class="align-middle text-center text-sm"> <span class="text-xs text-secondary mb-0">${elem.date}</span> </td>`;
+                    orderBody += `<td class="align-middle text-center text-sm"> <span class="text-xs text-secondary mb-0">${dateFormater(elem.date, 2)}</span> </td>`;
                     orderBody += '</tr>'
                 });
 
@@ -272,6 +290,8 @@ use Carbon\Carbon;
 
     document.querySelector('.refresh').addEventListener('click', async () => {
 
+        inLoader();
+
         localStorage.setItem('searchDataDepto', document.querySelector('.department_slct').value);
         localStorage.setItem('searchDataOffice', document.querySelector('.office_slct').value);
 
@@ -279,7 +299,7 @@ use Carbon\Carbon;
 
         setTimeout(() => {
             location.reload();
-        }, 2000);
+        }, 1000);
     });
 
     let filterPerOffice = valueSelected => {

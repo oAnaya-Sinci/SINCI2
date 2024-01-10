@@ -125,10 +125,26 @@ class ApiEmailController extends Controller
         $output = $dompdf->output();
         file_put_contents('reportsPDF/'.$nameReport.'.pdf', $output);
 
+        $this->sendPDFInEmail($nameReport, $request[2]);
+
         return $request;
     }
 
-    public function sendPDFInEmail(){
+    public function sendPDFInEmail($nameReport, $email){
     
+        $template_path = 'email_report';
+        $asunto = explode('- ', $nameReport);
+        $body = $asunto[0].$asunto[1];
+
+        // $email = 'oanaya@sinci.com';
+
+        Mail::send($template_path, ['body' => $body], function($message) use ($email, $nameReport, $asunto) {
+            $message->to($email)->subject('SNL | '. explode('@', $email)[0] .' | '.$asunto[0].$asunto[1] );
+            $message->from('snla@sinci.com','SNL | '. explode('@', $email)[0] .' | '.$asunto[0].$asunto[1]);
+            $message->cc('oanaya@sinci.com');
+            $message->attach('reportsPDF/'.$nameReport.'.pdf');
+        });
+
+        return view('email_report', compact('body'));
     }
 }

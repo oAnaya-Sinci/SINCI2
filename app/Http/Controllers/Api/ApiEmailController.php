@@ -110,11 +110,13 @@ class ApiEmailController extends Controller
 
     public function generatePDF(Request $request){
 
+        $htmlReport = $request[0];
         $nameReport = $request[1];
+        $emailUser = $request[2];
 
         // instantiate and use the dompdf class
         $dompdf = new Dompdf();
-        $dompdf->loadHtml($request[0]);
+        $dompdf->loadHtml($htmlReport);
 
         // (Optional) Setup the paper size and orientation
         $dompdf->setPaper('A4', 'portrait');
@@ -125,7 +127,7 @@ class ApiEmailController extends Controller
         $output = $dompdf->output();
         file_put_contents('reportsPDF/'.$nameReport.'.pdf', $output);
 
-        $this->sendPDFInEmail($nameReport, $request[2]);
+        $this->sendPDFInEmail($nameReport, $emailUser);
 
         return $request;
     }
@@ -141,7 +143,7 @@ class ApiEmailController extends Controller
         Mail::send($template_path, ['body' => $body], function($message) use ($email, $nameReport, $asunto) {
             $message->to($email)->subject('SNL | '. explode('@', $email)[0] .' | '.$asunto[0].$asunto[1] );
             $message->from('snla@sinci.com','SNL | '. explode('@', $email)[0] .' | '.$asunto[0].$asunto[1]);
-            $message->cc('oanaya@sinci.com');
+            // $message->cc('oanaya@sinci.com');
             $message->attach('reportsPDF/'.$nameReport.'.pdf');
         });
 

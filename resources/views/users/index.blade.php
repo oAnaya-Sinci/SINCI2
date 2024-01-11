@@ -138,7 +138,7 @@
                                         <form method="POST" action="{{ route('users.destroy', $user) }}">
                                                 @csrf
                                                 @method('DELETE')
-                                            <button type="submit" onclick="return confirm('AL borrar al usuario {{ $user->name }}, este no podra ser recuperado en el futuro. \n ¿Desea continuar con la eliminación del usuario? ')" class="btn btn-danger"
+                                            <button type="submit" onclick="return confirm('¿Desea continuar con la eliminación del usuario {{ $user->name }}? ')" class="btn btn-danger"
                                                 data-toggle="tooltip" data-original-title="Delete user">
                                                 Eliminar
                                             </button>

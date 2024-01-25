@@ -184,7 +184,7 @@ class Usuarios extends Authenticatable
         'Minuta_Archivos',
         'COMPRAS_CERRAR',
         'Minuta_Requiere',
-        'PROYECTOS_BITACORA',
+        'PROYECTOS_BITÁCORA',
         'PROYECTOS_NIVEL',
         'VIATICOS_CAPTURARGASTOS',
         'VIATICOS_REPORTES',

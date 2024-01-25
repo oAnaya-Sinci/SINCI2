@@ -59,6 +59,8 @@ $('#btnLogin').click(async function() {
 
             if (response.sessionAuth == 'No Access Granted') {
 
+                outLoader();
+
                 $("#noAccessModal .modal-header h4").text(response.sessionAuth);
                 $("#noAccessModal").modal('show');
 

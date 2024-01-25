@@ -3995,7 +3995,10 @@
                 htmlEscape(formatDates(event.start, event.end, opt('timeFormat'))) +
                 "</div>" +
                 "<div class='fc-event-title'>" +
+                "<div class='title'>" +
                 htmlEscape(event.title || '') +
+                "</div>" +
+                htmlEscape(event.body || '') +
                 "<div class='idEvent " + event.id + "'>" + event.id + "</div>" +
                 "</div>" +
                 "</div>" +

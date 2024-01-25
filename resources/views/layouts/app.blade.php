@@ -319,10 +319,10 @@
         <li class="bitacora inactive">
           <a href="/bitacoras/main">
             <i class='bx bx-calendar'></i>
-            <span class="link_name">Bitacora</span>
+            <span class="link_name">Bitácora</span>
           </a>
           <ul class="sub-menu blank">
-            <li><a class="link_name" href="/bitacoras/main">Bitacora</a></li>
+            <li><a class="link_name" href="/bitacoras/main">Bitácora</a></li>
           </ul>
         </li>
         <li class="onlyAdmin inactive">

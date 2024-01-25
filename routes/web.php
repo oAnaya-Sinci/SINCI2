@@ -70,7 +70,7 @@ Route::post('/settings/notifi/{status}', [SettingController::class, 'statusUpdat
 
 Route::any('/', function () {
     $currentDate = Date::now()->format('Y-m-d');
-    $fileName = 'reporte_bitacoras_' . $currentDate . '.xlsx';
+    $fileName = 'reporte_bitácoras_' . $currentDate . '.xlsx';
     [ReportController::class, 'filter'];
     return (new UsersExport)->department(request('department'))->office(request('office'))->download($fileName);
 })->name('reports.filter');

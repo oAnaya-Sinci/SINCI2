@@ -48,7 +48,7 @@ class ApiEmailController extends Controller
         else{
 
             $template_path = 'email_recordatorio';
-            $body = "Estimado usuario, este es un mensaje automatico para recordarte que debes de llenar tu bitacora de acuerdo a tus actividades en la semana.";
+            $body = "Estimado usuario, este es un mensaje automatico para recordarte que debes de llenar tu bitácora de acuerdo a tus actividades en la semana.";
 
             Mail::send($template_path, ['body' => $body, 'minimal_days' => $minimal_days], function($message) use ($email) {
                 $message->to($email)->subject('SNL | '. explode('@', $email)[0] .' | Notificación para registro en bitácora');

@@ -302,9 +302,15 @@ h5 {
     box-shadow: none;
 }
 
-
 .fc-event-container .fc-event .fc-event-inner .fc-event-title{
     font-size: 10.5px;
+}
+
+.fc-event-container .fc-event .fc-event-inner .fc-event-title .title{
+    width: 190px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 /**

@@ -11,7 +11,7 @@
               <p>Para cualquier aclaración por favor contacte con el administrador del sistema o con su jefe inmediato.</p>
           </div>
           <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" id="modal-btn-no">Cerrar</button>
+              <button type="button" class="btn btn-secondary" id="modal-btn-no" data-bs-dismiss="modal">Cerrar</button>
           </div>
           </div>
       </div>

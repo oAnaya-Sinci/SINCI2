@@ -16,7 +16,7 @@ class SettingController extends Controller
         $settings_date = Date::all();
         $settings_notifi = Date::all();
         $settings = Setting::all();
-        $titulo = 'Configuracion de niveles';
+        $titulo = 'Configuración de niveles';
 
 
         return view('settings.index', compact('settings', 'titulo','settings_date','settings_notifi'));
@@ -24,7 +24,7 @@ class SettingController extends Controller
 
     public function edit(Setting $setting)
     {
-        $titulo = 'Configuracion de niveles';
+        $titulo = 'Configuración de niveles';
 
         return view('settings.edit', compact('setting', 'titulo'));
     }

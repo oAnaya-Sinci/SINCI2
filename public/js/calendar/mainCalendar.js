@@ -244,13 +244,13 @@ let eventsCalendar = (dataDB) => {
             titleBtcr = proyectCode[0];
         } else {
 
-            titleBtcr = value.LOCATION + "\n -- -- -- -- -- -- -- -- -- -- -- -- \n " + value.NOTAS
+            titleBtcr = value.LOCATION
         }
 
         event = {
             id: value.ID_PROYECTOS_AVANCE,
-            // title: value.LOCATION + "\n -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- \n " + value.NOTAS,
             title: titleBtcr,
+            body: "-- -- -- -- -- -- -- -- -- -- -- -- -- -- \n " + value.NOTAS,
             start: new Date(sYear, sMonth, sDay, horaInicio, minutosInicio),
             end: new Date(eYear, eMonth, eDay, HoraFin, minutosFin),
             allDay: false,

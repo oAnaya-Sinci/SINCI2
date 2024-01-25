@@ -123,7 +123,7 @@
 
                         <div class="form-group">
                             <i class='material-icons opacity-10 inlineElements'>mode<label >Editar</label></i>
-                            <i class='material-icons opacity-10 inlineElements'>file_download<label >Bitacora</label></i>
+                            <i class='material-icons opacity-10 inlineElements'>file_download<label >Bitácora</label></i>
                         </div>
 
                         <div class="form-group">

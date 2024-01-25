@@ -72,7 +72,7 @@ use Carbon\Carbon;
                                 <thead>
                                     <tr>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Fecha de configuracion</th>
+                                            Fecha de configuración</th>
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         </th>
@@ -143,7 +143,7 @@ use Carbon\Carbon;
                                         <td>
                                             <div class="d-flex px-2 py-1">
                                                 <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="text-xs text-secondary mb-0">Correo electronico</h6>
+                                                    <h6 class="text-xs text-secondary mb-0">Correo electrónico</h6>
                                                 </div>
                                             </div>
                                         </td>

@@ -2748,7 +2748,7 @@
 
     }
 
-    ;;
+    ;
 
     setDefaults({
         allDaySlot: true,

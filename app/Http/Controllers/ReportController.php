@@ -42,4 +42,22 @@ class ReportController extends Controller
 
         return view('reports.index', compact('users', 'departments', 'offices', 'titulo', 'date'));
     }
+
+    public function sendReportSurveyPDF(){
+
+        $htmlReport = "";
+
+        // instantiate and use the dompdf class
+        $dompdf = new Dompdf();
+        $dompdf->loadHtml($htmlReport);
+
+        // (Optional) Setup the paper size and orientation
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Output the generated PDF to Browser
+        $dompdf->stream();
+    }
 }

@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ApiEmailController;
+use App\Http\Controllers\ReportController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -24,4 +25,5 @@ Route::prefix('emails')->namespace('Api')->group(function () {
 
 Route::prefix('reports')->namespace('Api')->group(function () {
     Route::post('generatePDF', [ApiEmailController::class, 'generatePDF']);
+    Route::post('obtainpdfsurvey', [ReportController::class, 'sendReportSurveyPDF']);
 });

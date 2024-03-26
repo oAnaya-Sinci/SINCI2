@@ -119,7 +119,9 @@ body .nav-link.text-white {
 }
 
 .modalsSinciClass {
-    margin-top: 4rem;
+    /* margin-top: 4rem; */
+    margin-top: 1rem;
+    margin-left: 4rem;
 }
 
 .modal input,
@@ -281,7 +283,8 @@ h5 {
 
 .dropdown-menu.show .bs-searchbox+.inner.show,
 .dropdown-menu.show .bs-searchbox+.inner.show .inner.show {
-    margin-top: 2rem !important;
+    margin-top: 1.7rem !important;
+    padding-left: 0.5rem;
 }
 
 [href="/bitacoras/main"] {

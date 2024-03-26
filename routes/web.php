@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\Surveys\SurveyController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\Api\ApiEmailController;
 use App\Exports\UsersExport;
@@ -52,6 +53,13 @@ Route::post('/users', [UserController::class, 'store'])->name('users.store');
 Route::get('/users/edit/{user}', [UserController::class, 'edit'])->name('users.edit');
 Route::post('/users/{user}', [UserController::class, 'update'])->name('users.update');
 Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+
+// Routes Survey
+Route::get('/surveys/main', [SurveyController::class, 'index'])->name('surveys');
+Route::get('/surveys/obtainSurveys', [SurveyController::class, 'getSurveys'])->name('obtain_surveys');
+Route::get('/surveys/generatePDFSurveys/', [SurveyController::class, 'obtainPDFSurvey'])->name('pdf_surveys');
+Route::post('/surveys/saveDataSurvey/', [SurveyController::class, 'store'])->name('save_surveys');
+//END
 
 //Routes reports
 Route::get('/reports', [ReportController::class, 'index'])->name('reports');

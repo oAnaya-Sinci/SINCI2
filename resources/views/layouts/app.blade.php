@@ -25,6 +25,7 @@
     <!-- CSS Files -->
     <link id="pagestyle" href="/css/material-dashboard.css?v=3.0.0" rel="stylesheet" />
 
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
     <link href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.css" rel="stylesheet"/>
     <link href='../css/datepicker.min.css' rel='stylesheet' media='print' />
     <link href="/css/bootstrap-select.css" rel="stylesheet" />
@@ -302,6 +303,11 @@
   }
 }
 
+li span{
+
+  margin: 0.2rem 0 0 -1rem;
+}
+
 .inactive{
     display: none;
 }
@@ -336,7 +342,7 @@
         </li>
         <li class="onlyAdmin inactive">
           <a href="/settings">
-            <i class='bx bx-file'></i>
+            <i class='bx bx-cog'></i>
             <span class="link_name">Configuración</span>
           </a>
           <ul class="sub-menu blank">
@@ -352,6 +358,18 @@
             <li><a class="link_name" href="/reports">Reportes</a></li>
           </ul>
         </li>
+
+        <li  class="onlyAdmin reports inactive">
+          <a href="{{ Route('surveys') }}">
+            <!-- <i class='bx bx-task'></i> -->
+            <i class='bx bx-calendar-week'></i>
+            <span class="link_name">Encuestas</span>
+          </a>
+          <ul class="sub-menu blank">
+            <li><a class="link_name" href="{{ Route('surveys') }}">Encuestas</a></li>
+          </ul>
+        </li>
+
         <li>
           <div class="profile-details">
             <div class="profile-content">
@@ -385,6 +403,10 @@
 
 
     <!--   Core JS Files   -->
+    <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
+
     <script src="/js/core/popper.min.js"></script>
     <script src="/js/core/bootstrap.min.js"></script>
     <script src="/js/plugins/perfect-scrollbar.min.js"></script>

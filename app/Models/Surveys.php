@@ -9,5 +9,5 @@ class Surveys extends Model
 {
     use HasFactory;
 
-    protected $table = "";
+    protected $table = "encuesta";
 }

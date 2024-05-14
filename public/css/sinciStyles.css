@@ -76,6 +76,10 @@ body .nav-link.text-white {
 }
 
 
+.form-control{
+    border: 1px solid #d2d6da !important;
+}
+
 /**
  * @Author: Carlos Omar Anaya Barajas
  * @Date: 2022-01-14 10:16:31

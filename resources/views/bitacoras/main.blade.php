@@ -47,8 +47,7 @@
                         <!-- <select class="form-select modalForm" name="slctProyecto" id="slctProyecto" required>
                 <option value="">NAN</option>
               </select> -->
-                        <select class="selectpicker form-control" name="slctProyecto" id="slctProyecto"
-                            data-live-search="true" data-virtual-scroll="false">
+                        <select class="selectpicker form-control" name="slctProyecto" id="slctProyecto" data-live-search="true" data-virtual-scroll="false">
                             <option value="">NAN</option>
                         </select>
                         <!-- <select class="selectpicker form-control" id="number" data-live-search="true" title="Select a number" data-hide-disabled="true"></select> -->

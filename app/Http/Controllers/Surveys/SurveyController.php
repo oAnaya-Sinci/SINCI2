@@ -3,106 +3,133 @@
 namespace App\Http\Controllers\Surveys;
 
 use App\Http\Controllers\Controller;
+
+use App\Models\Surveys as ModelsSurveys;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Dompdf\Dompdf;
+use Mail;
+use App\Models\Surveys;
+use App\Models\surveysClients;
+use ErrorException;
 
 class SurveyController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-         $surveys = $this->getSurveys();
-         $surveysGenerated = DB::select(DB::raw("SELECT id_encuesta, nombre_encuesta FROM encuesta ORDER BY nombre_encuesta;"));
+  /**
+   * Display a listing of the resource.
+   *
+   * @return \Illuminate\Http\Response
+   */
+  public function index()
+  {
+    $surveys = $this->getSurveys();
+    //  $surveysGenerated = DB::select(DB::raw("SELECT id_encuesta, nombre_encuesta FROM encuesta ORDER BY nombre_encuesta;"));
+    $surveysGenerated = Surveys::select('nombre_encuesta', 'id_encuesta')->get()->pluck('nombre_encuesta', 'id_encuesta')->toArray();
 
-        return view("surveys/index", compact('surveys', 'surveysGenerated'));
-    }
+    //  die( var_dump( $surveysGenerated ) );
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+    return view("surveys/index", compact('surveys', 'surveysGenerated'));
+  }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-      $queryInsert = "INSERT INTO clientes_encuestas(llave_encuesta, orden_compra_cliente, nombre_cliente, codigo_proyecto_cliente, descripcion_proyecto_cliente, correo_cliente, correo_copia, correo_copia_oculta, id_encuesta) ";
-      $queryInsert .= "VALUES('" . $request[0] ."','". $request[0] ."','". $request[1] ."','". $request[2] ."','". $request[3] ."','". $request[4] . "','". $request[5] . "','". $request[6] . "','". $request[7] . "')";
+  /**
+   * Show the form for creating a new resource.
+   *
+   * @return \Illuminate\Http\Response
+   */
+  public function create()
+  {
+    //
+  }
 
-      DB::insert( DB::raw( $queryInsert ));
+  /**
+   * Store a newly created resource in storage.
+   *
+   * @param  \Illuminate\Http\Request  $request
+   * @return \Illuminate\Http\Response
+   */
+  public function store(Request $request) {
 
-      return true;
-    }
+    $existSurvey = DB::table('clientes_encuestas')->where('llave_encuesta', $request[0])->exists();
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+    if ($existSurvey)
+      return ['response' => false, 'Message' => "Debido a que ya existe una encuesta para el codigo de proyecto", 'codigo' => $request[6]];
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+    $survey = surveysClients::create([
+      'llave_encuesta' => $request[0],
+      'orden_compra_cliente' => $request[0],
+      'nombre_cliente' => $request[1],
+      'codigo_proyecto_cliente' => $request[6],
+      'descripcion_proyecto_cliente' => $request[2],
+      'correo_cliente' => $request[3],
+      'correo_copia' => $request[4],
+      'correo_copia_oculta' => $request[5],
+      'id_encuesta' => $request[7],
+    ]);
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+    $survey->save();
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+    // Send emails
+    $this->sendEmailWithSurveyKey($request[3], $request[0]);
+    $this->sendEmailNewSurvey([$request[4], $request[5]], $request[0]);
 
-    /**
-     * Obtain the data of the surveys
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function getSurveys()
-    {
-        $dataSurvey = DB::select(DB::raw('
-            SELECT 
+    return ['response' => true, 'Message' => "Información guardada exitosamente"];
+  }
+
+  /**
+   * Display the specified resource.
+   *
+   * @param  int  $id
+   * @return \Illuminate\Http\Response
+   */
+  public function show($id)
+  {
+    //
+  }
+
+  /**
+   * Show the form for editing the specified resource.
+   *
+   * @param  int  $id
+   * @return \Illuminate\Http\Response
+   */
+  public function edit($id)
+  {
+    //
+  }
+
+  /**
+   * Update the specified resource in storage.
+   *
+   * @param  \Illuminate\Http\Request  $request
+   * @param  int  $id
+   * @return \Illuminate\Http\Response
+   */
+  public function update(Request $request, $id)
+  {
+    //
+  }
+
+  /**
+   * Remove the specified resource from storage.
+   *
+   * @param  int  $id
+   * @return \Illuminate\Http\Response
+   */
+  public function destroy($id)
+  {
+    //
+  }
+
+  /**
+   * Obtain the data of the surveys
+   *
+   * @param  int  $id
+   * @return \Illuminate\Http\Response
+   */
+  public function getSurveys(){
+
+    $dataSurvey = DB::select(DB::raw('
+            SELECT
                 CE.nombre_cliente, CE.codigo_proyecto_cliente, CE.orden_compra_cliente, CE.descripcion_proyecto_cliente, CE.correo_cliente, CE.correo_copia, CE.correo_copia_oculta, CE.estatus_encuesta, CE.created_timestamp AS survey_created,
                 E.nombre_encuesta, E.descripcion,
                 CEC.id_llave_encuesta, CEC.created_timestamp AS survey_answered
@@ -113,66 +140,141 @@ class SurveyController extends Controller
             ORDER BY CE.created_timestamp DESC;
         '));
 
-        return $dataSurvey;
-    } 
+    return $dataSurvey;
+  }
 
-    public function obtainPDFSurvey(Request $request){
+  public function sendEmailWithSurveyKey($email, $keySurvey){
 
-      $idSurvey = $request->input('idSurvey');
+    $template_path = 'surveys/emailNewSurvey';
+    $asunto = "Encuesta de satisfacción al cliente";
+    $body = "Llave para contestación de encuesta: " . $keySurvey;
 
-        $plantillaHTML_header = '<!DOCTYPE html>
+    Mail::send($template_path, ['body' => $body], function ($message) use ($email, $asunto) {
+      $message->to($email)->subject($asunto)->from('snla@sinci.com', $asunto);
+    });
+  }
+
+  // function to send email
+  public function sendEmailNewSurvey($emails){
+
+    $email = $emails[0];
+    $emailCC = $emails[1];
+
+    $template_path = 'surveys/emailNewSurvey';
+    $asunto = "Encuesta de satisfacción al cliente";
+    $body = "Se mando una encuesta que sera contestada por el ususarios de esta direccion de correo electronico";
+
+    if ($emailCC != null) {
+      Mail::send($template_path, ['body' => $body], function ($message) use ($email, $emailCC, $asunto) {
+        $message->to($email)->subject($asunto)->from('snla@sinci.com', $asunto)->cc($emailCC);
+      });
+    } else {
+      Mail::send($template_path, ['body' => $body], function ($message) use ($email, $asunto) {
+        $message->to($email)->subject($asunto)->from('snla@sinci.com', $asunto);
+      });
+    }
+  }
+
+  public function obtainPDFSurvey(Request $request){
+
+    $idSurvey = $request->input('idSurvey');
+    $sendEmail = $request->input('sendEmail');
+
+    $plantillaHTML_header = '<!DOCTYPE html>
         <html lang="en">
         <head>
            <meta charset="UTF-8">
            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-           <title>Reporte '. $idSurvey .'</title>
+           <title>Reporte ' . $idSurvey . '</title>
         </head>
-        
+
         <body style="width: 100%; opacity: 100;">
-        
+
            <div style="text-align: center;">
               <div class="col-md-6">
-      
+
                  <div class="header" style="display: flex; margin-bottom: 0.5rem;">
                     <!-- <img src="https://websas.sinci.com/assets/img/logo_sinci.png" alt="" width="100" height="100" style="margin: 0 1rem 0 0;"> -->
                     <div class="dataClient" style="display: flex; flex-direction: column; gap: 0.5rem;">';
-        
-                     $plantillaHTML_middle = '</div>
+                    $plantillaHTML_middle = '</div>
                  </div>
-        
+
                  <hr>
-        
+
                  <div class="dataSurvey">';
-        
                   $plantillaHTML_end = '</div>
-        
+
               </div>
            </div>
-        
+
         </body>
-        
+
         </html>';
 
-        $survey = DB::select(DB::raw( "SELECT datos_cliente_encuesta, respuestas_encuesta FROM clientes_encuestas_contestadas WHERE id_llave_encuesta = '" . $idSurvey . "'" ));
+    $survey = DB::select(DB::raw("SELECT datos_cliente_encuesta, respuestas_encuesta FROM clientes_encuestas_contestadas WHERE id_llave_encuesta = '" . $idSurvey . "'"));
 
-        $templateSurvey = $plantillaHTML_header . $survey[0]->datos_cliente_encuesta . $plantillaHTML_middle . $survey[0]->respuestas_encuesta . $plantillaHTML_end;
+    $templateSurvey = $plantillaHTML_header . $survey[0]->datos_cliente_encuesta . $plantillaHTML_middle . $survey[0]->respuestas_encuesta . $plantillaHTML_end;
 
-        // instantiate and use the dompdf class
-        $dompdf = new Dompdf();
-        $dompdf->loadHtml($templateSurvey);
+    // instantiate and use the dompdf class
+    $dompdf = new Dompdf();
+    $dompdf->loadHtml($templateSurvey);
 
-        // (Optional) Setup the paper size and orientation
-        $dompdf->setPaper('A4', 'portrait');
+    // (Optional) Setup the paper size and orientation
+    $dompdf->setPaper('A4', 'portrait');
 
-        // Render the HTML as PDF
-        $dompdf->render();
+    // Render the HTML as PDF
+    $dompdf->render();
 
-        // Output the generated PDF to Browser
-        $dompdf->stream();
+    if ($sendEmail == 'true') {
+      $output = $dompdf->output();
+      file_put_contents('reportsPDF/' . $idSurvey . '.pdf', $output);
 
-        // $output = $dompdf->output();
-        // file_put_contents('reportsPDF/'.$idSurvey.'.pdf', $output);
-
-        return $templateSurvey;
+      $emails = $this->sendEmailSurveyAnsweredClient($idSurvey);
+      $emails = $this->sendEmailSurveyAnswered($idSurvey);
+    } else {
+      // Output the generated PDF to Browser
+      $dompdf->stream();
     }
+
+    return $emails;
+  }
+
+  public function sendEmailSurveyAnsweredClient($idSurvey){
+
+    $emails = DB::select(DB::raw("SELECT correo_cliente FROM clientes_encuestas WHERE llave_encuesta = '" . $idSurvey . "'"));
+
+    $email = $emails[0]->correo_cliente;
+
+    $template_path = 'surveys/emailSurveyAnswered';
+    $asunto = "Encuesta de satisfacción al cliente";
+    $body = "Gracias por sus respuestas, sinci agradece que nos tomara como opción para sus necesidades y quedamos atentos a cualquier duda, demanda o solicitud futura";
+
+    Mail::send($template_path, ['body' => $body], function ($message) use ($email, $asunto) {
+      $message->to($email)->subject($asunto)->from('snla@sinci.com', $asunto);
+    });
+  }
+
+  public function sendEmailSurveyAnswered($idSurvey){
+
+    $emails = DB::select(DB::raw("SELECT correo_copia, correo_copia_oculta FROM clientes_encuestas WHERE llave_encuesta = '" . $idSurvey . "'"));
+
+    $email = $emails[0]->correo_copia;
+    $emailCC = $emails[0]->correo_copia_oculta;
+
+    $template_path = 'surveys/emailSurveyAnswered';
+    $asunto = "Encuesta de satisfacción al cliente";
+    $body = "Gracias por sus respuestas, sinci agradece que nos tomara como opción para sus necesidades y quedamos atentos a cualquier duda, demanda o solicitud futura";
+
+    if ($emailCC != null) {
+      Mail::send($template_path, ['body' => $body], function ($message) use ($email, $emailCC, $asunto) {
+        $message->to($email)->subject($asunto)->from('snla@sinci.com', $asunto)->cc($emailCC);
+      });
+    } else {
+      Mail::send($template_path, ['body' => $body], function ($message) use ($email, $asunto) {
+        $message->to($email)->subject($asunto)->from('snla@sinci.com', $asunto);
+      });
+    }
+
+    return $emails;
+  }
 }

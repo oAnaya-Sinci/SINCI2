@@ -20,15 +20,21 @@ class SurveyController extends Controller
    *
    * @return \Illuminate\Http\Response
    */
-  public function index()
-  {
-    $surveys = $this->getSurveys();
-    //  $surveysGenerated = DB::select(DB::raw("SELECT id_encuesta, nombre_encuesta FROM encuesta ORDER BY nombre_encuesta;"));
+  public function index(){
+
+    $surveys = $this->getSurveys(1, '2024-01-01', '2050-12-01');
     $surveysGenerated = Surveys::select('nombre_encuesta', 'id_encuesta')->get()->pluck('nombre_encuesta', 'id_encuesta')->toArray();
 
-    //  die( var_dump( $surveysGenerated ) );
-
     return view("surveys/index", compact('surveys', 'surveysGenerated'));
+  }
+
+  public function obtainSurveys(Request $request){
+
+    $dataFilter = json_decode($request['dataFilters']);
+
+    $surveys = $this->getSurveys($dataFilter->status, $dataFilter->date_init, $dataFilter->date_end);
+
+    return json_encode($surveys);
   }
 
   /**
@@ -70,7 +76,9 @@ class SurveyController extends Controller
 
     // Send emails
     $this->sendEmailWithSurveyKey($request[3], $request[0]);
-    $this->sendEmailNewSurvey([$request[4], $request[5]], $request[0]);
+
+    if($request[4] != "")
+        $this->sendEmailNewSurvey([$request[4], $request[5]], $request[0]);
 
     return ['response' => true, 'Message' => "Información guardada exitosamente"];
   }
@@ -126,10 +134,10 @@ class SurveyController extends Controller
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
-  public function getSurveys(){
+  public function getSurveys($status, $date_init, $date_end){
 
-    $dataSurvey = DB::select(DB::raw('
-            SELECT
+    $dataSurvey = DB::select(DB::raw(
+        "SELECT
                 CE.nombre_cliente, CE.codigo_proyecto_cliente, CE.orden_compra_cliente, CE.descripcion_proyecto_cliente, CE.correo_cliente, CE.correo_copia, CE.correo_copia_oculta, CE.estatus_encuesta, CE.created_timestamp AS survey_created,
                 E.nombre_encuesta, E.descripcion,
                 CEC.id_llave_encuesta, CEC.created_timestamp AS survey_answered
@@ -137,17 +145,22 @@ class SurveyController extends Controller
             INNER JOIN encuesta E ON CE.id_encuesta = E.id_encuesta
             LEFT  JOIN clientes_encuestas_contestadas CEC ON CE.llave_encuesta = CEC.id_llave_encuesta
 
-            ORDER BY CE.created_timestamp DESC;
-        '));
+            WHERE CE.estatus_encuesta = ". $status ."
+            AND CE.created_timestamp BETWEEN '". $date_init ." 00:00:00' AND '". $date_end ." 23:59:59'
+
+            ORDER BY CE.created_timestamp DESC;"
+        ));
 
     return $dataSurvey;
   }
 
   public function sendEmailWithSurveyKey($email, $keySurvey){
 
-    $template_path = 'surveys/emailNewSurvey';
+    $template_path = 'surveys/emailKeySurvey';
     $asunto = "Encuesta de satisfacción al cliente";
     $body = "Llave para contestación de encuesta: " . $keySurvey;
+
+    $email = explode(',', $email);
 
     Mail::send($template_path, ['body' => $body], function ($message) use ($email, $asunto) {
       $message->to($email)->subject($asunto)->from('snla@sinci.com', $asunto);
@@ -158,15 +171,20 @@ class SurveyController extends Controller
   public function sendEmailNewSurvey($emails){
 
     $email = $emails[0];
+    $email = explode(',', $email);
+
     $emailCC = $emails[1];
+
+    if($emailCC != "")
+        $emailCC = explode(',', $emailCC);
 
     $template_path = 'surveys/emailNewSurvey';
     $asunto = "Encuesta de satisfacción al cliente";
-    $body = "Se mando una encuesta que sera contestada por el ususarios de esta direccion de correo electronico";
+    $body = "Con esta plantilla solo se avisa de la contestacion de la encuesta";
 
     if ($emailCC != null) {
       Mail::send($template_path, ['body' => $body], function ($message) use ($email, $emailCC, $asunto) {
-        $message->to($email)->subject($asunto)->from('snla@sinci.com', $asunto)->cc($emailCC);
+        $message->to($email)->cc($emailCC)->subject($asunto)->from('snla@sinci.com', $asunto);
       });
     } else {
       Mail::send($template_path, ['body' => $body], function ($message) use ($email, $asunto) {
@@ -192,24 +210,13 @@ class SurveyController extends Controller
 
            <div style="text-align: center;">
               <div class="col-md-6">
-
                  <div class="header" style="display: flex; margin-bottom: 0.5rem;">
                     <!-- <img src="https://websas.sinci.com/assets/img/logo_sinci.png" alt="" width="100" height="100" style="margin: 0 1rem 0 0;"> -->
                     <div class="dataClient" style="display: flex; flex-direction: column; gap: 0.5rem;">';
-                    $plantillaHTML_middle = '</div>
-                 </div>
 
-                 <hr>
+    $plantillaHTML_middle = '</div></div><hr><div class="dataSurvey">';
 
-                 <div class="dataSurvey">';
-                  $plantillaHTML_end = '</div>
-
-              </div>
-           </div>
-
-        </body>
-
-        </html>';
+    $plantillaHTML_end = '</div></div></div></body></html>';
 
     $survey = DB::select(DB::raw("SELECT datos_cliente_encuesta, respuestas_encuesta FROM clientes_encuestas_contestadas WHERE id_llave_encuesta = '" . $idSurvey . "'"));
 
@@ -245,6 +252,8 @@ class SurveyController extends Controller
 
     $email = $emails[0]->correo_cliente;
 
+    $email = explode(',', $email);
+
     $template_path = 'surveys/emailSurveyAnswered';
     $asunto = "Encuesta de satisfacción al cliente";
     $body = "Gracias por sus respuestas, sinci agradece que nos tomara como opción para sus necesidades y quedamos atentos a cualquier duda, demanda o solicitud futura";
@@ -259,7 +268,12 @@ class SurveyController extends Controller
     $emails = DB::select(DB::raw("SELECT correo_copia, correo_copia_oculta FROM clientes_encuestas WHERE llave_encuesta = '" . $idSurvey . "'"));
 
     $email = $emails[0]->correo_copia;
+    $email = explode(',', $email);
+
     $emailCC = $emails[0]->correo_copia_oculta;
+
+    if($emailCC != "")
+        $emailCC = explode(',', $emailCC);
 
     $template_path = 'surveys/emailSurveyAnswered';
     $asunto = "Encuesta de satisfacción al cliente";

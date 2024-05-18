@@ -76,7 +76,7 @@ body .nav-link.text-white {
 }
 
 
-.form-control{
+input:not(.form-control.selectpicker){
     border: 1px solid #d2d6da !important;
 }
 

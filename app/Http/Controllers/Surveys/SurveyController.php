@@ -248,7 +248,7 @@ class SurveyController extends Controller
 
   public function sendEmailSurveyAnsweredClient($idSurvey){
 
-    $emails = DB::select(DB::raw("SELECT correo_cliente FROM clientes_encuestas WHERE llave_encuesta = '" . $idSurvey . "'"));
+    $emails = DB::select(DB::raw("SELECT correo_cliente, llave_encuesta FROM clientes_encuestas WHERE llave_encuesta = '" . $idSurvey . "'"));
 
     $email = $emails[0]->correo_cliente;
 
@@ -265,7 +265,7 @@ class SurveyController extends Controller
 
   public function sendEmailSurveyAnswered($idSurvey){
 
-    $emails = DB::select(DB::raw("SELECT correo_copia, correo_copia_oculta FROM clientes_encuestas WHERE llave_encuesta = '" . $idSurvey . "'"));
+    $emails = DB::select(DB::raw("SELECT correo_copia, correo_copia_oculta, llave_encuesta FROM clientes_encuestas WHERE llave_encuesta = '" . $idSurvey . "'"));
 
     $email = $emails[0]->correo_copia;
     $email = explode(',', $email);

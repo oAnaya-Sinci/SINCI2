@@ -247,7 +247,7 @@ class SurveyController extends Controller
       $emails = $this->sendEmailSurveyAnswered($idSurvey);
     } else {
       // Output the generated PDF to Browser
-      $dompdf->stream();
+      $dompdf->stream($idSurvey.".pdf");
     }
 
     return $emails;
@@ -265,14 +265,17 @@ class SurveyController extends Controller
     $asunto = "Encuesta de satisfacción al cliente";
     $body = "Gracias por sus respuestas, sinci agradece que nos tomara como opción para sus necesidades y quedamos atentos a cualquier duda, demanda o solicitud futura";
 
-    Mail::send($template_path, ['body' => $body], function ($message) use ($email, $asunto) {
-      $message->to($email)->subject($asunto)->from('snla@sinci.com', $asunto);
+    Mail::send($template_path, ['body' => $body], function ($message) use ($email, $asunto, $idSurvey) {
+      $message->to($email)->subject($asunto)->from('snla@sinci.com', $asunto)->attach('reportsPDF/'.$idSurvey.'.pdf');;
     });
   }
 
   public function sendEmailSurveyAnswered($idSurvey){
 
     $emails = DB::select(DB::raw("SELECT correo_copia, correo_copia_oculta, llave_encuesta FROM clientes_encuestas WHERE llave_encuesta = '" . $idSurvey . "'"));
+
+    if($emails[0]->correo_copia == null)
+        return $emails;
 
     $email = $emails[0]->correo_copia;
     $email = explode(',', $email);
@@ -287,12 +290,12 @@ class SurveyController extends Controller
     $body = "Gracias por sus respuestas, sinci agradece que nos tomara como opción para sus necesidades y quedamos atentos a cualquier duda, demanda o solicitud futura";
 
     if ($emailCC != null) {
-      Mail::send($template_path, ['body' => $body], function ($message) use ($email, $emailCC, $asunto) {
-        $message->to($email)->subject($asunto)->from('snla@sinci.com', $asunto)->cc($emailCC);
+      Mail::send($template_path, ['body' => $body], function ($message) use ($email, $emailCC, $asunto, $idSurvey) {
+        $message->to($email)->subject($asunto)->from('snla@sinci.com', $asunto)->cc($emailCC)->attach('reportsPDF/'.$idSurvey.'.pdf');;
       });
     } else {
-      Mail::send($template_path, ['body' => $body], function ($message) use ($email, $asunto) {
-        $message->to($email)->subject($asunto)->from('snla@sinci.com', $asunto);
+      Mail::send($template_path, ['body' => $body], function ($message) use ($email, $asunto, $idSurvey) {
+        $message->to($email)->subject($asunto)->from('snla@sinci.com', $asunto)->attach('reportsPDF/'.$idSurvey.'.pdf');;
       });
     }
 

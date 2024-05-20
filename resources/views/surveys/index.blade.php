@@ -137,21 +137,21 @@ use Carbon\Carbon;
 
           <div class="row">
             <div class="col-xl-3">
-              <label for="">Status</label>
+              <label for="" style="margin-bottom: 0 !important; margin-top: 0.5rem !important; font-weight: 500 !important;">Status</label>
               <select name="" id="slctStatus" class="form-select">
                 <option value="1">Creada</option>
                 <option value="0">Contestada</option>
               </select>
             </div>
-            <div class="col-xl-4">
-              <label for="">Busqueda por fechas</label>
+            <div class="col-xl-3">
+              <label for="" style="margin-bottom: 0 !important; margin-top: 0.5rem !important; font-weight: 500 !important;">Busqueda por fechas</label>
               <div class="form-group" style="display: flex; gap: 1em;">
                 <input type="date" name="" id="date_init" class="form-control">
                 <input type="date" name="" id="date_end" class="form-control">
               </div>
             </div>
             <!-- <div class="col-xl-4">
-                     <label>Busqueda general</label>
+                     <label style="margin-bottom: 0 !important; margin-top: 0.5rem !important; font-weight: 500 !important;">Busqueda general</label>
                      <input type="text" name="" id="" class="form-control" placeholder="ingrese el valor que desea filtar en la tabla de resultado">
                   </div> -->
             <div class="col-xl-1" style="display: flex; flex-direction: column;">
@@ -371,8 +371,11 @@ use Carbon\Carbon;
 <script>
   document.addEventListener("DOMContentLoaded", async function(event) {
 
-    let obtainDate = () => {
+    let obtainDate = (firstDay = false) => {
         let today = new Date().toLocaleDateString('es-MX').split('/').reverse();
+
+        if(firstDay)
+            today[2] = '01';
 
         if(today[1] < 10)
             today[1] = `0${today[1]}`;
@@ -425,6 +428,11 @@ use Carbon\Carbon;
     document.querySelectorAll('#createNewSurveyModal .modal-body select').forEach(select => {
       dataSurvey.push(select.value);
     });
+
+    let descriptionProject = document.querySelector('.filter-option-inner-inner').innerText;
+    descriptionProject = descriptionProject.split(' - ')[1];
+
+    dataSurvey.push(descriptionProject);
 
     let headers = {
       method: 'POST',

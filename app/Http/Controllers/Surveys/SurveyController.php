@@ -20,9 +20,12 @@ class SurveyController extends Controller
    *
    * @return \Illuminate\Http\Response
    */
+
   public function index(){
 
-    $surveys = $this->getSurveys(1, '2024-01-01', '2050-12-01');
+    date_default_timezone_set('America/Mexico_City');
+
+    $surveys = $this->getSurveys(1, date('Y-m-d'), date('Y-m-d'));
     $surveysGenerated = Surveys::select('nombre_encuesta', 'id_encuesta')->get()->pluck('nombre_encuesta', 'id_encuesta')->toArray();
 
     return view("surveys/index", compact('surveys', 'surveysGenerated'));
@@ -60,12 +63,14 @@ class SurveyController extends Controller
     if ($existSurvey)
       return ['response' => false, 'Message' => "Debido a que ya existe una encuesta para el codigo de proyecto", 'codigo' => $request[6]];
 
+    // $request[2] - Este campo obtiene el nombre de el vendedor que se debe de guardar porterior en la base de datos
+
     $survey = surveysClients::create([
       'llave_encuesta' => $request[0],
       'orden_compra_cliente' => $request[0],
       'nombre_cliente' => $request[1],
       'codigo_proyecto_cliente' => $request[6],
-      'descripcion_proyecto_cliente' => $request[2],
+      'descripcion_proyecto_cliente' => $request[8],
       'correo_cliente' => $request[3],
       'correo_copia' => $request[4],
       'correo_copia_oculta' => $request[5],
@@ -136,19 +141,21 @@ class SurveyController extends Controller
    */
   public function getSurveys($status, $date_init, $date_end){
 
+    $dateSearch = " AND CE.created_timestamp BETWEEN '". $date_init ." 00:00:00' AND '". $date_end ." 23:59:59'";
+
+    if($status == 0)
+      $dateSearch = " AND CE.updated_timestamp BETWEEN '". $date_init ." 00:00:00' AND '". $date_end ." 23:59:59'";
+
     $dataSurvey = DB::select(DB::raw(
         "SELECT
-                CE.nombre_cliente, CE.codigo_proyecto_cliente, CE.orden_compra_cliente, CE.descripcion_proyecto_cliente, CE.correo_cliente, CE.correo_copia, CE.correo_copia_oculta, CE.estatus_encuesta, CE.created_timestamp AS survey_created,
-                E.nombre_encuesta, E.descripcion,
-                CEC.id_llave_encuesta, CEC.created_timestamp AS survey_answered
-            FROM clientes_encuestas CE
-            INNER JOIN encuesta E ON CE.id_encuesta = E.id_encuesta
-            LEFT  JOIN clientes_encuestas_contestadas CEC ON CE.llave_encuesta = CEC.id_llave_encuesta
+              CE.nombre_cliente, CE.codigo_proyecto_cliente, CE.orden_compra_cliente, CE.descripcion_proyecto_cliente, CE.correo_cliente, CE.correo_copia, CE.correo_copia_oculta, CE.estatus_encuesta, CE.created_timestamp AS survey_created,
+              E.nombre_encuesta, E.descripcion,
+              CEC.id_llave_encuesta, CEC.created_timestamp AS survey_answered
+          FROM clientes_encuestas CE
+          INNER JOIN encuesta E ON CE.id_encuesta = E.id_encuesta
+          LEFT  JOIN clientes_encuestas_contestadas CEC ON CE.llave_encuesta = CEC.id_llave_encuesta
 
-            WHERE CE.estatus_encuesta = ". $status ."
-            AND CE.created_timestamp BETWEEN '". $date_init ." 00:00:00' AND '". $date_end ." 23:59:59'
-
-            ORDER BY CE.created_timestamp DESC;"
+          WHERE CE.estatus_encuesta = ". $status . $dateSearch . " ORDER BY CE.created_timestamp DESC;"
         ));
 
     return $dataSurvey;

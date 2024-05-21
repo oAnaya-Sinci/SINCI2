@@ -4,110 +4,11 @@ use Carbon\Carbon;
 
 @extends('layouts.app')
 
+@section('cssSection')
+    <link rel="stylesheet" href="/css/surveys/main.css">
+@endsection
+
 @section('pageContent')
-
-<style>
-  .card-body.surveys {
-
-    width: 100%;
-    height: 62vh;
-    overflow: auto;
-  }
-
-  table thead tr th {
-    text-align: left;
-    padding: 0.25rem 0.5rem 0.5rem 0.5rem !important;
-    vertical-align: middle;
-  }
-
-  table thead tr {
-    background-color: #8A1F03;
-    color: #FFF;
-  }
-
-  table thead tr th {
-
-    border-right: solid 1px #FFF !important;
-  }
-
-  table tbody tr td {
-
-    /* border: solid 1px #8A1F03 !important; */
-  }
-
-  table tbody tr td {
-    font-size: 13px;
-    text-align: left;
-    padding: 0.5rem 0.25rem 0.15rem 0.75rem !important;
-  }
-
-  table tbody tr td:last-child {
-    text-align: center;
-  }
-
-  table tbody tr td:last-child .btn {
-    margin: -5px 0 0.15rem 0;
-    padding: 0.15rem 1.5rem;
-  }
-
-  table thead tr th.client,
-  table tbody tr td.client {
-    width: 23px;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-  }
-
-  .modal .modal-body label {
-    font-weight: 500;
-    font-size: 14px;
-  }
-
-  .form-group .input-group input {
-
-    height: fit-content;
-  }
-
-  .form-group .input-group .input-group-append .btn {
-
-    border-radius: 0 0.5rem 0.5rem 0;
-    /* border-radius: 0; */
-  }
-
-  #createNewSurveyModal .modal-content {
-    height: auto;
-  }
-
-  #createNewSurveyModal .modal-footer .btn {
-    margin-bottom: 0;
-  }
-
-  .alarmExistSurvey .alert {
-    width: 83%;
-  }
-
-  .alarmExistSurvey .alert p {
-    font-weight: 500;
-    color: #fff
-  }
-
-  .alarmExistSurvey {
-    width: 93%;
-    position: fixed;
-    z-index: 2;
-    transform: translateX(100%);
-    transition: transform ease-out 1.5s;
-  }
-
-  .showAlarmExistSurvey {
-    transform: translateX(0%);
-    transition: transform ease-out 0.5s;
-  }
-
-  hr {
-    color: #FFF;
-  }
-</style>
 
 <div class="row justify-content-end alarmExistSurvey">
   <div class="col-12 col-lg-6">
@@ -121,6 +22,17 @@ use Carbon\Carbon;
   </div>
 </div>
 
+<div class="row justify-content-end alarmErrorEmails">
+  <div class="col-12 col-lg-6">
+    <div class="alert alert-danger" role="alert">
+      <div class="title">
+        <h5>Detalle en correos</h5>
+      </div>
+      <hr>
+      <div class="message"><p>El formato de los correos ingresados no es correcto, favor de revisarlo antes de continuar</p></div>
+    </div>
+  </div>
+</div>
 
 <div class="container-fluid mb-3">
   <div class="row">
@@ -331,7 +243,7 @@ use Carbon\Carbon;
           <div class="col-md-6">
             <div class="form-group">
               <label for="">Correo contestar encuesta</label>
-              <input type="text" class="form-control" placeholder="Correo">
+              <input type="text" class="form-control emailClient" placeholder="Correo">
             </div>
           </div>
 
@@ -342,14 +254,14 @@ use Carbon\Carbon;
           <div class="col-md-6">
             <div class="form-group">
               <label for="">Correo adicional</label>
-              <input type="text" class="form-control" placeholder="CC">
+              <input type="text" class="form-control emailAdditional" placeholder="Additional Email">
             </div>
           </div>
 
           <div class="col-md-6">
             <div class="form-group">
               <label for="">Correo adicional copia (CC)</label>
-              <input type="text" class="form-control" placeholder="CCO">
+              <input type="text" class="form-control emailCC" placeholder="CC">
             </div>
           </div>
 
@@ -367,174 +279,5 @@ use Carbon\Carbon;
 @endsection
 
 @section('jsSection')
-
-<script>
-  document.addEventListener("DOMContentLoaded", async function(event) {
-
-    let obtainDate = (firstDay = false) => {
-        let today = new Date().toLocaleDateString('es-MX').split('/').reverse();
-
-        if(firstDay)
-            today[2] = '01';
-
-        if(today[1] < 10)
-            today[1] = `0${today[1]}`;
-
-        return today.join('-');
-    }
-
-    document.querySelector('#date_init').value = obtainDate();
-    document.querySelector('#date_end').value = obtainDate();
-
-    let dataProyecto = await fetch(urlData + "/obtainDataFromProyects?isLogedIn=" + dataLogin()).then(data => data.json()).then(dataProyecto => {
-      return dataProyecto
-    }).catch(() => {
-      IsLogedIn();
-    });
-
-    let options = "<option value=''>Seleccione un proyecto</option>";
-    dataProyecto.forEach(elem => {
-      options += `<option value="${elem.VALUE_SELECT}">${elem.OPTION_SELECT}</option>`;
-    });
-
-    document.querySelector('#dataProjects').innerHTML = options;
-    $('.selectpicker').selectpicker('refresh');
-
-    outLoader();
-
-    iniciateButtonPDF();
-  });
-
-  document.querySelector('#dataProjects').addEventListener('change', async elem => {
-
-    let idProyecto = elem.srcElement.value;
-    let dataOC = (await fetch(`${urlData}/obtainDataClient?idp=${idProyecto}`).then(json => json.json()))[0];
-
-    document.querySelector('#clientName').value = dataOC.RAZON_SOCIAL;
-    document.querySelector('#codeProject').value = dataOC.ORDEN_COMPRA;
-    document.querySelector('#vendedor').value = dataOC.VENDEDOR;
-
-    document.querySelector('#btnSaveSurvey').removeAttribute('disabled');
-  });
-
-  document.querySelector('#btnSaveSurvey').addEventListener('click', async () => {
-
-    inLoader();
-
-    let dataSurvey = [];
-    document.querySelectorAll('#createNewSurveyModal .modal-body input:not([type = "search"])').forEach(input => {
-      dataSurvey.push(input.value);
-    });
-    document.querySelectorAll('#createNewSurveyModal .modal-body select').forEach(select => {
-      dataSurvey.push(select.value);
-    });
-
-    let descriptionProject = document.querySelector('.filter-option-inner-inner').innerText;
-    descriptionProject = descriptionProject.split(' - ')[1];
-
-    dataSurvey.push(descriptionProject);
-
-    let headers = {
-      method: 'POST',
-      body: JSON.stringify(dataSurvey),
-      headers: {
-        "content-type": "application/json; charset=utf-8",
-        'X-CSRF-TOKEN': $("meta[name='csrf-token']").attr("content"),
-      }
-    };
-
-    let responseSaveData = await fetch(`/surveys/saveDataSurvey`, headers).then(json => json.json());
-
-    $('#createNewSurveyModal').modal('hide');
-    outLoader();
-
-    if (!responseSaveData.response) {
-
-      setTimeout(() => {
-
-        document.querySelector('.alarmExistSurvey .alert .message').innerHTML = `<p>${responseSaveData.Message} (${responseSaveData.codigo})</p>`;
-        document.querySelector('.alarmExistSurvey').classList.toggle('showAlarmExistSurvey');
-      }, 1000);
-
-      setTimeout(() => {
-        document.querySelector('.alarmExistSurvey').classList.toggle('showAlarmExistSurvey');
-      }, 13000);
-
-    } else {
-      await obtainDataSurvey();
-    }
-  });
-
-  let obtainDataSurvey = async () => {
-
-    let dataFilters = {
-      status: document.querySelector('#slctStatus').value,
-      date_init: document.querySelector('#date_init').value,
-      date_end: document.querySelector('#date_end').value
-    }
-
-    let dataSurvey = await fetch(`/surveys/obtainSurveys?dataFilters=${JSON.stringify(dataFilters)}`).then(json => json.json());
-
-    let table = document.querySelector('#tableSurveys tbody');
-    try {
-        table.querySelector('tr').remove();
-    } catch (error) {
-        console.warn(error);
-    }
-    let tbody = "";
-
-    dataSurvey.forEach(elem => {
-
-      tbody += `<tr><td class="client">${ elem.nombre_cliente }</td>`;
-      tbody += `<td>${ elem.codigo_proyecto_cliente }</td>`;
-      tbody += `<td>${ elem.orden_compra_cliente }</td>`;
-      // tbody += `<td class="description">${ elem.descripcion_proyecto_cliente }</td>`;
-      tbody += `<td>${ elem.correo_cliente }</td>`;
-      // tbody += `<td>${ elem.correo_copia === null ? " - " : elem.correo_copia}</td>`;
-      // tbody += `<td>${ elem.correo_copia_oculta === null ? " - " : elem.correo_copia_oculta }</td>`;
-      tbody += `<td>${ elem.estatus_encuesta === 1 ? "Creada" : "Contestada" }</td>`;
-      tbody += `<td>${ elem.survey_created }</td>`;
-      // tbody += `<td>${ elem.nombre_encuesta }</td>`;
-      // tbody += `<td>${ elem.descripcion }</td>`;
-      tbody += `<td>${ elem.survey_answered === null ? ' - ' : elem.survey_answered }</td>`;
-      tbody += `<td>${ elem.id_llave_encuesta === null ? ' - ' : `<button class="btn btn-primary btn-sm" data-llave="${elem.id_llave_encuesta}">Ver</button>` }</td><tr>`;
-    });
-
-    table.innerHTML = tbody;
-
-    iniciateButtonPDF();
-
-    return true;
-  };
-
-  document.querySelector('.btn-filters').addEventListener('click', () => {
-    obtainDataSurvey();
-  });
-
-  let iniciateButtonPDF = () => {
-
-    document.querySelectorAll('#tableSurveys tbody tr td .btn').forEach(btn => {
-
-      btn.addEventListener('click', async btnClick => {
-
-        let keyReportPDF = btnClick.srcElement.dataset.llave;
-        // window.open(`/reportsPDF/${keyReportPDF}.pdf`, '_blank');
-        window.open(`/surveys/generatePDFSurveys?idSurvey=${keyReportPDF}&sendEmail=false`, '_blank');
-      });
-    });
-  };
-
-  document.querySelector('#newSurvey').addEventListener('click', () => {
-
-    document.querySelectorAll('#createNewSurveyModal .modal-body input').forEach(input => {
-      input.value = "";
-    });
-    document.querySelectorAll('#createNewSurveyModal .modal-body select').forEach(select => {
-      select.value = "";
-    });
-
-    $('#createNewSurveyModal').modal('show');
-  });
-</script>
-
+    <script src="/js/surveys/main.js"></script>
 @endsection

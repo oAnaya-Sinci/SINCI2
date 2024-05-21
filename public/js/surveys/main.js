@@ -1,0 +1,239 @@
+document.addEventListener("DOMContentLoaded", async function (event) {
+
+  let obtainDate = (firstDay = false) => {
+    let today = new Date().toLocaleDateString('es-MX').split('/').reverse();
+
+    if (firstDay)
+      today[2] = '01';
+
+    if (today[1] < 10)
+      today[1] = `0${today[1]}`;
+
+    return today.join('-');
+  }
+
+  document.querySelector('#date_init').value = obtainDate();
+  document.querySelector('#date_end').value = obtainDate();
+
+  let dataProyecto = await fetch(urlData + "/obtainDataFromProyects?isLogedIn=" + dataLogin()).then(data => data.json()).then(dataProyecto => {
+    return dataProyecto
+  }).catch(() => {
+    IsLogedIn();
+  });
+
+  let options = "<option value=''>Seleccione un proyecto</option>";
+  dataProyecto.forEach(elem => {
+    options += `<option value="${elem.VALUE_SELECT}">${elem.OPTION_SELECT}</option>`;
+  });
+
+  document.querySelector('#dataProjects').innerHTML = options;
+  $('.selectpicker').selectpicker('refresh');
+
+  outLoader();
+
+  iniciateButtonPDF();
+});
+
+document.querySelector('#dataProjects').addEventListener('change', async elem => {
+
+  let idProyecto = elem.srcElement.value;
+  let dataOC = (await fetch(`${urlData}/obtainDataClient?idp=${idProyecto}`).then(json => json.json()))[0];
+
+  document.querySelector('#clientName').value = dataOC.RAZON_SOCIAL;
+  document.querySelector('#codeProject').value = dataOC.ORDEN_COMPRA;
+  document.querySelector('#vendedor').value = dataOC.VENDEDOR;
+
+  document.querySelector('#btnSaveSurvey').removeAttribute('disabled');
+});
+
+document.querySelector('#btnSaveSurvey').addEventListener('click', async () => {
+
+  inLoader();
+
+  let dataSurvey = [];
+  document.querySelectorAll('#createNewSurveyModal .modal-body input:not([type = "search"])').forEach(input => {
+    dataSurvey.push(input.value);
+  });
+  document.querySelectorAll('#createNewSurveyModal .modal-body select').forEach(select => {
+    dataSurvey.push(select.value);
+  });
+
+  let descriptionProject = document.querySelector('.filter-option-inner-inner').innerText;
+  descriptionProject = descriptionProject.split(' - ')[1];
+
+  dataSurvey.push(descriptionProject);
+
+  let headers = {
+    method: 'POST',
+    body: JSON.stringify(dataSurvey),
+    headers: {
+      "content-type": "application/json; charset=utf-8",
+      'X-CSRF-TOKEN': $("meta[name='csrf-token']").attr("content"),
+    }
+  };
+
+  let responseSaveData = await fetch(`/surveys/saveDataSurvey`, headers).then(json => json.json());
+
+  $('#createNewSurveyModal').modal('hide');
+  $('.selectpicker').val('');
+  $('.selectpicker').selectpicker('refresh');
+  outLoader();
+
+  if (!responseSaveData.response) {
+
+    setTimeout(() => {
+
+      document.querySelector('.alarmExistSurvey .alert .message').innerHTML = `<p>${responseSaveData.Message} (${responseSaveData.codigo})</p>`;
+      document.querySelector('.alarmExistSurvey').classList.toggle('showAlarmExistSurvey');
+    }, 1000);
+
+    setTimeout(() => {
+      document.querySelector('.alarmExistSurvey').classList.toggle('showAlarmExistSurvey');
+    }, 13000);
+
+  } else {
+    await obtainDataSurvey();
+  }
+});
+
+let obtainDataSurvey = async () => {
+
+  let dataFilters = {
+    status: document.querySelector('#slctStatus').value,
+    date_init: document.querySelector('#date_init').value,
+    date_end: document.querySelector('#date_end').value
+  }
+
+  let dataSurvey = await fetch(`/surveys/obtainSurveys?dataFilters=${JSON.stringify(dataFilters)}`).then(json => json.json());
+
+  let table = document.querySelector('#tableSurveys tbody');
+  try {
+    table.querySelector('tr').remove();
+  } catch (error) {
+    console.warn(error);
+  }
+  let tbody = "";
+
+  dataSurvey.forEach(elem => {
+
+    tbody += `<tr><td class="client">${elem.nombre_cliente}</td>`;
+    tbody += `<td>${elem.codigo_proyecto_cliente}</td>`;
+    tbody += `<td>${elem.orden_compra_cliente}</td>`;
+    // tbody += `<td class="description">${ elem.descripcion_proyecto_cliente }</td>`;
+    tbody += `<td>${elem.correo_cliente}</td>`;
+    // tbody += `<td>${ elem.correo_copia === null ? " - " : elem.correo_copia}</td>`;
+    // tbody += `<td>${ elem.correo_copia_oculta === null ? " - " : elem.correo_copia_oculta }</td>`;
+    tbody += `<td>${elem.estatus_encuesta === 1 ? "Creada" : "Contestada"}</td>`;
+    tbody += `<td>${elem.survey_created}</td>`;
+    // tbody += `<td>${ elem.nombre_encuesta }</td>`;
+    // tbody += `<td>${ elem.descripcion }</td>`;
+    tbody += `<td>${elem.survey_answered === null ? ' - ' : elem.survey_answered}</td>`;
+    tbody += `<td>${elem.id_llave_encuesta === null ? ' - ' : `<button class="btn btn-primary btn-sm" data-llave="${elem.id_llave_encuesta}">Ver</button>`}</td><tr>`;
+  });
+
+  table.innerHTML = tbody;
+
+  iniciateButtonPDF();
+
+  return true;
+};
+
+document.querySelector('.btn-filters').addEventListener('click', () => {
+  obtainDataSurvey();
+});
+
+let iniciateButtonPDF = () => {
+
+  document.querySelectorAll('#tableSurveys tbody tr td .btn').forEach(btn => {
+
+    btn.addEventListener('click', async btnClick => {
+
+      let keyReportPDF = btnClick.srcElement.dataset.llave;
+      // window.open(`/reportsPDF/${keyReportPDF}.pdf`, '_blank');
+      window.open(`/surveys/generatePDFSurveys?idSurvey=${keyReportPDF}&sendEmail=false`, '_blank');
+    });
+  });
+};
+
+document.querySelector('#newSurvey').addEventListener('click', () => {
+
+  document.querySelectorAll('#createNewSurveyModal .modal-body input').forEach(input => {
+    input.value = "";
+  });
+  document.querySelectorAll('#createNewSurveyModal .modal-body select').forEach(select => {
+    select.value = "";
+  });
+
+  $('#createNewSurveyModal').modal('show');
+});
+
+let validateEmailsInput_SINCI = emailsString => {
+
+  let re_email = /\S+@\S+\.\S+/;
+  let re_SinciEmail = /sinci.com/i;
+
+  let errorEmailFormat = false;
+  emailsString.split(',').map(email => {
+
+    email.trim();
+
+    let checkEmail = re_email.test(email);
+    let splitEmail = email.split('@')[1].trim();
+    let isEmailSinci = re_SinciEmail.test(splitEmail);
+
+    if(!checkEmail || isEmailSinci){
+      errorEmailFormat = true;
+    }
+  });
+
+  if(errorEmailFormat){
+
+    document.querySelector('.sidebar').style.zIndex = 1;
+
+    setTimeout(() => {
+      document.querySelector('.modalsSinciClass').style.zIndex = 2;
+      document.querySelector('.modal-backdrop').style.zIndex = 1;
+      document.querySelector('.alarmErrorEmails').classList.toggle('showAlarmErrorEmail');
+    }, 500);
+
+    setTimeout(() => {
+      document.querySelector('.alarmErrorEmails').classList.toggle('showAlarmErrorEmail');
+    }, 6000);
+  }
+};
+
+let validateEmailsInput = emailsString => {
+
+  let re_email = /\S+@\S+\.\S+/;
+
+  let errorEmailFormat = false;
+  emailsString.split(',').map(email => {
+
+    email.trim();
+
+    let checkEmail = re_email.test(email);
+
+    if(!checkEmail){
+      errorEmailFormat = true;
+    }
+  });
+
+  if(errorEmailFormat){
+
+    document.querySelector('.sidebar').style.zIndex = 1;
+
+    setTimeout(() => {
+      document.querySelector('.modalsSinciClass').style.zIndex = 2;
+      document.querySelector('.modal-backdrop').style.zIndex = 1;
+      document.querySelector('.alarmErrorEmails').classList.toggle('showAlarmErrorEmail');
+    }, 500);
+
+    setTimeout(() => {
+      document.querySelector('.alarmErrorEmails').classList.toggle('showAlarmErrorEmail');
+    }, 6000);
+  }
+};
+
+document.querySelector('.emailClient').addEventListener('change', input => { validateEmailsInput_SINCI(input.srcElement.value); });
+document.querySelector('.emailAdditional').addEventListener('change', input => { validateEmailsInput(input.srcElement.value); });
+document.querySelector('.emailCC').addEventListener('change', input => { validateEmailsInput(input.srcElement.value); });

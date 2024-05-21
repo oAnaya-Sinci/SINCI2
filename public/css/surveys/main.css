@@ -1,0 +1,104 @@
+.card-body.surveys {
+
+    width: 100%;
+    height: 62vh;
+    overflow: auto;
+  }
+
+  table thead tr th {
+    text-align: left;
+    padding: 0.25rem 0.5rem 0.5rem 0.5rem !important;
+    vertical-align: middle;
+  }
+
+  table thead tr {
+    background-color: #8A1F03;
+    color: #FFF;
+  }
+
+  table thead tr th {
+
+    border-right: solid 1px #FFF !important;
+  }
+
+  table tbody tr td {
+
+    /* border: solid 1px #8A1F03 !important; */
+  }
+
+  table tbody tr td {
+    font-size: 13px;
+    text-align: left;
+    padding: 0.5rem 0.25rem 0.15rem 0.75rem !important;
+  }
+
+  table tbody tr td:last-child {
+    text-align: center;
+  }
+
+  table tbody tr td:last-child .btn {
+    margin: -5px 0 0.15rem 0;
+    padding: 0.15rem 1.5rem;
+  }
+
+  table thead tr th.client,
+  table tbody tr td.client {
+    width: 23px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  .modal .modal-body label {
+    font-weight: 500;
+    font-size: 14px;
+  }
+
+  .form-group .input-group input {
+
+    height: fit-content;
+  }
+
+  .form-group .input-group .input-group-append .btn {
+
+    border-radius: 0 0.5rem 0.5rem 0;
+    /* border-radius: 0; */
+  }
+
+  #createNewSurveyModal .modal-content {
+    height: auto;
+  }
+
+  #createNewSurveyModal .modal-footer .btn {
+    margin-bottom: 0;
+  }
+
+  .alarmExistSurvey .alert,
+  .alarmErrorEmails .alert {
+    width: 83%;
+  }
+
+  .alarmExistSurvey .alert p,
+  .alarmErrorEmails .alert p {
+    font-weight: 500;
+    color: #fff
+  }
+
+  .alarmExistSurvey,
+  .alarmErrorEmails {
+    width: 93%;
+    position: fixed;
+    z-index: 3;
+    transform: translateX(100%);
+    transition: transform ease-out 1.5s;
+  }
+
+  .showAlarmExistSurvey,
+  .showAlarmErrorEmail {
+    transform: translateX(0%);
+    transition: transform ease-out 0.5s;
+  }
+
+  hr {
+    color: #FFF;
+  }

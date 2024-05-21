@@ -128,7 +128,7 @@ let obtainDataSurvey = async () => {
     // tbody += `<td>${ elem.nombre_encuesta }</td>`;
     // tbody += `<td>${ elem.descripcion }</td>`;
     tbody += `<td>${elem.survey_answered === null ? ' - ' : elem.survey_answered}</td>`;
-    tbody += `<td>${elem.id_llave_encuesta === null ? ' - ' : `<button class="btn btn-primary btn-sm" data-llave="${elem.id_llave_encuesta}">Ver</button>`}</td><tr>`;
+    tbody += `<td>${elem.id_llave_encuesta === null ? `<button class="btn btn-primary btn-sm" data-llave="${elem.id_llave_encuesta}"  data-type="reenviar">Reenviar</button>` : `<button class="btn btn-primary btn-sm" data-llave="${elem.id_llave_encuesta}" data-type="pdf">PDF</button>`}</td></tr>`;
   });
 
   table.innerHTML = tbody;

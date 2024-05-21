@@ -106,7 +106,7 @@ use Carbon\Carbon;
                 <!-- <th>Encuesta</th> -->
                 <!-- <th>Descripcion</th> -->
                 <th>Contestada el</th>
-                <th>Reporte</th>
+                <th>Acciones</th>
               </tr>
             </thead>
             <tbody>
@@ -140,9 +140,9 @@ use Carbon\Carbon;
                 @endif
 
                 @if($survey->id_llave_encuesta != null)
-                <td><button class="btn btn-primary btn-sm" data-llave="{{$survey->id_llave_encuesta}}">Ver</button></td>
+                    <td><button class="btn btn-primary btn-sm" data-llave="{{$survey->id_llave_encuesta}}" data-type="pdf">PDF</button></td>
                 @else
-                <td> - </td>
+                    <td><button class="btn btn-primary btn-sm" data-llave="{{$survey->id_llave_encuesta}}" data-type="reenviar">Reenviar</button></td>
                 @endif
               </tr>
               @endforeach

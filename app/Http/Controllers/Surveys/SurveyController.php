@@ -25,7 +25,7 @@ class SurveyController extends Controller
 
     date_default_timezone_set('America/Mexico_City');
 
-    $surveys = $this->getSurveys(1, date('Y-m-d'), date('Y-m-d'));
+    $surveys = $this->getSurveys(1, date('Y-m-') . "1", date('Y-m-d'));
     $surveysGenerated = Surveys::select('nombre_encuesta', 'id_encuesta')->get()->pluck('nombre_encuesta', 'id_encuesta')->toArray();
 
     return view("surveys/index", compact('surveys', 'surveysGenerated'));

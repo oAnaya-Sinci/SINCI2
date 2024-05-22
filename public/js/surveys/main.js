@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", async function (event) {
     return today.join('-');
   }
 
-  document.querySelector('#date_init').value = obtainDate();
+  document.querySelector('#date_init').value = obtainDate(true);
   document.querySelector('#date_end').value = obtainDate();
 
   let dataProyecto = await fetch(urlData + "/obtainDataFromProyects?isLogedIn=" + dataLogin()).then(data => data.json()).then(dataProyecto => {
@@ -49,6 +49,30 @@ document.querySelector('#dataProjects').addEventListener('change', async elem =>
 document.querySelector('#btnSaveSurvey').addEventListener('click', async () => {
 
   inLoader();
+
+  let validateEmail1 = validateEmailsInput_SINCI(document.querySelector('.emailClient').value);
+  let validateEmail2 = validateEmailsInput(document.querySelector('.emailAdditional').value);
+  let validateEmail3 = validateEmailsInput(document.querySelector('.emailCC').value);
+
+  console.log(validateEmail1, validateEmail2, validateEmail3);
+
+  if(validateEmail1 || validateEmail2 || validateEmail3){
+    outLoader();
+
+    document.querySelector('.sidebar').style.zIndex = 1;
+
+    setTimeout(() => {
+      document.querySelector('.modalsSinciClass').style.zIndex = 2;
+      document.querySelector('.modal-backdrop').style.zIndex = 1;
+      document.querySelector('.alarmErrorEmails').classList.toggle('showAlarmErrorEmail');
+    }, 500);
+
+    setTimeout(() => {
+      document.querySelector('.alarmErrorEmails').classList.toggle('showAlarmErrorEmail');
+    }, 6000);
+    
+    return false;
+  }
 
   let dataSurvey = [];
   document.querySelectorAll('#createNewSurveyModal .modal-body input:not([type = "search"])').forEach(input => {
@@ -200,6 +224,8 @@ let validateEmailsInput_SINCI = emailsString => {
       document.querySelector('.alarmErrorEmails').classList.toggle('showAlarmErrorEmail');
     }, 6000);
   }
+
+  return errorEmailFormat;
 };
 
 let validateEmailsInput = emailsString => {
@@ -232,6 +258,8 @@ let validateEmailsInput = emailsString => {
       document.querySelector('.alarmErrorEmails').classList.toggle('showAlarmErrorEmail');
     }, 6000);
   }
+
+  return errorEmailFormat;
 };
 
 document.querySelector('.emailClient').addEventListener('change', input => { validateEmailsInput_SINCI(input.srcElement.value); });

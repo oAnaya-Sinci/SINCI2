@@ -59,6 +59,7 @@ Route::get('/surveys/main', [SurveyController::class, 'index'])->name('surveys')
 Route::get('/surveys/obtainSurveys', [SurveyController::class, 'obtainSurveys'])->name('obtain_surveys');
 Route::get('/surveys/generatePDFSurveys/', [SurveyController::class, 'obtainPDFSurvey'])->name('pdf_surveys');
 Route::post('/surveys/saveDataSurvey/', [SurveyController::class, 'store'])->name('save_surveys');
+Route::post('/surveys/resend_emails/', [SurveyController::class, 'resend_emails'])->name('resend_emails');
 //END
 
 //Routes reports

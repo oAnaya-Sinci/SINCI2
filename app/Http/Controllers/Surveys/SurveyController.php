@@ -301,4 +301,59 @@ class SurveyController extends Controller
 
     return $emails;
   }
+
+  public function resend_emails(Request $request){
+
+    $this->resen_client_key($request->llave);
+    $this->resen_client_no_key($request->llave);
+
+    return true;
+  }
+
+  public function resen_client_key($key){
+
+    $emails = DB::select(DB::raw("SELECT correo_cliente, llave_encuesta FROM clientes_encuestas WHERE llave_encuesta = '" . $key . "'"));
+
+    $email = $emails[0]->correo_cliente;
+
+    $email = explode(',', $email);
+
+    $template_path = 'surveys/emailKeySurvey';
+    $asunto = "Encuesta de satisfacción al cliente";
+    $body = "Llave para contestación de encuesta: " . $key;
+
+    Mail::send($template_path, ['body' => $body], function ($message) use ($email, $asunto) {
+      $message->to($email)->subject($asunto)->from('snla@sinci.com', $asunto);
+    });
+  }
+
+  public function resen_client_no_key($key){
+
+    $emails = DB::select(DB::raw("SELECT correo_copia, correo_copia_oculta, llave_encuesta FROM clientes_encuestas WHERE llave_encuesta = '" . $key . "'"));
+
+    if($emails[0]->correo_copia == null)
+        return $emails;
+
+    $email = $emails[0]->correo_copia;
+    $email = explode(',', $email);
+
+    $emailCC = $emails[0]->correo_copia_oculta;
+
+    if($emailCC != "")
+        $emailCC = explode(',', $emailCC);
+
+    $template_path = 'surveys/emailNewSurvey';
+    $asunto = "Encuesta de satisfacción al cliente";
+    $body = "Con esta plantilla solo se avisa de la contestacion de la encuesta";
+
+    if ($emailCC != null) {
+      Mail::send($template_path, ['body' => $body], function ($message) use ($email, $emailCC, $asunto) {
+        $message->to($email)->subject($asunto)->from('snla@sinci.com', $asunto)->cc($emailCC);
+      });
+    } else {
+      Mail::send($template_path, ['body' => $body], function ($message) use ($email, $asunto) {
+        $message->to($email)->subject($asunto)->from('snla@sinci.com', $asunto);
+      });
+    }
+  }
 }

@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", async function (event) {
 
   outLoader();
 
-  iniciateButtonPDF();
+  initiateButtonActions();
 });
 
 document.querySelector('#dataProjects').addEventListener('change', async elem => {
@@ -54,8 +54,6 @@ document.querySelector('#btnSaveSurvey').addEventListener('click', async () => {
   let validateEmail2 = validateEmailsInput(document.querySelector('.emailAdditional').value);
   let validateEmail3 = validateEmailsInput(document.querySelector('.emailCC').value);
 
-  console.log(validateEmail1, validateEmail2, validateEmail3);
-
   if(validateEmail1 || validateEmail2 || validateEmail3){
     outLoader();
 
@@ -70,7 +68,7 @@ document.querySelector('#btnSaveSurvey').addEventListener('click', async () => {
     setTimeout(() => {
       document.querySelector('.alarmErrorEmails').classList.toggle('showAlarmErrorEmail');
     }, 6000);
-    
+
     return false;
   }
 
@@ -113,7 +111,7 @@ document.querySelector('#btnSaveSurvey').addEventListener('click', async () => {
 
     setTimeout(() => {
       document.querySelector('.alarmExistSurvey').classList.toggle('showAlarmExistSurvey');
-    }, 13000);
+    }, 10000);
 
   } else {
     await obtainDataSurvey();
@@ -152,12 +150,12 @@ let obtainDataSurvey = async () => {
     // tbody += `<td>${ elem.nombre_encuesta }</td>`;
     // tbody += `<td>${ elem.descripcion }</td>`;
     tbody += `<td>${elem.survey_answered === null ? ' - ' : elem.survey_answered}</td>`;
-    tbody += `<td>${elem.id_llave_encuesta === null ? `<button class="btn btn-primary btn-sm" data-llave="${elem.id_llave_encuesta}"  data-type="reenviar">Reenviar</button>` : `<button class="btn btn-primary btn-sm" data-llave="${elem.id_llave_encuesta}" data-type="pdf">PDF</button>`}</td></tr>`;
+    tbody += `<td>${elem.id_llave_encuesta === null ? `<button class="btn btn-primary btn-sm" data-llave="${elem.orden_compra_cliente}"  data-type="reenviar">Reenviar</button>` : `<button class="btn btn-primary btn-sm" data-llave="${elem.id_llave_encuesta}" data-type="pdf">PDF</button>`}</td></tr>`;
   });
 
   table.innerHTML = tbody;
 
-  iniciateButtonPDF();
+  initiateButtonActions();
 
   return true;
 };
@@ -166,15 +164,28 @@ document.querySelector('.btn-filters').addEventListener('click', () => {
   obtainDataSurvey();
 });
 
-let iniciateButtonPDF = () => {
+let initiateButtonActions = () => {
 
   document.querySelectorAll('#tableSurveys tbody tr td .btn').forEach(btn => {
 
     btn.addEventListener('click', async btnClick => {
 
-      let keyReportPDF = btnClick.srcElement.dataset.llave;
-      // window.open(`/reportsPDF/${keyReportPDF}.pdf`, '_blank');
-      window.open(`/surveys/generatePDFSurveys?idSurvey=${keyReportPDF}&sendEmail=false`, '_blank');
+      if(btn.dataset.type == 'reenviar'){
+
+        let headers = {
+            method: 'POST',
+            body: JSON.stringify({llave: btn.dataset.llave}),
+            headers: {
+              "content-type": "application/json; charset=utf-8",
+              'X-CSRF-TOKEN': $("meta[name='csrf-token']").attr("content"),
+            }
+          };
+
+        await fetch('/surveys/resend_emails', headers);
+      } else {
+        let keyReportPDF = btnClick.srcElement.dataset.llave;
+        window.open(`/surveys/generatePDFSurveys?idSurvey=${keyReportPDF}&sendEmail=false`, '_blank');
+      }
     });
   });
 };
@@ -192,6 +203,9 @@ document.querySelector('#newSurvey').addEventListener('click', () => {
 });
 
 let validateEmailsInput_SINCI = emailsString => {
+
+  if(emailsString == '')
+    return false;
 
   let re_email = /\S+@\S+\.\S+/;
   let re_SinciEmail = /sinci.com/i;
@@ -229,6 +243,9 @@ let validateEmailsInput_SINCI = emailsString => {
 };
 
 let validateEmailsInput = emailsString => {
+
+  if(emailsString == '')
+    return false;
 
   let re_email = /\S+@\S+\.\S+/;
 

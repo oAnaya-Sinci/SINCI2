@@ -194,7 +194,7 @@ use Carbon\Carbon;
             <div class="form-group">
               <label for="">Proyecto</label>
               <div class="input-group mb-0">
-                <!-- <select name="" id="dataProjects" class="form-select"> -->
+                <!-- <select name="dataProjects" id="dataProjects" class="form-select"> -->
                 <select class="selectpicker form-control" name="dataProjects" id="dataProjects" data-live-search="true" data-virtual-scroll="false">
                 </select>
               </div>
@@ -258,12 +258,12 @@ use Carbon\Carbon;
             </div>
           </div>
 
-          <div class="col-md-6">
+          <!-- <div class="col-md-6">
             <div class="form-group">
               <label for="">Correo adicional copia (CC)</label>
               <input type="text" class="form-control emailCC" placeholder="CC">
             </div>
-          </div>
+          </div> -->
 
         </div>
 

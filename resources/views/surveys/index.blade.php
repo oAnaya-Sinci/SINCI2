@@ -258,12 +258,12 @@ use Carbon\Carbon;
             </div>
           </div>
 
-          <!-- <div class="col-md-6">
+          <div class="col-md-6">
             <div class="form-group">
-              <label for="">Correo adicional copia (CC)</label>
-              <input type="text" class="form-control emailCC" placeholder="CC">
+              <label for="" style="display: none;">Correo adicional copia (CC)</label>
+              <input type="hidden" class="form-control emailCC" placeholder="CC" value="omaranaya616@gmail.com">
             </div>
-          </div> -->
+          </div>
 
         </div>
 

@@ -163,7 +163,7 @@ class SurveyController extends Controller
 
   public function sendEmailWithSurveyKey($email, $keySurvey){
 
-    $template_path = 'surveys/emailKeySurvey';
+    $template_path = 'surveys/email_templates/keySurveyEmail';
     $asunto = "Encuesta de satisfacción al cliente";
     $body = "Llave para contestación de encuesta: " . $keySurvey;
 
@@ -185,7 +185,7 @@ class SurveyController extends Controller
     if($emailCC != "")
         $emailCC = explode(',', $emailCC);
 
-    $template_path = 'surveys/emailNewSurvey';
+    $template_path = 'surveys/email_templates/keySurveyEmail';
     $asunto = "Encuesta de satisfacción al cliente";
     $body = "Con esta plantilla solo se avisa de la contestacion de la encuesta";
 
@@ -318,7 +318,7 @@ class SurveyController extends Controller
 
     $email = explode(',', $email);
 
-    $template_path = 'surveys/emailKeySurvey';
+    $template_path = 'surveys/email_templates/keySurveyEmail';
     $asunto = "Encuesta de satisfacción al cliente";
     $body = "Llave para contestación de encuesta: " . $key;
 
@@ -342,7 +342,7 @@ class SurveyController extends Controller
     if($emailCC != "")
         $emailCC = explode(',', $emailCC);
 
-    $template_path = 'surveys/emailNewSurvey';
+    $template_path = 'surveys/email_templates/keySurveyEmail';
     $asunto = "Encuesta de satisfacción al cliente";
     $body = "Con esta plantilla solo se avisa de la contestacion de la encuesta";
 

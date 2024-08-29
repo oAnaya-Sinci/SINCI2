@@ -387,12 +387,14 @@
                                   style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                                   <tbody>
                                     <tr style="border-collapse:collapse">
-                                      <td style="padding:0;Margin:0;position:relative" align="center"><img
-                                          class="adapt-img"
-                                          src="https://img.freepik.com/free-vector/product-quality-concept-illustration_114360-7301.jpg?t=st=1717708395~exp=1717711995~hmac=d924331aa9eb7741cd7bd6a3c211ff6ce8dd98d2a6e91da6c1a920178386ebd2&w=740"
-                                          alt="Weekly deals, explore great saving"
-                                          title="Weekly deals, explore great saving"
-                                          style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic; width: 65%; height: 21rem;">
+                                      <td style="padding:0;Margin:0;position:relative" align="center">
+                                        <a target="_blank" href="">
+                                          <img class="adapt-img"
+                                            src="https://img.freepik.com/free-vector/feedback-survey-concept-illustration_114360-15500.jpg?t=st=1717686352~exp=1717689952~hmac=b61e16e216a7fa3884d2fe7b0dfe54025d7687790523a76e9a0e02174b3d17cc&w=1380"
+                                            alt="Weekly deals, explore great saving"
+                                            title="Weekly deals, explore great saving"
+                                            style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic; width: 100%; height: 21rem;">
+                                        </a>
                                       </td>
                                     </tr>
                                   </tbody>
@@ -416,14 +418,9 @@
       <tbody>
         <tr style="background-color: #F6F6F6;border-collapse:collapse">
           <td align="center" style="padding:1rem;Margin:0">
-            <p style="text-align: justify; font-size: 14px;">SINCI® agradece su tiempo para contestar esta encuesta de
-              satisfacción. En caso de tener un tema ajeno y desea ponerse en contacto con nosotros, le dejamos el
-              siguiente link.</p>
+            <p style="text-align: justify; font-size: 14px;">{{$body}}</p>
 
-              <div style="margin-bottom: 1.5rem;">
-                <a style="padding: 0.5rem 4.5rem; border-radius: 0.5rem; border: 0; font-weight: 500; font-size: 15px; color: #FFF; background-color: #fe6948; text-decoration: none;" href="https://sinci.com/contacto/" target="_blank">Contacto SINCI</a>
-              </div>
-            </td>
+          </td>
         </tr>
       </tbody>
     </table>

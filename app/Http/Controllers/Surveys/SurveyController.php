@@ -8,7 +8,8 @@ use App\Models\Surveys as ModelsSurveys;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Dompdf\Dompdf;
-use Mail;
+// use Mail;
+use Illuminate\Support\Facades\Mail;
 use App\Models\Surveys;
 use App\Models\surveysClients;
 use ErrorException;
@@ -21,7 +22,8 @@ class SurveyController extends Controller
    * @return \Illuminate\Http\Response
    */
 
-  public function index(){
+  public function index()
+  {
 
     date_default_timezone_set('America/Mexico_City');
 
@@ -31,7 +33,8 @@ class SurveyController extends Controller
     return view("surveys/index", compact('surveys', 'surveysGenerated'));
   }
 
-  public function obtainSurveys(Request $request){
+  public function obtainSurveys(Request $request)
+  {
 
     $dataFilter = json_decode($request['dataFilters']);
 
@@ -56,7 +59,8 @@ class SurveyController extends Controller
    * @param  \Illuminate\Http\Request  $request
    * @return \Illuminate\Http\Response
    */
-  public function store(Request $request) {
+  public function store(Request $request)
+  {
 
     $existSurvey = DB::table('clientes_encuestas')->where('llave_encuesta', $request[0])->exists();
 
@@ -82,8 +86,8 @@ class SurveyController extends Controller
     // Send emails
     $this->sendEmailWithSurveyKey($request[3], $request[0]);
 
-    if($request[4] != "")
-        $this->sendEmailNewSurvey([$request[4], $request[5]], $request[0]);
+    if ($request[4] != "")
+      $this->sendEmailNewSurvey([$request[4], $request[5]], $request[0]);
 
     return ['response' => true, 'Message' => "Información guardada exitosamente"];
   }
@@ -139,15 +143,16 @@ class SurveyController extends Controller
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
-  public function getSurveys($status, $date_init, $date_end){
+  public function getSurveys($status, $date_init, $date_end)
+  {
 
-    $dateSearch = " AND CE.created_timestamp BETWEEN '". $date_init ." 00:00:00' AND '". $date_end ." 23:59:59'";
+    $dateSearch = " AND CE.created_timestamp BETWEEN '" . $date_init . " 00:00:00' AND '" . $date_end . " 23:59:59'";
 
-    if($status == 0)
-      $dateSearch = " AND CE.updated_timestamp BETWEEN '". $date_init ." 00:00:00' AND '". $date_end ." 23:59:59'";
+    if ($status == 0)
+      $dateSearch = " AND CE.updated_timestamp BETWEEN '" . $date_init . " 00:00:00' AND '" . $date_end . " 23:59:59'";
 
     $dataSurvey = DB::select(DB::raw(
-        "SELECT
+      "SELECT
               CE.nombre_cliente, CE.codigo_proyecto_cliente, CE.orden_compra_cliente, CE.descripcion_proyecto_cliente, CE.correo_cliente, CE.correo_copia, CE.correo_copia_oculta, CE.estatus_encuesta, CE.created_timestamp AS survey_created,
               E.nombre_encuesta, E.descripcion,
               CEC.id_llave_encuesta, CEC.created_timestamp AS survey_answered
@@ -155,17 +160,18 @@ class SurveyController extends Controller
           INNER JOIN encuesta E ON CE.id_encuesta = E.id_encuesta
           LEFT  JOIN clientes_encuestas_contestadas CEC ON CE.llave_encuesta = CEC.id_llave_encuesta
 
-          WHERE CE.estatus_encuesta = ". $status . $dateSearch . " ORDER BY CE.created_timestamp DESC;"
-        ));
+          WHERE CE.estatus_encuesta = " . $status . $dateSearch . " ORDER BY CE.created_timestamp DESC;"
+    ));
 
     return $dataSurvey;
   }
 
-  public function sendEmailWithSurveyKey($email, $keySurvey){
+  public function sendEmailWithSurveyKey($email, $keySurvey)
+  {
 
     $template_path = 'surveys/email_templates/keySurveyEmail';
     $asunto = "Encuesta de satisfacción al cliente";
-    $body = "Llave para contestación de encuesta: " . $keySurvey;
+    $body = $keySurvey;
 
     $email = explode(',', $email);
 
@@ -175,19 +181,20 @@ class SurveyController extends Controller
   }
 
   // function to send email
-  public function sendEmailNewSurvey($emails){
+  public function sendEmailNewSurvey($emails)
+  {
 
     $email = $emails[0];
     $email = explode(',', $email);
 
     $emailCC = $emails[1];
 
-    if($emailCC != "")
-        $emailCC = explode(',', $emailCC);
+    if ($emailCC != "")
+      $emailCC = explode(',', $emailCC);
 
-    $template_path = 'surveys/email_templates/keySurveyEmail';
+    $template_path = 'surveys/email_templates/blankSurveyTemplate';
     $asunto = "Encuesta de satisfacción al cliente";
-    $body = "Con esta plantilla solo se avisa de la contestacion de la encuesta";
+    $body = "<p>Con esta plantilla solo se avisa de la contestacion de la encuesta</p>";
 
     if ($emailCC != null) {
       Mail::send($template_path, ['body' => $body], function ($message) use ($email, $emailCC, $asunto) {
@@ -200,7 +207,8 @@ class SurveyController extends Controller
     }
   }
 
-  public function obtainPDFSurvey(Request $request){
+  public function obtainPDFSurvey(Request $request)
+  {
 
     $idSurvey = $request->input('idSurvey');
     $sendEmail = $request->input('sendEmail');
@@ -247,13 +255,14 @@ class SurveyController extends Controller
       $emails = $this->sendEmailSurveyAnswered($idSurvey);
     } else {
       // Output the generated PDF to Browser
-      $dompdf->stream($idSurvey.".pdf");
+      $dompdf->stream($idSurvey . ".pdf");
     }
 
     return $emails;
   }
 
-  public function sendEmailSurveyAnsweredClient($idSurvey){
+  public function sendEmailSurveyAnsweredClient($idSurvey)
+  {
 
     $emails = DB::select(DB::raw("SELECT correo_cliente, llave_encuesta FROM clientes_encuestas WHERE llave_encuesta = '" . $idSurvey . "'"));
 
@@ -261,48 +270,48 @@ class SurveyController extends Controller
 
     $email = explode(',', $email);
 
-    $template_path = 'surveys/emailSurveyAnswered';
-    $asunto = "Encuesta de satisfacción al cliente";
-    $body = "Gracias por sus respuestas, sinci agradece que nos tomara como opción para sus necesidades y quedamos atentos a cualquier duda, demanda o solicitud futura";
+    $template_path = 'surveys/email_templates/answeredSurveyEmail';
+    $asunto = "Encuesta realizada exitosamente";
 
-    Mail::send($template_path, ['body' => $body], function ($message) use ($email, $asunto, $idSurvey) {
-      $message->to($email)->subject($asunto)->from('snla@sinci.com', $asunto)->attach('reportsPDF/'.$idSurvey.'.pdf');;
+    Mail::send($template_path, function ($message) use ($email, $asunto, $idSurvey) {
+      $message->to($email)->subject($asunto)->from('snla@sinci.com', $asunto)->attach('reportsPDF/' . $idSurvey . '.pdf');;
     });
   }
 
-  public function sendEmailSurveyAnswered($idSurvey){
+  public function sendEmailSurveyAnswered($idSurvey)
+  {
 
     $emails = DB::select(DB::raw("SELECT correo_copia, correo_copia_oculta, llave_encuesta FROM clientes_encuestas WHERE llave_encuesta = '" . $idSurvey . "'"));
 
-    if($emails[0]->correo_copia == null)
-        return $emails;
+    if ($emails[0]->correo_copia == null)
+      return $emails;
 
     $email = $emails[0]->correo_copia;
     $email = explode(',', $email);
 
     $emailCC = $emails[0]->correo_copia_oculta;
 
-    if($emailCC != "")
-        $emailCC = explode(',', $emailCC);
+    if ($emailCC != "")
+      $emailCC = explode(',', $emailCC);
 
-    $template_path = 'surveys/emailSurveyAnswered';
+    $template_path = 'surveys/email_templates/answeredSurveyEmail';
     $asunto = "Encuesta de satisfacción al cliente";
-    $body = "Gracias por sus respuestas, sinci agradece que nos tomara como opción para sus necesidades y quedamos atentos a cualquier duda, demanda o solicitud futura";
 
     if ($emailCC != null) {
-      Mail::send($template_path, ['body' => $body], function ($message) use ($email, $emailCC, $asunto, $idSurvey) {
-        $message->to($email)->subject($asunto)->from('snla@sinci.com', $asunto)->cc($emailCC)->attach('reportsPDF/'.$idSurvey.'.pdf');;
+      Mail::send($template_path, function ($message) use ($email, $emailCC, $asunto, $idSurvey) {
+        $message->to($email)->subject($asunto)->from('snla@sinci.com', $asunto)->cc($emailCC)->attach('reportsPDF/' . $idSurvey . '.pdf');;
       });
     } else {
-      Mail::send($template_path, ['body' => $body], function ($message) use ($email, $asunto, $idSurvey) {
-        $message->to($email)->subject($asunto)->from('snla@sinci.com', $asunto)->attach('reportsPDF/'.$idSurvey.'.pdf');;
+      Mail::send($template_path, function ($message) use ($email, $asunto, $idSurvey) {
+        $message->to($email)->subject($asunto)->from('snla@sinci.com', $asunto)->attach('reportsPDF/' . $idSurvey . '.pdf');;
       });
     }
 
     return $emails;
   }
 
-  public function resend_emails(Request $request){
+  public function resend_emails(Request $request)
+  {
 
     $this->resen_client_key($request->llave);
     $this->resen_client_no_key($request->llave);
@@ -310,7 +319,8 @@ class SurveyController extends Controller
     return true;
   }
 
-  public function resen_client_key($key){
+  public function resen_client_key($key)
+  {
 
     $emails = DB::select(DB::raw("SELECT correo_cliente, llave_encuesta FROM clientes_encuestas WHERE llave_encuesta = '" . $key . "'"));
 
@@ -320,38 +330,38 @@ class SurveyController extends Controller
 
     $template_path = 'surveys/email_templates/keySurveyEmail';
     $asunto = "Encuesta de satisfacción al cliente";
-    $body = "Llave para contestación de encuesta: " . $key;
+    $body = $key;
 
     Mail::send($template_path, ['body' => $body], function ($message) use ($email, $asunto) {
       $message->to($email)->subject($asunto)->from('snla@sinci.com', $asunto);
     });
   }
 
-  public function resen_client_no_key($key){
+  public function resen_client_no_key($key)
+  {
 
     $emails = DB::select(DB::raw("SELECT correo_copia, correo_copia_oculta, llave_encuesta FROM clientes_encuestas WHERE llave_encuesta = '" . $key . "'"));
 
-    if($emails[0]->correo_copia == null)
-        return $emails;
+    if ($emails[0]->correo_copia == null)
+      return $emails;
 
     $email = $emails[0]->correo_copia;
     $email = explode(',', $email);
 
     $emailCC = $emails[0]->correo_copia_oculta;
 
-    if($emailCC != "")
-        $emailCC = explode(',', $emailCC);
+    if ($emailCC != "")
+      $emailCC = explode(',', $emailCC);
 
-    $template_path = 'surveys/email_templates/keySurveyEmail';
+    $template_path = 'surveys/email_templates/answeredSurveyEmail';
     $asunto = "Encuesta de satisfacción al cliente";
-    $body = "Con esta plantilla solo se avisa de la contestacion de la encuesta";
 
     if ($emailCC != null) {
-      Mail::send($template_path, ['body' => $body], function ($message) use ($email, $emailCC, $asunto) {
+      Mail::send($template_path, function ($message) use ($email, $emailCC, $asunto) {
         $message->to($email)->subject($asunto)->from('snla@sinci.com', $asunto)->cc($emailCC);
       });
     } else {
-      Mail::send($template_path, ['body' => $body], function ($message) use ($email, $asunto) {
+      Mail::send($template_path, function ($message) use ($email, $asunto) {
         $message->to($email)->subject($asunto)->from('snla@sinci.com', $asunto);
       });
     }

@@ -3,8 +3,8 @@
 // HTTP
 // var urlData = "http://10.10.100.34:1880"; // PRODUCTION SERVER WITHOUT SECURE PROTOCOL 80
 
-var currenUrl = window.location.href.split("/")[2];
-currenUrl = currenUrl.split(":");
+var currentUrl = window.location.href.split("/")[2];
+currentUrl = currentUrl.split(":");
 
 var urlData = "https://websas.sinci.com:1880";
 
@@ -264,7 +264,7 @@ let checkIsAdmin = async (isReports = false) => {
         if(localStorage.getItem('isAdmin') == 0 && localStorage.getItem('seeReports') == 0){
 
             document.querySelector('.container-fluid').remove();;
-    
+
             location.href = "/bitacoras/main";
         }
     }

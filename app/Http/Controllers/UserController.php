@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Office;
 use App\Models\Position;
 use App\Models\Department;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
@@ -18,6 +19,9 @@ class UserController extends Controller
     {
         $users = User::orderBy('name')->get();
         $titulo = 'ADMINISTRACIÓN DE USUARIOS';
+
+        dd( Auth::id() );
+        // die( var_dump( auth()->user() ) );
 
         return view('users.index', compact('users', 'titulo'));
     }
@@ -37,7 +41,7 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-       
+
         $user = User::create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),

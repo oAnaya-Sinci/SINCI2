@@ -348,7 +348,7 @@
                                         <td align="center" style="padding:0;Margin:0;font-size:0"><a
                                             href="https://sinci.com/" target="_blank"
                                             style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:'lucida sans unicode', 'lucida grande', sans-serif;font-size:14px;text-decoration:underline;color:#CCCCCC"><img
-                                              src="./images/Logo SINCI email.png" alt="SINCI logo"
+                                              src="https://websas.sinci.com/img/email_images/Logo SINCI email.png" alt="SINCI logo"
                                               title="SINCI logo"
                                               style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic; width: 100%"></a>
                                         </td>
@@ -531,25 +531,25 @@
                                       <tr style="border-collapse:collapse">
                                         <td valign="top" align="center" style="padding:0;Margin:0;padding-right:10px"><a
                                             target="_blank" href="https://twitter.com/SinciMX"><img title="X"
-                                              src="./images/twitter-circle-black.png" alt="Tw" width="27"
+                                              src="https://websas.sinci.com/img/email_images/twitter-circle-black.png" alt="Tw" width="27"
                                               style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic"></a>
                                         </td>
                                         <td valign="top" align="center" style="padding:0;Margin:0;padding-right:10px"><a
                                             target="_blank"
                                             href="https://es-es.facebook.com/pages/SINCI-GDL/138633972834428"><img
-                                              title="Facebook" src="./images/facebook-circle-black.png" alt="Fb"
+                                              title="Facebook" src="https://websas.sinci.com/img/email_images/facebook-circle-black.png" alt="Fb"
                                               width="27"
                                               style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic"></a>
                                         </td>
                                         <td valign="top" align="center" style="padding:0;Margin:0;padding-right:10px"><a
                                             target="_blank" href="https://www.linkedin.com/company/sinci/"><img
-                                              title="Linkedin" src="./images/linkedin-circle-black.png" alt="ln"
+                                              title="Linkedin" src="https://websas.sinci.com/img/email_images/linkedin-circle-black.png" alt="ln"
                                               width="27"
                                               style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic"></a>
                                         </td>
                                         <td valign="top" align="center" style="padding:0;Margin:0;padding-right:10px"><a
                                             target="_blank" href="https://www.instagram.com/sincigdl/"><img
-                                              title="Instagram" src="./images/instagram-circle-black.png" alt="Ig"
+                                              title="Instagram" src="https://websas.sinci.com/img/email_images/instagram-circle-black.png" alt="Ig"
                                               width="27"
                                               style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic"></a>
                                         </td>
@@ -605,6 +605,6 @@
     </table>
   </div>
 
-</body> 
+</body>
 
 </html>

@@ -418,8 +418,8 @@
       <tbody>
         <tr style="background-color: #F6F6F6;border-collapse:collapse">
           <td align="center" style="padding:1rem;Margin:0">
-            <p style="text-align: justify; font-size: 14px;">{{$body}}</p>
-
+            <!-- <p style="text-align: justify; font-size: 14px;">{{$body}}</p> -->
+            {{$body}}
           </td>
         </tr>
       </tbody>

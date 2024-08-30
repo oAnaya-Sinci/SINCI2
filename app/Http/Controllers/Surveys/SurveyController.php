@@ -170,7 +170,7 @@ class SurveyController extends Controller
   {
 
     $template_path = 'surveys/email_templates/keySurveyEmail';
-    $asunto = "Encuesta de satisfacción al cliente";
+    $asunto = "Encuesta SINCI de satisfacción al cliente";
     $body = $keySurvey;
 
     $email = explode(',', $email);
@@ -192,9 +192,11 @@ class SurveyController extends Controller
     if ($emailCC != "")
       $emailCC = explode(',', $emailCC);
 
+    $init_p = '<p style="text-align: justify; font-size: 14px;">';  
+
     $template_path = 'surveys/email_templates/blankSurveyTemplate';
-    $asunto = "Encuesta de satisfacción al cliente";
-    $body = "<p>Con esta plantilla solo se avisa de la contestacion de la encuesta</p>";
+    $asunto = "Encuesta SINCI de satisfacción al cliente";
+    $body = $init_p . 'Con esta plantilla solo se avisa de la contestacion de la encuesta</p>';
 
     if ($emailCC != null) {
       Mail::send($template_path, ['body' => $body], function ($message) use ($email, $emailCC, $asunto) {
@@ -295,7 +297,7 @@ class SurveyController extends Controller
       $emailCC = explode(',', $emailCC);
 
     $template_path = 'surveys/email_templates/answeredSurveyEmail';
-    $asunto = "Encuesta de satisfacción al cliente";
+    $asunto = "Encuesta SINCI de satisfacción al cliente";
 
     if ($emailCC != null) {
       Mail::send($template_path, function ($message) use ($email, $emailCC, $asunto, $idSurvey) {
@@ -329,7 +331,7 @@ class SurveyController extends Controller
     $email = explode(',', $email);
 
     $template_path = 'surveys/email_templates/keySurveyEmail';
-    $asunto = "Encuesta de satisfacción al cliente";
+    $asunto = "Encuesta SINCI de satisfacción al cliente";
     $body = $key;
 
     Mail::send($template_path, ['body' => $body], function ($message) use ($email, $asunto) {
@@ -354,7 +356,7 @@ class SurveyController extends Controller
       $emailCC = explode(',', $emailCC);
 
     $template_path = 'surveys/email_templates/answeredSurveyEmail';
-    $asunto = "Encuesta de satisfacción al cliente";
+    $asunto = "Encuesta SINCI de satisfacción al cliente";
 
     if ($emailCC != null) {
       Mail::send($template_path, function ($message) use ($email, $emailCC, $asunto) {

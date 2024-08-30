@@ -349,8 +349,8 @@
                                         <td align="center" style="padding:0;Margin:0;font-size:0"><a
                                             href="https://sinci.com/" target="_blank"
                                             style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:'lucida sans unicode', 'lucida grande', sans-serif;font-size:14px;text-decoration:underline;color:#CCCCCC"><img
-                                              src="https://websas.sinci.com/img/email_images/Logo SINCI email.png" alt="SINCI logo"
-                                              title="SINCI logo"
+                                              src="https://websas.sinci.com/img/email_images/Logo SINCI email.png" alt="Sinci_Logo"
+                                              title="Sinci_Logo"
                                               style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic; width: 100%"></a>
                                         </td>
                                       </tr>

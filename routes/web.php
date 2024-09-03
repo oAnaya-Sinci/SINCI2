@@ -8,6 +8,8 @@ use App\Http\Controllers\SettingController;
 use App\Http\Controllers\Api\ApiEmailController;
 use App\Exports\UsersExport;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
+
 // use App\Http\Controllers\HomeController AS home;
 // use App\Http\Controllers\Auth\logoutController AS logout;
 // use Illuminate\Support\Facades\Auth;
@@ -29,7 +31,10 @@ use Carbon\Carbon;
 Route::get('/', function(){ return view('authenticate/loginUser'); });
 
 
-Route::get('/dashboard', function(){ $titulo = "DASHBOARD"; return view('dashboard/main', compact('titulo')); });
+Route::get('/dashboard', function(){
+    $titulo = "DASHBOARD";
+    return view('dashboard/main', compact('titulo'));
+});
 
 /**
  * @Author: `Carlos Omar Anaya Barajas`

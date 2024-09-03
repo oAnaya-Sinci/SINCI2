@@ -21,42 +21,53 @@ var timeOut;
  * @Date: 2022-03-03 12:23:26
  * @Desc: Here iniciate some of the elements required for a good work of the proyect
  */
-$(document).ready(function() {
+$(document).ready(function () {
 
-    console.time('Session');
+  console.time('Session');
 
-    IsLogedIn();
+  IsLogedIn();
 
-    let isAdmin = Number(window.localStorage.getItem('isAdmin'));
-    let seeReports = Number(window.localStorage.getItem('seeReports'));
+  let isAdmin = Number(window.localStorage.getItem('isAdmin'));
+  let encuestario = Number(window.localStorage.getItem('encuestador'));
+  let seeReports = Number(window.localStorage.getItem('seeReports'));
 
-    if(isAdmin){
-        // document.querySelectorAll('.nav-links .onlyAdmin').forEach((elem) => { elem.classList.add('inactive') });
-        document.querySelectorAll('.nav-links .onlyAdmin').forEach((elem) => { elem.classList.toggle('inactive') });
-        document.querySelectorAll('.nav-links .bitacora').forEach((elem) => { elem.classList.toggle('inactive') });
-    } else {
-        document.querySelectorAll('.nav-links .bitacora').forEach((elem) => { elem.classList.toggle('inactive') });
-        if(seeReports)
-            document.querySelectorAll('.nav-links .reports').forEach((elem) => { elem.classList.toggle('inactive') });
-    }
-
-    timeOut = setTimeout(() => { return false }, 1000);
-
-    set_TimeOut();
-
-    moment.updateLocale('en', {
-        months: [
-            "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Augosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
-        ]
+  if(encuestario != 1){
+    document.querySelectorAll('.ingProyectos').forEach( elem => {
+      elem.style.display = 'none';
     });
-
-    moment.updateLocale('en', {
-        monthsShort: [
-            "Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"
-        ]
+   } else{
+    document.querySelectorAll('.encuestadores').forEach( elem => {
+      elem.style.display = 'none';
     });
+   }
 
-    // $('body').addClass('g-sidenav-pinned');
+  if (isAdmin) {
+    // document.querySelectorAll('.nav-links .onlyAdmin').forEach((elem) => { elem.classList.add('inactive') });
+    document.querySelectorAll('.nav-links .onlyAdmin').forEach((elem) => { elem.classList.toggle('inactive') });
+    document.querySelectorAll('.nav-links .bitacora').forEach((elem) => { elem.classList.toggle('inactive') });
+  } else {
+    document.querySelectorAll('.nav-links .bitacora').forEach((elem) => { elem.classList.toggle('inactive') });
+    if (seeReports)
+      document.querySelectorAll('.nav-links .reports').forEach((elem) => { elem.classList.toggle('inactive') });
+  }
+
+  timeOut = setTimeout(() => { return false }, 1000);
+
+  set_TimeOut();
+
+  moment.updateLocale('en', {
+    months: [
+      "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Augosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+    ]
+  });
+
+  moment.updateLocale('en', {
+    monthsShort: [
+      "Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"
+    ]
+  });
+
+  // $('body').addClass('g-sidenav-pinned');
 });
 
 /**
@@ -67,16 +78,16 @@ $(document).ready(function() {
  */
 function set_TimeOut() {
 
-    // let timeSession = 305000; // 5 minutes
-    // let timeSession = 605000; // 10 minutes
-    let timeSession = 905000; // 15 minutes
-    // let timeSession = 6005000; // 100 minutes
+  // let timeSession = 305000; // 5 minutes
+  // let timeSession = 605000; // 10 minutes
+  let timeSession = 905000; // 15 minutes
+  // let timeSession = 6005000; // 100 minutes
 
-    clearTimeout(timeOut);
+  clearTimeout(timeOut);
 
-    timeOut = setTimeout(() => {
-        IsLogedIn();
-    }, timeSession);
+  timeOut = setTimeout(() => {
+    IsLogedIn();
+  }, timeSession);
 }
 
 /**
@@ -86,10 +97,10 @@ function set_TimeOut() {
  * @Desc:  This function let the user login to the proyect using the enter key
  */
 
-$(document).click(function() {
-    IsLogedIn();
+$(document).click(function () {
+  IsLogedIn();
 
-    $('.g-sidenav-pinned #sidenav-main').removeClass('bg-white');
+  $('.g-sidenav-pinned #sidenav-main').removeClass('bg-white');
 });
 
 /**
@@ -99,39 +110,39 @@ $(document).click(function() {
  * @Desc: This function close the session of the user in the proyect
  */
 
-$('#logout').click(function() {
+$('#logout').click(function () {
 
-    window.localStorage.setItem('sasIsLogedIn', 'false');
-    window.location.href = "/";
+  window.localStorage.setItem('sasIsLogedIn', 'false');
+  window.location.href = "/";
 });
 
 async function IsLogedIn() {
 
-    await $.ajax({
-        type: "POST",
-        url: urlData + "/authenticate/isLogedIn",
-        data: { "isLogedIn": window.localStorage.getItem('sasIsLogedIn') },
-        success: function(response) {
+  await $.ajax({
+    type: "POST",
+    url: urlData + "/authenticate/isLogedIn",
+    data: { "isLogedIn": window.localStorage.getItem('sasIsLogedIn') },
+    success: function (response) {
 
-            response = JSON.parse(response)[0];
+      response = JSON.parse(response)[0];
 
-            if (response.sessionAuth != 'false') {
-                set_TimeOut();
-                window.localStorage.setItem('sasIsLogedIn', response.sessionAuth);
-            } else {
-                window.localStorage.setItem('sasIsLogedIn', 'false');
-                console.timeEnd('Session');
+      if (response.sessionAuth != 'false') {
+        set_TimeOut();
+        window.localStorage.setItem('sasIsLogedIn', response.sessionAuth);
+      } else {
+        window.localStorage.setItem('sasIsLogedIn', 'false');
+        console.timeEnd('Session');
 
-                window.location.href = "/";
-            }
-        },
-        error: function(exception) {
+        window.location.href = "/";
+      }
+    },
+    error: function (exception) {
 
-            console.error(exception);
-            showMessage("danger", "error", exception)
-                // window.location.href = "/";
-        }
-    });
+      console.error(exception);
+      showMessage("danger", "error", exception)
+      // window.location.href = "/";
+    }
+  });
 }
 
 /**
@@ -143,55 +154,55 @@ async function IsLogedIn() {
 
 function showMessage(type, header = "Mensaje del sistema", message = "") {
 
-    switch (type.toLowerCase()) {
+  switch (type.toLowerCase()) {
 
-        case 'success':
-            $('#successToast .mssgHeader').text(header);
-            $('#successToast .toast-body').text(message);
-            $('.bg-gradient-success').click();
-            break;
+    case 'success':
+      $('#successToast .mssgHeader').text(header);
+      $('#successToast .toast-body').text(message);
+      $('.bg-gradient-success').click();
+      break;
 
-        case 'warning':
-            $('#warningToast .mssgHeader').text(header);
-            $('#warningToast .toast-body').text(message);
-            $('.bg-gradient-warning').click();
-            break;
+    case 'warning':
+      $('#warningToast .mssgHeader').text(header);
+      $('#warningToast .toast-body').text(message);
+      $('.bg-gradient-warning').click();
+      break;
 
-        case 'info':
-            $('#infoToast .mssgHeader').text(header);
-            $('#infoToast .toast-body').text(message);
-            $('.bg-gradient-info').click();
-            break;
+    case 'info':
+      $('#infoToast .mssgHeader').text(header);
+      $('#infoToast .toast-body').text(message);
+      $('.bg-gradient-info').click();
+      break;
 
-        case 'danger':
-            $('#dangerToast .mssgHeader').text(header);
-            $('#dangerToast .toast-body').text(message);
-            $('.bg-gradient-danger').click();
-            break;
-    }
+    case 'danger':
+      $('#dangerToast .mssgHeader').text(header);
+      $('#dangerToast .toast-body').text(message);
+      $('.bg-gradient-danger').click();
+      break;
+  }
 }
 
-$('.btnCancelModal').click(function() {
+$('.btnCancelModal').click(function () {
 
-    $('.modal').modal('hide');
+  $('.modal').modal('hide');
 });
 
 //
-var modalConfirm = function(callback) {
+var modalConfirm = function (callback) {
 
-    // $("#btn-confirm").on("click", function() {
-    //     $("#mi-modal").modal('show');
-    // });
+  // $("#btn-confirm").on("click", function() {
+  //     $("#mi-modal").modal('show');
+  // });
 
-    $("#modal-btn-si").on("click", function() {
-        callback(true);
-        $("#mi-modal").modal('hide');
-    });
+  $("#modal-btn-si").on("click", function () {
+    callback(true);
+    $("#mi-modal").modal('hide');
+  });
 
-    $("#modal-btn-no").on("click", function() {
-        callback(false);
-        $("#mi-modal").modal('hide');
-    });
+  $("#modal-btn-no").on("click", function () {
+    callback(false);
+    $("#mi-modal").modal('hide');
+  });
 };
 
 /**
@@ -202,72 +213,72 @@ var modalConfirm = function(callback) {
  */
 
 var inLoader = () => {
-    $(".loader").fadeIn("slow");
+  $(".loader").fadeIn("slow");
 }
 
 var outLoader = () => {
-    $(".loader").fadeOut("slow");
+  $(".loader").fadeOut("slow");
 }
 
 var dataLogin = () => {
 
-    let keyLogin = window.localStorage.getItem('sasIsLogedIn').split("/");
+  let keyLogin = window.localStorage.getItem('sasIsLogedIn').split("/");
 
-    let newStr = "";
-    let x = 0;
-    $.each(keyLogin, function(index, value) {
+  let newStr = "";
+  let x = 0;
+  $.each(keyLogin, function (index, value) {
 
-        if (x < keyLogin.length - 1)
-            newStr += value + "-";
-        else
-            newStr += value;
+    if (x < keyLogin.length - 1)
+      newStr += value + "-";
+    else
+      newStr += value;
 
-        x++;
-    });
-    keyLogin = newStr;
+    x++;
+  });
+  keyLogin = newStr;
 
-    keyLogin = keyLogin.split("+");
+  keyLogin = keyLogin.split("+");
 
-    newStr = "";
-    x = 0;
-    $.each(keyLogin, function(index, value) {
+  newStr = "";
+  x = 0;
+  $.each(keyLogin, function (index, value) {
 
-        if (x < keyLogin.length - 1)
-            newStr += value + "_";
-        else
-            newStr += value;
+    if (x < keyLogin.length - 1)
+      newStr += value + "_";
+    else
+      newStr += value;
 
-        x++;
-    });
-    keyLogin = newStr;
+    x++;
+  });
+  keyLogin = newStr;
 
-    return keyLogin;
+  return keyLogin;
 }
 
 let checkIsAdmin = async (isReports = false) => {
 
-    let userEmail = localStorage.getItem('userEmail');
+  let userEmail = localStorage.getItem('userEmail');
 
-    let response = await fetch(urlData + `/checkisadmin?user_email=${userEmail}`).then(json => json.json()).then(data => data);
+  let response = await fetch(urlData + `/checkisadmin?user_email=${userEmail}`).then(json => json.json()).then(data => data);
 
-    localStorage.setItem('isAdmin', response.isAdmin);
-    localStorage.setItem('seeReports', response.seeReports);
+  localStorage.setItem('isAdmin', response.isAdmin);
+  localStorage.setItem('seeReports', response.seeReports);
 
-    if(!isReports){
-        if(localStorage.getItem('isAdmin') == 0){
+  if (!isReports) {
+    if (localStorage.getItem('isAdmin') == 0) {
 
-            document.querySelector('.container-fluid').remove();;
+      document.querySelector('.container-fluid').remove();;
 
-            location.href = "/bitacoras/main";
-        }
-    } else {
-        if(localStorage.getItem('isAdmin') == 0 && localStorage.getItem('seeReports') == 0){
-
-            document.querySelector('.container-fluid').remove();;
-
-            location.href = "/bitacoras/main";
-        }
+      location.href = "/bitacoras/main";
     }
+  } else {
+    if (localStorage.getItem('isAdmin') == 0 && localStorage.getItem('seeReports') == 0) {
+
+      document.querySelector('.container-fluid').remove();;
+
+      location.href = "/bitacoras/main";
+    }
+  }
 }
 
 /**

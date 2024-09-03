@@ -11,6 +11,12 @@ let calendar;
  */
 $(document).ready(function() {
 
+    let encuestario = Number(window.localStorage.getItem('encuestador'));
+
+    if(encuestario == 2){
+        window.location.href = '/dashboard'
+    }
+
     $('.datetimepicker').datetimepicker({
         // follow MomentJS docs: https://momentjs.com/docs/#/displaying/format/
         format: 'YYYY-MM-DD HH:mm',

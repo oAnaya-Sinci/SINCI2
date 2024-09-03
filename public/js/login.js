@@ -72,14 +72,14 @@ $('#btnLogin').click(async function() {
                     }
                 });
             } else if (response.sessionAuth != 'false') {
-                console.log(formData, formData[1], userData, userData.usuario);
                 localStorage.setItem('sasIsLogedIn', response.sessionAuth);
                 localStorage.setItem('isAdmin', response.isAdmin);
-                localStorage.setItem('seeReports', response.seeReports);                
+                localStorage.setItem('seeReports', response.seeReports);
+                localStorage.setItem('encuestador', response.encuestador);
                 localStorage.setItem('userEmail', formData[1].value+'@sinci.com')
 
-                // location.href = "/dashboard";
-                location.href = "/bitacoras/main";
+                location.href = "/dashboard";
+                // location.href = "/bitacoras/main";
             } else {
                 // localStorage.setItem('sasIsLogedIn', false);
                 localStorage.removeItem('sasIsLogedIn');

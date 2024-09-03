@@ -20,9 +20,6 @@ class UserController extends Controller
         $users = User::orderBy('name')->get();
         $titulo = 'ADMINISTRACIÓN DE USUARIOS';
 
-        dd( Auth::id() );
-        // die( var_dump( auth()->user() ) );
-
         return view('users.index', compact('users', 'titulo'));
     }
 

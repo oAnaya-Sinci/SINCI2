@@ -1,5 +1,11 @@
 document.addEventListener("DOMContentLoaded", async function (event) {
 
+  let encuestario = Number(window.localStorage.getItem('encuestador'));
+
+  if(encuestario == 1){
+    window.location.href = '/dashboard'
+  }
+
   let obtainDate = (firstDay = false) => {
     let today = new Date().toLocaleDateString('es-MX').split('/').reverse();
 
@@ -54,7 +60,7 @@ document.querySelector('#btnSaveSurvey').addEventListener('click', async () => {
   let validateEmail2 = validateEmailsInput(document.querySelector('.emailAdditional').value);
   let validateEmail3 = validateEmailsInput(document.querySelector('.emailCC').value);
 
-  if(validateEmail1 || validateEmail2 || validateEmail3){
+  if (validateEmail1 || validateEmail2 || validateEmail3) {
     outLoader();
 
     document.querySelector('.sidebar').style.zIndex = 1;
@@ -170,16 +176,16 @@ let initiateButtonActions = () => {
 
     btn.addEventListener('click', async btnClick => {
 
-      if(btn.dataset.type == 'reenviar'){
+      if (btn.dataset.type == 'reenviar') {
 
         let headers = {
-            method: 'POST',
-            body: JSON.stringify({llave: btn.dataset.llave}),
-            headers: {
-              "content-type": "application/json; charset=utf-8",
-              'X-CSRF-TOKEN': $("meta[name='csrf-token']").attr("content"),
-            }
-          };
+          method: 'POST',
+          body: JSON.stringify({ llave: btn.dataset.llave }),
+          headers: {
+            "content-type": "application/json; charset=utf-8",
+            'X-CSRF-TOKEN': $("meta[name='csrf-token']").attr("content"),
+          }
+        };
 
         await fetch('/surveys/resend_emails', headers);
       } else {
@@ -204,7 +210,7 @@ document.querySelector('#newSurvey').addEventListener('click', () => {
 
 let validateEmailsInput_SINCI = emailsString => {
 
-  if(emailsString == '')
+  if (emailsString == '')
     return false;
 
   let re_email = /\S+@\S+\.\S+/;
@@ -219,12 +225,12 @@ let validateEmailsInput_SINCI = emailsString => {
     let splitEmail = email.split('@')[1].trim();
     let isEmailSinci = re_SinciEmail.test(splitEmail);
 
-    if(!checkEmail || isEmailSinci){
+    if (!checkEmail || isEmailSinci) {
       errorEmailFormat = true;
     }
   });
 
-  if(errorEmailFormat){
+  if (errorEmailFormat) {
 
     document.querySelector('.sidebar').style.zIndex = 1;
 
@@ -244,7 +250,7 @@ let validateEmailsInput_SINCI = emailsString => {
 
 let validateEmailsInput = emailsString => {
 
-  if(emailsString == '')
+  if (emailsString == '')
     return false;
 
   let re_email = /\S+@\S+\.\S+/;
@@ -256,12 +262,12 @@ let validateEmailsInput = emailsString => {
 
     let checkEmail = re_email.test(email);
 
-    if(!checkEmail){
+    if (!checkEmail) {
       errorEmailFormat = true;
     }
   });
 
-  if(errorEmailFormat){
+  if (errorEmailFormat) {
 
     document.querySelector('.sidebar').style.zIndex = 1;
 

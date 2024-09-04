@@ -2,15 +2,18 @@ document.addEventListener("DOMContentLoaded", async function (event) {
 
   let encuestario = Number(window.localStorage.getItem('encuestador'));
 
-  if(encuestario == 1){
+  if (encuestario == 1) {
     window.location.href = '/dashboard'
   }
 
   let obtainDate = (firstDay = false) => {
+
     let today = new Date().toLocaleDateString('es-MX').split('/').reverse();
 
     if (firstDay)
       today[2] = '01';
+    else if ( today[2] < 10 )
+      today[2] = `0${today[2]}`;
 
     if (today[1] < 10)
       today[1] = `0${today[1]}`;

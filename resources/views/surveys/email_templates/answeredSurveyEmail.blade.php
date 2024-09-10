@@ -314,6 +314,10 @@
     }
   </style><!--<base href="#">-->
   <base href=".">
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function(){ document.querySelector('.year').innerText = new Date().getFullYear(); });
+  </script>
 </head>
 
 <body

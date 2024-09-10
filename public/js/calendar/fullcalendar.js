@@ -2748,8 +2748,7 @@
 
     }
 
-    ;
-
+    // Configuración de calendario
     setDefaults({
         allDaySlot: true,
         allDayText: 'all-day',

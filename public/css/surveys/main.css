@@ -102,3 +102,12 @@
   hr {
     color: #FFF;
   }
+
+  .bx.bx-plus:hover,
+  .bx.bx-minus:hover{
+    cursor: pointer;
+  }
+
+  .resend_survey.non_display{
+    display: none;
+  }

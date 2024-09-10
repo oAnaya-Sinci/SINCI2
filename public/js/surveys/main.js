@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", async function (event) {
 
     if (firstDay)
       today[2] = '01';
-    else if ( today[2] < 10 )
+    else if (today[2] < 10)
       today[2] = `0${today[2]}`;
 
     if (today[1] < 10)
@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", async function (event) {
 
   outLoader();
 
-  initiateButtonActions();
+  obtainDataSurvey();
 });
 
 document.querySelector('#dataProjects').addEventListener('change', async elem => {
@@ -143,23 +143,44 @@ let obtainDataSurvey = async () => {
   } catch (error) {
     console.warn(error);
   }
+
   let tbody = "";
+  let ordenCompra = null;
 
-  dataSurvey.forEach(elem => {
+  dataSurvey.forEach((elem, i) => {
 
-    tbody += `<tr><td class="client">${elem.nombre_cliente}</td>`;
-    tbody += `<td>${elem.codigo_proyecto_cliente}</td>`;
-    tbody += `<td>${elem.orden_compra_cliente}</td>`;
-    // tbody += `<td class="description">${ elem.descripcion_proyecto_cliente }</td>`;
-    tbody += `<td>${elem.correo_cliente}</td>`;
-    // tbody += `<td>${ elem.correo_copia === null ? " - " : elem.correo_copia}</td>`;
-    // tbody += `<td>${ elem.correo_copia_oculta === null ? " - " : elem.correo_copia_oculta }</td>`;
-    tbody += `<td>${elem.estatus_encuesta === 1 ? "Creada" : "Contestada"}</td>`;
-    tbody += `<td>${elem.survey_created}</td>`;
-    // tbody += `<td>${ elem.nombre_encuesta }</td>`;
-    // tbody += `<td>${ elem.descripcion }</td>`;
-    tbody += `<td>${elem.survey_answered === null ? ' - ' : elem.survey_answered}</td>`;
-    tbody += `<td>${elem.id_llave_encuesta === null ? `<button class="btn btn-primary btn-sm" data-llave="${elem.orden_compra_cliente}"  data-type="reenviar">Reenviar</button>` : `<button class="btn btn-primary btn-sm" data-llave="${elem.id_llave_encuesta}" data-type="pdf">PDF</button>`}</td></tr>`;
+    if (elem.orden_compra_cliente != ordenCompra) {
+      tbody += `<tr><td class="client"> <i class="bx bx-plus"></i> ${elem.nombre_cliente}</td>`;
+      tbody += `<td>${elem.codigo_proyecto_cliente}</td>`;
+      tbody += `<td>${elem.orden_compra_cliente}</td>`;
+      // tbody += `<td class="description">${ elem.descripcion_proyecto_cliente }</td>`;
+      tbody += `<td>${elem.correo_cliente}</td>`;
+      // tbody += `<td>${ elem.correo_copia === null ? " - " : elem.correo_copia}</td>`;
+      // tbody += `<td>${ elem.correo_copia_oculta === null ? " - " : elem.correo_copia_oculta }</td>`;
+      tbody += `<td>${elem.estatus_encuesta === 1 ? "Creada" : "Contestada"}</td>`;
+      tbody += `<td>${elem.survey_created}</td>`;
+      // tbody += `<td>${ elem.nombre_encuesta }</td>`;
+      // tbody += `<td>${ elem.descripcion }</td>`;
+      tbody += `<td>${elem.survey_answered === null ? ' - ' : elem.survey_answered}</td>`;
+      tbody += `<td>${elem.id_llave_encuesta === null ? `<button class="btn btn-primary btn-sm" data-llave="${elem.orden_compra_cliente}"  data-type="reenviar">Reenviar</button>` : `<button class="btn btn-primary btn-sm" data-llave="${elem.id_llave_encuesta}" data-type="pdf">PDF</button>`}</td></tr>`;
+
+      ordenCompra = elem.orden_compra_cliente;
+    } else {
+
+      let dateOptions = {
+        hour12: true,
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        // second: 'numeric'
+      };
+
+      tbody += `<tr class = "resend_survey non_display"><td colspan = "2" style="text-align: center;">Fecha reenvio de encuesta intento ${i}</td>`;
+      tbody += `<td colspan = "6">${new Date(elem.fecha_reenvio).toLocaleDateString('es-MX', dateOptions)}</td></tr>`;
+      ordenCompra = elem.orden_compra_cliente;
+    }
   });
 
   table.innerHTML = tbody;
@@ -175,9 +196,9 @@ document.querySelector('.btn-filters').addEventListener('click', () => {
 
 let initiateButtonActions = () => {
 
-  document.querySelectorAll('#tableSurveys tbody tr td .btn').forEach(btn => {
+  document.querySelectorAll('#tableSurveys tbody tr:not(.resend_survey)').forEach(tr => {
 
-    btn.addEventListener('click', async btnClick => {
+    tr.querySelector('td .btn').addEventListener('click', async btnClick => {
 
       if (btn.dataset.type == 'reenviar') {
 
@@ -196,7 +217,41 @@ let initiateButtonActions = () => {
         window.open(`/surveys/generatePDFSurveys?idSurvey=${keyReportPDF}&sendEmail=false`, '_blank');
       }
     });
+
+    document.querySelector('td .bx').addEventListener('click', trBX => {
+
+      trBX.srcElement.classList.toggle('bx-plus');
+      trBX.srcElement.classList.toggle('bx-minus');
+
+      document.querySelectorAll('.resend_survey').forEach( elem => {
+        elem.classList.toggle('non_display')
+      });
+    });
+
   });
+
+  // document.querySelectorAll('#tableSurveys tbody tr td .btn').forEach(btn => {
+
+  //   btn.addEventListener('click', async btnClick => {
+
+  //     if (btn.dataset.type == 'reenviar') {
+
+  //       let headers = {
+  //         method: 'POST',
+  //         body: JSON.stringify({ llave: btn.dataset.llave }),
+  //         headers: {
+  //           "content-type": "application/json; charset=utf-8",
+  //           'X-CSRF-TOKEN': $("meta[name='csrf-token']").attr("content"),
+  //         }
+  //       };
+
+  //       await fetch('/surveys/resend_emails', headers);
+  //     } else {
+  //       let keyReportPDF = btnClick.srcElement.dataset.llave;
+  //       window.open(`/surveys/generatePDFSurveys?idSurvey=${keyReportPDF}&sendEmail=false`, '_blank');
+  //     }
+  //   });
+  // });
 };
 
 document.querySelector('#newSurvey').addEventListener('click', () => {

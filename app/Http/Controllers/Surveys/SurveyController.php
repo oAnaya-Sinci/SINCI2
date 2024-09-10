@@ -27,7 +27,8 @@ class SurveyController extends Controller
 
     date_default_timezone_set('America/Mexico_City');
 
-    $surveys = $this->getSurveys(1, date('Y-m-') . "1", date('Y-m-d'));
+    // $surveys = $this->getSurveys(1, date('Y-m-') . "1", date('Y-m-d'));
+    $surveys = [];
     $surveysGenerated = Surveys::select('nombre_encuesta', 'id_encuesta')->get()->pluck('nombre_encuesta', 'id_encuesta')->toArray();
 
     return view("surveys/index", compact('surveys', 'surveysGenerated'));
@@ -153,11 +154,12 @@ class SurveyController extends Controller
 
     $dataSurvey = DB::select(DB::raw(
       "SELECT
-              CE.nombre_cliente, CE.codigo_proyecto_cliente, CE.orden_compra_cliente, CE.descripcion_proyecto_cliente, CE.correo_cliente, CE.correo_copia, CE.correo_copia_oculta, CE.estatus_encuesta, CE.created_timestamp AS survey_created,
-              E.nombre_encuesta, E.descripcion,
+              CE.nombre_cliente, CE.codigo_proyecto_cliente, CE.id_encuesta, CE.orden_compra_cliente, CE.descripcion_proyecto_cliente, CE.correo_cliente, CE.correo_copia, CE.correo_copia_oculta, CE.estatus_encuesta, CE.created_timestamp AS survey_created,
+              E.nombre_encuesta, E.descripcion, RS.fecha_reenvio,
               CEC.id_llave_encuesta, CEC.created_timestamp AS survey_answered
           FROM clientes_encuestas CE
           INNER JOIN encuesta E ON CE.id_encuesta = E.id_encuesta
+          LEFT JOIN resend_survey RS ON RS.id_encuesta = CE.orden_compra_cliente
           LEFT  JOIN clientes_encuestas_contestadas CEC ON CE.llave_encuesta = CEC.id_llave_encuesta
 
           WHERE CE.estatus_encuesta = " . $status . $dateSearch . " ORDER BY CE.created_timestamp DESC;"
@@ -315,17 +317,21 @@ class SurveyController extends Controller
 
   public function resend_emails(Request $request)
   {
+    DB::table('resend_survey')->insert([
+      'id_encuesta' => $request->llave
+    ]);
 
-    $this->resen_client_key($request->llave);
-    $this->resen_client_no_key($request->llave);
+    $this->resend_client_key($request->llave);
+    $this->resend_client_no_key($request->llave);
 
     return true;
   }
 
-  public function resen_client_key($key)
+  public function resend_client_key($key)
   {
 
     $emails = DB::select(DB::raw("SELECT correo_cliente, llave_encuesta FROM clientes_encuestas WHERE llave_encuesta = '" . $key . "'"));
+    // $emails = DB::select(DB::raw("SELECT correo_cliente, llave_encuesta FROM clientes_encuestas WHERE id_encuesta = '" . $key . "'"));
 
     $email = $emails[0]->correo_cliente;
 
@@ -340,10 +346,11 @@ class SurveyController extends Controller
     });
   }
 
-  public function resen_client_no_key($key)
+  public function resend_client_no_key($key)
   {
 
     $emails = DB::select(DB::raw("SELECT correo_copia, correo_copia_oculta, llave_encuesta FROM clientes_encuestas WHERE llave_encuesta = '" . $key . "'"));
+    // $emails = DB::select(DB::raw("SELECT correo_copia, correo_copia_oculta, llave_encuesta FROM clientes_encuestas WHERE id_encuesta = '" . $key . "'"));
 
     if ($emails[0]->correo_copia == null)
       return $emails;

@@ -143,6 +143,7 @@ use Carbon\Carbon;
                     <td><button class="btn btn-primary btn-sm" data-llave="{{$survey->id_llave_encuesta}}" data-type="pdf">PDF</button></td>
                 @else
                     <td><button class="btn btn-primary btn-sm" data-llave="{{$survey->orden_compra_cliente}}" data-type="reenviar">Reenviar</button></td>
+                    <!-- <td><button class="btn btn-primary btn-sm" data-llave="{{$survey->id_encuesta}}" data-type="reenviar">Reenviar</button></td> -->
                 @endif
               </tr>
               @endforeach

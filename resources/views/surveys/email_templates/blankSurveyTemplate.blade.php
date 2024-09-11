@@ -434,11 +434,11 @@
               <tr style="border-collapse:collapse">
                 <td align="center" style="padding:0;Margin:0">
                   <table class="es-footer-body" cellspacing="0" cellpadding="0" align="center" role="none"
-                    style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;background-color: #EAEAEA; width:630px">
+                    style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px; width:630px">
                     <tbody>
                       <tr style="border-collapse:collapse">
                         <td align="left"
-                          style="padding-top:1.5rem;Margin:0;padding-bottom:5px;padding-left:20px;padding-right:20px">
+                          style="padding-top:1.5rem;Margin:0;padding-bottom:15px;padding-left:20px;padding-right:35px; display: flex;">
                           <!--[if mso]><table style="width:560px" cellpadding="0" cellspacing="0"><tr><td style="width:194px"><![endif]-->
                           <table class="es-left" cellspacing="0" cellpadding="0" align="left" role="none"
                             style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;float:left">
@@ -455,14 +455,8 @@
                                             <span>CONTÁCTANOS:</span>
                                           </p>
                                           <div style="text-align: left;">
-                                            <div>
-                                              <hr
-                                                style="background-color: #ff934f; height: 5px; border-radius: 1rem; border: none; margin: 0;">
-                                            </div>
-                                            <div style="width: 65%;">
-                                              <hr
-                                                style="background-color: #ff934f; height: 5px; border-radius: 1rem; border: none; margin: 3px 0 0 0;">
-                                            </div>
+                                            <div><hr style="background-color: #ff934f; height: 5px; border-radius: 1rem; border: none; margin: 0;"></div>
+                                            <div style="width: 65%;"><hr style="background-color: #ff934f; height: 5px; border-radius: 1rem; border: none; margin: 3px 0 0 0;"></div>
                                           </div>
                                           <p
                                             style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:12px;font-family:'lucida sans unicode', 'lucida grande', sans-serif;line-height:21px;color:#000000">
@@ -471,7 +465,7 @@
                                               <a target="_blank"
                                                 style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:'lucida sans unicode', 'lucida grande', sans-serif;font-size:12px;text-decoration:underline;color:#000000;line-height:20px; display: flex; gap: 0.5rem;"
                                                 href="https://sinci.com/">
-                                                <!-- <img title="Facebook" src="https://websas.sinci.com/img/email_images/sitio-web.png" alt="Fb" width="22"> -->
+                                                <!-- <img title="Facebook" src="./images/sitio-web.png" alt="Fb" width="22"> -->
                                                 sinci.com</a></span>
                                           </p>
                                           <p
@@ -480,7 +474,7 @@
                                               style="font-family:helvetica, 'helvetica neue', arial, verdana, sans-serif;line-height:150%">
                                               <a style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:'lucida sans unicode', 'lucida grande', sans-serif;font-size:12px;text-decoration:underline;color:#000000;line-height:20px; display: flex; gap: 0.5rem;"
                                                 href="tel:3336153618">
-                                                <!-- <img title="Facebook" src="https://websas.sinci.com/img/email_images/telephone.png" alt="Fb" width="20"> -->
+                                                <!-- <img title="Facebook" src="./images/telephone.png" alt="Fb" width="20"> -->
                                                 (33) 3615.3618</a></span>
                                           </p>
                                         </td>
@@ -517,19 +511,19 @@
                                               <tr style="border-collapse:collapse">
                                                 <td valign="top" align="center" style="padding:0;Margin:0;"><a
                                                     target="_blank" href="https://twitter.com/SinciMX"><img title="X"
-                                                      src="https://websas.sinci.com/img/email_images/twitter-circle-black.png" alt="Tw" width="35"
+                                                      src="./images/twitter-circle-black.png" alt="Tw" width="35"
                                                       style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic"></a>
                                                 </td>
                                                 <td valign="top" align="center" style="padding:0;Margin:0;"><a
                                                     target="_blank"
                                                     href="https://es-es.facebook.com/pages/SINCI-GDL/138633972834428"><img
-                                                      title="Facebook" src="https://websas.sinci.com/img/email_images/facebook-circle-black.png" alt="Fb"
+                                                      title="Facebook" src="./images/facebook-circle-black.png" alt="Fb"
                                                       width="40"
                                                       style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic"></a>
                                                 </td>
                                                 <td valign="top" align="center" style="padding:0;Margin:0;"><a
                                                     target="_blank" href="https://www.linkedin.com/company/sinci/"><img
-                                                      title="Linkedin" src="https://websas.sinci.com/img/email_images/linkedin-circle-black.png" alt="ln"
+                                                      title="Linkedin" src="./images/linkedin-circle-black.png" alt="ln"
                                                       width="40"
                                                       style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic"></a>
                                                 </td>
@@ -547,7 +541,7 @@
                           </table>
                         </td>
                       </tr>
-                      <tr style="border-collapse:collapse">
+                      <tr style="border-collapse:collapse; background-color: #EAEAEA;">
                         <td align="left" style="Margin:0;padding: 5px 20px 0 20px">
                           <table width="100%" cellspacing="0" cellpadding="0" role="none"
                             style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
@@ -559,14 +553,14 @@
                                     <tbody>
                                       <tr style="border-collapse:collapse">
                                         <td esdev-links-color="#333333" align="center"
-                                          style="padding:0;Margin:0;padding-top:5px">
+                                          style="padding:0;Margin:0;">
 
-                                          <p
+                                          <div
                                             style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:12px;font-family:'lucida sans unicode', 'lucida grande', sans-serif;line-height:26px;color:#000000">
-                                            Copyright© <span class=year></span> </p>
+                                            Copyright© <span class=year> <?php echo date('Y'); ?> </span> </div>
 
-                                          <p
-                                            style="Margin:-7px 0 0 0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:11px;font-family:'lucida sans unicode', 'lucida grande', sans-serif;line-height:26px;color:#000000">
+                                          <div
+                                            style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:11px;font-family:'lucida sans unicode', 'lucida grande', sans-serif;line-height:26px;color:#000000">
                                             <a target="_blank"
                                               style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:'lucida sans unicode', 'lucida grande', sans-serif;font-size:11px;text-decoration:underline;color:#000000;line-height:20px"
                                               href="https://sinci.com/aviso-legal">Aviso Legal</a>
@@ -587,7 +581,7 @@
                                               style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:'lucida sans unicode', 'lucida grande', sans-serif;font-size:11px;text-decoration:underline;color:#000000;line-height:20px"
                                               href="https://sinci.com/politica_de_seguridad_salud_laboral/">Política de
                                               seguridad</a>
-                                          </p>
+                                          </div>
                                       </tr>
                                     </tbody>
                                   </table>

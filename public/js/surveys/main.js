@@ -1,3 +1,14 @@
+
+let dateOptions = {
+  hour12: true,
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+  hour: 'numeric',
+  minute: 'numeric',
+  // second: 'numeric'
+};
+
 document.addEventListener("DOMContentLoaded", async function (event) {
 
   let encuestario = Number(window.localStorage.getItem('encuestador'));
@@ -147,10 +158,16 @@ let obtainDataSurvey = async () => {
   let tbody = "";
   let ordenCompra = null;
 
+  let counter;
   dataSurvey.forEach((elem, i) => {
 
+    let codigo = elem.codigo_proyecto_cliente.replace(/[\s]/, '').substr(0, 8);
+
     if (elem.orden_compra_cliente != ordenCompra) {
-      tbody += `<tr><td class="client"> <i class="bx bx-plus"></i> ${elem.nombre_cliente}</td>`;
+
+      counter = 0;
+
+      tbody += `<tr><td class="client"> <i class="bx bx-plus" data-orden = "${codigo}"></i> ${elem.nombre_cliente} </td>`;
       tbody += `<td>${elem.codigo_proyecto_cliente}</td>`;
       tbody += `<td>${elem.orden_compra_cliente}</td>`;
       // tbody += `<td class="description">${ elem.descripcion_proyecto_cliente }</td>`;
@@ -162,22 +179,24 @@ let obtainDataSurvey = async () => {
       // tbody += `<td>${ elem.nombre_encuesta }</td>`;
       // tbody += `<td>${ elem.descripcion }</td>`;
       tbody += `<td>${elem.survey_answered === null ? ' - ' : elem.survey_answered}</td>`;
+      tbody += `<td style="text-align: center !important;"> ${elem.total_resend} </td>`;
       tbody += `<td>${elem.id_llave_encuesta === null ? `<button class="btn btn-primary btn-sm" data-llave="${elem.orden_compra_cliente}"  data-type="reenviar">Reenviar</button>` : `<button class="btn btn-primary btn-sm" data-llave="${elem.id_llave_encuesta}" data-type="pdf">PDF</button>`}</td></tr>`;
 
       ordenCompra = elem.orden_compra_cliente;
+
+      if(elem.fecha_reenvio != null){
+
+        counter ++;
+
+        tbody += `<tr class = "${codigo} resend_survey non_display"><td colspan = "3" style="text-align: center;">Fecha reenvío de encuesta intento N° ${counter}</td>`;
+        tbody += `<td colspan = "6">${new Date(elem.fecha_reenvio).toLocaleDateString('es-MX', dateOptions)}</td></tr>`;
+        ordenCompra = elem.orden_compra_cliente;
+      }
     } else {
 
-      let dateOptions = {
-        hour12: true,
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-        hour: 'numeric',
-        minute: 'numeric',
-        // second: 'numeric'
-      };
+      counter ++;
 
-      tbody += `<tr class = "resend_survey non_display"><td colspan = "2" style="text-align: center;">Fecha reenvio de encuesta intento ${i}</td>`;
+      tbody += `<tr class = "${codigo} resend_survey non_display"><td colspan = "3" style="text-align: center;">Fecha reenvío de encuesta intento N° ${counter}</td>`;
       tbody += `<td colspan = "6">${new Date(elem.fecha_reenvio).toLocaleDateString('es-MX', dateOptions)}</td></tr>`;
       ordenCompra = elem.orden_compra_cliente;
     }
@@ -200,11 +219,11 @@ let initiateButtonActions = () => {
 
     tr.querySelector('td .btn').addEventListener('click', async btnClick => {
 
-      if (btn.dataset.type == 'reenviar') {
+      if (btnClick.srcElement.dataset.type == 'reenviar') {
 
         let headers = {
           method: 'POST',
-          body: JSON.stringify({ llave: btn.dataset.llave }),
+          body: JSON.stringify({ llave: btnClick.srcElement.dataset.llave }),
           headers: {
             "content-type": "application/json; charset=utf-8",
             'X-CSRF-TOKEN': $("meta[name='csrf-token']").attr("content"),
@@ -212,18 +231,23 @@ let initiateButtonActions = () => {
         };
 
         await fetch('/surveys/resend_emails', headers);
+
+        obtainDataSurvey();
+
       } else {
         let keyReportPDF = btnClick.srcElement.dataset.llave;
         window.open(`/surveys/generatePDFSurveys?idSurvey=${keyReportPDF}&sendEmail=false`, '_blank');
       }
     });
 
-    document.querySelector('td .bx').addEventListener('click', trBX => {
+    tr.querySelector('td .bx').addEventListener('click', trBX => {
+
+      let client = trBX.srcElement.dataset.orden;
 
       trBX.srcElement.classList.toggle('bx-plus');
       trBX.srcElement.classList.toggle('bx-minus');
 
-      document.querySelectorAll('.resend_survey').forEach( elem => {
+      document.querySelectorAll(`.${client}.resend_survey`).forEach( elem => {
         elem.classList.toggle('non_display')
       });
     });

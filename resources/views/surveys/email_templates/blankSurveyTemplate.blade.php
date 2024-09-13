@@ -438,7 +438,7 @@
                     <tbody>
                       <tr style="border-collapse:collapse">
                         <td align="left"
-                          style="padding-top:1.5rem;Margin:0;padding-bottom:15px;padding-left:20px;padding-right:35px; display: flex;">
+                          style="padding-top:1.5rem;Margin:0;padding-bottom:15px;padding-left:35px;padding-right:45px; display: flex;">
                           <!--[if mso]><table style="width:560px" cellpadding="0" cellspacing="0"><tr><td style="width:194px"><![endif]-->
                           <table class="es-left" cellspacing="0" cellpadding="0" align="left" role="none"
                             style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;float:left">
@@ -509,9 +509,10 @@
                                             style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px; margin-top: 0.25rem;">
                                             <tbody>
                                               <tr style="border-collapse:collapse">
-                                                <td valign="top" align="center" style="padding:0;Margin:0;"><a
-                                                    target="_blank" href="https://twitter.com/SinciMX"><img title="X"
-                                                      src="https://websas.sinci.com/img/email_images/twitter-circle-black.png" alt="Tw" width="35"
+                                              <td valign="top" align="center" style="padding:0;Margin:0;"><a
+                                                    target="_blank" href="https://www.linkedin.com/company/sinci/"><img
+                                                      title="Linkedin" src="https://websas.sinci.com/img/email_images/linkedin-circle-black.png" alt="ln"
+                                                      width="40"
                                                       style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic"></a>
                                                 </td>
                                                 <td valign="top" align="center" style="padding:0;Margin:0;"><a
@@ -522,9 +523,8 @@
                                                       style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic"></a>
                                                 </td>
                                                 <td valign="top" align="center" style="padding:0;Margin:0;"><a
-                                                    target="_blank" href="https://www.linkedin.com/company/sinci/"><img
-                                                      title="Linkedin" src="https://websas.sinci.com/img/email_images/linkedin-circle-black.png" alt="ln"
-                                                      width="40"
+                                                    target="_blank" href="https://twitter.com/SinciMX"><img title="X"
+                                                      src="https://websas.sinci.com/img/email_images/twitter-circle-black.png" alt="Tw" width="35"
                                                       style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic"></a>
                                                 </td>
                                               </tr>

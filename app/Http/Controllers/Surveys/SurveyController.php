@@ -155,14 +155,15 @@ class SurveyController extends Controller
     $dataSurvey = DB::select(DB::raw(
       "SELECT
               CE.nombre_cliente, CE.codigo_proyecto_cliente, CE.id_encuesta, CE.orden_compra_cliente, CE.descripcion_proyecto_cliente, CE.correo_cliente, CE.correo_copia, CE.correo_copia_oculta, CE.estatus_encuesta, CE.created_timestamp AS survey_created,
-              E.nombre_encuesta, E.descripcion, RS.fecha_reenvio,
+              E.nombre_encuesta, E.descripcion, RS.fecha_reenvio, TEMP.total AS total_resend,
               CEC.id_llave_encuesta, CEC.created_timestamp AS survey_answered
           FROM clientes_encuestas CE
           INNER JOIN encuesta E ON CE.id_encuesta = E.id_encuesta
           LEFT JOIN resend_survey RS ON RS.id_encuesta = CE.orden_compra_cliente
+          LEFT JOIN (SELECT id_encuesta, COUNT(Fecha_reenvio) AS total FROM resend_survey GROUP BY id_encuesta) AS TEMP ON TEMP.id_encuesta = CE.orden_compra_cliente
           LEFT  JOIN clientes_encuestas_contestadas CEC ON CE.llave_encuesta = CEC.id_llave_encuesta
 
-          WHERE CE.estatus_encuesta = " . $status . $dateSearch . " ORDER BY CE.created_timestamp DESC;"
+          WHERE CE.estatus_encuesta = " . $status . $dateSearch . " ORDER BY CE.created_timestamp DESC, RS.fecha_reenvio DESC;"
     ));
 
     return $dataSurvey;
@@ -367,11 +368,11 @@ class SurveyController extends Controller
     $asunto = "Encuesta SINCI de satisfacción al cliente";
 
     if ($emailCC != null) {
-      Mail::send($template_path, function ($message) use ($email, $emailCC, $asunto) {
+      Mail::send($template_path, [], function ($message) use ($email, $emailCC, $asunto) {
         $message->to($email)->subject($asunto)->from('snla@sinci.com', $asunto)->cc($emailCC);
       });
     } else {
-      Mail::send($template_path, function ($message) use ($email, $asunto) {
+      Mail::send($template_path, [], function ($message) use ($email, $asunto) {
         $message->to($email)->subject($asunto)->from('snla@sinci.com', $asunto);
       });
     }

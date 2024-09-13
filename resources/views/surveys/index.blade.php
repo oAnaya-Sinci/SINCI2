@@ -106,48 +106,12 @@ use Carbon\Carbon;
                 <!-- <th>Encuesta</th> -->
                 <!-- <th>Descripcion</th> -->
                 <th>Contestada el</th>
+                <th>Total reenvios</th>
                 <th>Acciones</th>
               </tr>
             </thead>
             <tbody>
-              @if($surveys == [])
               <tr></tr>
-              @else
-              @foreach($surveys as $survey)
-              <tr>
-                <td>{{ $survey->nombre_cliente }}</td>
-                <td>{{ $survey->codigo_proyecto_cliente }}</td>
-                <td>{{ $survey->orden_compra_cliente }}</td>
-                <!-- <td>{{ $survey->descripcion_proyecto_cliente }}</td> -->
-                <td>{{ $survey->correo_cliente }}</td>
-                <!-- <td>{{ $survey->correo_copia }}</td> -->
-                <!-- <td>{{ $survey->correo_copia_oculta }}</td> -->
-
-                @if($survey->estatus_encuesta == 1)
-                <td> Creada </td>
-                @else
-                <td> Contestada </td>
-                @endif
-
-                <td>{{ $survey->survey_created }}</td>
-                <!-- <td>{{ $survey->nombre_encuesta }}</td> -->
-                <!-- <td>{{ $survey->descripcion }}</td> -->
-
-                @if($survey->survey_answered != null)
-                <td>{{ $survey->survey_answered }}</td>
-                @else
-                <td> - </td>
-                @endif
-
-                @if($survey->id_llave_encuesta != null)
-                    <td><button class="btn btn-primary btn-sm" data-llave="{{$survey->id_llave_encuesta}}" data-type="pdf">PDF</button></td>
-                @else
-                    <td><button class="btn btn-primary btn-sm" data-llave="{{$survey->orden_compra_cliente}}" data-type="reenviar">Reenviar</button></td>
-                    <!-- <td><button class="btn btn-primary btn-sm" data-llave="{{$survey->id_encuesta}}" data-type="reenviar">Reenviar</button></td> -->
-                @endif
-              </tr>
-              @endforeach
-              @endif
             </tbody>
           </table>
 

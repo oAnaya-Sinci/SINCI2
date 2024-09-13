@@ -188,16 +188,18 @@ let obtainDataSurvey = async () => {
 
         counter ++;
 
-        tbody += `<tr class = "${codigo} resend_survey non_display"><td colspan = "3" style="text-align: center;">Fecha reenvío de encuesta intento N° ${counter}</td>`;
-        tbody += `<td colspan = "6">${new Date(elem.fecha_reenvio).toLocaleDateString('es-MX', dateOptions)}</td></tr>`;
+        tbody += `<tr class = "${codigo} resend_survey non_display"><td colspan = "2" style="text-align: center;">Reenvío de encuesta intento N° ${counter}</td>`;
+        tbody += `<td colspan = "7">${new Date(elem.fecha_reenvio).toLocaleDateString('es-MX', dateOptions)}</td></tr>`;
+        // tbody += `<td colspan = "5"></td></tr>`;
         ordenCompra = elem.orden_compra_cliente;
       }
     } else {
 
       counter ++;
 
-      tbody += `<tr class = "${codigo} resend_survey non_display"><td colspan = "3" style="text-align: center;">Fecha reenvío de encuesta intento N° ${counter}</td>`;
-      tbody += `<td colspan = "6">${new Date(elem.fecha_reenvio).toLocaleDateString('es-MX', dateOptions)}</td></tr>`;
+      tbody += `<tr class = "${codigo} resend_survey non_display"><td colspan = "2" style="text-align: center;">Reenvío de encuesta intento N° ${counter}</td>`;
+      tbody += `<td colspan = "7">${new Date(elem.fecha_reenvio).toLocaleDateString('es-MX', dateOptions)}</td></tr>`;
+    //   tbody += `<td colspan = "5"></td></tr>`;
       ordenCompra = elem.orden_compra_cliente;
     }
   });

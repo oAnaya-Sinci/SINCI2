@@ -155,7 +155,7 @@ class SurveyController extends Controller
     $dataSurvey = DB::select(DB::raw(
       "SELECT
               CE.nombre_cliente, CE.codigo_proyecto_cliente, CE.id_encuesta, CE.orden_compra_cliente, CE.descripcion_proyecto_cliente, CE.correo_cliente, CE.correo_copia, CE.correo_copia_oculta, CE.estatus_encuesta, CE.created_timestamp AS survey_created,
-              E.nombre_encuesta, E.descripcion, RS.fecha_reenvio, TEMP.total AS total_resend,
+              E.nombre_encuesta, E.descripcion, RS.fecha_reenvio, IF(ISNULL(TEMP.total), 0, TEMP.total) AS total_resend,
               CEC.id_llave_encuesta, CEC.created_timestamp AS survey_answered
           FROM clientes_encuestas CE
           INNER JOIN encuesta E ON CE.id_encuesta = E.id_encuesta

@@ -231,7 +231,7 @@ class SurveyController extends Controller
 
         <body style="width: 100%; opacity: 100;">
 
-           <div style="width: 100%; text-align: right; margin-bottom: 0.5rem; font-size: 15px">'. date('Y-m-d H:i:s') .'</div>
+           <div style="width: 100%; text-align: right; margin-bottom: 0.5rem; font-size: 11px">'. date('Y-m-d H:i:s') .'</div>
            <div style="text-align: center;">
               <div class="col-md-6">
                  <div class="header" style="display: flex; margin-bottom: 0.5rem;">

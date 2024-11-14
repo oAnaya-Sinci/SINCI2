@@ -216,6 +216,8 @@ class SurveyController extends Controller
   public function obtainPDFSurvey(Request $request)
   {
 
+    date_default_timezone_set('America/Mexico_City');
+
     $idSurvey = $request->input('idSurvey');
     $sendEmail = $request->input('sendEmail');
 
@@ -230,6 +232,7 @@ class SurveyController extends Controller
         <body style="width: 100%; opacity: 100;">
 
            <div style="text-align: center;">
+              <div class="col-md-12" style="width: 100%; display: flex; justify-content: end; align-items: end; margin-bottom: 0.5rem;">
               <div class="col-md-6">
                  <div class="header" style="display: flex; margin-bottom: 0.5rem;">
                     <!-- <img src="https://websas.sinci.com/assets/img/logo_sinci.png" alt="" width="100" height="100" style="margin: 0 1rem 0 0;"> -->

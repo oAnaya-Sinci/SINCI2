@@ -289,6 +289,8 @@ document.querySelector('#newSurvey').addEventListener('click', () => {
     select.value = "";
   });
 
+  $('.selectpicker').selectpicker('refresh');
+
   $('#createNewSurveyModal').modal('show');
 });
 

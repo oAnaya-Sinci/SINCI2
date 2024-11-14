@@ -232,7 +232,7 @@ class SurveyController extends Controller
         <body style="width: 100%; opacity: 100;">
 
            <div style="text-align: center;">
-              <div class="col-md-12" style="width: 100%; display: flex; justify-content: end; align-items: end; margin-bottom: 0.5rem;">'. date('Y-m-d H:i:s') .'</div>
+              <div style="width: 100%; display: flex; justify-content: end; align-items: end; margin-bottom: 0.5rem; font-size: 4px">'. date('Y-m-d H:i:s') .'</div>
               <div class="col-md-6">
                  <div class="header" style="display: flex; margin-bottom: 0.5rem;">
                     <!-- <img src="https://websas.sinci.com/assets/img/logo_sinci.png" alt="" width="100" height="100" style="margin: 0 1rem 0 0;"> -->

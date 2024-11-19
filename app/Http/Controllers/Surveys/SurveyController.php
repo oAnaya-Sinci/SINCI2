@@ -163,7 +163,7 @@ class SurveyController extends Controller
           LEFT JOIN (SELECT id_encuesta, COUNT(Fecha_reenvio) AS total FROM resend_survey GROUP BY id_encuesta) AS TEMP ON TEMP.id_encuesta = CE.orden_compra_cliente
           LEFT  JOIN clientes_encuestas_contestadas CEC ON CE.llave_encuesta = CEC.id_llave_encuesta
 
-          WHERE CE.estatus_encuesta = " . $status . $dateSearch . " ORDER BY CE.created_timestamp DESC, RS.fecha_reenvio DESC;"
+          WHERE CE.estatus_encuesta = " . $status . $dateSearch . " ORDER BY CE.created_timestamp DESC, RS.fecha_reenvio ASC;"
     ));
 
     return $dataSurvey;

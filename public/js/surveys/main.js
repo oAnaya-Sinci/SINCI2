@@ -100,6 +100,9 @@ document.querySelector('#btnSaveSurvey').addEventListener('click', async () => {
     dataSurvey.push(select.value);
   });
 
+  dataSurvey[3] = dataSurvey[3].replace(/\s/g, '');
+  dataSurvey[4] = dataSurvey[4].replace(/\s/g, '');
+
   let descriptionProject = document.querySelector('.filter-option-inner-inner').innerText;
   descriptionProject = descriptionProject.split(' - ')[1];
 
@@ -238,7 +241,8 @@ let initiateButtonActions = () => {
 
       } else {
         let keyReportPDF = btnClick.srcElement.dataset.llave;
-        window.open(`/surveys/generatePDFSurveys?idSurvey=${keyReportPDF}&sendEmail=false`, '_blank');
+        // window.open(`/surveys/generatePDFSurveys?idSurvey=${keyReportPDF}&sendEmail=false`, '_blank');
+        window.open(`/reportsPDF/${keyReportPDF}.pdf`, '_blank');
       }
     });
 

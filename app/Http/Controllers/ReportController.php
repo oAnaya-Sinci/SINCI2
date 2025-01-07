@@ -15,7 +15,7 @@ class ReportController extends Controller
 {
     public function index()
     {
-        $users = User::select('users.id', 'users.name', 'users.email', 'users.days', 'users.admission_date')->whereRelation('positions', 'id', '=', 4)->orderByRaw('(users.days * 1) DESC')->get();
+        $users = User::select('users.id', 'users.name', 'users.email', 'users.days', 'users.admission_date')->where('typeUser_id', 1)->whereRelation('positions', 'id', '=', 4)->orderByRaw('(users.days * 1) DESC')->get();
         $departments = Department::all()->pluck('name', 'id')->except([6]);
         $offices = Office::all()->pluck('name', 'id');
         $titulo = 'REPORTES';
@@ -38,6 +38,7 @@ class ReportController extends Controller
         ->whereHas('offices', function ($query) use ($request) {
             $query->where('id', $request->input('office'));
         })
+        ->where('users.typeUser_id', 1)
         ->get();
 
         return view('reports.index', compact('users', 'departments', 'offices', 'titulo', 'date'));

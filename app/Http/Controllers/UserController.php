@@ -17,7 +17,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::orderBy('name')->get();
+        $users = User::orderBy('name')->where('typeUser_id', 1)->get();
         $titulo = 'ADMINISTRACIÓN DE USUARIOS';
 
         return view('users.index', compact('users', 'titulo'));
@@ -38,7 +38,6 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-
         $user = User::create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),

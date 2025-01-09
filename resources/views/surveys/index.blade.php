@@ -66,7 +66,7 @@ use Carbon\Carbon;
                      <label style="margin-bottom: 0 !important; margin-top: 0.5rem !important; font-weight: 500 !important;">Busqueda general</label>
                      <input type="text" name="" id="" class="form-control" placeholder="ingrese el valor que desea filtar en la tabla de resultado">
                   </div> -->
-            <div class="col-xl-1" style="display: flex; flex-direction: column;">
+            <div class="col-xl-2" style="display: flex; flex-direction: column;">
               <label style="visibility: hidden;">Buscar</label>
               <button class="btn btn-primary btn-filters">Buscar</button>
             </div>

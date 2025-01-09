@@ -1,111 +1,140 @@
 .card-body.surveys {
-
     width: 100%;
     height: 62vh;
     overflow: auto;
-  }
+}
 
-  table thead tr th {
+table thead tr th {
     text-align: left;
     padding: 0.25rem 0.5rem 0.5rem 0.5rem !important;
     vertical-align: middle;
-  }
+}
 
-  table thead tr {
-    background-color: #8A1F03;
-    color: #FFF;
+table thead tr {
+    background-color: #8a1f03;
+    color: #fff;
     font-size: 13.5px;
-  }
-  table thead tr th {
+}
+table thead tr th {
+    border-right: solid 1px #fff !important;
+}
 
-    border-right: solid 1px #FFF !important;
-  }
-
-  table tbody tr td {
+table tbody tr td {
     border-width: 1px !important;
     border-color: darkgray;
     font-size: 11.5px;
     text-align: left;
     padding: 0.35rem 0.25rem 0.15rem 0.5rem !important;
-  }
+}
 
-  table tbody tr td:last-child {
+table tbody tr td:last-child {
     text-align: center;
-  }
+}
 
-  table tbody tr td:last-child .btn {
+table tbody tr td:last-child .btn {
     margin: -2px 0 0.1rem 0;
     padding: 0.15rem 1rem;
     font-size: 10px;
-  }
+}
 
-  table thead tr th.client,
-  table tbody tr td.client {
+table thead tr th.client,
+table tbody tr td.client {
     width: 23px;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
-  }
+}
 
-  .modal .modal-body label {
+.modal .modal-body label {
     font-weight: 500;
     font-size: 14px;
-  }
+}
 
-  .form-group .input-group input {
-
+.form-group .input-group input {
     height: fit-content;
-  }
+}
 
-  .form-group .input-group .input-group-append .btn {
-
+.form-group .input-group .input-group-append .btn {
     border-radius: 0 0.5rem 0.5rem 0;
     /* border-radius: 0; */
-  }
+}
 
-  #createNewSurveyModal .modal-content {
+#createNewSurveyModal .modal-content {
     height: auto;
-  }
+}
 
-  #createNewSurveyModal .modal-footer .btn {
+#createNewSurveyModal .modal-footer .btn {
     margin-bottom: 0;
-  }
+}
 
-  .alarmExistSurvey .alert,
-  .alarmErrorEmails .alert {
+.alarmExistSurvey .alert,
+.alarmErrorEmails .alert {
     width: 83%;
-  }
+}
 
-  .alarmExistSurvey .alert p,
-  .alarmErrorEmails .alert p {
+.alarmExistSurvey .alert p,
+.alarmErrorEmails .alert p {
     font-weight: 500;
-    color: #fff
-  }
+    color: #fff;
+}
 
-  .alarmExistSurvey,
-  .alarmErrorEmails {
+.alarmExistSurvey,
+.alarmErrorEmails {
     width: 93%;
     position: fixed;
     z-index: 3;
     transform: translateX(100%);
     transition: transform ease-out 1.5s;
-  }
+}
 
-  .showAlarmExistSurvey,
-  .showAlarmErrorEmail {
+.showAlarmExistSurvey,
+.showAlarmErrorEmail {
     transform: translateX(0%);
     transition: transform ease-out 0.5s;
+}
+
+hr {
+    color: #fff;
+}
+
+.bx.bx-plus:hover,
+.bx.bx-minus:hover {
+  cursor: pointer;
+}
+
+.resend_survey.non_display {
+  display: none;
+}
+
+@media (min-resolution: 120dpi) {
+
+  h5{
+    font-size: 100% !important;
   }
 
-  hr {
-    color: #FFF;
+  .card-body .row:first-child{
+    /* gap: 4em; */
+    font-size: 50%;
   }
 
-  .bx.bx-plus:hover,
-  .bx.bx-minus:hover{
-    cursor: pointer;
+  select, input, button, label{
+    font-size: 135% !important;
+    /* padding: 0.5rem !important; */
   }
 
-  .resend_survey.non_display{
-    display: none;
+  th{
+    font-size: 80% !important;
   }
+
+  td{
+    font-size: 60% !important;
+
+    button{
+      font-size: 80% !important;
+    }
+  }
+
+  #newSurvey{
+    font-size: 65% !important;
+  }
+}

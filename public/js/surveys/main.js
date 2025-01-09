@@ -226,6 +226,9 @@ let initiateButtonActions = () => {
 
       if (btnClick.srcElement.dataset.type == 'reenviar') {
 
+        btnClick.srcElement.disabled = true;
+        btnClick.srcElement.innerText = 'Reenviando...';
+
         let headers = {
           method: 'POST',
           body: JSON.stringify({ llave: btnClick.srcElement.dataset.llave }),
@@ -237,7 +240,9 @@ let initiateButtonActions = () => {
 
         await fetch('/surveys/resend_emails', headers);
 
-        obtainDataSurvey();
+        setTimeout(() => {
+            obtainDataSurvey();
+        }, 2000);
 
       } else {
         let keyReportPDF = btnClick.srcElement.dataset.llave;

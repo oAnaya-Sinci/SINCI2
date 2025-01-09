@@ -303,16 +303,30 @@ class SurveyController extends Controller
     if ($emailCC != "")
       $emailCC = explode(',', $emailCC);
 
-    $template_path = 'surveys/email_templates/answeredSurveyEmail';
-    $asunto = "Encuesta SINCI realizada exitosamente";
+    // $template_path = 'surveys/email_templates/answeredSurveyEmail';
+    // $asunto = "Encuesta SINCI realizada exitosamente";
+
+    // if ($emailCC != null) {
+    //   Mail::send($template_path, [], function ($message) use ($email, $emailCC, $asunto, $idSurvey) {
+    //     $message->to($email)->subject($asunto)->from('snla@sinci.com', $asunto)->cc($emailCC)->attach('reportsPDF/' . $idSurvey . '.pdf');
+    //   });
+    // } else {
+    //   Mail::send($template_path, [], function ($message) use ($email, $asunto, $idSurvey) {
+    //     $message->to($email)->subject($asunto)->from('snla@sinci.com', $asunto)->attach('reportsPDF/' . $idSurvey . '.pdf');
+    //   });
+    // }
+
+    $template_path = 'surveys/email_templates/blankSurveyTemplate';
+    $asunto = "Encuesta SINCI de satisfacción al cliente";
+    $body = 'La encuesta se ha contestado';
 
     if ($emailCC != null) {
-      Mail::send($template_path, [], function ($message) use ($email, $emailCC, $asunto, $idSurvey) {
-        $message->to($email)->subject($asunto)->from('snla@sinci.com', $asunto)->cc($emailCC)->attach('reportsPDF/' . $idSurvey . '.pdf');;
+      Mail::send($template_path, ['body' => $body], function ($message) use ($email, $emailCC, $asunto, $idSurvey) {
+        $message->to($email)->cc($emailCC)->subject($asunto)->from('snla@sinci.com', $asunto)->attach('reportsPDF/' . $idSurvey . '.pdf');
       });
     } else {
-      Mail::send($template_path, [], function ($message) use ($email, $asunto, $idSurvey) {
-        $message->to($email)->subject($asunto)->from('snla@sinci.com', $asunto)->attach('reportsPDF/' . $idSurvey . '.pdf');;
+      Mail::send($template_path, ['body' => $body], function ($message) use ($email, $asunto, $idSurvey) {
+        $message->to($email)->subject($asunto)->from('snla@sinci.com', $asunto)->attach('reportsPDF/' . $idSurvey . '.pdf');
       });
     }
 
@@ -367,17 +381,18 @@ class SurveyController extends Controller
     if ($emailCC != "")
       $emailCC = explode(',', $emailCC);
 
-    $template_path = 'surveys/email_templates/answeredSurveyEmail';
+    $template_path = 'surveys/email_templates/blankSurveyTemplate';
     $asunto = "Encuesta SINCI de satisfacción al cliente";
+    $body = 'Con esta plantilla solo se avisa de la contestacion de la encuesta';
 
     if ($emailCC != null) {
-      Mail::send($template_path, [], function ($message) use ($email, $emailCC, $asunto) {
-        $message->to($email)->subject($asunto)->from('snla@sinci.com', $asunto)->cc($emailCC);
-      });
-    } else {
-      Mail::send($template_path, [], function ($message) use ($email, $asunto) {
-        $message->to($email)->subject($asunto)->from('snla@sinci.com', $asunto);
-      });
-    }
+        Mail::send($template_path, ['body' => $body], function ($message) use ($email, $emailCC, $asunto) {
+          $message->to($email)->cc($emailCC)->subject($asunto)->from('snla@sinci.com', $asunto);
+        });
+      } else {
+        Mail::send($template_path, ['body' => $body], function ($message) use ($email, $asunto) {
+          $message->to($email)->subject($asunto)->from('snla@sinci.com', $asunto);
+        });
+      }
   }
 }

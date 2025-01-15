@@ -199,8 +199,7 @@ class SurveyController extends Controller
 
     $template_path = 'surveys/email_templates/blankSurveyTemplate';
     $asunto = "Encuesta SINCI de satisfacción al cliente";
-    // $body = $init_p . 'Con esta plantilla solo se avisa de la contestacion de la encuesta</p>';
-    $body = 'Con esta plantilla solo se avisa de la contestacion de la encuesta';
+    $body = 'Este mensaje es un aviso del envió de la encuesta al cliente';
 
     if ($emailCC != null) {
       Mail::send($template_path, ['body' => $body], function ($message) use ($email, $emailCC, $asunto) {
@@ -317,8 +316,8 @@ class SurveyController extends Controller
     // }
 
     $template_path = 'surveys/email_templates/blankSurveyTemplate';
-    $asunto = "Encuesta SINCI de satisfacción al cliente";
-    $body = 'La encuesta se ha contestado';
+    $asunto = "Encuesta SINCI realizada exitosamente";
+    $body = 'Se ha recibido respuesta de una encuesta de satisfacción al clienteo';
 
     if ($emailCC != null) {
       Mail::send($template_path, ['body' => $body], function ($message) use ($email, $emailCC, $asunto, $idSurvey) {
@@ -383,7 +382,7 @@ class SurveyController extends Controller
 
     $template_path = 'surveys/email_templates/blankSurveyTemplate';
     $asunto = "Encuesta SINCI de satisfacción al cliente";
-    $body = 'Con esta plantilla solo se avisa de la contestacion de la encuesta';
+    $body = 'Este mensaje es un aviso del envió de la encuesta al cliente';
 
     if ($emailCC != null) {
         Mail::send($template_path, ['body' => $body], function ($message) use ($email, $emailCC, $asunto) {

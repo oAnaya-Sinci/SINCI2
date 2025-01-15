@@ -210,6 +210,8 @@ use Carbon\Carbon;
 
       let dateFormater = (date, wichFormat) => {
 
+        date = date.trim();
+
         let dateToFormat = date.split(/[- /]/);
 
         let newDate;

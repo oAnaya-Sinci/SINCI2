@@ -80,7 +80,7 @@ use Carbon\Carbon;
                     <span class="nombre"><img src="/img/order_down.png" alt="" width="15" height="15" name="order_down"> Nombre / Correo </span>
                   </th>
                   <!-- <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Puesto / Oficina</th> -->
-                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                     <span class="oficina"><img src="/img/order_down.png" alt="" width="15" height="15" name="order_down"> Oficina </span>
                   </th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">

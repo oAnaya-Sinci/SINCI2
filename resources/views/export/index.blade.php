@@ -27,7 +27,7 @@
             <td>{{ $department->name }}</td>
             @endforeach
             <td>{{ $user->days }}</td>
-            <td>{{ $user->admission_date }}</td>
+            <td>{{ Carbon\Carbon::parse($user->admission_date)->format('d/m/Y') }}</td>
         </tr>
     @endforeach
     </tbody>

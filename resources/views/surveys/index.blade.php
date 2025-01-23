@@ -62,10 +62,6 @@ use Carbon\Carbon;
                 <input type="date" name="" id="date_end" class="form-control">
               </div>
             </div>
-            <!-- <div class="col-xl-4">
-                     <label style="margin-bottom: 0 !important; margin-top: 0.5rem !important; font-weight: 500 !important;">Busqueda general</label>
-                     <input type="text" name="" id="" class="form-control" placeholder="ingrese el valor que desea filtar en la tabla de resultado">
-                  </div> -->
             <div class="col-xl-2" style="display: flex; flex-direction: column;">
               <label style="visibility: hidden;">Buscar</label>
               <button class="btn btn-primary btn-filters">Buscar</button>
@@ -97,14 +93,9 @@ use Carbon\Carbon;
                 <th class="client">Cliente</th>
                 <th>Proyecto</th>
                 <th>Orden compra</th>
-                <!-- <th>Descripcion</th> -->
                 <th>Correo cliente</th>
-                <!-- <th>CC</th> -->
-                <!-- <th>CCO</th> -->
                 <th>Estatus</th>
                 <th>Creada el</th>
-                <!-- <th>Encuesta</th> -->
-                <!-- <th>Descripcion</th> -->
                 <th>Contestada el</th>
                 <th>Total reenvios</th>
                 <th>Acciones</th>
@@ -141,25 +132,10 @@ use Carbon\Carbon;
 
         <div class="row">
 
-          <!-- <div class="col-md-6">
-                     <div class="form-group">
-                        <label for="">Orden Compra</label>
-                        <div class="input-group mb-0">
-                           <input type="text" id="inputOC" class="form-control" placeholder="Orden compra proyecto">
-                           <div class="input-group-append">
-                           <button id="searchOC" class="btn btn-outline-primary" type="button">
-                                 Buscar
-                              </button>
-                           </div>
-                        </div>
-                     </div>
-                  </div> -->
-
           <div class="col-md-12">
             <div class="form-group">
               <label for="">Proyecto</label>
               <div class="input-group mb-0">
-                <!-- <select name="dataProjects" id="dataProjects" class="form-select"> -->
                 <select class="selectpicker form-control" name="dataProjects" id="dataProjects" data-live-search="true" data-virtual-scroll="false">
                 </select>
               </div>

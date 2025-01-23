@@ -317,7 +317,7 @@ class SurveyController extends Controller
 
     $template_path = 'surveys/email_templates/blankSurveyTemplate';
     $asunto = "Encuesta SINCI realizada exitosamente";
-    $body = 'Se ha recibido respuesta de una encuesta de satisfacción al clienteo';
+    $body = 'Se ha recibido respuesta de una encuesta de satisfacción al cliente';
 
     if ($emailCC != null) {
       Mail::send($template_path, ['body' => $body], function ($message) use ($email, $emailCC, $asunto, $idSurvey) {

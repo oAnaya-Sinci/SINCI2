@@ -12,6 +12,7 @@
         <th>Oficina</th>
         <th>Departamento</th>
         <th>Dias acumulados</th>
+        <th>Fecha ingreso</th>
     </tr>
     </thead>
     <tbody>
@@ -26,6 +27,7 @@
             <td>{{ $department->name }}</td>
             @endforeach
             <td>{{ $user->days }}</td>
+            <td>{{ $user->admission_date }}</td>
         </tr>
     @endforeach
     </tbody>

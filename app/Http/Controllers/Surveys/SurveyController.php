@@ -186,7 +186,6 @@ class SurveyController extends Controller
   // function to send email
   public function sendEmailNewSurvey($emails)
   {
-
     $email = $emails[0];
     $email = explode(',', $email);
 

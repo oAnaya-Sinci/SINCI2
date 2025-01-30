@@ -429,9 +429,9 @@
 
                     <!-- <button style="width: 40%; height: 2.5rem; border-radius: 0.5rem; border: 0; font-weight: 700; color: #FFF; background-color: #fe6948;">Encuesta SINCI</button> -->
                     <div style="margin-bottom: 1.5rem;">
-                      <a style="padding: 0.5rem 4.5rem; border-radius: 0.5rem; border: 0; font-weight: 500; font-size: 15px; color: #FFF; background-color: #fe6948; text-decoration: none;" href="https://encuestas.sinci.com/" target="_blank">Encuesta SINCI</a>
+                      <a style="padding: 0.5rem 4.5rem; border-radius: 0.5rem; border: 0; font-weight: 500; font-size: 15px; color: #FFF; background-color: #fe6948; text-decoration: none;" href="https://encuestas.sinci.com?key={{$body}}" target="_blank">Encuesta SINCI</a>
                     </div>
-                    <p style="text-align: justify; font-size: 14px;"> Una vez ahí use la siguente <em>"llave:"</em> <strong> <u style="font-size: 15px;">{{$body}}</u> </strong> para poder ingresar al cuestionario. </p>
+                    <!-- <p style="text-align: justify; font-size: 14px;"> Una vez ahí use la siguente <em>"llave:"</em> <strong> <u style="font-size: 15px;">{{$body}}</u> </strong> para poder ingresar al cuestionario. </p> -->
                     <p style="text-align: justify; font-size: 14px;">En caso de no poder ingresar a la plataforma o de tener
                       detalles contestando la misma, no dude en ponerse en <a target="_blank"
                         href="https://sinci.com/contacto/">contacto</a> con el equipo de sinci, donde atenderemos cualquier duda

@@ -51,8 +51,8 @@ use Carbon\Carbon;
             <div class="col-xl-3">
               <label for="" style="margin-bottom: 0 !important; margin-top: 0.5rem !important; font-weight: 500 !important;">Status</label>
               <select name="" id="slctStatus" class="form-select">
-                <option value="1">Creada</option>
-                <option value="0">Contestada</option>
+                <option value="1">Enviadas</option>
+                <option value="0">Contestadas</option>
               </select>
             </div>
             <div class="col-xl-3">

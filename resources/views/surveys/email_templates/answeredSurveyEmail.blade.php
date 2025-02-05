@@ -11,7 +11,7 @@
 
   <meta content="width=device-width, initial-scale=1" name="viewport">
   <meta content="telephone=no" name="format-detection">
-  <title>Encuesta SINCI</title><!--[if (mso 16)]>
+  <title>Encuesta SINCI®</title><!--[if (mso 16)]>
     <style type="text/css">
     a {text-decoration: none;}
     </style>
@@ -426,7 +426,7 @@
                       siguiente link.</p>
 
                     <div style="margin-bottom: 1.5rem;">
-                      <a style="padding: 0.5rem 4.5rem; border-radius: 0.5rem; border: 0; font-weight: 500; font-size: 15px; color: #FFF; background-color: #fe6948; text-decoration: none;" href="https://sinci.com/contacto/" target="_blank">Contacto SINCI</a>
+                      <a style="padding: 0.5rem 4.5rem; border-radius: 0.5rem; border: 0; font-weight: 500; font-size: 15px; color: #FFF; background-color: #fe6948; text-decoration: none;" href="https://sinci.com/contacto/" target="_blank">Contacto SINCI®</a>
                     </div>
                   </td>
                 </tr>

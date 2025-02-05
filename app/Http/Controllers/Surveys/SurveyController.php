@@ -278,7 +278,7 @@ class SurveyController extends Controller
     $email = explode(',', $email);
 
     $template_path = 'surveys/email_templates/answeredSurveyEmail';
-    $asunto = "Encuesta SINCI realizada exitosamente";
+    $asunto = "Encuesta SINCI® realizada exitosamente";
 
     Mail::send($template_path, [], function ($message) use ($email, $asunto, $idSurvey) {
       $message->to($email)->subject($asunto)->from('snla@sinci.com', $asunto)->attach('reportsPDF/' . $idSurvey . '.pdf');;
@@ -315,7 +315,7 @@ class SurveyController extends Controller
     // }
 
     $template_path = 'surveys/email_templates/blankSurveyTemplate';
-    $asunto = "Encuesta SINCI realizada exitosamente";
+    $asunto = "Encuesta SINCI® realizada exitosamente";
     $body = 'Se ha recibido respuesta de una encuesta de satisfacción al cliente';
 
     if ($emailCC != null) {
@@ -354,7 +354,7 @@ class SurveyController extends Controller
     $email = explode(',', $email);
 
     $template_path = 'surveys/email_templates/keySurveyEmail';
-    $asunto = "Encuesta SINCI de satisfacción al cliente";
+    $asunto = "Encuesta SINCI® de satisfacción al cliente";
     $body = $key;
 
     Mail::send($template_path, ['body' => $body], function ($message) use ($email, $asunto) {
@@ -380,7 +380,7 @@ class SurveyController extends Controller
       $emailCC = explode(',', $emailCC);
 
     $template_path = 'surveys/email_templates/blankSurveyTemplate';
-    $asunto = "Encuesta SINCI de satisfacción al cliente";
+    $asunto = "Encuesta SINCI® de satisfacción al cliente";
     $body = 'Este mensaje es un aviso del envió de la encuesta al cliente';
 
     if ($emailCC != null) {

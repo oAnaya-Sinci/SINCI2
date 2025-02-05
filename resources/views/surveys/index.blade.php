@@ -95,7 +95,7 @@ use Carbon\Carbon;
                 <th>Orden compra</th>
                 <th>Correo cliente</th>
                 <th>Estatus</th>
-                <th>Creada el</th>
+                <th>Enviada el</th>
                 <th>Contestada el</th>
                 <th>Total reenvios</th>
                 <th>Acciones</th>

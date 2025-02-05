@@ -11,7 +11,7 @@
 
   <meta content="width=device-width, initial-scale=1" name="viewport">
   <meta content="telephone=no" name="format-detection">
-  <title>Encuesta SINCI</title><!--[if (mso 16)]>
+  <title>Encuesta SINCI®</title><!--[if (mso 16)]>
     <style type="text/css">
     a {text-decoration: none;}
     </style>
@@ -413,7 +413,7 @@
               </td>
             </tr>
       </tbody>
-    </table> -->
+    </table> -->22
 
 
             <table class="es-content" cellspacing="0" cellpadding="0" align="center" role="none"

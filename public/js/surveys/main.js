@@ -177,7 +177,7 @@ let obtainDataSurvey = async () => {
       tbody += `<td>${elem.correo_cliente}</td>`;
       // tbody += `<td>${ elem.correo_copia === null ? " - " : elem.correo_copia}</td>`;
       // tbody += `<td>${ elem.correo_copia_oculta === null ? " - " : elem.correo_copia_oculta }</td>`;
-      tbody += `<td>${elem.estatus_encuesta === 1 ? "Creada" : "Contestada"}</td>`;
+      tbody += `<td>${elem.estatus_encuesta === 1 ? "Enviada" : "Contestada"}</td>`;
       tbody += `<td>${elem.survey_created}</td>`;
       // tbody += `<td>${ elem.nombre_encuesta }</td>`;
       // tbody += `<td>${ elem.descripcion }</td>`;

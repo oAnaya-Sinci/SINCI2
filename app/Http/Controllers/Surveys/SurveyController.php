@@ -218,6 +218,7 @@ class SurveyController extends Controller
 
     $idSurvey = $request->input('idSurvey');
     $sendEmail = $request->input('sendEmail');
+    $salesmanEmail = trim($request->input('salesManEmail'));
 
     $plantillaHTML_header = '<!DOCTYPE html>
         <html lang="en">
@@ -259,7 +260,7 @@ class SurveyController extends Controller
       file_put_contents('reportsPDF/' . $idSurvey . '.pdf', $output);
 
       $emails = $this->sendEmailSurveyAnsweredClient($idSurvey);
-      $emails = $this->sendEmailSurveyAnswered($idSurvey);
+      $emails = $this->sendEmailSurveyAnswered($idSurvey, $salesmanEmail);
     } else {
       // Output the generated PDF to Browser
       $dompdf->stream($idSurvey . ".pdf");
@@ -285,9 +286,8 @@ class SurveyController extends Controller
     });
   }
 
-  public function sendEmailSurveyAnswered($idSurvey)
+  public function sendEmailSurveyAnswered($idSurvey, $salesmanEmail)
   {
-
     $emails = DB::select(DB::raw("SELECT correo_copia, correo_copia_oculta, llave_encuesta FROM clientes_encuestas WHERE llave_encuesta = '" . $idSurvey . "'"));
 
     if ($emails[0]->correo_copia == null)
@@ -314,17 +314,19 @@ class SurveyController extends Controller
     //   });
     // }
 
+    $emailCCo = ['mmorales@sinci.com', 'rmartinez@sinci.com', $salesmanEmail];
+
     $template_path = 'surveys/email_templates/blankSurveyTemplate';
     $asunto = "Encuesta SINCI® realizada exitosamente";
     $body = 'Se ha recibido respuesta de una encuesta de satisfacción al cliente';
 
     if ($emailCC != null) {
-      Mail::send($template_path, ['body' => $body], function ($message) use ($email, $emailCC, $asunto, $idSurvey) {
-        $message->to($email)->cc($emailCC)->subject($asunto)->from('snla@sinci.com', $asunto)->attach('reportsPDF/' . $idSurvey . '.pdf');
+      Mail::send($template_path, ['body' => $body], function ($message) use ($email, $emailCC, $emailCCo, $asunto, $idSurvey) {
+        $message->to($email)->cc($emailCC)->bbc($emailCCo)->subject($asunto)->from('snla@sinci.com', $asunto)->attach('reportsPDF/' . $idSurvey . '.pdf');
       });
     } else {
-      Mail::send($template_path, ['body' => $body], function ($message) use ($email, $asunto, $idSurvey) {
-        $message->to($email)->subject($asunto)->from('snla@sinci.com', $asunto)->attach('reportsPDF/' . $idSurvey . '.pdf');
+      Mail::send($template_path, ['body' => $body], function ($message) use ($email, $asunto, $emailCCo, $idSurvey) {
+        $message->to($email)->bbc($emailCCo)->subject($asunto)->from('snla@sinci.com', $asunto)->attach('reportsPDF/' . $idSurvey . '.pdf');
       });
     }
 
@@ -364,7 +366,6 @@ class SurveyController extends Controller
 
   public function resend_client_no_key($key)
   {
-
     $emails = DB::select(DB::raw("SELECT correo_copia, correo_copia_oculta, llave_encuesta FROM clientes_encuestas WHERE llave_encuesta = '" . $key . "'"));
     // $emails = DB::select(DB::raw("SELECT correo_copia, correo_copia_oculta, llave_encuesta FROM clientes_encuestas WHERE id_encuesta = '" . $key . "'"));
 

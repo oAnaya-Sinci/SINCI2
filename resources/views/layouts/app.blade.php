@@ -375,16 +375,27 @@
                 <div class="ingProyectos">
                     <li class="bitacora inactive">
                         <a href="/bitacoras/main">
-                            <i class='bx bx-calendar'></i>
+                            <!-- <i class='bx bx-calendar'></i> -->
+                            <i class='bx bx-calendar-edit'></i>
                             <span class="link_name">Bitácora</span>
                         </a>
                         <ul class="sub-menu blank">
                             <li><a class="link_name" href="/bitacoras/main">Bitácora</a></li>
                         </ul>
                     </li>
+                    <!-- <li class="bitacora inactive">
+                        <a href="/exception-dates/main">
+                            <i class='bx bxs-tag-x'></i>
+                            <span class="link_name">Excepciones</span>
+                        </a>
+                        <ul class="sub-menu blank">
+                            <li><a class="link_name" href="/exception-dates/main">Excepciones</a></li>
+                        </ul>
+                    </li> -->
                     <li class="onlyAdmin inactive">
                         <a href="/users">
-                            <i class='bx bx-user'></i>
+                            <!-- <i class='bx bx-user'></i> -->
+                            <i class='bx bxs-user'></i>
                             <span class="link_name">Usuarios</span>
                         </a>
                         <ul class="sub-menu blank">

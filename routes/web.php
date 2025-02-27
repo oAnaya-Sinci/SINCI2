@@ -67,6 +67,12 @@ Route::post('/surveys/saveDataSurvey/', [SurveyController::class, 'store'])->nam
 Route::post('/surveys/resend_emails/', [SurveyController::class, 'resend_emails'])->name('resend_emails');
 //END
 
+// Routes Exception Dates
+Route::get('/exception-dates/main', [\App\Http\Controllers\exceptionDates\exceptionsController::class, 'index'])->name('exception_dates');
+Route::get('/exception-dates/create', [\App\Http\Controllers\exceptionDates\exceptionsController::class, 'createException'])->name('create_exception');
+Route::get('/exception-dates/obtainExceptions', [\App\Http\Controllers\exceptionDates\exceptionsController::class, 'obtainExceptions'])->name('obtain_exceptions');
+// END
+
 //Routes reports
 Route::get('/reports', [ReportController::class, 'index'])->name('reports');
 // Route::post('/generateReportPDF/', [ReportController::class, 'generatePDFToSendInEmail'])->name('reportPDF');

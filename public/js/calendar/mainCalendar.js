@@ -256,7 +256,7 @@ let eventsCalendar = (dataDB) => {
         event = {
             id: value.ID_PROYECTOS_AVANCE,
             title: titleBtcr,
-            body: "-- -- -- -- -- -- -- -- -- -- -- -- -- -- \n " + value.NOTAS,
+            body: "-- ".repeat(13) + "\n" + value.NOTAS,
             start: new Date(sYear, sMonth, sDay, horaInicio, minutosInicio),
             end: new Date(eYear, eMonth, eDay, HoraFin, minutosFin),
             allDay: false,

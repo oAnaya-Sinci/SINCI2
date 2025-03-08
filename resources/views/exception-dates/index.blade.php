@@ -15,21 +15,21 @@
 
               <div class="row">
 
-                <div class="col-md-3">
+                <div class="col-md-6">
                   <div class="form-group">
                     <label for="Tipo Excepción" class="col-form-label text-s">Tipo de excepción</label>
-                    <select name="slctTipo" id="slctTipo" class="form-select">
+                    <select name="slctTipeException" id="slctTipeException" class="form-select w-50">
                       <option value="-1">Seleccione una opción</option>
                     </select>
                   </div>
                 </div>
 
-                <div class="col-md-3">
+                <!-- <div class="col-md-3">
                   <div class="form-group">
                     <label for="Tipo Excepción" class="col-form-label text-s">Busqueda General</label>
                     <input type="text" name="genericSearch" id="genereicSearch" class="form-control"/>
                   </div>
-                </div>
+                </div> -->
 
                 <div class="col-md-6 mt-5 text-end">
                   <button class="btn btn--large btn-outline-primary btn-block btn-create-exception mb-0" type="button" style="padding: 0.35rem 0.65rem;">Nueva Excepción</button>
@@ -50,7 +50,7 @@
                           <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7"><span class="noti_telegram">tipo excepción </span></th>
                           <th class="text-start text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-1"><span class="noti_telegram">Descripción </span></th>
                           <th class="text-start text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-1"><span class="admin">Empleado</span></th>
-                          <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7"><span class="admin">Acciones</span></th>
+                          <!-- <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7"><span class="admin">Acciones</span></th> -->
                         </tr>
                       </thead>
                       <tbody style="text-align: center;">

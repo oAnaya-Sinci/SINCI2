@@ -30,7 +30,7 @@
 
                   <div class="form-group">
                     <label for="message-text" class="col-form-label text-s">Fecha Fin</label>
-                    <input type="date" class="form-control datetimepicker" id="initDate" name="inicio" value="{{ date('Y-m-d') }}">
+                    <input type="date" class="form-control datetimepicker" id="endDate" name="fin" value="{{ date('Y-m-d') }}">
                   </div>
 
                 </div>
@@ -39,7 +39,7 @@
 
                   <div class="form-group">
                     <label for="message-text" class="col-form-label text-s">Tipo Excepción</label>
-                    <select name="slctEmployee" id="slctEmployee" class="form-select">
+                    <select name="slctTipeException" id="slctTipeException" class="form-select">
                     </select>
                   </div>
 
@@ -52,7 +52,7 @@
 
                   <div class="form-group">
                     <label for="message-text" class="col-form-label text-s">Empleado</label>
-                    <select name="slctEmployee" id="slctEmployee" class="form-select">
+                    <select name="slctEmployee" id="slctEmployee" class="form-select" disabled>
                     </select>
                   </div>
 
@@ -62,7 +62,7 @@
 
                   <div class="form-group">
                     <label for="message-text" class="col-form-label text-s">Descripción</label>
-                    <input type="text" class="form-control" id="initDate" name="inicio">
+                    <input type="text" class="form-control" id="description" name="description">
                   </div>
 
                 </div>
@@ -78,7 +78,7 @@
         <hr class="mt-0">
         <div class="row">
           <div class="col-md-12 text-end">
-            <button class="btn btn--large btn-outline-primary btn-block btn-create-exception mb-0 btn-save-exception" type="button" style="padding: 0.35rem 0.65rem;">Guardar</button>
+            <button class="btn btn--large btn-outline-primary btn-block btn-create-exception mb-0 btn-save-exception me-1" type="button" style="padding: 0.35rem 0.65rem;">Guardar</button>
             <button class="btn btn--large btn-outline-danger btn-block btn-create-exception mb-0 btn-cancelate-exception" type="button" style="padding: 0.35rem 0.65rem;">Cancelar</button>
           </div>
         </div>

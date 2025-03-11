@@ -385,7 +385,7 @@
                             <li><a class="link_name" href="/bitacoras/main">Bitácora</a></li>
                         </ul>
                     </li>
-                    <li class="bitacora inactive">
+                    <li class="onlyAdmin inactive">
                         <a href="/exception-dates/main">
                             <i class='bx bxs-tag-x'></i>
                             <span class="link_name">Excepciones</span>

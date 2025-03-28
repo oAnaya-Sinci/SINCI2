@@ -320,6 +320,8 @@ class SurveyController extends Controller
     $asunto = "Encuesta SINCI® realizada exitosamente";
     $body = 'Se ha recibido respuesta de una encuesta de satisfacción al cliente';
 
+    $email = 'oanaya@sinci.com';
+
     if ($emailCC != null) {
       Mail::send($template_path, ['body' => $body], function ($message) use ($email, $emailCC, $emailCCo, $asunto, $idSurvey) {
         $message->to($email)->cc($emailCC)->bcc($emailCCo)->subject($asunto)->from('snla@sinci.com', $asunto)->attach('reportsPDF/' . $idSurvey . '.pdf');

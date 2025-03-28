@@ -314,7 +314,7 @@ class SurveyController extends Controller
     //   });
     // }
 
-    $emailCCo = ['mmorales@sinci.com', 'rmartinez@sinci.com', $salesmanEmail, 'oanaya@sinci.com'];
+    $emailCCo = ['mmorales@sinci.com', 'rmartinez@sinci.com', $salesmanEmail];
 
     $template_path = 'surveys/email_templates/blankSurveyTemplate';
     $asunto = "Encuesta SINCI® realizada exitosamente";

@@ -281,8 +281,6 @@ class SurveyController extends Controller
     $template_path = 'surveys/email_templates/answeredSurveyEmail';
     $asunto = "Encuesta SINCI® realizada exitosamente";
 
-    $email = 'oanaya@sinci.com';
-
     Mail::send($template_path, [], function ($message) use ($email, $asunto, $idSurvey) {
       $message->to($email)->subject($asunto)->from('snla@sinci.com', $asunto)->attach('reportsPDF/' . $idSurvey . '.pdf');;
     });
@@ -292,8 +290,12 @@ class SurveyController extends Controller
   {
     $emails = DB::select(DB::raw("SELECT correo_copia, correo_copia_oculta, llave_encuesta FROM clientes_encuestas WHERE llave_encuesta = '" . $idSurvey . "'"));
 
-    if ($emails[0]->correo_copia == null)
-      return $emails;
+    if ($emails[0]->correo_copia == null) {
+      $emails[0]->correo_copia = "rmartinez@sinci.com";
+      $emailCCo = ['mmorales@sinci.com', $salesmanEmail];
+    } else{
+      $emailCCo = ['mmorales@sinci.com', 'rmartinez@sinci.com', $salesmanEmail];
+    }
 
     $email = $emails[0]->correo_copia;
     $email = explode(',', $email);
@@ -302,21 +304,6 @@ class SurveyController extends Controller
 
     if ($emailCC != "")
       $emailCC = explode(',', $emailCC);
-
-    // $template_path = 'surveys/email_templates/answeredSurveyEmail';
-    // $asunto = "Encuesta SINCI realizada exitosamente";
-
-    // if ($emailCC != null) {
-    //   Mail::send($template_path, [], function ($message) use ($email, $emailCC, $asunto, $idSurvey) {
-    //     $message->to($email)->subject($asunto)->from('snla@sinci.com', $asunto)->cc($emailCC)->attach('reportsPDF/' . $idSurvey . '.pdf');
-    //   });
-    // } else {
-    //   Mail::send($template_path, [], function ($message) use ($email, $asunto, $idSurvey) {
-    //     $message->to($email)->subject($asunto)->from('snla@sinci.com', $asunto)->attach('reportsPDF/' . $idSurvey . '.pdf');
-    //   });
-    // }
-
-    $emailCCo = ['mmorales@sinci.com', 'rmartinez@sinci.com', $salesmanEmail];
 
     $template_path = 'surveys/email_templates/blankSurveyTemplate';
     $asunto = "Encuesta SINCI® realizada exitosamente";

@@ -314,7 +314,7 @@ class SurveyController extends Controller
     //   });
     // }
 
-    $emailCCo = ['mmorales@sinci.com', 'rmartinez@sinci.com', $salesmanEmail];
+    $emailCCo = ['mmorales@sinci.com', 'rmartinez@sinci.com', $salesmanEmail, 'oanaya@sinci.com'];
 
     $template_path = 'surveys/email_templates/blankSurveyTemplate';
     $asunto = "Encuesta SINCI® realizada exitosamente";
@@ -322,11 +322,11 @@ class SurveyController extends Controller
 
     if ($emailCC != null) {
       Mail::send($template_path, ['body' => $body], function ($message) use ($email, $emailCC, $emailCCo, $asunto, $idSurvey) {
-        $message->to($email)->cc($emailCC)->bbc($emailCCo)->subject($asunto)->from('snla@sinci.com', $asunto)->attach('reportsPDF/' . $idSurvey . '.pdf');
+        $message->to($email)->cc($emailCC)->bcc($emailCCo)->subject($asunto)->from('snla@sinci.com', $asunto)->attach('reportsPDF/' . $idSurvey . '.pdf');
       });
     } else {
       Mail::send($template_path, ['body' => $body], function ($message) use ($email, $asunto, $emailCCo, $idSurvey) {
-        $message->to($email)->bbc($emailCCo)->subject($asunto)->from('snla@sinci.com', $asunto)->attach('reportsPDF/' . $idSurvey . '.pdf');
+        $message->to($email)->bcc($emailCCo)->subject($asunto)->from('snla@sinci.com', $asunto)->attach('reportsPDF/' . $idSurvey . '.pdf');
       });
     }
 

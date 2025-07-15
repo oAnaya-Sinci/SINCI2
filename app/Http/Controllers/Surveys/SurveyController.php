@@ -146,7 +146,6 @@ class SurveyController extends Controller
    */
   public function getSurveys($status, $date_init, $date_end)
   {
-
     $dateSearch = " AND CE.created_timestamp BETWEEN '" . $date_init . " 00:00:00' AND '" . $date_end . " 23:59:59'";
 
     if ($status == 0)
@@ -171,7 +170,6 @@ class SurveyController extends Controller
 
   public function sendEmailWithSurveyKey($email, $keySurvey)
   {
-
     $template_path = 'surveys/email_templates/keySurveyEmail';
     $asunto = "Encuesta SINCI de satisfacción al cliente";
     $body = $keySurvey;
@@ -307,7 +305,7 @@ class SurveyController extends Controller
 
     $template_path = 'surveys/email_templates/blankSurveyTemplate';
     $asunto = "Encuesta SINCI® realizada exitosamente";
-    $body = 'Se ha recibido respuesta de una encuesta de satisfacción al cliente';
+    $body = 'Se ha realizado la respuesta de la encuesta '. $idSurvey .' de satisfacción al cliente';
 
     if ($emailCC != null) {
       Mail::send($template_path, ['body' => $body], function ($message) use ($email, $emailCC, $emailCCo, $asunto, $idSurvey) {
@@ -355,11 +353,13 @@ class SurveyController extends Controller
 
   public function resend_client_no_key($key)
   {
-    $emails = DB::select(DB::raw("SELECT correo_copia, correo_copia_oculta, llave_encuesta FROM clientes_encuestas WHERE llave_encuesta = '" . $key . "'"));
+    $emails = DB::select(DB::raw("SELECT correo_cliente, correo_copia, correo_copia_oculta, llave_encuesta FROM clientes_encuestas WHERE llave_encuesta = '" . $key . "'"));
     // $emails = DB::select(DB::raw("SELECT correo_copia, correo_copia_oculta, llave_encuesta FROM clientes_encuestas WHERE id_encuesta = '" . $key . "'"));
 
     if ($emails[0]->correo_copia == null)
       return $emails;
+
+    $correoCliente = $emails[0]->correo_cliente;
 
     $email = $emails[0]->correo_copia;
     $email = explode(',', $email);
@@ -371,7 +371,7 @@ class SurveyController extends Controller
 
     $template_path = 'surveys/email_templates/blankSurveyTemplate';
     $asunto = "Encuesta SINCI® de satisfacción al cliente";
-    $body = 'Este mensaje es un aviso del envió de la encuesta al cliente';
+    $body = 'Reenvio de encuesta ' . $key . ' al correo ' . $correoCliente;
 
     if ($emailCC != null) {
         Mail::send($template_path, ['body' => $body], function ($message) use ($email, $emailCC, $asunto) {

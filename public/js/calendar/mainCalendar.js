@@ -282,17 +282,14 @@ async function modalCalendarSinci() {
 
     let dl = dataLogin();
 
-    // await fetch(urlData + "/obtainDataProyecto?isLogedIn=" + dl).then(data => data.json()).then(dataProyecto => { processDataToSelect(dataProyecto, '#slctProyecto'); }).catch(() => { IsLogedIn(); });
-    // await fetch(urlData + "/obtainDataUser?isLogedIn=" + dl).then(data => data.json()).then(dataUsuario => { processDataToSelect(dataUsuario, '#slctUsuario'); }).catch(() => { IsLogedIn(); });
-    // await fetch(urlData + "/obtainDataAsignar?isLogedIn=" + dl).then(data => data.json()).then(dataAsignar => { processDataToSelect(dataAsignar, '#slctAsignar'); }).catch(() => { IsLogedIn(); });
-
-    let dataUsuario = await fetch(urlData + "/obtainDataUser?isLogedIn=" + dl).then(data => data.json()).then(dataUsuario => { return dataUsuario }).catch(() => { IsLogedIn(); });
+    let dataUsuario = await fetch(urlData + "/obtainDataUser?isLogedIn=" + dl).then(data => data.json()).then(dataUsuario => dataUsuario ).catch(() => { IsLogedIn(); });
     processDataToSelect(dataUsuario, '#slctUsuario');
 
-    let dataProyecto = await fetch(urlData + "/obtainDataProyecto?isLogedIn=" + dl).then(data => data.json()).then(dataProyecto => { return dataProyecto }).catch(() => { IsLogedIn(); });
+    let dataProyecto = await fetch(urlData + "/obtainDataProyecto?isLogedIn=" + dl).then(data => data.json()).then(dataProyecto => dataProyecto ).catch(() => { IsLogedIn(); });
     processDataToSelect(dataProyecto, '#slctProyecto');
 
-    let dataAsignar = await fetch(urlData + "/obtainDataAsignar?isLogedIn=" + dl).then(data => data.json()).then(dataAsignar => { return dataAsignar }).catch(() => { IsLogedIn(); });
+    let depto = localStorage.getItem('depto');
+    let dataAsignar = await fetch(urlData + "/obtainDataAsignar?isLogedIn=" + dl + "&depto=" + depto).then(data => data.json()).then(dataAsignar => dataAsignar ).catch(() => { IsLogedIn(); });
     processDataToSelect(dataAsignar, '#slctAsignar');
 
     $('.selectpicker').selectpicker('refresh');

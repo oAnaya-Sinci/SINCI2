@@ -85,8 +85,11 @@
                                     <option value="-1">Seleccione una opción</option>
                                     <option value="0">Horas desarrollo</option>
                                     <option value="1">Horas de puesta en servicio</option>
-                                    <option value="2">Administrativo</option>
+                                    <option value="2">Administrativo proyecto</option>
                                     <option value="3">Servicio</option>
+                                    <option value="4">Administrativo interno</option>
+                                    <option value="5">Descansos, vacaciones, etc.</option>
+                                    <option value="6">Incapacidad IMSS</option>
                                 </select>
                             </div>
                         </div>
@@ -95,7 +98,7 @@
                                 <label for="recipient-name" class="col-form-label">Asignar a</label>
                                 <select class="selectpicker form-control" name="slctAsignar" id="slctAsignar"
                                     data-live-search="true" data-virtual-scroll="false">
-                                    <option value="">NAN</option>
+                                    <option value="">NULL</option>
                                 </select>
                             </div>
                         </div>

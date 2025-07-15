@@ -77,6 +77,7 @@ $('#btnLogin').click(async function() {
                 localStorage.setItem('seeReports', response.seeReports);
                 localStorage.setItem('encuestador', response.encuestador);
                 localStorage.setItem('userEmail', formData[1].value+'@sinci.com')
+                localStorage.setItem('depto', response.depto)
 
                 location.href = "/dashboard";
                 // location.href = "/bitacoras/main";

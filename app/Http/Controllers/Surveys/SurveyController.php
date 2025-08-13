@@ -353,7 +353,7 @@ class SurveyController extends Controller
 
   public function resend_client_no_key($key)
   {
-    $emails = DB::select(DB::raw("SELECT correo_cliente, correo_copia, correo_copia_oculta, llave_encuesta FROM clientes_encuestas WHERE llave_encuesta = '" . $key . "'"));
+    $emails = DB::select(DB::raw("SELECT correo_cliente, correo_copia, correo_copia_oculta, llave_encuesta, codigo_proyecto_cliente FROM clientes_encuestas WHERE llave_encuesta = '" . $key . "'"));
     // $emails = DB::select(DB::raw("SELECT correo_copia, correo_copia_oculta, llave_encuesta FROM clientes_encuestas WHERE id_encuesta = '" . $key . "'"));
 
     if ($emails[0]->correo_copia == null)
@@ -371,7 +371,8 @@ class SurveyController extends Controller
 
     $template_path = 'surveys/email_templates/blankSurveyTemplate';
     $asunto = "Encuesta SINCI® de satisfacción al cliente";
-    $body = 'Reenvio de encuesta ' . $key . ' al correo ' . $correoCliente;
+    // $body = 'Reenvio de encuesta a la orden de compra:' . $key . ' y numero de proyecto:' . $emails[0]->codigo_proyecto_cliente . ' al correo ' . $correoCliente;
+    $body = 'Reenvio de encuesta a '. $correoCliente .' de la orden de compra: '. $key . ' y numero de proyecto: ' . $emails[0]->codigo_proyecto_cliente;
 
     if ($emailCC != null) {
         Mail::send($template_path, ['body' => $body], function ($message) use ($email, $emailCC, $asunto) {

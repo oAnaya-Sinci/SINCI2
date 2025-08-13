@@ -153,16 +153,16 @@ class SurveyController extends Controller
 
     $dataSurvey = DB::select(DB::raw(
       "SELECT
-              CE.nombre_cliente, CE.codigo_proyecto_cliente, CE.id_encuesta, CE.orden_compra_cliente, CE.descripcion_proyecto_cliente, CE.correo_cliente, CE.correo_copia, CE.correo_copia_oculta, CE.estatus_encuesta, CE.created_timestamp AS survey_created,
-              E.nombre_encuesta, E.descripcion, RS.fecha_reenvio, IF(ISNULL(TEMP.total), 0, TEMP.total) AS total_resend,
-              CEC.id_llave_encuesta, CEC.created_timestamp AS survey_answered
-          FROM clientes_encuestas CE
-          INNER JOIN encuesta E ON CE.id_encuesta = E.id_encuesta
-          LEFT JOIN resend_survey RS ON RS.id_encuesta = CE.orden_compra_cliente
-          LEFT JOIN (SELECT id_encuesta, COUNT(Fecha_reenvio) AS total FROM resend_survey GROUP BY id_encuesta) AS TEMP ON TEMP.id_encuesta = CE.orden_compra_cliente
-          LEFT  JOIN clientes_encuestas_contestadas CEC ON CE.llave_encuesta = CEC.id_llave_encuesta
+            CE.nombre_cliente, CE.codigo_proyecto_cliente, CE.id_encuesta, CE.orden_compra_cliente, CE.descripcion_proyecto_cliente, CE.correo_cliente, CE.correo_copia, CE.correo_copia_oculta, CE.estatus_encuesta, CE.created_timestamp AS survey_created,
+            E.nombre_encuesta, E.descripcion, RS.fecha_reenvio, IF(ISNULL(TEMP.total), 0, TEMP.total) AS total_resend,
+            CEC.id_llave_encuesta, CEC.created_timestamp AS survey_answered
+        FROM clientes_encuestas CE
+        INNER JOIN encuesta E ON CE.id_encuesta = E.id_encuesta
+        LEFT JOIN resend_survey RS ON RS.id_encuesta = CE.orden_compra_cliente
+        LEFT JOIN (SELECT id_encuesta, COUNT(Fecha_reenvio) AS total FROM resend_survey GROUP BY id_encuesta) AS TEMP ON TEMP.id_encuesta = CE.orden_compra_cliente
+        LEFT  JOIN clientes_encuestas_contestadas CEC ON CE.llave_encuesta = CEC.id_llave_encuesta
 
-          WHERE CE.estatus_encuesta = " . $status . $dateSearch . " ORDER BY CE.created_timestamp DESC, RS.fecha_reenvio ASC;"
+        WHERE CE.estatus_encuesta = " . $status . $dateSearch . " ORDER BY CE.created_timestamp DESC, RS.fecha_reenvio ASC;"
     ));
 
     return $dataSurvey;
@@ -184,6 +184,8 @@ class SurveyController extends Controller
   // function to send email
   public function sendEmailNewSurvey($emails)
   {
+    $data = DB::select(DB::raw("SELECT correo_cliente, correo_copia, correo_copia_oculta, llave_encuesta, codigo_proyecto_cliente FROM clientes_encuestas WHERE llave_encuesta = '" . $emails[2] . "'"));
+
     $email = $emails[0];
     $email = explode(',', $email);
 
@@ -196,7 +198,7 @@ class SurveyController extends Controller
 
     $template_path = 'surveys/email_templates/blankSurveyTemplate';
     $asunto = "Encuesta SINCI de satisfacción al cliente";
-    $body = 'Este mensaje es un aviso del envió de la encuesta al cliente';
+    $body = 'Envio de encuesta a '. $data[0]->correo_cliente .' de la orden de compra: '. $data[0]->llave_encuesta . ' y numero de proyecto: ' . $data[0]->codigo_proyecto_cliente;
 
     if ($emailCC != null) {
       Mail::send($template_path, ['body' => $body], function ($message) use ($email, $emailCC, $asunto) {
@@ -286,7 +288,7 @@ class SurveyController extends Controller
 
   public function sendEmailSurveyAnswered($idSurvey, $salesmanEmail)
   {
-    $emails = DB::select(DB::raw("SELECT correo_copia, correo_copia_oculta, llave_encuesta FROM clientes_encuestas WHERE llave_encuesta = '" . $idSurvey . "'"));
+    $emails = DB::select(DB::raw("SELECT correo_copia, correo_copia_oculta, llave_encuesta, codigo_proyecto_cliente FROM clientes_encuestas WHERE llave_encuesta = '" . $idSurvey . "'"));
 
     if ($emails[0]->correo_copia == null) {
       $emails[0]->correo_copia = "rmartinez@sinci.com";
@@ -305,7 +307,7 @@ class SurveyController extends Controller
 
     $template_path = 'surveys/email_templates/blankSurveyTemplate';
     $asunto = "Encuesta SINCI® realizada exitosamente";
-    $body = 'Se ha realizado la respuesta de la encuesta con la orden de compra: '. $idSurvey . ' y numero de proyecto: ' . $emails[0]->codigo_proyecto_cliente;
+    $body = 'Contestacion de encuesta por parte de '. $emails[0]->correo_cliente .' de la orden de compra: '. $idSurvey . ' y numero de proyecto: ' . $emails[0]->codigo_proyecto_cliente;
 
     if ($emailCC != null) {
       Mail::send($template_path, ['body' => $body], function ($message) use ($email, $emailCC, $emailCCo, $asunto, $idSurvey) {

@@ -174,6 +174,7 @@ class SurveyController extends Controller
     $asunto = "Encuesta SINCI de satisfacción al cliente";
     $body = $keySurvey;
 
+    $email = str_replace(' ', '', $email);
     $email = explode(',', $email);
 
     Mail::send($template_path, ['body' => $body], function ($message) use ($email, $asunto) {
@@ -184,32 +185,78 @@ class SurveyController extends Controller
   // function to send email
   public function sendEmailNewSurvey($emails)
   {
-    $data = DB::select(DB::raw("SELECT correo_cliente, correo_copia, correo_copia_oculta, llave_encuesta, codigo_proyecto_cliente FROM clientes_encuestas WHERE llave_encuesta = '" . $emails[2] . "'"));
+    try {
+      $data = DB::select(DB::raw("SELECT correo_cliente, correo_copia, correo_copia_oculta, llave_encuesta, codigo_proyecto_cliente FROM clientes_encuestas WHERE llave_encuesta = '" . $emails[2] . "'"));
 
-    $email = $emails[0];
-    $email = explode(',', $email);
+      $email = str_replace(' ', '', $emails[0]);
+      $email = explode(',', $email);
 
-    $emailCC = $emails[1];
+      $emailCC = $emails[1];
 
-    if ($emailCC != "")
-      $emailCC = explode(',', $emailCC);
+      if ($emailCC != "") {
+        $emailCC = str_replace(' ', '', $emailCC);
+        $emailCC = explode(',', $emailCC);
+      }
 
-    // $init_p = '<p style="text-align: justify; font-size: 14px;">';
+      $template_path = 'surveys/email_templates/blankSurveyTemplate';
+      $asunto = "Encuesta SINCI de satisfacción al cliente";
+      $body = 'Envio de encuesta a ' . $data[0]->correo_cliente . ' de la orden de compra: ' . $data[0]->llave_encuesta . ' y numero de proyecto: ' . $data[0]->codigo_proyecto_cliente;
 
-    $template_path = 'surveys/email_templates/blankSurveyTemplate';
-    $asunto = "Encuesta SINCI de satisfacción al cliente";
-    $body = 'Envio de encuesta a '. $data[0]->correo_cliente .' de la orden de compra: '. $data[0]->llave_encuesta . ' y numero de proyecto: ' . $data[0]->codigo_proyecto_cliente;
-
-    if ($emailCC != null) {
-      Mail::send($template_path, ['body' => $body], function ($message) use ($email, $emailCC, $asunto) {
-        $message->to($email)->cc($emailCC)->subject($asunto)->from('snla@sinci.com', $asunto);
-      });
-    } else {
-      Mail::send($template_path, ['body' => $body], function ($message) use ($email, $asunto) {
-        $message->to($email)->subject($asunto)->from('snla@sinci.com', $asunto);
-      });
+      if ($emailCC != null) {
+        Mail::send($template_path, ['body' => $body], function ($message) use ($email, $emailCC, $asunto) {
+          $message->to($email)->cc($emailCC)->subject($asunto)->from('snla@sinci.com', $asunto);
+        });
+      } else {
+        Mail::send($template_path, ['body' => $body], function ($message) use ($email, $asunto) {
+          $message->to($email)->subject($asunto)->from('snla@sinci.com', $asunto);
+        });
+      }
+    } catch (\Throwable $th) {
+      throw $th;
     }
   }
+
+  // function to send email
+  public function sendEmailNewSurvey_test()
+  {
+    try {
+      $emails[0] = "omaranaya616@gmail.com";
+      $emails[1] = "carlosomarab@gmail.com, oanaya@sinci.com";
+
+      $data = DB::select(DB::raw("SELECT correo_cliente, correo_copia, correo_copia_oculta, llave_encuesta, codigo_proyecto_cliente FROM clientes_encuestas WHERE llave_encuesta = '4500412965'"));
+
+      $email = $emails[0];
+      $email = explode(',', $email);
+
+      $emailCC = $emails[1];
+
+      if ($emailCC != "") {
+        $emailCC = str_replace(' ', '', $emailCC);
+        $emailCC = explode(',', $emailCC);
+      }
+
+      // $init_p = '<p style="text-align: justify; font-size: 14px;">';
+
+      $template_path = 'surveys/email_templates/blankSurveyTemplate';
+      $asunto = "Encuesta SINCI de satisfacción al cliente";
+      $body = 'Envio de encuesta a ' . $data[0]->correo_cliente . ' de la orden de compra: ' . $data[0]->llave_encuesta . ' y numero de proyecto: ' . $data[0]->codigo_proyecto_cliente;
+
+      if ($emailCC != null) {
+        Mail::send($template_path, ['body' => $body], function ($message) use ($email, $emailCC, $asunto) {
+          $message->to($email)->cc($emailCC)->subject($asunto)->from('snla@sinci.com', $asunto);
+        });
+      } else {
+        Mail::send($template_path, ['body' => $body], function ($message) use ($email, $asunto) {
+          $message->to($email)->subject($asunto)->from('snla@sinci.com', $asunto);
+        });
+      }
+
+      return "Message sent";
+    } catch (\Throwable $th) {
+      throw $th;
+    }
+  }
+
 
   public function obtainPDFSurvey(Request $request)
   {
@@ -230,7 +277,7 @@ class SurveyController extends Controller
 
         <body style="width: 100%; opacity: 100;">
 
-           <div style="width: 100%; text-align: right; margin-bottom: 0.5rem; font-size: 10px">'. date('Y-m-d H:i:s') .'</div>
+           <div style="width: 100%; text-align: right; margin-bottom: 0.5rem; font-size: 10px">' . date('Y-m-d H:i:s') . '</div>
            <div style="text-align: center;">
               <div class="col-md-6">
                  <div class="header" style="display: flex; margin-bottom: 0.5rem;">
@@ -271,11 +318,10 @@ class SurveyController extends Controller
 
   public function sendEmailSurveyAnsweredClient($idSurvey)
   {
-
     $emails = DB::select(DB::raw("SELECT correo_cliente, llave_encuesta FROM clientes_encuestas WHERE llave_encuesta = '" . $idSurvey . "'"));
 
     $email = $emails[0]->correo_cliente;
-
+    $email = str_replace(' ', '', $email);
     $email = explode(',', $email);
 
     $template_path = 'surveys/email_templates/answeredSurveyEmail';
@@ -290,24 +336,29 @@ class SurveyController extends Controller
   {
     $emails = DB::select(DB::raw("SELECT correo_copia, correo_copia_oculta, llave_encuesta, codigo_proyecto_cliente FROM clientes_encuestas WHERE llave_encuesta = '" . $idSurvey . "'"));
 
+    $salesmanEmail = str_replace(' ', '', $salesmanEmail);
+
     if ($emails[0]->correo_copia == null) {
       $emails[0]->correo_copia = "rmartinez@sinci.com";
       $emailCCo = ['mmorales@sinci.com', $salesmanEmail];
-    } else{
+    } else {
       $emailCCo = ['mmorales@sinci.com', 'rmartinez@sinci.com', $salesmanEmail];
     }
 
     $email = $emails[0]->correo_copia;
+    $email = str_replace(' ', '', $email);
     $email = explode(',', $email);
 
     $emailCC = $emails[0]->correo_copia_oculta;
 
-    if ($emailCC != "")
+    if ($emailCC != "") {
+      $emailCC = str_replace(' ', '', $emailCC);
       $emailCC = explode(',', $emailCC);
+    }
 
     $template_path = 'surveys/email_templates/blankSurveyTemplate';
     $asunto = "Encuesta SINCI® realizada exitosamente";
-    $body = 'Contestacion de encuesta por parte de '. $emails[0]->correo_cliente .' de la orden de compra: '. $idSurvey . ' y numero de proyecto: ' . $emails[0]->codigo_proyecto_cliente;
+    $body = 'Contestacion de encuesta por parte de ' . $emails[0]->correo_cliente . ' de la orden de compra: ' . $idSurvey . ' y numero de proyecto: ' . $emails[0]->codigo_proyecto_cliente;
 
     if ($emailCC != null) {
       Mail::send($template_path, ['body' => $body], function ($message) use ($email, $emailCC, $emailCCo, $asunto, $idSurvey) {
@@ -336,12 +387,10 @@ class SurveyController extends Controller
 
   public function resend_client_key($key)
   {
-
     $emails = DB::select(DB::raw("SELECT correo_cliente, llave_encuesta FROM clientes_encuestas WHERE llave_encuesta = '" . $key . "'"));
-    // $emails = DB::select(DB::raw("SELECT correo_cliente, llave_encuesta FROM clientes_encuestas WHERE id_encuesta = '" . $key . "'"));
 
     $email = $emails[0]->correo_cliente;
-
+    $email = str_replace(' ', '', $email);
     $email = explode(',', $email);
 
     $template_path = 'surveys/email_templates/keySurveyEmail';
@@ -356,7 +405,6 @@ class SurveyController extends Controller
   public function resend_client_no_key($key)
   {
     $emails = DB::select(DB::raw("SELECT correo_cliente, correo_copia, correo_copia_oculta, llave_encuesta, codigo_proyecto_cliente FROM clientes_encuestas WHERE llave_encuesta = '" . $key . "'"));
-    // $emails = DB::select(DB::raw("SELECT correo_copia, correo_copia_oculta, llave_encuesta FROM clientes_encuestas WHERE id_encuesta = '" . $key . "'"));
 
     if ($emails[0]->correo_copia == null)
       return $emails;
@@ -364,26 +412,29 @@ class SurveyController extends Controller
     $correoCliente = $emails[0]->correo_cliente;
 
     $email = $emails[0]->correo_copia;
+    $email = str_replace(' ', '', $email);
     $email = explode(',', $email);
 
     $emailCC = $emails[0]->correo_copia_oculta;
 
-    if ($emailCC != "")
+    if ($emailCC != ""){
+      $emailCC = str_replace(' ', '', $emailCC);
       $emailCC = explode(',', $emailCC);
+    }
 
     $template_path = 'surveys/email_templates/blankSurveyTemplate';
     $asunto = "Encuesta SINCI® de satisfacción al cliente";
     // $body = 'Reenvio de encuesta a la orden de compra:' . $key . ' y numero de proyecto:' . $emails[0]->codigo_proyecto_cliente . ' al correo ' . $correoCliente;
-    $body = 'Reenvio de encuesta a '. $correoCliente .' de la orden de compra: '. $key . ' y numero de proyecto: ' . $emails[0]->codigo_proyecto_cliente;
+    $body = 'Reenvio de encuesta a ' . $correoCliente . ' de la orden de compra: ' . $key . ' y numero de proyecto: ' . $emails[0]->codigo_proyecto_cliente;
 
     if ($emailCC != null) {
-        Mail::send($template_path, ['body' => $body], function ($message) use ($email, $emailCC, $asunto) {
-          $message->to($email)->cc($emailCC)->subject($asunto)->from('snla@sinci.com', $asunto);
-        });
-      } else {
-        Mail::send($template_path, ['body' => $body], function ($message) use ($email, $asunto) {
-          $message->to($email)->subject($asunto)->from('snla@sinci.com', $asunto);
-        });
-      }
+      Mail::send($template_path, ['body' => $body], function ($message) use ($email, $emailCC, $asunto) {
+        $message->to($email)->cc($emailCC)->subject($asunto)->from('snla@sinci.com', $asunto);
+      });
+    } else {
+      Mail::send($template_path, ['body' => $body], function ($message) use ($email, $asunto) {
+        $message->to($email)->subject($asunto)->from('snla@sinci.com', $asunto);
+      });
+    }
   }
 }

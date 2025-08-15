@@ -65,6 +65,8 @@ Route::get('/surveys/obtainSurveys', [SurveyController::class, 'obtainSurveys'])
 Route::get('/surveys/generatePDFSurveys/', [SurveyController::class, 'obtainPDFSurvey'])->name('pdf_surveys');
 Route::post('/surveys/saveDataSurvey/', [SurveyController::class, 'store'])->name('save_surveys');
 Route::post('/surveys/resend_emails/', [SurveyController::class, 'resend_emails'])->name('resend_emails');
+
+// Route::get('/surveys/test_functino_send_emails/', [SurveyController::class, 'sendEmailNewSurvey_test'])->name('test_resend_emails');
 //END
 
 // Routes Exception Dates

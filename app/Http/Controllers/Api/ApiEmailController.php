@@ -45,7 +45,7 @@ class ApiEmailController extends Controller
             return view('email', compact('body', 'admission_date', 'minimal_days'));
         } else if($request->recordatorio == 1){
 
-            $template_path = 'email_recordatorio_1';
+            $template_path = 'email_recordatorio';
             $body = "Estimado usuario, este es un mensaje automatico para recordarte que debes de llenar tu bitácora de acuerdo a tus actividades en la semana.";
 
             Mail::send($template_path, ['body' => $body, 'minimal_days' => $minimal_days], function($message) use ($email) {
@@ -53,7 +53,7 @@ class ApiEmailController extends Controller
                 $message->from('snla@sinci.com','SNL | '. explode('@', $email)[0] .' | Recordatorio para registro en bitácora');
             });
 
-            return view('email_recordatorio_1', compact('body', 'minimal_days'));
+            return view('email_recordatorio', compact('body', 'minimal_days'));
         } else {
 
             $template_path = 'email_recordatorio_1';

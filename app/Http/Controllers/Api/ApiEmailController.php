@@ -29,7 +29,7 @@ class ApiEmailController extends Controller
         $admission_date = date_format(date_create($request->date_user), 'd-m-Y');
         $minimal_days = Setting::where('id', 1)->value('days');
 
-        if($request->recordatorio == 0){  
+        if($request->recordatorio == 0){
             if($level == 1){
                 Mail::send($template_path, ['body' => $body, 'admission_date' => $admission_date, 'minimal_days' => $minimal_days], function($message) use ($template_path, $email) {
                     $message->to($email)->subject('SNL | '. explode('@', $email)[0] .' | Notificación por falta de registro en bitácora');
@@ -43,19 +43,28 @@ class ApiEmailController extends Controller
             }
 
             return view('email', compact('body', 'admission_date', 'minimal_days'));
-        }
+        } else if($request->recordatorio == 1){
 
-        else{
-
-            $template_path = 'email_recordatorio';
+            $template_path = 'email_recordatorio_1';
             $body = "Estimado usuario, este es un mensaje automatico para recordarte que debes de llenar tu bitácora de acuerdo a tus actividades en la semana.";
 
             Mail::send($template_path, ['body' => $body, 'minimal_days' => $minimal_days], function($message) use ($email) {
-                $message->to($email)->subject('SNL | '. explode('@', $email)[0] .' | Notificación para registro en bitácora');
-                $message->from('snla@sinci.com','SNL | '. explode('@', $email)[0] .' | Notificación para registro en bitácora');
+                $message->to($email)->subject('SNL | '. explode('@', $email)[0] .' | Recordatorio para registro en bitácora');
+                $message->from('snla@sinci.com','SNL | '. explode('@', $email)[0] .' | Recordatorio para registro en bitácora');
             });
 
-            return view('email_recordatorio', compact('body', 'minimal_days'));
+            return view('email_recordatorio_1', compact('body', 'minimal_days'));
+        } else {
+
+            $template_path = 'email_recordatorio_1';
+            $body = "Estimado usuario, este es un mensaje automatico para recordarte que debes de llenar tu bitácora de acuerdo a tus visitas a planta en la semana.";
+
+            Mail::send($template_path, ['body' => $body, 'minimal_days' => $minimal_days], function($message) use ($email) {
+                $message->to($email)->subject('SNL | '. explode('@', $email)[0] .' | Recordatorio para registro en bitácora');
+                $message->from('snla@sinci.com','SNL | '. explode('@', $email)[0] .' | Recordatorio para registro en bitácora');
+            });
+
+            return view('email_recordatorio_1', compact('body', 'minimal_days'));
         }
     }
 
@@ -104,7 +113,7 @@ class ApiEmailController extends Controller
         //
     }
 
-    /* 
+    /*
         * Function para generar los repotes correspondientes en PDF para coordinadoes y supervisores
      */
 
@@ -133,7 +142,7 @@ class ApiEmailController extends Controller
     }
 
     public function sendPDFInEmail($nameReport, $email){
-    
+
         $template_path = 'email_report';
         $asunto = explode('- ', $nameReport);
         $body = $asunto[0].$asunto[1];

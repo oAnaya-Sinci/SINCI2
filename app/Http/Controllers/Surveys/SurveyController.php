@@ -24,7 +24,6 @@ class SurveyController extends Controller
 
   public function index()
   {
-
     date_default_timezone_set('America/Mexico_City');
 
     // $surveys = $this->getSurveys(1, date('Y-m-') . "1", date('Y-m-d'));
@@ -183,10 +182,10 @@ class SurveyController extends Controller
   }
 
   // function to send email
-  public function sendEmailNewSurvey($emails)
+  public function sendEmailNewSurvey($emails, $key)
   {
     try {
-      $data = DB::select(DB::raw("SELECT correo_cliente, correo_copia, correo_copia_oculta, llave_encuesta, codigo_proyecto_cliente FROM clientes_encuestas WHERE llave_encuesta = '" . $emails[2] . "'"));
+      $data = DB::select(DB::raw("SELECT correo_cliente, correo_copia, correo_copia_oculta, llave_encuesta, codigo_proyecto_cliente FROM clientes_encuestas WHERE llave_encuesta = '" . $key . "'"));
 
       $email = str_replace(' ', '', $emails[0]);
       $email = explode(',', $email);

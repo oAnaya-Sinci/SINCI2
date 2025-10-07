@@ -1,17 +1,8 @@
-// HTTPS
-// var urlData = "https://10.10.100.34:1880"; // PRODUCTION SERVER WITH SECURE PROTOCOL 443
-// HTTP
-// var urlData = "http://10.10.100.34:1880"; // PRODUCTION SERVER WITHOUT SECURE PROTOCOL 80
 
 var currentUrl = window.location.href.split("/")[2];
 currentUrl = currentUrl.split(":");
 
 var urlData = "https://websas.sinci.com:1880";
-
-// var URL to my Local UBUTBU Server for the update
-// var urlData = "https://192.168.0.102:1880";
-// var urlData = "http://localhost:1880";
-// var urlData = "https://10.10.100.34:1880";
 
 var timeOut;
 
@@ -22,8 +13,6 @@ var timeOut;
  * @Desc: Here iniciate some of the elements required for a good work of the proyect
  */
 $(document).ready(function () {
-
-  console.time('Session');
 
   IsLogedIn();
 

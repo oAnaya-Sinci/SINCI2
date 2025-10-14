@@ -59,7 +59,7 @@ class ApiEmailController extends Controller
             $template_path = 'email_recordatorio_1';
 
             Mail::send($template_path, ['body' => $body, 'minimal_days' => $minimal_days], function($message) use ($email) {
-                $message->to($email)->subject('SNL | '. explode('@', $email)[0] .' | Recordatorio para registro en bitácora');
+                $message->to($email)->subject('Servicios y visitas a planta | '. explode('@', $email)[0] .' | Recordatorio para registro en bitácora');
                 $message->from('snla@sinci.com','SNL | '. explode('@', $email)[0] .' | Recordatorio para registro en bitácora');
             });
 

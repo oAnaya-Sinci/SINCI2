@@ -152,6 +152,7 @@
                                             <ol>
                                                 <li>Recuerda que la cantidad máxima de días sin registrar en la bitácora son <span style="color:red;font-weight:bold">{{$minimal_days}}</span> días.</li>
                                                 <li>Los días tomados en consideración son de lunes a viernes.</span></li>
+                                                <li>No se tomarán en cuenta registros de solo 30 minutos por día, o que estos mismos no sean registrados adecuadamente.</li>
                                                 <li>Todos los siguientes días deben de ser registrados:</li>
                                                 <ul>
                                                     <li>Días hábiles.</li>

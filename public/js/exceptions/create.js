@@ -63,7 +63,7 @@ document.querySelector('.btn-save-exception').addEventListener('click', async fu
     initDateToIgnore: initDate,
     endDateToIgnore: endDate,
     description: description,
-    employee: employee == "" ? NULL : employee,
+    employee: employee == "" ? null : employee,
     description_type: typeException
   };
 

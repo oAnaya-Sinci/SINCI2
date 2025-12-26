@@ -57,12 +57,23 @@
   }, 1000);
 })();
 
+let fillYears = () => {
+
+  let actualYear = new Date().getFullYear();
+  let options = "";
+  for (let i = actualYear; i >= 2025; i--) {
+    options += `<option ${i == actualYear ? 'selected' : ''} value="${i}">${i}</option>`;
+  }
+
+  document.querySelector('#slctYear').innerHTML = options;
+}
+
 let dataExceptions = async () => {
 
   let dataExceptions = await fetch(`${urlData}/getDataExceptionTypes`).then(json => json.json()).then(data => data);
 
   let options = "";
-  options += `<option value="-1">Todos las excepciones</option>`;
+  options += `<option value="-1">Todas las excepciones</option>`;
   dataExceptions.forEach(elem => {
     options += `<option value="${elem.id}">${elem.description_type}</option>`;
   });
@@ -70,9 +81,11 @@ let dataExceptions = async () => {
   document.querySelector('#slctTipeException').innerHTML = options;
 }
 
-let dataExceptionDates = async (exectiosSelected = -1) => {
+let dataExceptionDates = async () => {
 
-  let dataExceptions = await fetch(`${urlData}/getDataExceptionDates?exectionSelected=${exectiosSelected}`).then(json => json.json()).then(data => data);
+  let year = document.querySelector('#slctYear').value;
+  let exectiosSelected = document.querySelector('#slctTipeException').value;
+  let dataExceptions = await fetch(`${urlData}/getDataExceptionDates?exectionSelected=${exectiosSelected}&year=${year}`).then(json => json.json()).then(data => data);
 
   fillTableExceptionDates(dataExceptions);
 }
@@ -97,7 +110,12 @@ let fillTableExceptionDates = dataExceptions => {
 
 document.querySelector('#slctTipeException').addEventListener('change', async function () {
 
-  let exceptionSelected = document.querySelector('#slctTipeException').value;
-
-  dataExceptionDates(exceptionSelected);
+  dataExceptionDates();
 });
+
+document.querySelector('#slctYear').addEventListener('change', async function () {
+
+  dataExceptionDates();
+});
+
+fillYears();

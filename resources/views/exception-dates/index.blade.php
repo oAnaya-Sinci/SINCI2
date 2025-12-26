@@ -15,11 +15,18 @@
 
               <div class="row">
 
-                <div class="col-md-6">
+                <div class="col-md-2">
+                  <div class="form-group">
+                    <label for="Tipo Excepción" class="col-form-label text-s">Año</label>
+                    <select name="slctYear" id="slctYear" class="form-select">
+                    </select>
+                  </div>
+                </div>
+
+                 <div class="col-md-4">
                   <div class="form-group">
                     <label for="Tipo Excepción" class="col-form-label text-s">Tipo de excepción</label>
-                    <select name="slctTipeException" id="slctTipeException" class="form-select w-50">
-                      <option value="-1">Seleccione una opción</option>
+                    <select name="slctTipeException" id="slctTipeException" class="form-select">
                     </select>
                   </div>
                 </div>

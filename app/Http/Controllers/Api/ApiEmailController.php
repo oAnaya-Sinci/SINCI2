@@ -64,7 +64,7 @@ class ApiEmailController extends Controller
         $message->from('snla@sinci.com', 'SNL | ' . explode('@', $email)[0] . ' | Recordatorio de registro en bitácora');
       });
 
-      return view('email_recordatorio_1', compact('body', 'minimal_days'));
+      return view('email_recordatorio_1', compact('body', 'body1', 'minimal_days'));
     }
   }
 
